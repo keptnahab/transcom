@@ -1,0 +1,66 @@
+{
+  "name": "transcom",
+  "version": "0.1.0",
+  "description": "Local multi-channel audio transcription for live production",
+  "main": "electron/main.js",
+  "scripts": {
+    "dev": "concurrently \"npm run dev:renderer\" \"npm run dev:electron\"",
+    "dev:renderer": "vite --config renderer/vite.config.js --port 5747",
+    "dev:electron": "wait-on http://localhost:5747 && electron .",
+    "build:renderer": "vite build --config renderer/vite.config.js",
+    "build": "npm run build:renderer && electron-builder",
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.0",
+    "electron": "^34.0.0",
+    "electron-builder": "^25.0.0",
+    "vite": "^6.0.0",
+    "wait-on": "^8.0.0"
+  },
+  "build": {
+    "appId": "com.transcom.app",
+    "productName": "TransCom",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "electron/**/*",
+      "renderer/dist/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "backend",
+        "to": "backend",
+        "filter": [
+          "**/*",
+          "!**/__pycache__/**",
+          "!**/*.pyc",
+          "!.pytest_cache/**"
+        ]
+      },
+      {
+        "from": "fixtures",
+        "to": "fixtures",
+        "filter": [
+          "**/*"
+        ]
+      },
+      {
+        "from": "models",
+        "to": "models",
+        "filter": [
+          "**/*.onnx"
+        ]
+      }
+    ],
+    "mac": {
+      "category": "public.app-category.utilities",
+      "target": [
+        "dir",
+        "zip"
+      ]
+    }
+  }
+}

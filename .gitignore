@@ -1,0 +1,36 @@
+.DS_Store
+
+# Dependencies
+node_modules/
+backend/.venv/
+.venv/
+
+# Python caches and test output
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Local sessions, models, and generated data
+sessions/
+models/
+*.db
+*.db-shm
+*.db-wal
+transcom_export.*
+
+# Build artifacts
+dist/
+renderer/dist/
+release/
+
+# Local logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment
+.env
+.env.local

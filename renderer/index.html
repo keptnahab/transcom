@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TransCom</title>
+  <link rel="stylesheet" href="src/styles/app.css" />
+</head>
+<body>
+  <div id="app">
+    <!-- Connection overlay -->
+    <div id="connection-overlay" class="overlay">
+      <div class="overlay-inner">
+        <div class="spinner"></div>
+        <p>Connecting to audio engine…</p>
+      </div>
+    </div>
+
+    <div id="auth-overlay" class="overlay">
+      <form id="login-form" class="login-dialog">
+        <strong>TransCom Beta</strong>
+        <span>Sign in with your issued beta credentials.</span>
+        <input class="form-input" id="login-email" type="email" placeholder="Email" autocomplete="username" required />
+        <input class="form-input" id="login-password" type="password" placeholder="Password" autocomplete="current-password" required />
+        <button class="btn primary" type="submit">Login</button>
+        <p id="login-error"></p>
+      </form>
+    </div>
+
+    <aside id="setup-panel"></aside>
+
+    <main id="main-pane">
+      <header id="toolbar"></header>
+      <div id="transcript-pane-wrap">
+        <div id="transcript-pane"></div>
+        <div id="activity-banner" class="hidden">
+          <span id="activity-count"></span> new message(s) ↓
+        </div>
+      </div>
+      <footer id="status-bar">
+        <span id="status-channels">0 channels active</span>
+        <span id="status-model"></span>
+        <span id="status-engine"></span>
+        <span id="status-timer">00:00</span>
+      </footer>
+    </main>
+
+    <aside id="speaker-panel"></aside>
+  </div>
+
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>
