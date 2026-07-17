@@ -14,6 +14,7 @@ import backend.config as cfg
 
 class AuthService:
     def __init__(self, db_path: str | Path = cfg.AUTH_DB_PATH) -> None:
+        self._auth_disabled = cfg.AUTH_DISABLED
         self._lock = threading.Lock()
         self._db = sqlite3.connect(str(db_path), check_same_thread=False)
         self._db.execute("PRAGMA journal_mode=WAL")
@@ -40,6 +41,8 @@ class AuthService:
         self._db.commit()
 
     def ensure_bootstrap_admin(self) -> str | None:
+        if self._auth_disabled:
+            return None
         with self._lock:
             row = self._db.execute("SELECT COUNT(*) FROM users").fetchone()
             if row and row[0] > 0:
@@ -114,6 +117,8 @@ class AuthService:
             self._db.commit()
 
     def login(self, email: str, password: str) -> dict | None:
+        if self._auth_disabled:
+            return self.disabled_session()
         normalized = self._normalize_email(email)
         with self._lock:
             row = self._db.execute(
@@ -142,6 +147,8 @@ class AuthService:
         }
 
     def user_for_token(self, token: str | None) -> dict | None:
+        if self._auth_disabled:
+            return self._disabled_user()
         if not token:
             return None
         token_hash = self._hash_token(token)
@@ -167,6 +174,20 @@ class AuthService:
     def close(self) -> None:
         self._db.close()
 
+    @property
+    def auth_disabled(self) -> bool:
+        return self._auth_disabled
+
+    def disabled_session(self) -> dict:
+        user = self._disabled_user()
+        expires_at = time.time() + cfg.AUTH_SESSION_SECONDS
+        return {
+            "token": "auth-disabled-token",
+            "user": {"email": user["email"], "is_admin": user["is_admin"]},
+            "expires_at": expires_at,
+            "auth_disabled": True,
+        }
+
     def _migrate(self) -> None:
         columns = {
             row[1]
@@ -174,6 +195,14 @@ class AuthService:
         }
         if "visible_password" not in columns:
             self._db.execute("ALTER TABLE users ADD COLUMN visible_password TEXT")
+
+    def _disabled_user(self) -> dict:
+        return {
+            "email": cfg.AUTH_DISABLED_EMAIL,
+            "is_admin": True,
+            "expires_at": time.time() + cfg.AUTH_SESSION_SECONDS,
+            "auth_disabled": True,
+        }
 
     @staticmethod
     def generate_password(length: int = 14) -> str:

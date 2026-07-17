@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "candidate_id": "transcom-asr-candidate-v1",
+  "frozen_at": "2026-07-13T16:33:02-04:00",
+  "selection_rule": "Selected only from development suites; no holdout ASR was run before this file was created.",
+  "targets_file": "evaluation/TARGETS_V1.md",
+  "release_configuration": {
+    "backend_apple_silicon": "mlx",
+    "model": "mlx-community/whisper-large-v3-turbo-q4",
+    "model_revision": "660c343bbf4e52ac257f0b7d952e5388e6f93bef",
+    "language": "de",
+    "initial_prompt": "Theaterprobe mit Regie, Bühne, Licht und Ton. Fachbegriffe: Inspizienz, Hubpodium, Not-Aus, AES67, Dante.",
+    "hotwords": "",
+    "beam_size": 1,
+    "no_speech_threshold": 0.6,
+    "chunk_seconds": 1.25,
+    "capture_overlap_seconds": 0.0,
+    "vad_min_speech_seconds": 0.5,
+    "vad_min_silence_seconds": 0.35,
+    "vad_max_segment_seconds": 5.0,
+    "vad_pre_roll_seconds": 0.15,
+    "vad_post_roll_seconds": 0.0
+  },
+  "portable_fallback": {
+    "model": "Systran/faster-whisper-small",
+    "model_revision": "536b0662742c02347bc0e980a01041f333bce120"
+  },
+  "implementation_sha256": {
+    "backend/config.py": "c0678c880f84992a38c40b40f2cd202e9223af15c20a7b650b3460c0ce0231d9",
+    "backend/audio/capture.py": "1b78ec5dcd2679e9d7c28de6a4fd9934d71abe51dea2e616ac581008f0c59fe9",
+    "backend/audio/segmentation.py": "093608650cc479b520a8e5bc1b640321824e2c4db3b96f746a5e3210e4c5f8bd",
+    "backend/transcription/engine.py": "7dc0875cb368d28cad6c0f86f4c874fdb1e5fd957a7f0f706df0701f14833e39",
+    "backend/requirements.txt": "34e5d0a637735fb5d85663c3b719fdbeb2ae1d01a015e86417f288356fb15279",
+    "scripts/setup.sh": "4e3541c455ed7a5ab1ed64323771dc9fd3c55bd3b8a77c64ee4aa630407329aa",
+    "scripts/download_models.py": "a23ca39eeaaa481d1ca64a0da706237d8827ad2bb032d3cf86e30e5815ad5c4a",
+    "evaluation/MODELS_V1.json": "a652aafdd4fa72f32fc76a7247d13526aaa640eb16b05bf4c715e8b0747e3c81"
+  },
+  "sealed_holdout_inputs": {
+    "human_manifest_sha256": "c0ad5717ba6a2c5e6e9ef223c8f83bae21063cb84bce065da2e327d38a5c64db",
+    "synthetic_parent_manifest_sha256": "9cb48de5d875256c96fae76b8e7745783d6ad3fea3be016e80fc5c3570bdb2ff"
+  },
+  "development_evidence": {
+    "human_clean": {
+      "result": "evaluation/results/candidate_v1_human_fleurs_de_dev_20260713.json",
+      "wer": 0.04017857142857143,
+      "cer": 0.007058823529411765,
+      "rtf": 0.0372618433171235
+    },
+    "human_degraded": {
+      "result": "evaluation/results/candidate_v1_degraded_fleurs_de_dev_20260713.json",
+      "wer": 0.05803571428571429,
+      "cer": 0.015215686274509805,
+      "rtf": 0.037295380132625976
+    },
+    "synthetic_intercom_direct": {
+      "result": "evaluation/results/candidate_v1_synthetic_v3_dev_intercom_20260713.json",
+      "wer": 0.12222222222222222,
+      "cer": 0.07249466950959488,
+      "rtf": 0.07522170734654424
+    },
+    "synthetic_intercom_streaming": {
+      "result": "evaluation/results/candidate_v1_synthetic_v3_dev_live_pipeline_20260713.json",
+      "wer": 0.13333333333333333,
+      "cer": 0.08315565031982942,
+      "rtf": 0.0677150872414544,
+      "first_emit_simulated_seconds": 1.664308125
+    },
+    "isolated_critical_commands": {
+      "result": "evaluation/results/candidate_v1_short_latency_defaults_20260713.json",
+      "wer": 0.0,
+      "cer": 0.0,
+      "max_end_to_emit_seconds": 2.2468052500000004
+    }
+  }
+}

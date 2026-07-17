@@ -1,0 +1,22 @@
+{
+  "schema_version":"2.0","dataset_version":"synthetic_de_v7","split":"holdout","language":"de-DE","pause_seconds":0.65,"trailing_guard_ms":0,"seal_after_generation":true,
+  "safety_catalog":{"catalog_id":"transcom-safety-command-intents-v1","path":"evaluation/synthesis_v2/catalogs/safety_commands_v1.json","sha256":"9217165522fabb2b8559d7164b96a480085f6c5db3dc5c020dd0c10af3c5cfb8"},
+  "utterances":[
+    {"id":"v7-holdout-001","speaker":"Hanne","role":"Maschinerie","voice":"Flo (Deutsch (Deutschland))","rate":161,"intent":"motion_stop","text":"Antriebsfahrt unverzüglich beenden!","categories":["short","safety","technical"]},
+    {"id":"v7-holdout-002","speaker":"Ismail","role":"Sicherheit","voice":"Grandma (Deutsch (Deutschland))","rate":165,"intent":"area_evacuate","text":"Sicherheitssektor sofort leeren!","categories":["short","safety"]},
+    {"id":"v7-holdout-003","speaker":"Jule","role":"Energie","voice":"Rocko (Deutsch (Deutschland))","rate":169,"intent":"energy_isolate","text":"Pneumatikversorgung vollständig isolieren!","categories":["short","safety","technical"]},
+    {"id":"v7-holdout-004","speaker":"Kurt","role":"Rigging","voice":"Shelley (Deutsch (Deutschland))","rate":173,"intent":"brake_lock","text":"Feststellbremse jetzt schließen!","categories":["short","safety","technical"]},
+    {"id":"v7-holdout-005","speaker":"Hanne","role":"Bühne","voice":"Flo (Deutsch (Deutschland))","rate":177,"intent":"access_secure","text":"Wartungsklappe gegen Öffnen sichern!","categories":["short","safety","technical","umlaut"]},
+    {"id":"v7-holdout-006","speaker":"Ismail","role":"Rigging","voice":"Grandma (Deutsch (Deutschland))","rate":181,"intent":"load_hold","text":"Tragvorgang sofort halten!","categories":["short","safety","technical"]},
+    {"id":"v7-holdout-007","speaker":"Jule","role":"Inspizienz","voice":"Rocko (Deutsch (Deutschland))","rate":185,"intent":"cue_status","text":"Cue S fünf wartet.","categories":["short","alphanumeric","number","technical"]},
+    {"id":"v7-holdout-008","speaker":"Kurt","role":"Automation","voice":"Shelley (Deutsch (Deutschland))","rate":189,"intent":"component_status","text":"Achse E drei gesperrt.","categories":["short","alphanumeric","number","technical"]},
+    {"id":"v7-holdout-009","speaker":"Hanne","role":"Netzwerk","voice":"Flo (Deutsch (Deutschland))","rate":161,"intent":"component_status","text":"Knoten G acht erreichbar.","categories":["short","alphanumeric","number","technical"]},
+    {"id":"v7-holdout-010","speaker":"Ismail","role":"Bühne","voice":"Grandma (Deutsch (Deutschland))","rate":165,"intent":"component_status","text":"Marke V sechs erkannt.","categories":["short","alphanumeric","number"]},
+    {"id":"v7-holdout-011","speaker":"Jule","role":"Energie","voice":"Rocko (Deutsch (Deutschland))","rate":169,"intent":"signal_fault","text":"Prüfpunkt sieben meldet einen instabilen Spannungswert.","categories":["medium","number","technical","umlaut"]},
+    {"id":"v7-holdout-012","speaker":"Kurt","role":"Netzwerk","voice":"Shelley (Deutsch (Deutschland))","rate":173,"intent":"signal_fault","text":"Buslinie L neun verliert wiederholt ihre Zeitreferenz.","categories":["medium","alphanumeric","number","technical"]},
+    {"id":"v7-holdout-013","speaker":"Hanne","role":"Maschinerie","voice":"Flo (Deutsch (Deutschland))","rate":177,"intent":"signal_fault","text":"Drucksensor zwei registriert einen unerwarteten Abfall.","categories":["medium","number","technical"]},
+    {"id":"v7-holdout-014","speaker":"Ismail","role":"Sicherheit","voice":"Grandma (Deutsch (Deutschland))","rate":181,"intent":"safety_check","text":"Vor der Betriebsfreigabe kontrollieren wir Sperrbereich, Bremszustand, Lastweg und die geschlossene Schutzverkleidung.","categories":["long","safety","technical"]},
+    {"id":"v7-holdout-015","speaker":"Jule","role":"Automation","voice":"Rocko (Deutsch (Deutschland))","rate":185,"intent":"safety_check","text":"Überwachungspunkt H dreizehn prüft fünf Rückmeldungen und blockiert den Ablauf bei mehr als einem Millimeter Differenz.","categories":["long","alphanumeric","number","technical","umlaut"]},
+    {"id":"v7-holdout-016","speaker":"Kurt","role":"Inspizienz","voice":"Shelley (Deutsch (Deutschland))","rate":189,"intent":"safety_check","text":"Bevor der nächste Durchlauf beginnt, werden Hinterbühne, Orchesterpodest und sämtliche vier Fluchtwege gemeinsam bestätigt.","categories":["long","safety","number","technical","umlaut"]}
+  ]
+}

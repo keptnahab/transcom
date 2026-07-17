@@ -1,0 +1,81 @@
+{
+  "schema_version": "2.0",
+  "dataset_version": "synthetic_de_v2",
+  "split": "dev",
+  "language": "de-DE",
+  "pause_seconds": 0.36,
+  "utterances": [
+    {
+      "id": "dev-001",
+      "speaker": "Lea",
+      "role": "Regie",
+      "voice": "Anna",
+      "rate": 172,
+      "text": "Bühne frei?",
+      "categories": ["short", "command", "umlaut"]
+    },
+    {
+      "id": "dev-002",
+      "speaker": "Murat",
+      "role": "Inspizienz",
+      "voice": "Eddy (Deutsch (Deutschland))",
+      "rate": 184,
+      "text": "Achtung, die nächste Lichtmarke kommt in zwölf Sekunden.",
+      "categories": ["medium", "number", "technical"]
+    },
+    {
+      "id": "dev-003",
+      "speaker": "Sophie",
+      "role": "Ton",
+      "voice": "Reed (Deutsch (Deutschland))",
+      "rate": 166,
+      "text": "Das Funkmikrofon von Željko liegt bei minus achtzehn Dezibel; ich prüfe jetzt Empfänger drei und den Rückkanal.",
+      "categories": ["long", "proper_name", "number", "technical", "diacritic"]
+    },
+    {
+      "id": "dev-004",
+      "speaker": "Ben",
+      "role": "Licht",
+      "voice": "Sandy (Deutsch (Deutschland))",
+      "rate": 190,
+      "text": "Verstanden.",
+      "categories": ["short", "acknowledgement"]
+    },
+    {
+      "id": "dev-005",
+      "speaker": "Lea",
+      "role": "Regie",
+      "voice": "Anna",
+      "rate": 178,
+      "text": "Am 14. Oktober beginnen wir um 19:30 Uhr mit Szene fünf; vorher bleibt der südliche Bühnenzug gesperrt.",
+      "categories": ["long", "date", "time", "number", "technical", "umlaut"]
+    },
+    {
+      "id": "dev-006",
+      "speaker": "Murat",
+      "role": "Inspizienz",
+      "voice": "Eddy (Deutsch (Deutschland))",
+      "rate": 176,
+      "text": "Klara, bestätige bitte den Not-Aus am Hubpodium, aber löse ihn nicht aus.",
+      "categories": ["medium", "proper_name", "safety", "technical"]
+    },
+    {
+      "id": "dev-007",
+      "speaker": "Sophie",
+      "role": "Ton",
+      "voice": "Reed (Deutsch (Deutschland))",
+      "rate": 182,
+      "text": "AES67 läuft stabil, und der Dante-Primärlink zeigt 0,4 Millisekunden Latenz.",
+      "categories": ["medium", "abbreviation", "decimal", "technical", "umlaut"]
+    },
+    {
+      "id": "dev-008",
+      "speaker": "Ben",
+      "role": "Licht",
+      "voice": "Sandy (Deutsch (Deutschland))",
+      "rate": 170,
+      "text": "Ich fahre den Übergang langsam von 35 auf 72 Prozent und halte anschließend die warme Farbtemperatur bis zum Schlussapplaus.",
+      "categories": ["long", "number", "technical"]
+    }
+  ]
+}

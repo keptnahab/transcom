@@ -7,13 +7,24 @@ const CHECK_IN_SECONDS = 10
 
 let activeCheckIn = null
 
+function closeOptions() {
+  document.getElementById('speaker-panel')?.classList.remove('open')
+  document.getElementById('utility-scrim')?.classList.remove('open')
+}
+
 export function init() {
   const panel = document.getElementById('speaker-panel')
   panel.innerHTML = `
-    <section class="panel-section" id="speaker-card"></section>
-    <section class="panel-section" id="users-card"></section>
-    <section class="panel-section" id="share-card"></section>
+    <div class="utility-header">
+      <div><strong>Optionen</strong><span>Nur bei Bedarf</span></div>
+      <button class="drawer-close" id="btn-close-options" type="button" aria-label="Optionen schließen">×</button>
+    </div>
+    <section id="speaker-card"></section>
+    <section id="share-card"></section>
+    <section id="users-card"></section>
   `
+  document.getElementById('btn-close-options').addEventListener('click', closeOptions)
+  document.getElementById('utility-scrim')?.addEventListener('click', closeOptions)
   store.subscribe('speakers', renderSpeakers)
   store.subscribe('authUser', renderUsers)
   store.subscribe('betaUsers', renderUsers)
@@ -24,18 +35,24 @@ export function init() {
 function renderSpeakers(speakers) {
   const el = document.getElementById('speaker-card')
   if (!el) return
+  const wasOpen = el.querySelector('details')?.open || false
   el.innerHTML = `
-    <div class="section-head">
-      <span>Speaker Check-in</span>
-      <span class="pill">${speakers.length}/8</span>
-    </div>
-    <div class="speaker-add">
-      <input class="form-input" id="speaker-name" placeholder="Name" maxlength="32" />
-      <button class="btn primary" id="btn-speaker-add">Add</button>
-    </div>
-    <div class="speaker-list">
-      ${speakers.map((sp, idx) => speakerRow(sp, idx)).join('') || '<div class="empty-note">Add up to 8 people before going live.</div>'}
-    </div>
+    <details class="utility-details" ${wasOpen ? 'open' : ''}>
+      <summary>
+        <span>Stimmen erkennen</span>
+        <small>${speakers.length ? `${speakers.length} eingerichtet` : 'optional'}</small>
+      </summary>
+      <div class="details-body">
+        <p class="section-intro">Nur nötig, wenn Namen im Transkript automatisch zugeordnet werden sollen. Die Transkription funktioniert auch ohne diesen Schritt.</p>
+        <div class="speaker-add">
+          <input class="form-input" id="speaker-name" placeholder="Name der Person" maxlength="32" />
+          <button class="btn primary" id="btn-speaker-add">Hinzufügen</button>
+        </div>
+        <div class="speaker-list">
+          ${speakers.map((sp, idx) => speakerRow(sp, idx)).join('') || '<div class="empty-note">Keine Stimmen eingerichtet.</div>'}
+        </div>
+      </div>
+    </details>
   `
   el.querySelector('#btn-speaker-add').addEventListener('click', () => {
     const input = el.querySelector('#speaker-name')
@@ -63,14 +80,14 @@ function speakerRow(sp) {
         <span class="swatch" style="background:${esc(sp.color)}"></span>
         <div>
           <strong>${esc(sp.name)}</strong>
-        <span>${sp.usable ? 'audio profile ready' : 'needs live check-in'}</span>
+        <span>${sp.usable ? 'Stimme erkannt' : 'kurze Stimmprobe nötig'}</span>
         </div>
-        <button class="tiny danger-text" data-speaker-delete="${sp.id}">Delete</button>
+        <button class="tiny danger-text" data-speaker-delete="${sp.id}">Löschen</button>
       </div>
       <div class="quality"><span style="width:${quality}%"></span></div>
       <div class="enroll-controls">
-        <label>sec <input data-duration type="number" min="3" max="20" value="${Math.max(3, Math.round(sp.duration_seconds || CHECK_IN_SECONDS))}" /></label>
-        <button class="btn" data-enroll="${sp.id}">Check-in</button>
+        <label>Sekunden <input data-duration type="number" min="3" max="20" value="${Math.max(3, Math.round(sp.duration_seconds || CHECK_IN_SECONDS))}" /></label>
+        <button class="btn" data-enroll="${sp.id}">Stimmprobe starten</button>
       </div>
     </div>
   `
@@ -79,17 +96,22 @@ function speakerRow(sp) {
 function renderShare(share) {
   const el = document.getElementById('share-card')
   if (!el) return
+  const wasOpen = el.querySelector('details')?.open || false
   el.innerHTML = `
-    <div class="section-head">
-      <span>LAN Viewer</span>
-      <span class="pill ${share?.enabled ? 'ok' : ''}">${share?.enabled ? 'on' : 'off'}</span>
-    </div>
-    <div class="share-url">${share?.url ? esc(share.url) : 'No viewer link yet'}</div>
-    <div class="button-row">
-      <button class="btn ${share?.enabled ? 'danger' : 'primary'}" id="btn-share-toggle">${share?.enabled ? 'Stop Share' : 'Start Share'}</button>
-      <button class="btn" id="btn-copy-share" ${share?.url ? '' : 'disabled'}>Copy</button>
-    </div>
-    <div class="hint">Read-only live transcript with a random token. No export or correction controls.</div>
+    <details class="utility-details" ${wasOpen ? 'open' : ''}>
+      <summary>
+        <span>Live-Ansicht teilen</span>
+        <small>${share?.enabled ? 'aktiv' : 'optional'}</small>
+      </summary>
+      <div class="details-body">
+        <p class="section-intro">Erzeugt einen schreibgeschützten Link für Zuschauer im lokalen Netz.</p>
+        <div class="share-url">${share?.url ? esc(share.url) : 'Noch kein Link erzeugt'}</div>
+        <div class="button-row">
+          <button class="btn ${share?.enabled ? 'danger' : 'primary'}" id="btn-share-toggle">${share?.enabled ? 'Freigabe stoppen' : 'Link erzeugen'}</button>
+          <button class="btn" id="btn-copy-share" ${share?.url ? '' : 'disabled'}>Kopieren</button>
+        </div>
+      </div>
+    </details>
   `
   el.querySelector('#btn-share-toggle').addEventListener('click', () => ws.send(share?.enabled ? 'share_stop' : 'share_start', {}))
   el.querySelector('#btn-copy-share').addEventListener('click', async () => {
@@ -100,6 +122,7 @@ function renderShare(share) {
 function renderUsers() {
   const el = document.getElementById('users-card')
   if (!el) return
+  const wasOpen = el.querySelector('details')?.open || false
   const user = store.get('authUser')
   if (!user?.is_admin) {
     el.innerHTML = ''
@@ -108,30 +131,47 @@ function renderUsers() {
   const users = store.get('betaUsers') || []
   const generated = store.get('generatedPassword')
   el.innerHTML = `
-    <div class="section-head">
-      <span>Beta Users</span>
-      <span class="pill">${users.length}</span>
-    </div>
-    <div class="speaker-add">
-      <input class="form-input" id="beta-user-email" placeholder="email@example.com" type="email" />
-      <button class="btn primary" id="btn-beta-user-add">Add</button>
-    </div>
-    ${generated ? `<div class="generated-password"><span>${esc(generated.email)}</span><strong>${esc(generated.password)}</strong></div>` : ''}
-    <div class="user-list">
-      ${users.map(u => `
-        <div class="user-row">
-          <div class="user-identity">
-            <span>${esc(u.email)}${u.is_admin ? ' · admin' : ''}</span>
-            <button class="tiny danger-text" data-user-delete="${esc(u.email)}" ${u.email === user.email ? 'disabled' : ''}>Delete</button>
-          </div>
-          <div class="user-password-row">
-            <input class="form-input" type="text" autocomplete="off" spellcheck="false" data-user-password="${esc(u.email)}" value="${esc(u.password || '')}" placeholder="${u.password ? 'Password' : 'Reset required'}" />
-            <button class="tiny" data-user-password-save="${esc(u.email)}">Save</button>
-            <button class="tiny" data-user-password-generate="${esc(u.email)}">Generate</button>
+    <details class="utility-details" ${wasOpen ? 'open' : ''}>
+      <summary><span>Beta-Zugänge</span><small>${users.length} Benutzer</small></summary>
+      <div class="details-body">
+        <div class="user-create">
+          <label class="field-label" for="beta-user-email">Neuen Beta-Zugang anlegen</label>
+          <div class="speaker-add">
+            <input class="form-input" id="beta-user-email" placeholder="email@example.com" type="email" />
+            <button class="btn primary" id="btn-beta-user-add">Hinzufügen</button>
           </div>
         </div>
-      `).join('') || '<div class="empty-note">No beta users yet.</div>'}
-    </div>
+        ${generated ? `<div class="generated-password"><span>Neues Passwort für ${esc(generated.email)}</span><strong>${esc(generated.password)}</strong></div>` : ''}
+        <div class="user-list-heading">
+          <strong>Bestehende Benutzer</strong>
+          <span>${users.length}</span>
+        </div>
+        <div class="user-list">
+          ${users.map(u => `
+            <div class="user-row">
+              <div class="user-identity">
+                <span class="user-avatar" aria-hidden="true">${esc(u.email.slice(0, 1).toUpperCase())}</span>
+                <div class="user-copy">
+                  <strong>${esc(u.email)}</strong>
+                  <span>${u.is_admin ? 'Administrator' : 'Beta-Benutzer'}</span>
+                </div>
+                <button class="tiny danger-text" data-user-delete="${esc(u.email)}" ${u.email === user.email ? 'disabled' : ''}>Löschen</button>
+              </div>
+              <div class="user-password-row">
+                <label class="user-password-field">
+                  <span>Passwort</span>
+                  <input class="form-input" type="text" autocomplete="off" spellcheck="false" data-user-password="${esc(u.email)}" value="${esc(u.password || '')}" placeholder="Noch kein sichtbares Passwort" />
+                </label>
+                <div class="user-password-actions">
+                  <button class="btn" data-user-password-save="${esc(u.email)}">Speichern</button>
+                  <button class="btn" data-user-password-generate="${esc(u.email)}">Neues Passwort</button>
+                </div>
+              </div>
+            </div>
+          `).join('') || '<div class="empty-note">Noch keine Beta-Zugänge.</div>'}
+        </div>
+      </div>
+    </details>
   `
   el.querySelector('#btn-beta-user-add').addEventListener('click', async () => {
     const input = el.querySelector('#beta-user-email')
@@ -225,8 +265,8 @@ function startCheckInDialog({ speaker, duration }) {
       <div class="checkin-head">
           <span class="swatch" style="background:${esc(speaker.color)}"></span>
         <div>
-          <strong id="checkin-title">${esc(speaker.name)} Check-in</strong>
-          <span>Speak live into the selected feed for ${seconds.toFixed(0)} seconds</span>
+          <strong id="checkin-title">Stimmprobe: ${esc(speaker.name)}</strong>
+          <span>${seconds.toFixed(0)} Sekunden deutlich in den ausgewählten Eingang sprechen.</span>
         </div>
       </div>
       <div class="checkin-meter">
@@ -234,9 +274,9 @@ function startCheckInDialog({ speaker, duration }) {
       </div>
       <div class="checkin-readout">
         <span id="checkin-remaining">${seconds.toFixed(1)}s</span>
-        <span>recording</span>
+        <span>Aufnahme läuft</span>
       </div>
-      <button class="btn danger" id="btn-cancel-checkin">Cancel</button>
+      <button class="btn danger" id="btn-cancel-checkin">Abbrechen</button>
     </div>
   `
   document.body.appendChild(dialog)

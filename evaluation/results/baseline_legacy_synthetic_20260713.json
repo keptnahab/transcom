@@ -1,0 +1,65 @@
+{
+  "audio": "/Users/macbookpro/Library/CloudStorage/Dropbox-Privat/00_AI/01_Codex/260704 TransCom/01 1st try on Claude/TransCom/evaluation/data/raw/synthetic/macos_say_legacy_mixed_4turn_v1.wav",
+  "audio_sha256": "a28d74c92dfc6c322eb18176034f0a2b70d4b2d8b0ffd94f375de69fe3c2fb17",
+  "reference_source": "/Users/macbookpro/Library/CloudStorage/Dropbox-Privat/00_AI/01_Codex/260704 TransCom/01 1st try on Claude/TransCom/evaluation/data/manifests/macos_say_legacy_mixed_4turn_v1.json",
+  "reference_binding_verified": true,
+  "reference_word_count": 60,
+  "duration_seconds": 28.168875,
+  "chunk_seconds": 1.5,
+  "overlap_seconds": 0.75,
+  "language": "auto",
+  "languages_used": [
+    "de",
+    "en"
+  ],
+  "jobs": 7,
+  "stored_segments": 7,
+  "segments_with_text": 7,
+  "empty_segments": 0,
+  "duplicate_replacements": 0,
+  "word_error_rate": 0.23333333333333334,
+  "character_error_rate": 0.14376996805111822,
+  "char_similarity": 0.8562300319488818,
+  "word_errors": {
+    "substitutions": 9,
+    "deletions": 5,
+    "insertions": 0
+  },
+  "character_errors": {
+    "substitutions": 11,
+    "deletions": 31,
+    "insertions": 3
+  },
+  "speaker_counts": {
+    "Speaker 1": 3,
+    "Speaker 2": 4
+  },
+  "speaker_status": {
+    "engine": "sherpa-onnx",
+    "model": "/Users/macbookpro/Library/CloudStorage/Dropbox-Privat/00_AI/01_Codex/260704 TransCom/01 1st try on Claude/TransCom/models/3dspeaker_speech_eres2net_sv_en_voxceleb_16k.onnx",
+    "provider": "cpu",
+    "ready": true,
+    "auto_cluster": true,
+    "auto_speakers": 2,
+    "error": null
+  },
+  "first_emit_seconds": 3.521837667,
+  "first_emit_simulated_seconds": 5.817837667,
+  "avg_infer_seconds": 0.48191241671428553,
+  "p50_infer_seconds": 0.464269625,
+  "p95_infer_seconds": 0.517837667,
+  "max_infer_seconds": 0.517837667,
+  "total_infer_seconds": 3.3733869169999986,
+  "inference_real_time_factor": 0.11975582684789501,
+  "simulated_pipeline_complete_seconds": 29.75713,
+  "transcript": "Hallo Rishi, Dies ist Anna auf Kanal 1 Jetzt die lokale Transkriktion mit einem gemischten Interkom-Signal. Copy that, this is Daniel from Stage Management. you is in 10 seconds. Please stand by. Bitte prüfen, ob der Sprecherwechsel im Transkriebt sichtbar bleibt. confirmed, the offline viewer should show timestamp. Deca Names and the Current Text",
+  "texts": [
+    "Hallo Rishi, Dies ist Anna auf Kanal 1",
+    "Jetzt die lokale Transkriktion mit einem gemischten Interkom-Signal.",
+    "Copy that, this is Daniel from Stage Management.",
+    "you is in 10 seconds. Please stand by.",
+    "Bitte prüfen, ob der Sprecherwechsel im Transkriebt sichtbar bleibt.",
+    "confirmed, the offline viewer should show timestamp.",
+    "Deca Names and the Current Text"
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "passed": false,
+  "gates": [
+    {
+      "name": "relative_wer_cer_reduction_at_least_20_percent",
+      "passed": true,
+      "evidence": {
+        "clean_wer": 0.7108433734939759,
+        "clean_cer": 0.7215909090909091,
+        "intercom_wer": 0.7469879518072289,
+        "intercom_cer": 0.6708074534161491
+      }
+    },
+    {
+      "name": "synthetic_clean_absolute",
+      "passed": false,
+      "evidence": {
+        "wer": 0.24742268041237114,
+        "cer": 0.07390648567119155
+      }
+    },
+    {
+      "name": "synthetic_intercom_absolute",
+      "passed": false,
+      "evidence": {
+        "wer": 0.21649484536082475,
+        "cer": 0.07993966817496229
+      }
+    },
+    {
+      "name": "no_subgroup_wer_regression_over_0_05",
+      "passed": true,
+      "evidence": {
+        "regressions": []
+      }
+    },
+    {
+      "name": "human_absolute",
+      "passed": true,
+      "evidence": {
+        "wer": 0.044642857142857144,
+        "cer": 0.007058823529411765
+      }
+    },
+    {
+      "name": "degraded_absolute",
+      "passed": true,
+      "evidence": {
+        "wer": 0.06160714285714286,
+        "cer": 0.015372549019607842
+      }
+    },
+    {
+      "name": "short_safety_exact",
+      "passed": false,
+      "evidence": {
+        "clips": 6,
+        "errors": [
+          {
+            "audio_id": "v6-holdout-002",
+            "word_error_rate": 0.3333333333333333,
+            "reference": "Gefahrenzone sofort verlassen!",
+            "hypothesis": "Gefachenszone sofort verlassen."
+          },
+          {
+            "audio_id": "v6-holdout-003",
+            "word_error_rate": 1.5,
+            "reference": "Bremskreis verriegeln!",
+            "hypothesis": "Bremse, Kreis, Verriegen."
+          },
+          {
+            "audio_id": "v6-holdout-005",
+            "word_error_rate": 1.0,
+            "reference": "Energiezufuhr trennen!",
+            "hypothesis": "Inner P2F4FMEN"
+          },
+          {
+            "audio_id": "v6-holdout-006",
+            "word_error_rate": 0.3333333333333333,
+            "reference": "Arbeitsbereich umgehend sperren!",
+            "hypothesis": "Arbeitsbereich umgehend werden."
+          }
+        ]
+      }
+    },
+    {
+      "name": "all_short_outputs_require_confirmation",
+      "passed": true,
+      "evidence": {
+        "unflagged_audio_ids": []
+      }
+    },
+    {
+      "name": "short_first_usable_at_most_3_5_seconds",
+      "passed": true,
+      "evidence": {
+        "max_seconds": 2.9426878339999996
+      }
+    },
+    {
+      "name": "short_rtf_at_most_0_5",
+      "passed": true,
+      "evidence": {
+        "rtf": 0.236897304063492
+      }
+    }
+  ]
+}

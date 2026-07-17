@@ -1,54 +1,73 @@
 import store from '../store.js'
 import ws from '../ws.js'
+import { token } from '../auth.js'
+import { editionState } from '../edition.mjs'
 
-const COLORS = ['#4cc9f0', '#f72585', '#80ed99', '#f9c74f', '#b5179e', '#43aa8b', '#f3722c', '#577590']
+const CHANNEL_COLOR = '#2f6f9e'
+let fileMonitor = null
+let fileMonitorStartRequested = false
 
 export function init() {
   const panel = document.getElementById('setup-panel')
   panel.innerHTML = `
-    <div class="panel-title">
-      <strong>TransCom</strong>
-      <span>v1 local</span>
+    <div class="alpine-landscape" aria-hidden="true">
+      <i class="alpine-ridge alpine-ridge-1"></i>
+      <i class="alpine-ridge alpine-ridge-2"></i>
+      <i class="alpine-ridge alpine-ridge-3"></i>
+      <i class="alpine-ridge alpine-ridge-4"></i>
+      <i class="alpine-ridge alpine-ridge-5"></i>
     </div>
+    <div class="panel-title">
+      <div class="brand-lockup">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <div class="brand-copy">
+          <strong>TransCom</strong>
+          <div class="brand-tagline">
+            <span>Live-Transkription</span>
+            <em>Offline</em>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="panel-actions" id="sidebar-actions" aria-label="Transkript-Aktionen"></nav>
 
-    <section class="panel-section" id="session-card"></section>
-    <section class="panel-section" id="audio-card"></section>
-    <section class="panel-section" id="model-card"></section>
+    <section class="panel-section project-section" id="session-card"></section>
+    <section class="panel-section audio-section" id="audio-card"></section>
+    <section class="panel-section technical-section" id="model-card"></section>
   `
 
   store.subscribe('session', renderSession)
   store.subscribe('devices', renderAudio)
   store.subscribe('channels', renderAudio)
   store.subscribe('audioSource', renderAudio)
+  store.subscribe('audioSourceMode', renderAudio)
   store.subscribe('status', renderModels)
 }
 
 function renderSession(session) {
   const el = document.getElementById('session-card')
   if (!el) return
-  const status = session?.status || 'setup'
+  const isLive = session?.status === 'live'
   el.innerHTML = `
     <div class="section-head">
-      <span>Session</span>
-      <span class="pill ${status === 'live' ? 'ok' : ''}">${status}</span>
+      <span>Transkript</span>
+      <span class="pill ${isLive ? 'ok' : ''}">${isLive ? 'läuft' : 'bereit'}</span>
     </div>
-    <input class="form-input" id="session-name" placeholder="Session name" value="${esc(session?.name || '')}" />
-    <input class="form-input" id="session-root" placeholder="Storage folder (optional)" value="${esc(session?.root_dir || '')}" />
-    <div class="button-row">
-      <button class="btn primary" id="btn-session-create">Create</button>
-      <button class="btn ${status === 'live' ? 'danger' : 'primary'}" id="btn-session-toggle">${status === 'live' ? 'Stop' : 'Start'}</button>
-    </div>
-    ${session?.session_dir ? `<div class="small-path">${esc(session.session_dir)}</div>` : ''}
+    <label class="field-label" for="session-name">Name</label>
+    <input class="form-input project-name" id="session-name" aria-label="Name des Transkripts" placeholder="z. B. Probe 14. Juli" value="${esc(session?.name || '')}" ${isLive ? 'disabled' : ''} />
+    <details class="inline-details" ${session?.root_dir ? '' : ''}>
+      <summary>Speicherort</summary>
+      <input class="form-input" id="session-root" aria-label="Speicherordner" placeholder="Standardordner verwenden" value="${esc(session?.root_dir || '')}" ${isLive ? 'disabled' : ''} />
+      ${session?.session_dir ? `<div class="small-path">${esc(session.session_dir)}</div>` : '<div class="hint">Ohne Auswahl verwendet TransCom den Standardordner.</div>'}
+    </details>
   `
-  el.querySelector('#btn-session-create').addEventListener('click', () => {
-    ws.send('session_create', {
-      name: el.querySelector('#session-name').value,
-      root_dir: el.querySelector('#session-root').value,
-    })
-  })
-  el.querySelector('#btn-session-toggle').addEventListener('click', () => {
-    ws.send(status === 'live' ? 'session_stop' : 'session_start', {})
-  })
+}
+
+export function stopForSessionChange(session = store.get('session')) {
+  const isCapturing = (store.get('channels') || []).some(channel => channel.is_active)
+  stopFileMonitor()
+  if (isCapturing) ws.send('stop_all', {})
+  if (session?.status === 'live') ws.send('session_stop', {})
 }
 
 function renderAudio() {
@@ -57,140 +76,230 @@ function renderAudio() {
   const devices = store.get('devices') || []
   const channels = store.get('channels') || []
   const audioSource = store.get('audioSource') || { mode: 'live', path: null }
+  const sourceMode = store.get('audioSourceMode') || (audioSource.mode === 'file' ? 'file' : 'live')
   const feed = channels[0]
-  const active = channels.filter(ch => ch.is_active).length
-  const selectedDevice = feed?.device_index ?? devices.find(d => d.is_default)?.index ?? devices[0]?.index ?? 0
-  const sourceMode = audioSource.mode === 'file' ? 'file' : 'live'
+  const isActive = channels.some(channel => channel.is_active)
+  const selectedDevice = feed?.device_index ?? devices.find(device => device.is_default)?.index ?? devices[0]?.index ?? 0
   const sourcePath = audioSource.path || ''
-  const sourceLabel = sourcePath ? sourcePath.split('/').pop() : 'No audio file selected'
+  const demoPath = audioSource.demo_path || ''
+  const isDemo = sourceMode === 'file' && Boolean(sourcePath) && sourcePath === demoPath
+  const isOwnFile = sourceMode === 'file' && Boolean(sourcePath) && !isDemo
+  const sourceLabel = sourcePath ? sourcePath.split('/').pop() : ''
+  const selectedDeviceName = devices.find(device => device.index === selectedDevice)?.name || 'Audioeingang'
+  const startDisabled = sourceMode === 'file' && !sourcePath
+  const edition = editionState(store.get('status'))
 
   el.innerHTML = `
     <div class="section-head">
-      <span>Audio Feed</span>
-      <span class="pill ${active ? 'ok' : ''}">${active ? 'capturing' : 'idle'}</span>
+      <span>Was soll transkribiert werden?</span>
     </div>
-    <select class="form-select" id="source-mode">
-      <option value="live" ${sourceMode === 'live' ? 'selected' : ''}>Live Input / Loopback</option>
-      <option value="file" ${sourceMode === 'file' ? 'selected' : ''}>Audio File (WAV test feed)</option>
-    </select>
+    <div class="source-switch source-switch-three" role="group" aria-label="Audioquelle auswählen">
+      <button class="source-option ${sourceMode === 'live' ? 'selected' : ''}" id="source-live" type="button" ${isActive ? 'disabled' : ''}>
+        <span class="source-icon live-icon" aria-hidden="true"></span>
+        <strong>Live</strong>
+        <span>Eingang hören</span>
+      </button>
+      <button class="source-option ${isDemo ? 'selected' : ''}" id="source-demo" type="button" ${isActive || !demoPath ? 'disabled' : ''}>
+        <span class="source-icon demo-icon" aria-hidden="true"></span>
+        <strong>Demo</strong>
+        <span>Testaufnahme</span>
+      </button>
+      <button class="source-option ${isOwnFile ? 'selected' : ''}" id="source-file" type="button" ${isActive ? 'disabled' : ''}>
+        <span class="source-icon file-icon" aria-hidden="true"></span>
+        <strong>Datei</strong>
+        <span>Eigene Aufnahme</span>
+      </button>
+    </div>
+
     ${sourceMode === 'live' ? `
-      <select class="form-select" id="feed-device">
-        ${devices.length ? devices.map(d => `<option value="${d.index}" ${d.index === selectedDevice ? 'selected' : ''}>${esc(d.name)}${d.is_default ? ' (default)' : ''}</option>`).join('') : '<option>No input devices</option>'}
-      </select>
-      <div class="hint">For REAPER or a player app, route its output to a virtual input such as BlackHole and select that input here.</div>
+      <div class="source-detail">
+        <label class="field-label" for="feed-device">Audioeingang</label>
+        <select class="form-select" id="feed-device" ${isActive ? 'disabled' : ''}>
+          ${devices.length ? devices.map(device => `<option value="${device.index}" ${device.index === selectedDevice ? 'selected' : ''}>${esc(device.name)}${device.is_default ? ' (Standard)' : ''}</option>`).join('') : '<option>Kein Eingang gefunden</option>'}
+        </select>
+        <button class="subtle-action" id="btn-devices" type="button" ${isActive ? 'disabled' : ''}>Eingänge neu laden</button>
+      </div>
     ` : `
-      <div class="file-source">
-        <div class="file-path" title="${esc(sourcePath)}">${esc(sourceLabel)}</div>
-        <div class="button-row">
-          <button class="btn" id="btn-choose-file">Choose File</button>
-          <button class="btn" id="btn-demo-file">Use Demo WAV</button>
-        </div>
+      <div class="source-detail file-summary">
+        <span class="file-kicker">${isDemo ? 'TransCom-Testaufnahme' : 'Ausgewählte Datei'}</span>
+        <strong class="file-path" title="${esc(sourcePath)}">${esc(sourceLabel || 'Noch keine Datei gewählt')}</strong>
+        <span>${isDemo ? 'Startet zusammen mit der Transkription und zeigt den vollständigen Ablauf.' : 'Die Wiedergabe startet zusammen mit der Transkription.'}</span>
       </div>
     `}
-    <input class="form-input" id="feed-name" value="${esc(feed?.name || 'Intercom Mix')}" maxlength="32" />
-    <div class="button-row">
-      <button class="btn" id="btn-devices">Refresh</button>
-      <button class="btn ${feed?.is_active ? 'danger' : 'primary'}" id="btn-feed-toggle" ${sourceMode === 'file' && !sourcePath ? 'disabled' : ''}>${feed?.is_active ? 'Stop Feed' : 'Start Feed'}</button>
+
+    <div class="go-area ${isActive ? 'active' : ''}">
+      <button class="go-button ${isActive ? 'stop' : ''}" id="btn-transcription-toggle" type="button" ${startDisabled ? 'disabled' : ''}>
+        <span class="go-symbol" aria-hidden="true"></span>
+        <span>${isActive ? 'Transkription beenden' : 'Transkription starten'}</span>
+      </button>
+      <p>${isActive ? 'Audio wird gerade erkannt und live mitgeschrieben.' : sourceMode === 'live' ? `Bereit · ${esc(selectedDeviceName)}` : sourcePath ? 'Bereit · Wiedergabe und Transkript starten gemeinsam' : 'Bitte zuerst eine Audiodatei auswählen'}</p>
     </div>
-    <div class="channel-list-compact">
-      ${channels.map(ch => `
-        <div class="compact-channel">
-          <span class="swatch" style="background:${esc(ch.color)}"></span>
-          <span>${esc(ch.name)}</span>
-          <button class="tiny" data-remove="${ch.id}">Remove</button>
-        </div>
-      `).join('') || '<div class="empty-note">One mixed local input for v1.</div>'}
+    <div class="edition-note ${edition.edition}">
+      <strong>TransCom ${edition.label}</strong>
+      <span>${edition.edition === 'starter'
+        ? `Neue Transkriptionen enden automatisch nach exakt ${edition.sessionLimitSeconds} Sekunden. Gespeicherte Transkripte bleiben lesbar und bearbeitbar; Export ist gesperrt.`
+        : 'Unbegrenzte Transkriptionsdauer · TXT- und CSV-Export enthalten.'}</span>
     </div>
   `
 
-  el.querySelector('#btn-devices').addEventListener('click', () => ws.send('list_devices', {}))
-  el.querySelector('#source-mode').addEventListener('change', (event) => {
-    const mode = event.target.value
-    if (mode === 'file') {
-      if (sourcePath) {
-        ws.send('set_audio_source', { mode: 'file', path: sourcePath })
-      } else {
-        chooseAudioFile()
-      }
-      return
-    }
-    ws.send('set_audio_source', { mode: 'live' })
+  if (!isActive && !fileMonitorStartRequested) stopFileMonitor()
+
+  el.querySelector('#source-live')?.addEventListener('click', () => {
+    if (isActive) return
+    store.set('audioSourceMode', 'live')
+    updateAudioSource({ mode: 'live', path: null })
   })
-  el.querySelector('#btn-choose-file')?.addEventListener('click', chooseAudioFile)
-  el.querySelector('#btn-demo-file')?.addEventListener('click', () => {
-    if (!audioSource.demo_path) return
-    ws.send('set_audio_source', { mode: 'file', path: audioSource.demo_path })
+  el.querySelector('#source-demo')?.addEventListener('click', () => {
+    if (isActive || !demoPath) return
+    store.set('audioSourceMode', 'file')
+    updateAudioSource({ mode: 'file', path: demoPath })
   })
-  el.querySelector('#btn-feed-toggle').addEventListener('click', () => {
-    if (feed?.is_active) {
-      ws.send('stop_capture', { id: feed.id })
+  el.querySelector('#source-file')?.addEventListener('click', () => {
+    if (!isActive) chooseAudioFile()
+  })
+  el.querySelector('#btn-devices')?.addEventListener('click', () => ws.send('list_devices', {}))
+  el.querySelector('#btn-transcription-toggle').addEventListener('click', () => {
+    if (isActive) {
+      stopTranscription()
       return
     }
-    if (feed) {
-      ws.send('update_channel', {
-        id: feed.id,
-        name: el.querySelector('#feed-name').value,
-        device_index: Number(el.querySelector('#feed-device')?.value || feed.device_index || 0),
-        color: feed.color,
-        label: 'MIX',
-      })
-      ws.send('start_capture', { id: feed.id })
-      return
-    }
-    ws.send('add_channel', {
-      name: el.querySelector('#feed-name').value || 'Intercom Mix',
-      device_index: Number(el.querySelector('#feed-device')?.value || 0),
-      color: COLORS[0],
+    startTranscription({ feed, sourceMode, sourcePath, selectedDevice })
+  })
+}
+
+function startTranscription({ feed, sourceMode, sourcePath, selectedDevice }) {
+  if (sourceMode === 'file') {
+    if (!sourcePath) return
+    updateAudioSource({ mode: 'file', path: sourcePath })
+    startFileMonitor(sourcePath)
+  }
+
+  const session = store.get('session')
+  const requestedSession = sessionPayload()
+  const needsNewSession = !session
+    || (requestedSession.name.trim() && requestedSession.name.trim() !== session.name)
+    || (requestedSession.root_dir.trim() && requestedSession.root_dir.trim() !== session.root_dir)
+  if (needsNewSession) ws.send('session_create', requestedSession)
+  if (needsNewSession || session?.status !== 'live') ws.send('session_start', {})
+
+  if (feed) {
+    ws.send('update_channel', {
+      id: feed.id,
+      name: feed.name || 'Intercom Mix',
+      device_index: Number(document.getElementById('feed-device')?.value ?? feed.device_index ?? selectedDevice ?? 0),
+      color: feed.color || CHANNEL_COLOR,
       label: 'MIX',
-      start: true,
     })
+    ws.send('start_capture', { id: feed.id })
+    return
+  }
+
+  ws.send('add_channel', {
+    name: 'Intercom Mix',
+    device_index: Number(document.getElementById('feed-device')?.value ?? selectedDevice ?? 0),
+    color: CHANNEL_COLOR,
+    label: 'MIX',
+    start: true,
   })
-  el.querySelectorAll('[data-remove]').forEach(btn => {
-    btn.addEventListener('click', () => ws.send('remove_channel', { id: btn.dataset.remove }))
-  })
+}
+
+function stopTranscription() {
+  stopFileMonitor()
+  ws.send('stop_all', {})
+  if (store.get('session')?.status === 'live') ws.send('session_stop', {})
+}
+
+function sessionPayload() {
+  return {
+    name: document.getElementById('session-name')?.value || '',
+    root_dir: document.getElementById('session-root')?.value || '',
+  }
 }
 
 async function chooseAudioFile() {
   let path = ''
   if (window.electronAPI?.showOpenDialog) {
     const result = await window.electronAPI.showOpenDialog({
-      title: 'Choose intercom audio file',
+      title: 'Audioaufnahme auswählen',
       properties: ['openFile'],
       filters: [
-        { name: 'Audio Files', extensions: ['wav', 'wave', 'aiff', 'aif', 'mp3', 'm4a'] },
-        { name: 'All Files', extensions: ['*'] },
+        { name: 'Audiodateien', extensions: ['wav', 'wave', 'aiff', 'aif', 'mp3', 'm4a'] },
+        { name: 'Alle Dateien', extensions: ['*'] },
       ],
     })
     if (result.canceled || !result.filePaths?.length) return
     path = result.filePaths[0]
   } else {
-    path = window.prompt('Path to WAV/audio file') || ''
+    path = window.prompt('Pfad zur Audiodatei') || ''
   }
   if (!path.trim()) return
-  ws.send('set_audio_source', { mode: 'file', path: path.trim() })
+  store.set('audioSourceMode', 'file')
+  updateAudioSource({ mode: 'file', path: path.trim() })
+}
+
+function updateAudioSource(nextSource) {
+  const current = store.get('audioSource') || { mode: 'live', path: null, demo_path: null }
+  const merged = { ...current, ...nextSource }
+  store.set('audioSource', merged)
+  if (merged.mode === 'file') {
+    ws.send('set_audio_source', { mode: 'file', path: merged.path })
+    return
+  }
+  stopFileMonitor()
+  ws.send('set_audio_source', { mode: 'live' })
+}
+
+function startFileMonitor(path) {
+  fileMonitorStartRequested = true
+  fileMonitor = new Audio(audioFileUrl(path))
+  fileMonitor.volume = 1
+  fileMonitor.play().catch(error => {
+    console.warn('[audio monitor] playback failed', error)
+  })
+}
+
+function stopFileMonitor() {
+  fileMonitorStartRequested = false
+  if (!fileMonitor) return
+  fileMonitor.pause()
+  try {
+    fileMonitor.currentTime = 0
+  } catch {
+    // Metadata may not be ready yet.
+  }
+  fileMonitor = null
+}
+
+function audioFileUrl(path) {
+  const params = new URLSearchParams({ path })
+  const currentToken = token()
+  if (currentToken) params.set('token', currentToken)
+  const apiBase = window.electronAPI?.getWebApiBase?.() || ''
+  return `${apiBase}/api/audio-file?${params.toString()}`
 }
 
 function renderModels(status) {
   const el = document.getElementById('model-card')
   if (!el) return
-  const vad = modelStatus(status?.vad, 'pending')
-  const speaker = modelStatus(status?.speaker_model, 'pending')
+  const vad = modelStatus(status?.vad, 'wird geladen')
+  const speaker = modelStatus(status?.speaker_model, 'wird geladen')
   const lang = status?.language === 'en' ? 'en' : status?.language === 'auto' ? 'auto' : 'de'
+  // Edition changes also affect the recording card and its explanatory lock.
+  renderAudio()
   el.innerHTML = `
-    <div class="section-head">
-      <span>Offline Models</span>
-      <span class="pill">${esc(status?.backend || status?.device || 'cpu')}</span>
-    </div>
-    <div class="model-row"><span>Whisper</span><strong>${esc(status?.model || 'base')}</strong></div>
-    <div class="model-row"><span>Latency</span><strong>${esc(formatLatency(status))}</strong></div>
-    <label class="model-row"><span>Language</span><select class="mini-select" id="language-select">
-      <option value="auto" ${lang === 'auto' ? 'selected' : ''}>Deutsch + English</option>
-      <option value="de" ${lang === 'de' ? 'selected' : ''}>Deutsch</option>
-      <option value="en" ${lang === 'en' ? 'selected' : ''}>English</option>
-    </select></label>
-    <div class="model-row"><span>VAD</span><strong>${esc(vad)}</strong></div>
-    <div class="model-row"><span>Speaker ID</span><strong>${esc(speaker)}</strong></div>
-    <div class="hint">Speaker labels require a live audio check-in. Unsupported language detection is disabled; use German by default or set English in backend config.</div>
+    <details class="utility-details compact-details">
+      <summary><span>Sprache & Technik</span><small>optional</small></summary>
+      <div class="details-body">
+        <label class="model-row"><span>Sprache</span><select class="mini-select" id="language-select">
+          <option value="auto" ${lang === 'auto' ? 'selected' : ''}>Deutsch + Englisch</option>
+          <option value="de" ${lang === 'de' ? 'selected' : ''}>Deutsch</option>
+          <option value="en" ${lang === 'en' ? 'selected' : ''}>Englisch</option>
+        </select></label>
+        <div class="model-row"><span>Modell</span><strong>${esc(status?.model || 'base')}</strong></div>
+        <div class="model-row"><span>Spracherkennung</span><strong>${esc(vad)}</strong></div>
+        <div class="model-row"><span>Stimmenmodell</span><strong>${esc(speaker)}</strong></div>
+      </div>
+    </details>
   `
   el.querySelector('#language-select').addEventListener('change', event => {
     ws.send('set_language', { language: event.target.value })
@@ -201,14 +310,7 @@ function modelStatus(value, fallback) {
   if (!value) return fallback
   if (typeof value === 'string') return value
   const engine = value.engine || fallback
-  return value.ready ? engine : `${engine} fallback`
-}
-
-function formatLatency(status) {
-  const chunk = Number(status?.chunk_seconds || 0)
-  const overlap = Number(status?.overlap_seconds || 0)
-  if (!chunk) return 'pending'
-  return `${chunk.toFixed(2)}s / ${(chunk + overlap).toFixed(2)}s`
+  return value.ready ? engine : `${engine} (Ersatzmodus)`
 }
 
 function esc(value) {

@@ -1,0 +1,30 @@
+{
+  "schema_version": 2,
+  "created_at": "2026-07-13",
+  "release_backend_apple_silicon": {
+    "routing_policy": "original_audio_seconds <= 3.0 uses short; longer audio uses long",
+    "long": {
+      "repository": "mlx-community/whisper-large-v3-mlx-4bit",
+      "revision": "d12b5d0043a6fe0c59af321617fba041d4e8e0c8",
+      "files": {
+        "config.json": "2169666f6066dc3cb5b97456b14d799d9846fc713cb0bbd98367834b95726ec1",
+        "weights.npz": "3bfa3c4e42344ea87a5b81a73992a867088ae076d377042e384b657adea81db9"
+      }
+    },
+    "short": {
+      "repository": "mlx-community/whisper-large-v3-turbo-q4",
+      "revision": "660c343bbf4e52ac257f0b7d952e5388e6f93bef",
+      "files": {
+        "config.json": "538e24557b8f9bc504700add5e7bbe32087c2353001ff563e64772ad4398671a",
+        "weights.npz": "862bbc832b05f3f4ec19dd632b701d61a6d3f5c7906360a10d72a79870642a80"
+      }
+    }
+  },
+  "portable_fallback_and_safety_confirmation": {
+    "repository": "Systran/faster-whisper-small",
+    "revision": "536b0662742c02347bc0e980a01041f333bce120",
+    "files": {
+      "model.bin": "3e305921506d8872816023e4c273e75d2419fb89b24da97b4fe7bce14170d671"
+    }
+  }
+}

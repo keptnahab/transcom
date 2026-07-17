@@ -4,7 +4,9 @@ import { clearAuth, currentUser, isAuthFailure, login, me, token, listUsers } fr
 import { init as initChannelPanel } from './components/ChannelPanel.js'
 import { init as initSpeakerPanel } from './components/SpeakerPanel.js'
 import { init as initTranscriptPane, appendSegment, renderAll } from './components/TranscriptPane.js'
+import { init as initTranscriptLibrary } from './components/TranscriptLibrary.js'
 import { init as initToolbar } from './components/Toolbar.js'
+import { editionLimitMessage } from './edition.mjs'
 
 // ------------------------------------------------------------------
 // Bootstrap
@@ -12,24 +14,36 @@ import { init as initToolbar } from './components/Toolbar.js'
 initChannelPanel()
 initSpeakerPanel()
 initTranscriptPane()
+initTranscriptLibrary()
 initToolbar()
 
 const overlay = document.getElementById('connection-overlay')
 const authOverlay = document.getElementById('auth-overlay')
 const loginForm = document.getElementById('login-form')
 const loginError = document.getElementById('login-error')
+let connectionTimer = null
 
 // ------------------------------------------------------------------
 // Connection state
 // ------------------------------------------------------------------
 ws.onConnect(() => {
   store.set('connected', true)
+  if (connectionTimer) {
+    clearTimeout(connectionTimer)
+    connectionTimer = null
+  }
   overlay.classList.add('hidden')
 })
 
 ws.onDisconnect(() => {
   store.set('connected', false)
   overlay.classList.remove('hidden')
+  if (connectionTimer) clearTimeout(connectionTimer)
+  connectionTimer = setTimeout(() => {
+    if (!store.get('connected')) {
+      overlay.querySelector('p').textContent = 'Audio-Engine nicht erreichbar. Bitte Backend und WebSocket prüfen.'
+    }
+  }, 8000)
 })
 
 loginForm.addEventListener('submit', async event => {
@@ -51,14 +65,17 @@ bootstrapAuth()
 // ------------------------------------------------------------------
 // Message handlers
 // ------------------------------------------------------------------
-ws.on('init_state', ({ devices, channels, segments, session, speakers, share, audio_source, status }) => {
+ws.on('init_state', ({ devices, channels, segments, session, sessions, speakers, share, audio_source, status }) => {
+  const source = audio_source || status?.audio_source || { mode: 'live', path: null }
   store.set('devices', devices || [])
   store.set('channels', channels || [])
   store.setSegments(segments || [])
   store.set('session', session || null)
+  store.set('sessions', sessions || [])
   store.set('speakers', speakers || [])
   store.set('share', share || { enabled: false, url: null })
-  store.set('audioSource', audio_source || status?.audio_source || { mode: 'live', path: null })
+  store.set('audioSource', source)
+  store.set('audioSourceMode', source.mode === 'file' ? 'file' : 'live')
   store.set('status', status || {})
   if (segments?.length) renderAll(segments)
 })
@@ -68,7 +85,9 @@ ws.on('device_list', ({ devices }) => {
 })
 
 ws.on('audio_source_state', (source) => {
-  store.set('audioSource', source || { mode: 'live', path: null })
+  const nextSource = source || { mode: 'live', path: null }
+  store.set('audioSource', nextSource)
+  store.set('audioSourceMode', nextSource.mode === 'file' ? 'file' : 'live')
 })
 
 ws.on('channel_added', ({ channel }) => {
@@ -94,7 +113,12 @@ ws.on('transcript_segment', (seg) => {
 
 ws.on('transcript_cleared', () => {
   store.setSegments([])
-  document.getElementById('transcript-pane').innerHTML = ''
+  renderAll([])
+})
+
+ws.on('transcript_loaded', ({ segments }) => {
+  store.setSegments(segments || [])
+  renderAll(segments || [])
 })
 
 ws.on('segment_updated', ({ segment }) => {
@@ -104,6 +128,10 @@ ws.on('segment_updated', ({ segment }) => {
 
 ws.on('session_state', ({ session }) => {
   store.set('session', session || null)
+})
+
+ws.on('session_list', ({ sessions }) => {
+  store.set('sessions', sessions || [])
 })
 
 ws.on('speaker_update', ({ speakers }) => {
@@ -121,11 +149,20 @@ ws.on('share_state', (share) => {
 
 ws.on('backend_status', (status) => {
   store.set('status', status || {})
-  if (status?.audio_source) store.set('audioSource', status.audio_source)
+  if (status?.audio_source) {
+    store.set('audioSource', status.audio_source)
+    store.set('audioSourceMode', status.audio_source.mode === 'file' ? 'file' : 'live')
+  }
 })
 
 ws.on('engine_status', (status) => {
   store.set('engineStatus', status || {})
+})
+
+ws.on('edition_limit_reached', (payload) => {
+  const message = editionLimitMessage(payload)
+  store.set('engineStatus', { state: 'edition_limit_reached', message })
+  window.alert(message)
 })
 
 ws.on('error', ({ message }) => {
@@ -148,15 +185,18 @@ window.addEventListener('transcom-auth-invalid', event => {
 })
 
 async function bootstrapAuth() {
-  const existing = token()
-  if (!existing) {
-    authOverlay.classList.remove('hidden')
-    overlay.classList.add('hidden')
-    return
-  }
+  // Reuse an existing session immediately. The audio engine connection can
+  // warm up in parallel with the auth refresh instead of waiting for /api/me.
+  const existingToken = token()
+  if (existingToken) ws.connect(existingToken)
   try {
     await finishAuth(await me())
   } catch {
+    if (!token()) {
+      authOverlay.classList.remove('hidden')
+      overlay.classList.add('hidden')
+      return
+    }
     resetAuth()
   }
 }
@@ -164,8 +204,11 @@ async function bootstrapAuth() {
 async function finishAuth(user) {
   store.set('authUser', user || currentUser())
   authOverlay.classList.add('hidden')
-  overlay.classList.remove('hidden')
   ws.connect(token())
+  // A saved local session may already have opened the socket while /api/me
+  // was still being refreshed. Do not put the loading screen back on top of
+  // an already connected app.
+  overlay.classList.toggle('hidden', ws.connected)
   await refreshUsers()
 }
 

@@ -1,0 +1,170 @@
+{
+  "benchmark": "simulated-realtime-short-utterance-latency",
+  "manifest": "/Users/macbookpro/Library/CloudStorage/Dropbox-Privat/00_AI/01_Codex/260704 TransCom/01 1st try on Claude/TransCom/evaluation/data/manifests/synthetic_v3_short_latency_holdout_v1.json",
+  "manifest_sha256": "06eea8fcf9e6422a465e0b8b5e1a7e37ddb674d0626a2093816a39c2668bbea5",
+  "fixture_id": "synthetic_v3_short_latency_holdout_v1",
+  "source_manifest": "evaluation/generated/synthetic_v2/holdout/synthetic_de_v3-holdout-001/manifest.json",
+  "split": "holdout",
+  "all_hashes_verified": true,
+  "model": {
+    "asr_backend": "mlx",
+    "model": "mlx-community/whisper-large-v3-turbo-q4",
+    "model_revision": "660c343bbf4e52ac257f0b7d952e5388e6f93bef",
+    "resolved_model_path": "/Users/macbookpro/.cache/huggingface/hub/models--mlx-community--whisper-large-v3-turbo-q4/snapshots/660c343bbf4e52ac257f0b7d952e5388e6f93bef",
+    "device": "apple-silicon",
+    "compute_type": "mlx-q4",
+    "language_mode": "de",
+    "last_language": "de",
+    "fallback_reason": null,
+    "guard_fallback_count": 0,
+    "guard_fallback_model": "Systran/faster-whisper-small"
+  },
+  "recognition_config": {
+    "initial_prompt": "Theaterprobe mit Regie, Bühne, Licht und Ton. Fachbegriffe: Inspizienz, Hubpodium, Not-Aus, AES67, Dante.",
+    "hotwords": "",
+    "beam_size": 1,
+    "no_speech_threshold": 0.6,
+    "language_switch_min_probability": 0.55,
+    "language_stickiness_ratio": 0.75,
+    "language_switch_margin": 0.0
+  },
+  "model_load_seconds": 1.4124193749999998,
+  "language_mode": "de",
+  "simulation": {
+    "sample_rate": 16000,
+    "capture_block_size": 1024,
+    "chunk_seconds": 1.25,
+    "configured_overlap_seconds": 3.75,
+    "vad_min_silence_seconds": 0.35,
+    "feed_mode": "logical-real-time-by-sample-availability",
+    "worker_model": "single-serialized-worker"
+  },
+  "clips": 2,
+  "jobs": 2,
+  "successful_first_emits": 2,
+  "mean_end_to_emit_seconds": 2.3639971245,
+  "max_end_to_emit_seconds": 2.426553375,
+  "total_speech_seconds": 3.4,
+  "total_inference_seconds": 1.7852346250000002,
+  "real_time_factor": 0.5250690073529413,
+  "word_error_rate": 0.7142857142857143,
+  "character_error_rate": 0.6538461538461539,
+  "word_errors": {
+    "substitutions": 4,
+    "deletions": 1,
+    "insertions": 0,
+    "errors": 5,
+    "reference_length": 7,
+    "rate": 0.7142857142857143
+  },
+  "character_errors": {
+    "substitutions": 8,
+    "deletions": 5,
+    "insertions": 4,
+    "errors": 17,
+    "reference_length": 26,
+    "rate": 0.6538461538461539
+  },
+  "clip_results": [
+    {
+      "clip_id": "holdout-001",
+      "data_path": "evaluation/generated/synthetic_v2/holdout/synthetic_de_v3-holdout-001/parts/intercom/holdout-001.wav",
+      "audio_sha256": "206888d8c34018fa393b697c326d51bf01b5297aa31caeeba7117bf8e2731a11",
+      "reference": "Stopp, Gefahr!",
+      "hypothesis": "Dufall.",
+      "speech_end_seconds": 1.12,
+      "first_usable_emit_seconds": 3.5465533750000002,
+      "end_to_emit_seconds": 2.426553375,
+      "jobs": 1,
+      "total_inference_seconds": 0.9832425420000002,
+      "real_time_factor": 0.8778951267857144,
+      "word_error_rate": 1.0,
+      "character_error_rate": 0.8181818181818182,
+      "word_errors": {
+        "substitutions": 1,
+        "deletions": 1,
+        "insertions": 0,
+        "errors": 2,
+        "reference_length": 2,
+        "rate": 1.0
+      },
+      "character_errors": {
+        "substitutions": 4,
+        "deletions": 5,
+        "insertions": 0,
+        "errors": 9,
+        "reference_length": 11,
+        "rate": 0.8181818181818182
+      },
+      "language_mode": "de",
+      "languages_used": [
+        "de"
+      ],
+      "job_results": [
+        {
+          "speech_id": "speech-0",
+          "vad_speech_start_seconds": 0.278,
+          "vad_speech_end_seconds": 1.41,
+          "audio_seconds": 1.132,
+          "available_at_seconds": 2.563310833,
+          "vad_processing_seconds": 0.003310833000000013,
+          "worker_start_seconds": 2.563310833,
+          "inference_seconds": 0.9832425420000002,
+          "emit_at_seconds": 3.5465533750000002,
+          "hypothesis": "Dufall.",
+          "language_used": "de"
+        }
+      ]
+    },
+    {
+      "clip_id": "holdout-004",
+      "data_path": "evaluation/generated/synthetic_v2/holdout/synthetic_de_v3-holdout-001/parts/intercom/holdout-004.wav",
+      "audio_sha256": "2adec6fdb68a8159ed7745e7a11bc3c048287b8880f653ec53f660796a60d488",
+      "reference": "Cue 47 B ist bereit.",
+      "hypothesis": "KUH7 und 40D ist bereit.",
+      "speech_end_seconds": 2.28,
+      "first_usable_emit_seconds": 4.581440874,
+      "end_to_emit_seconds": 2.3014408740000003,
+      "jobs": 1,
+      "total_inference_seconds": 0.801992083,
+      "real_time_factor": 0.35175091359649124,
+      "word_error_rate": 0.6,
+      "character_error_rate": 0.5333333333333333,
+      "word_errors": {
+        "substitutions": 3,
+        "deletions": 0,
+        "insertions": 0,
+        "errors": 3,
+        "reference_length": 5,
+        "rate": 0.6
+      },
+      "character_errors": {
+        "substitutions": 4,
+        "deletions": 0,
+        "insertions": 4,
+        "errors": 8,
+        "reference_length": 15,
+        "rate": 0.5333333333333333
+      },
+      "language_mode": "de",
+      "languages_used": [
+        "de"
+      ],
+      "job_results": [
+        {
+          "speech_id": "speech-0",
+          "vad_speech_start_seconds": 0.0,
+          "vad_speech_end_seconds": 2.594,
+          "audio_seconds": 2.594,
+          "available_at_seconds": 3.779448791,
+          "vad_processing_seconds": 0.003448791000000284,
+          "worker_start_seconds": 3.779448791,
+          "inference_seconds": 0.801992083,
+          "emit_at_seconds": 4.581440874,
+          "hypothesis": "KUH7 und 40D ist bereit.",
+          "language_used": "de"
+        }
+      ]
+    }
+  ]
+}

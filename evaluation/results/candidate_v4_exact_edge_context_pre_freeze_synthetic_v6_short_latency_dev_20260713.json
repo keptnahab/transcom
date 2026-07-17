@@ -1,0 +1,617 @@
+{
+  "benchmark": "simulated-realtime-short-utterance-latency",
+  "manifest": "/Users/macbookpro/Library/CloudStorage/Dropbox-Privat/00_AI/01_Codex/260704 TransCom/01 1st try on Claude/TransCom/evaluation/data/manifests/synthetic_v6_short_latency_dev_v1.json",
+  "manifest_sha256": "00196186f09ba33074b4f45016fa2246527caf287db67124cde2aabd0b3de30e",
+  "fixture_id": "synthetic_v6_short_latency_dev_v1",
+  "source_manifest": "evaluation/generated/synthetic_v2/dev/synthetic_de_v6-dev-001/manifest.json",
+  "split": "dev",
+  "all_hashes_verified": true,
+  "model": {
+    "asr_backend": "mlx",
+    "model": "mlx-community/whisper-large-v3-turbo-q4",
+    "model_revision": "660c343bbf4e52ac257f0b7d952e5388e6f93bef",
+    "resolved_model_path": "/Users/macbookpro/.cache/huggingface/hub/models--mlx-community--whisper-large-v3-turbo-q4/snapshots/660c343bbf4e52ac257f0b7d952e5388e6f93bef",
+    "device": "apple-silicon",
+    "compute_type": "mlx-q4",
+    "language_mode": "de",
+    "last_language": "de",
+    "fallback_reason": null,
+    "guard_fallback_count": 0,
+    "confirm_short_seconds": 3.0,
+    "edge_padding_seconds": 0.35,
+    "edge_padding_max_seconds": 3.0,
+    "domain_glossary_terms": [
+      "Lastaufnahme",
+      "unterbrechen"
+    ],
+    "guard_fallback_model": "Systran/faster-whisper-small"
+  },
+  "recognition_config": {
+    "initial_prompt": "Deutschsprachige Theaterprobe mit kurzen Sicherheitskommandos und technischen Cues. Es geht um Motor, Bremse, Kreis, Kanal, Einheit, Buchstaben und Zahlen sowie um Inspizienz, Hubpodium, Not-Aus, AES67 und Dante.",
+    "hotwords": "",
+    "german_spoken_number_normalization": true,
+    "confirm_short_seconds": 3.0,
+    "edge_padding_seconds": 0.35,
+    "edge_padding_max_seconds": 3.0,
+    "domain_glossary_terms": [
+      "Lastaufnahme",
+      "unterbrechen"
+    ],
+    "beam_size": 1,
+    "no_speech_threshold": 0.6,
+    "language_switch_min_probability": 0.55,
+    "language_stickiness_ratio": 0.75,
+    "language_switch_margin": 0.0
+  },
+  "model_load_seconds": 1.2909074579999997,
+  "language_mode": "de",
+  "simulation": {
+    "sample_rate": 16000,
+    "capture_block_size": 1024,
+    "chunk_seconds": 1.25,
+    "configured_overlap_seconds": 3.75,
+    "vad_min_silence_seconds": 0.35,
+    "vad_pre_roll_seconds": 0.5,
+    "vad_post_roll_seconds": 0.0,
+    "feed_mode": "logical-real-time-by-sample-availability",
+    "worker_model": "single-serialized-worker"
+  },
+  "clips": 10,
+  "jobs": 10,
+  "successful_first_emits": 10,
+  "mean_end_to_emit_seconds": 1.361366379,
+  "max_end_to_emit_seconds": 1.6715315829999995,
+  "total_speech_seconds": 15.75,
+  "total_inference_seconds": 3.731132538999999,
+  "real_time_factor": 0.236897304063492,
+  "word_error_rate": 0.4,
+  "character_error_rate": 0.08173076923076923,
+  "word_errors": {
+    "substitutions": 11,
+    "deletions": 1,
+    "insertions": 0,
+    "errors": 12,
+    "reference_length": 30,
+    "rate": 0.4
+  },
+  "character_errors": {
+    "substitutions": 7,
+    "deletions": 2,
+    "insertions": 8,
+    "errors": 17,
+    "reference_length": 208,
+    "rate": 0.08173076923076923
+  },
+  "clip_results": [
+    {
+      "clip_id": "v6-dev-001",
+      "data_path": "evaluation/generated/synthetic_v2/dev/synthetic_de_v6-dev-001/parts/intercom/v6-dev-001.wav",
+      "audio_sha256": "4f7864a2dc44005ab0f9c4fd75e23ccb1d9be26f4d6d3c2b4cd5d83028c5c699",
+      "reference": "Hauptantrieb stoppen!",
+      "hypothesis": "Hauptantrieb stoppen.",
+      "speech_end_seconds": 1.26,
+      "first_usable_emit_seconds": 2.9315315829999995,
+      "end_to_emit_seconds": 1.6715315829999995,
+      "jobs": 1,
+      "total_inference_seconds": 0.3684026659999997,
+      "real_time_factor": 0.29238306825396804,
+      "word_error_rate": 0.0,
+      "character_error_rate": 0.0,
+      "word_errors": {
+        "substitutions": 0,
+        "deletions": 0,
+        "insertions": 0,
+        "errors": 0,
+        "reference_length": 2,
+        "rate": 0.0
+      },
+      "character_errors": {
+        "substitutions": 0,
+        "deletions": 0,
+        "insertions": 0,
+        "errors": 0,
+        "reference_length": 19,
+        "rate": 0.0
+      },
+      "language_mode": "de",
+      "languages_used": [
+        "de"
+      ],
+      "job_results": [
+        {
+          "speech_id": "speech-0",
+          "vad_speech_start_seconds": 0.0,
+          "vad_speech_end_seconds": 1.506,
+          "audio_seconds": 1.506,
+          "available_at_seconds": 2.563128917,
+          "vad_processing_seconds": 0.0031289169999997313,
+          "worker_start_seconds": 2.563128917,
+          "inference_seconds": 0.3684026659999997,
+          "emit_at_seconds": 2.9315315829999995,
+          "hypothesis": "Hauptantrieb stoppen.",
+          "mean_asr_confidence": 0.995361328125,
+          "minimum_asr_confidence": 0.9931640625,
+          "requires_confirmation": true,
+          "language_used": "de"
+        }
+      ]
+    },
+    {
+      "clip_id": "v6-dev-002",
+      "data_path": "evaluation/generated/synthetic_v2/dev/synthetic_de_v6-dev-001/parts/intercom/v6-dev-002.wav",
+      "audio_sha256": "680bfa3137604445cc943eab6874d48658207ad4b1ef153afb655fdf34db760b",
+      "reference": "Schutzraum sofort räumen!",
+      "hypothesis": "Schutzraum sofort räumen.",
+      "speech_end_seconds": 1.49,
+      "first_usable_emit_seconds": 2.934228291,
+      "end_to_emit_seconds": 1.4442282910000002,
+      "jobs": 1,
+      "total_inference_seconds": 0.37109045799999985,
+      "real_time_factor": 0.24905399865771802,
+      "word_error_rate": 0.0,
+      "character_error_rate": 0.0,
+      "word_errors": {
+        "substitutions": 0,
+        "deletions": 0,
+        "insertions": 0,
+        "errors": 0,
+        "reference_length": 3,
+        "rate": 0.0
+      },
+      "character_errors": {
+        "substitutions": 0,
+        "deletions": 0,
+        "insertions": 0,
+        "errors": 0,
+        "reference_length": 22,
+        "rate": 0.0
+      },
+      "language_mode": "de",
+      "languages_used": [
+        "de"
+      ],
+      "job_results": [
+        {
+          "speech_id": "speech-0",
+          "vad_speech_start_seconds": 0.0,
+          "vad_speech_end_seconds": 1.73,
+          "audio_seconds": 1.73,
+          "available_at_seconds": 2.5631378330000003,
+          "vad_processing_seconds": 0.0031378330000002563,
+          "worker_start_seconds": 2.5631378330000003,
+          "inference_seconds": 0.37109045799999985,
+          "emit_at_seconds": 2.934228291,
+          "hypothesis": "Schutzraum sofort räumen.",
+          "mean_asr_confidence": 0.8424479166666666,
+          "minimum_asr_confidence": 0.70068359375,
+          "requires_confirmation": true,
+          "language_used": "de"
+        }
+      ]
+    },
+    {
+      "clip_id": "v6-dev-003",
+      "data_path": "evaluation/generated/synthetic_v2/dev/synthetic_de_v6-dev-001/parts/intercom/v6-dev-003.wav",
+      "audio_sha256": "5d00075668695f82c8149eb38721192c9f74045ee1e073b01d1db5367d0686d9",
+      "reference": "Hubbewegung blockieren!",
+      "hypothesis": "Hubbewegung blockieren.",
+      "speech_end_seconds": 1.57,
+      "first_usable_emit_seconds": 2.941666416,
+      "end_to_emit_seconds": 1.3716664159999998,
+      "jobs": 1,
+      "total_inference_seconds": 0.37795691600000003,
+      "real_time_factor": 0.24073688917197453,
+      "word_error_rate": 0.0,
+      "character_error_rate": 0.0,
+      "word_errors": {
+        "substitutions": 0,
+        "deletions": 0,
+        "insertions": 0,
+        "errors": 0,
+        "reference_length": 2,
+        "rate": 0.0
+      },
+      "character_errors": {
+        "substitutions": 0,
+        "deletions": 0,
+        "insertions": 0,
+        "errors": 0,
+        "reference_length": 21,
+        "rate": 0.0
+      },
+      "language_mode": "de",
+      "languages_used": [
+        "de"
+      ],
+      "job_results": [
+        {
+          "speech_id": "speech-0",
+          "vad_speech_start_seconds": 0.0,
+          "vad_speech_end_seconds": 1.826,
+          "audio_seconds": 1.826,
+          "available_at_seconds": 2.5637095,
+          "vad_processing_seconds": 0.00370949999999981,
+          "worker_start_seconds": 2.5637095,
+          "inference_seconds": 0.37795691600000003,
+          "emit_at_seconds": 2.941666416,
+          "hypothesis": "Hubbewegung blockieren.",
+          "mean_asr_confidence": 0.845703125,
+          "minimum_asr_confidence": 0.7275390625,
+          "requires_confirmation": true,
+          "language_used": "de"
+        }
+      ]
+    },
+    {
+      "clip_id": "v6-dev-004",
+      "data_path": "evaluation/generated/synthetic_v2/dev/synthetic_de_v6-dev-001/parts/intercom/v6-dev-004.wav",
+      "audio_sha256": "04d0353d1542e285b55b8b1c359c3ec2067a8099f54c68045d47a6c4350c15f5",
+      "reference": "Lastaufnahme unterbrechen!",
+      "hypothesis": "Lastaufnahme unterbrechen.",
+      "speech_end_seconds": 1.74,
+      "first_usable_emit_seconds": 2.9426878339999996,
+      "end_to_emit_seconds": 1.2026878339999996,
+      "jobs": 1,
+      "total_inference_seconds": 0.3794425839999995,
+      "real_time_factor": 0.21807045057471236,
+      "word_error_rate": 0.0,
+      "character_error_rate": 0.0,
+      "word_errors": {
+        "substitutions": 0,
+        "deletions": 0,
+        "insertions": 0,
+        "errors": 0,
+        "reference_length": 2,
+        "rate": 0.0
+      },
+      "character_errors": {
+        "substitutions": 0,
+        "deletions": 0,
+        "insertions": 0,
+        "errors": 0,
+        "reference_length": 24,
+        "rate": 0.0
+      },
+      "language_mode": "de",
+      "languages_used": [
+        "de"
+      ],
+      "job_results": [
+        {
+          "speech_id": "speech-0",
+          "vad_speech_start_seconds": 0.0,
+          "vad_speech_end_seconds": 2.018,
+          "audio_seconds": 2.018,
+          "available_at_seconds": 2.56324525,
+          "vad_processing_seconds": 0.0032452499999999773,
+          "worker_start_seconds": 2.56324525,
+          "inference_seconds": 0.3794425839999995,
+          "emit_at_seconds": 2.9426878339999996,
+          "hypothesis": "Lastaufnahme unterbrechen.",
+          "mean_asr_confidence": 0.696044921875,
+          "minimum_asr_confidence": 0.607421875,
+          "requires_confirmation": true,
+          "language_used": "de"
+        }
+      ]
+    },
+    {
+      "clip_id": "v6-dev-005",
+      "data_path": "evaluation/generated/synthetic_v2/dev/synthetic_de_v6-dev-001/parts/intercom/v6-dev-005.wav",
+      "audio_sha256": "3936809eb32d29355bba8e3226ae1292fd6ee189721bf4f0b64929beacd02025",
+      "reference": "Zugang unverzüglich schließen!",
+      "hypothesis": "Zugang unverzüglich schließen.",
+      "speech_end_seconds": 1.89,
+      "first_usable_emit_seconds": 2.9379143329999997,
+      "end_to_emit_seconds": 1.0479143329999998,
+      "jobs": 1,
+      "total_inference_seconds": 0.3746072079999996,
+      "real_time_factor": 0.19820487195767175,
+      "word_error_rate": 0.0,
+      "character_error_rate": 0.0,
+      "word_errors": {
+        "substitutions": 0,
+        "deletions": 0,
+        "insertions": 0,
+        "errors": 0,
+        "reference_length": 3,
+        "rate": 0.0
+      },
+      "character_errors": {
+        "substitutions": 0,
+        "deletions": 0,
+        "insertions": 0,
+        "errors": 0,
+        "reference_length": 28,
+        "rate": 0.0
+      },
+      "language_mode": "de",
+      "languages_used": [
+        "de"
+      ],
+      "job_results": [
+        {
+          "speech_id": "speech-0",
+          "vad_speech_start_seconds": 0.0,
+          "vad_speech_end_seconds": 2.146,
+          "audio_seconds": 2.146,
+          "available_at_seconds": 2.563307125,
+          "vad_processing_seconds": 0.0033071250000000774,
+          "worker_start_seconds": 2.563307125,
+          "inference_seconds": 0.3746072079999996,
+          "emit_at_seconds": 2.9379143329999997,
+          "hypothesis": "Zugang unverzüglich schließen.",
+          "mean_asr_confidence": 0.99462890625,
+          "minimum_asr_confidence": 0.99169921875,
+          "requires_confirmation": true,
+          "language_used": "de"
+        }
+      ]
+    },
+    {
+      "clip_id": "v6-dev-006",
+      "data_path": "evaluation/generated/synthetic_v2/dev/synthetic_de_v6-dev-001/parts/intercom/v6-dev-006.wav",
+      "audio_sha256": "e3cc87a5232be850075898e28be226c237d93729754b25ce60831efa88d78cb2",
+      "reference": "Druckversorgung abschalten!",
+      "hypothesis": "Druckversorgung abschalten.",
+      "speech_end_seconds": 1.53,
+      "first_usable_emit_seconds": 2.9360776659999996,
+      "end_to_emit_seconds": 1.4060776659999996,
+      "jobs": 1,
+      "total_inference_seconds": 0.3729214159999996,
+      "real_time_factor": 0.24373948758169908,
+      "word_error_rate": 0.0,
+      "character_error_rate": 0.0,
+      "word_errors": {
+        "substitutions": 0,
+        "deletions": 0,
+        "insertions": 0,
+        "errors": 0,
+        "reference_length": 2,
+        "rate": 0.0
+      },
+      "character_errors": {
+        "substitutions": 0,
+        "deletions": 0,
+        "insertions": 0,
+        "errors": 0,
+        "reference_length": 25,
+        "rate": 0.0
+      },
+      "language_mode": "de",
+      "languages_used": [
+        "de"
+      ],
+      "job_results": [
+        {
+          "speech_id": "speech-0",
+          "vad_speech_start_seconds": 0.0,
+          "vad_speech_end_seconds": 1.762,
+          "audio_seconds": 1.762,
+          "available_at_seconds": 2.56315625,
+          "vad_processing_seconds": 0.0031562499999999716,
+          "worker_start_seconds": 2.56315625,
+          "inference_seconds": 0.3729214159999996,
+          "emit_at_seconds": 2.9360776659999996,
+          "hypothesis": "Druckversorgung abschalten.",
+          "mean_asr_confidence": 0.945556640625,
+          "minimum_asr_confidence": 0.92431640625,
+          "requires_confirmation": true,
+          "language_used": "de"
+        }
+      ]
+    },
+    {
+      "clip_id": "v6-dev-007",
+      "data_path": "evaluation/generated/synthetic_v2/dev/synthetic_de_v6-dev-001/parts/intercom/v6-dev-007.wav",
+      "audio_sha256": "dc50e0938128d9843734dbae8fbda01e86db2609cbaeb108d2547adc8670477a",
+      "reference": "Cue K zwei bereit.",
+      "hypothesis": "Kuhle Kotzweide-Reit.",
+      "speech_end_seconds": 1.49,
+      "first_usable_emit_seconds": 2.9382487089999993,
+      "end_to_emit_seconds": 1.4482487089999994,
+      "jobs": 1,
+      "total_inference_seconds": 0.37510979199999994,
+      "real_time_factor": 0.25175153825503355,
+      "word_error_rate": 1.0,
+      "character_error_rate": 0.42857142857142855,
+      "word_errors": {
+        "substitutions": 3,
+        "deletions": 1,
+        "insertions": 0,
+        "errors": 4,
+        "reference_length": 4,
+        "rate": 1.0
+      },
+      "character_errors": {
+        "substitutions": 2,
+        "deletions": 0,
+        "insertions": 4,
+        "errors": 6,
+        "reference_length": 14,
+        "rate": 0.42857142857142855
+      },
+      "language_mode": "de",
+      "languages_used": [
+        "de"
+      ],
+      "job_results": [
+        {
+          "speech_id": "speech-0",
+          "vad_speech_start_seconds": 0.0,
+          "vad_speech_end_seconds": 1.762,
+          "audio_seconds": 1.762,
+          "available_at_seconds": 2.5631389169999994,
+          "vad_processing_seconds": 0.0031389169999993527,
+          "worker_start_seconds": 2.5631389169999994,
+          "inference_seconds": 0.37510979199999994,
+          "emit_at_seconds": 2.9382487089999993,
+          "hypothesis": "Kuhle Kotzweide-Reit.",
+          "mean_asr_confidence": 0.3916829427083333,
+          "minimum_asr_confidence": 0.296875,
+          "requires_confirmation": true,
+          "language_used": "de"
+        }
+      ]
+    },
+    {
+      "clip_id": "v6-dev-008",
+      "data_path": "evaluation/generated/synthetic_v2/dev/synthetic_de_v6-dev-001/parts/intercom/v6-dev-008.wav",
+      "audio_sha256": "592de4d753b56a681f7dcee911750fc479b379987da784dad5fc2537b959887e",
+      "reference": "Position N acht erreicht.",
+      "hypothesis": "Positionen nach der Reich.",
+      "speech_end_seconds": 1.54,
+      "first_usable_emit_seconds": 2.93218325,
+      "end_to_emit_seconds": 1.39218325,
+      "jobs": 1,
+      "total_inference_seconds": 0.36902354199999987,
+      "real_time_factor": 0.23962567662337653,
+      "word_error_rate": 1.0,
+      "character_error_rate": 0.19047619047619047,
+      "word_errors": {
+        "substitutions": 4,
+        "deletions": 0,
+        "insertions": 0,
+        "errors": 4,
+        "reference_length": 4,
+        "rate": 1.0
+      },
+      "character_errors": {
+        "substitutions": 1,
+        "deletions": 1,
+        "insertions": 2,
+        "errors": 4,
+        "reference_length": 21,
+        "rate": 0.19047619047619047
+      },
+      "language_mode": "de",
+      "languages_used": [
+        "de"
+      ],
+      "job_results": [
+        {
+          "speech_id": "speech-0",
+          "vad_speech_start_seconds": 0.0,
+          "vad_speech_end_seconds": 1.858,
+          "audio_seconds": 1.858,
+          "available_at_seconds": 2.563159708,
+          "vad_processing_seconds": 0.0031597080000000943,
+          "worker_start_seconds": 2.563159708,
+          "inference_seconds": 0.36902354199999987,
+          "emit_at_seconds": 2.93218325,
+          "hypothesis": "Positionen nach der Reich.",
+          "mean_asr_confidence": 0.8668212890625,
+          "minimum_asr_confidence": 0.70654296875,
+          "requires_confirmation": true,
+          "language_used": "de"
+        }
+      ]
+    },
+    {
+      "clip_id": "v6-dev-009",
+      "data_path": "evaluation/generated/synthetic_v2/dev/synthetic_de_v6-dev-001/parts/intercom/v6-dev-009.wav",
+      "audio_sha256": "84c050b3d81b125fb922e97a91a1847f5cfc1db76037cf8f5adfbe151c432c8c",
+      "reference": "Linie P fünf aktiv.",
+      "hypothesis": "Linie P fünf aktiv.",
+      "speech_end_seconds": 1.63,
+      "first_usable_emit_seconds": 2.9322502080000006,
+      "end_to_emit_seconds": 1.3022502080000007,
+      "jobs": 1,
+      "total_inference_seconds": 0.3691081660000002,
+      "real_time_factor": 0.2264467276073621,
+      "word_error_rate": 0.0,
+      "character_error_rate": 0.0,
+      "word_errors": {
+        "substitutions": 0,
+        "deletions": 0,
+        "insertions": 0,
+        "errors": 0,
+        "reference_length": 4,
+        "rate": 0.0
+      },
+      "character_errors": {
+        "substitutions": 0,
+        "deletions": 0,
+        "insertions": 0,
+        "errors": 0,
+        "reference_length": 15,
+        "rate": 0.0
+      },
+      "language_mode": "de",
+      "languages_used": [
+        "de"
+      ],
+      "job_results": [
+        {
+          "speech_id": "speech-0",
+          "vad_speech_start_seconds": 0.0,
+          "vad_speech_end_seconds": 1.634,
+          "audio_seconds": 1.634,
+          "available_at_seconds": 2.5631420420000004,
+          "vad_processing_seconds": 0.0031420420000003446,
+          "worker_start_seconds": 2.5631420420000004,
+          "inference_seconds": 0.3691081660000002,
+          "emit_at_seconds": 2.9322502080000006,
+          "hypothesis": "Linie P fünf aktiv.",
+          "mean_asr_confidence": 0.9479166666666666,
+          "minimum_asr_confidence": 0.8828125,
+          "requires_confirmation": true,
+          "language_used": "de"
+        }
+      ]
+    },
+    {
+      "clip_id": "v6-dev-010",
+      "data_path": "evaluation/generated/synthetic_v2/dev/synthetic_de_v6-dev-001/parts/intercom/v6-dev-010.wav",
+      "audio_sha256": "8cd501a9d23cbd691b8acbdb9ddcdd4fb2ae20862b1b109c7a02952ed7c2b065",
+      "reference": "Modul Z drei verbunden.",
+      "hypothesis": "Motor, Set, Driver, Bunden.",
+      "speech_end_seconds": 1.61,
+      "first_usable_emit_seconds": 2.9368755000000006,
+      "end_to_emit_seconds": 1.3268755000000005,
+      "jobs": 1,
+      "total_inference_seconds": 0.37346979100000066,
+      "real_time_factor": 0.23196881428571467,
+      "word_error_rate": 1.0,
+      "character_error_rate": 0.3684210526315789,
+      "word_errors": {
+        "substitutions": 4,
+        "deletions": 0,
+        "insertions": 0,
+        "errors": 4,
+        "reference_length": 4,
+        "rate": 1.0
+      },
+      "character_errors": {
+        "substitutions": 4,
+        "deletions": 1,
+        "insertions": 2,
+        "errors": 7,
+        "reference_length": 19,
+        "rate": 0.3684210526315789
+      },
+      "language_mode": "de",
+      "languages_used": [
+        "de"
+      ],
+      "job_results": [
+        {
+          "speech_id": "speech-0",
+          "vad_speech_start_seconds": 0.0,
+          "vad_speech_end_seconds": 1.858,
+          "audio_seconds": 1.858,
+          "available_at_seconds": 2.563405709,
+          "vad_processing_seconds": 0.0034057089999999235,
+          "worker_start_seconds": 2.563405709,
+          "inference_seconds": 0.37346979100000066,
+          "emit_at_seconds": 2.9368755000000006,
+          "hypothesis": "Motor, Set, Driver, Bunden.",
+          "mean_asr_confidence": 0.32538604736328125,
+          "minimum_asr_confidence": 0.002716064453125,
+          "requires_confirmation": true,
+          "language_used": "de"
+        }
+      ]
+    }
+  ]
+}

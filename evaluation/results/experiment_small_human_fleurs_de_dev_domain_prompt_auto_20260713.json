@@ -1,0 +1,894 @@
+{
+  "benchmark": "hash-bound-clip-suite",
+  "manifest": "/Users/macbookpro/Library/CloudStorage/Dropbox-Privat/00_AI/01_Codex/260704 TransCom/01 1st try on Claude/TransCom/evaluation/data/manifests/fleurs_de_dev_v1.json",
+  "manifest_sha256": "dadfac0ee4be3470eb817e1841a3779a900a94561390cf07a3cd613e469b9052",
+  "project_root": "/Users/macbookpro/Library/CloudStorage/Dropbox-Privat/00_AI/01_Codex/260704 TransCom/01 1st try on Claude/TransCom",
+  "dataset_id": "fleurs_de_dev_v1",
+  "dataset_name": "FLEURS",
+  "manifest_language": "de-DE",
+  "language_mode": "auto",
+  "languages_used": [
+    "de"
+  ],
+  "all_clip_hashes_verified": true,
+  "model": {
+    "asr_backend": "faster-whisper",
+    "model": "Systran/faster-whisper-small",
+    "device": "cpu",
+    "compute_type": "int8",
+    "language_mode": "auto",
+    "last_language": "de",
+    "fallback_reason": null
+  },
+  "model_load_seconds": 0.4188477920000001,
+  "clip_count": 12,
+  "micro": {
+    "word_error_rate": 0.07142857142857142,
+    "character_error_rate": 0.021176470588235293,
+    "word_errors": {
+      "substitutions": 13,
+      "deletions": 3,
+      "insertions": 0,
+      "errors": 16,
+      "reference_length": 224,
+      "rate": 0.07142857142857142
+    },
+    "character_errors": {
+      "substitutions": 10,
+      "deletions": 13,
+      "insertions": 4,
+      "errors": 27,
+      "reference_length": 1275,
+      "rate": 0.021176470588235293
+    },
+    "semantic_word_error_rate": 0.07142857142857142,
+    "semantic_word_errors": {
+      "substitutions": 13,
+      "deletions": 3,
+      "insertions": 0,
+      "errors": 16,
+      "reference_length": 224,
+      "rate": 0.07142857142857142
+    }
+  },
+  "macro": {
+    "word_error_rate": 0.08441420353668805,
+    "character_error_rate": 0.031809323541428534
+  },
+  "total_audio_seconds": 135.72,
+  "total_inference_seconds": 23.969510334,
+  "real_time_factor": 0.17661000835543766,
+  "groups": {
+    "length_bucket": {
+      "long": {
+        "clip_count": 4,
+        "micro": {
+          "word_error_rate": 0.04504504504504504,
+          "character_error_rate": 0.011764705882352941,
+          "word_errors": {
+            "substitutions": 4,
+            "deletions": 1,
+            "insertions": 0,
+            "errors": 5,
+            "reference_length": 111,
+            "rate": 0.04504504504504504
+          },
+          "character_errors": {
+            "substitutions": 3,
+            "deletions": 3,
+            "insertions": 1,
+            "errors": 7,
+            "reference_length": 595,
+            "rate": 0.011764705882352941
+          },
+          "semantic_word_error_rate": 0.04504504504504504,
+          "semantic_word_errors": {
+            "substitutions": 4,
+            "deletions": 1,
+            "insertions": 0,
+            "errors": 5,
+            "reference_length": 111,
+            "rate": 0.04504504504504504
+          }
+        },
+        "macro": {
+          "word_error_rate": 0.04266826923076923,
+          "character_error_rate": 0.011714285714285715
+        },
+        "total_audio_seconds": 62.21999999999999,
+        "total_inference_seconds": 9.030909542,
+        "real_time_factor": 0.14514480138219224
+      },
+      "medium": {
+        "clip_count": 4,
+        "micro": {
+          "word_error_rate": 0.08108108108108109,
+          "character_error_rate": 0.017738359201773836,
+          "word_errors": {
+            "substitutions": 4,
+            "deletions": 2,
+            "insertions": 0,
+            "errors": 6,
+            "reference_length": 74,
+            "rate": 0.08108108108108109
+          },
+          "character_errors": {
+            "substitutions": 4,
+            "deletions": 3,
+            "insertions": 1,
+            "errors": 8,
+            "reference_length": 451,
+            "rate": 0.017738359201773836
+          },
+          "semantic_word_error_rate": 0.08108108108108109,
+          "semantic_word_errors": {
+            "substitutions": 4,
+            "deletions": 2,
+            "insertions": 0,
+            "errors": 6,
+            "reference_length": 74,
+            "rate": 0.08108108108108109
+          }
+        },
+        "macro": {
+          "word_error_rate": 0.0767359575409111,
+          "character_error_rate": 0.019034090909090907
+        },
+        "total_audio_seconds": 51.96,
+        "total_inference_seconds": 7.587431167,
+        "real_time_factor": 0.14602446433795227
+      },
+      "short": {
+        "clip_count": 4,
+        "micro": {
+          "word_error_rate": 0.1282051282051282,
+          "character_error_rate": 0.05240174672489083,
+          "word_errors": {
+            "substitutions": 5,
+            "deletions": 0,
+            "insertions": 0,
+            "errors": 5,
+            "reference_length": 39,
+            "rate": 0.1282051282051282
+          },
+          "character_errors": {
+            "substitutions": 3,
+            "deletions": 7,
+            "insertions": 2,
+            "errors": 12,
+            "reference_length": 229,
+            "rate": 0.05240174672489083
+          },
+          "semantic_word_error_rate": 0.1282051282051282,
+          "semantic_word_errors": {
+            "substitutions": 5,
+            "deletions": 0,
+            "insertions": 0,
+            "errors": 5,
+            "reference_length": 39,
+            "rate": 0.1282051282051282
+          }
+        },
+        "macro": {
+          "word_error_rate": 0.13383838383838384,
+          "character_error_rate": 0.06467959400090896
+        },
+        "total_audio_seconds": 21.54,
+        "total_inference_seconds": 7.351169625,
+        "real_time_factor": 0.34127992688022285
+      }
+    },
+    "gender": {
+      "MALE": {
+        "clip_count": 12,
+        "micro": {
+          "word_error_rate": 0.07142857142857142,
+          "character_error_rate": 0.021176470588235293,
+          "word_errors": {
+            "substitutions": 13,
+            "deletions": 3,
+            "insertions": 0,
+            "errors": 16,
+            "reference_length": 224,
+            "rate": 0.07142857142857142
+          },
+          "character_errors": {
+            "substitutions": 10,
+            "deletions": 13,
+            "insertions": 4,
+            "errors": 27,
+            "reference_length": 1275,
+            "rate": 0.021176470588235293
+          },
+          "semantic_word_error_rate": 0.07142857142857142,
+          "semantic_word_errors": {
+            "substitutions": 13,
+            "deletions": 3,
+            "insertions": 0,
+            "errors": 16,
+            "reference_length": 224,
+            "rate": 0.07142857142857142
+          }
+        },
+        "macro": {
+          "word_error_rate": 0.08441420353668805,
+          "character_error_rate": 0.031809323541428534
+        },
+        "total_audio_seconds": 135.72,
+        "total_inference_seconds": 23.969510334,
+        "real_time_factor": 0.17661000835543766
+      }
+    },
+    "official_split": {
+      "dev": {
+        "clip_count": 12,
+        "micro": {
+          "word_error_rate": 0.07142857142857142,
+          "character_error_rate": 0.021176470588235293,
+          "word_errors": {
+            "substitutions": 13,
+            "deletions": 3,
+            "insertions": 0,
+            "errors": 16,
+            "reference_length": 224,
+            "rate": 0.07142857142857142
+          },
+          "character_errors": {
+            "substitutions": 10,
+            "deletions": 13,
+            "insertions": 4,
+            "errors": 27,
+            "reference_length": 1275,
+            "rate": 0.021176470588235293
+          },
+          "semantic_word_error_rate": 0.07142857142857142,
+          "semantic_word_errors": {
+            "substitutions": 13,
+            "deletions": 3,
+            "insertions": 0,
+            "errors": 16,
+            "reference_length": 224,
+            "rate": 0.07142857142857142
+          }
+        },
+        "macro": {
+          "word_error_rate": 0.08441420353668805,
+          "character_error_rate": 0.031809323541428534
+        },
+        "total_audio_seconds": 135.72,
+        "total_inference_seconds": 23.969510334,
+        "real_time_factor": 0.17661000835543766
+      }
+    },
+    "profile": {
+      "unknown": {
+        "clip_count": 12,
+        "micro": {
+          "word_error_rate": 0.07142857142857142,
+          "character_error_rate": 0.021176470588235293,
+          "word_errors": {
+            "substitutions": 13,
+            "deletions": 3,
+            "insertions": 0,
+            "errors": 16,
+            "reference_length": 224,
+            "rate": 0.07142857142857142
+          },
+          "character_errors": {
+            "substitutions": 10,
+            "deletions": 13,
+            "insertions": 4,
+            "errors": 27,
+            "reference_length": 1275,
+            "rate": 0.021176470588235293
+          },
+          "semantic_word_error_rate": 0.07142857142857142,
+          "semantic_word_errors": {
+            "substitutions": 13,
+            "deletions": 3,
+            "insertions": 0,
+            "errors": 16,
+            "reference_length": 224,
+            "rate": 0.07142857142857142
+          }
+        },
+        "macro": {
+          "word_error_rate": 0.08441420353668805,
+          "character_error_rate": 0.031809323541428534
+        },
+        "total_audio_seconds": 135.72,
+        "total_inference_seconds": 23.969510334,
+        "real_time_factor": 0.17661000835543766
+      }
+    },
+    "voice": {
+      "unknown": {
+        "clip_count": 12,
+        "micro": {
+          "word_error_rate": 0.07142857142857142,
+          "character_error_rate": 0.021176470588235293,
+          "word_errors": {
+            "substitutions": 13,
+            "deletions": 3,
+            "insertions": 0,
+            "errors": 16,
+            "reference_length": 224,
+            "rate": 0.07142857142857142
+          },
+          "character_errors": {
+            "substitutions": 10,
+            "deletions": 13,
+            "insertions": 4,
+            "errors": 27,
+            "reference_length": 1275,
+            "rate": 0.021176470588235293
+          },
+          "semantic_word_error_rate": 0.07142857142857142,
+          "semantic_word_errors": {
+            "substitutions": 13,
+            "deletions": 3,
+            "insertions": 0,
+            "errors": 16,
+            "reference_length": 224,
+            "rate": 0.07142857142857142
+          }
+        },
+        "macro": {
+          "word_error_rate": 0.08441420353668805,
+          "character_error_rate": 0.031809323541428534
+        },
+        "total_audio_seconds": 135.72,
+        "total_inference_seconds": 23.969510334,
+        "real_time_factor": 0.17661000835543766
+      }
+    },
+    "role": {
+      "unknown": {
+        "clip_count": 12,
+        "micro": {
+          "word_error_rate": 0.07142857142857142,
+          "character_error_rate": 0.021176470588235293,
+          "word_errors": {
+            "substitutions": 13,
+            "deletions": 3,
+            "insertions": 0,
+            "errors": 16,
+            "reference_length": 224,
+            "rate": 0.07142857142857142
+          },
+          "character_errors": {
+            "substitutions": 10,
+            "deletions": 13,
+            "insertions": 4,
+            "errors": 27,
+            "reference_length": 1275,
+            "rate": 0.021176470588235293
+          },
+          "semantic_word_error_rate": 0.07142857142857142,
+          "semantic_word_errors": {
+            "substitutions": 13,
+            "deletions": 3,
+            "insertions": 0,
+            "errors": 16,
+            "reference_length": 224,
+            "rate": 0.07142857142857142
+          }
+        },
+        "macro": {
+          "word_error_rate": 0.08441420353668805,
+          "character_error_rate": 0.031809323541428534
+        },
+        "total_audio_seconds": 135.72,
+        "total_inference_seconds": 23.969510334,
+        "real_time_factor": 0.17661000835543766
+      }
+    },
+    "category": {}
+  },
+  "clip_results": [
+    {
+      "clip_index": 1,
+      "audio_id": "10829590158907308643",
+      "data_path": "evaluation/data/raw/human/fleurs_de_dev_v1/10829590158907308643.wav",
+      "audio_sha256": "f7676192afa3397e822da436e16e8977fd7b63c9a299ab1fb2e8166e32047f10",
+      "speaker_id": null,
+      "length_bucket": "short",
+      "gender": "MALE",
+      "official_split": "dev",
+      "profile": null,
+      "voice": null,
+      "role": null,
+      "categories": [],
+      "reference_status": "official_fleurs_metadata_not_manually_reviewed",
+      "requested_language": "auto",
+      "language_used": "de",
+      "audio_samples": 115200,
+      "audio_seconds": 7.2,
+      "inference_seconds": 1.734535917,
+      "real_time_factor": 0.24090776625000002,
+      "reference": "Es ist Martellys fünftes CEP innerhalb von vier Jahren.",
+      "hypothesis": "Es ist Mattellis 5. CEP innerhalb von vier Jahren.",
+      "word_error_rate": 0.2222222222222222,
+      "character_error_rate": 0.1956521739130435,
+      "semantic_word_error_rate": 0.2222222222222222,
+      "word_errors": {
+        "substitutions": 2,
+        "deletions": 0,
+        "insertions": 0,
+        "errors": 2,
+        "reference_length": 9,
+        "rate": 0.2222222222222222
+      },
+      "character_errors": {
+        "substitutions": 3,
+        "deletions": 6,
+        "insertions": 0,
+        "errors": 9,
+        "reference_length": 46,
+        "rate": 0.1956521739130435
+      }
+    },
+    {
+      "clip_index": 2,
+      "audio_id": "10867406545374035954",
+      "data_path": "evaluation/data/raw/human/fleurs_de_dev_v1/10867406545374035954.wav",
+      "audio_sha256": "64e2b82978216309dadd7b8d720ef4882f84d0eb290e5852cd2e0b55b7d3db37",
+      "speaker_id": null,
+      "length_bucket": "short",
+      "gender": "MALE",
+      "official_split": "dev",
+      "profile": null,
+      "voice": null,
+      "role": null,
+      "categories": [],
+      "reference_status": "official_fleurs_metadata_not_manually_reviewed",
+      "requested_language": "auto",
+      "language_used": "de",
+      "audio_samples": 84480,
+      "audio_seconds": 5.28,
+      "inference_seconds": 1.7454584579999999,
+      "real_time_factor": 0.3305792534090909,
+      "reference": "Manche Festivals haben spezielle Campingbereiche für Familien mit kleinen Kindern.",
+      "hypothesis": "Manche Festivals haben spezielle Campingbereiche für Familien mit kleinen Kindern.",
+      "word_error_rate": 0.0,
+      "character_error_rate": 0.0,
+      "semantic_word_error_rate": 0.0,
+      "word_errors": {
+        "substitutions": 0,
+        "deletions": 0,
+        "insertions": 0,
+        "errors": 0,
+        "reference_length": 10,
+        "rate": 0.0
+      },
+      "character_errors": {
+        "substitutions": 0,
+        "deletions": 0,
+        "insertions": 0,
+        "errors": 0,
+        "reference_length": 72,
+        "rate": 0.0
+      }
+    },
+    {
+      "clip_index": 3,
+      "audio_id": "11795096162630691727",
+      "data_path": "evaluation/data/raw/human/fleurs_de_dev_v1/11795096162630691727.wav",
+      "audio_sha256": "b813161f42e32d111b3ce7ff48a8a7498a6fcdb9b2f96eb5ef28db6bb8e3f2e2",
+      "speaker_id": null,
+      "length_bucket": "short",
+      "gender": "MALE",
+      "official_split": "dev",
+      "profile": null,
+      "voice": null,
+      "role": null,
+      "categories": [],
+      "reference_status": "official_fleurs_metadata_not_manually_reviewed",
+      "requested_language": "auto",
+      "language_used": "de",
+      "audio_samples": 83520,
+      "audio_seconds": 5.22,
+      "inference_seconds": 1.8063087910000002,
+      "real_time_factor": 0.3460361668582376,
+      "reference": "Das Ergebnis der Plotting-Analyse wird auf einer öffentlichen Website publiziert.",
+      "hypothesis": "Das Ergebnis der Plotting-Analyse wird auf einer öffentlichen Webseite publiziert.",
+      "word_error_rate": 0.09090909090909091,
+      "character_error_rate": 0.014285714285714285,
+      "semantic_word_error_rate": 0.09090909090909091,
+      "word_errors": {
+        "substitutions": 1,
+        "deletions": 0,
+        "insertions": 0,
+        "errors": 1,
+        "reference_length": 11,
+        "rate": 0.09090909090909091
+      },
+      "character_errors": {
+        "substitutions": 0,
+        "deletions": 0,
+        "insertions": 1,
+        "errors": 1,
+        "reference_length": 70,
+        "rate": 0.014285714285714285
+      }
+    },
+    {
+      "clip_index": 4,
+      "audio_id": "13222588926109612465",
+      "data_path": "evaluation/data/raw/human/fleurs_de_dev_v1/13222588926109612465.wav",
+      "audio_sha256": "fc322afdc98519832767ac43e6bd21a40132dba049d753b2b2a471fd315f6b80",
+      "speaker_id": null,
+      "length_bucket": "short",
+      "gender": "MALE",
+      "official_split": "dev",
+      "profile": null,
+      "voice": null,
+      "role": null,
+      "categories": [],
+      "reference_status": "official_fleurs_metadata_not_manually_reviewed",
+      "requested_language": "auto",
+      "language_used": "de",
+      "audio_samples": 61440,
+      "audio_seconds": 3.84,
+      "inference_seconds": 2.064866459,
+      "real_time_factor": 0.5377256403645834,
+      "reference": "Er sagte, dass er eine WLAN-Türklingel gebaut habe.",
+      "hypothesis": "Er sagte, dass er eine W-Landtürklinge gebaut habe.",
+      "word_error_rate": 0.2222222222222222,
+      "character_error_rate": 0.04878048780487805,
+      "semantic_word_error_rate": 0.2222222222222222,
+      "word_errors": {
+        "substitutions": 2,
+        "deletions": 0,
+        "insertions": 0,
+        "errors": 2,
+        "reference_length": 9,
+        "rate": 0.2222222222222222
+      },
+      "character_errors": {
+        "substitutions": 0,
+        "deletions": 1,
+        "insertions": 1,
+        "errors": 2,
+        "reference_length": 41,
+        "rate": 0.04878048780487805
+      }
+    },
+    {
+      "clip_index": 5,
+      "audio_id": "3895054676176812350",
+      "data_path": "evaluation/data/raw/human/fleurs_de_dev_v1/3895054676176812350.wav",
+      "audio_sha256": "a5f439d8525ad1570464214476b92ac50822644a8fad45e7e7c0b6708d1f0a22",
+      "speaker_id": null,
+      "length_bucket": "medium",
+      "gender": "MALE",
+      "official_split": "dev",
+      "profile": null,
+      "voice": null,
+      "role": null,
+      "categories": [],
+      "reference_status": "official_fleurs_metadata_not_manually_reviewed",
+      "requested_language": "auto",
+      "language_used": "de",
+      "audio_samples": 216000,
+      "audio_seconds": 13.5,
+      "inference_seconds": 1.890012208,
+      "real_time_factor": 0.1400009042962963,
+      "reference": "Bald betraten Polizisten, die mit Schutzanzügen ausgerüstet waren, das Gelände und drängten die Insassen mit Tränengas in die Ecke.",
+      "hypothesis": "Bald betraten Polizisten, die mit Schutzanzügen ausgerüstet waren, das Gelände und renkte die Insassen mit Trenningas in die Ecke.",
+      "word_error_rate": 0.10526315789473684,
+      "character_error_rate": 0.06363636363636363,
+      "semantic_word_error_rate": 0.10526315789473684,
+      "word_errors": {
+        "substitutions": 2,
+        "deletions": 0,
+        "insertions": 0,
+        "errors": 2,
+        "reference_length": 19,
+        "rate": 0.10526315789473684
+      },
+      "character_errors": {
+        "substitutions": 4,
+        "deletions": 2,
+        "insertions": 1,
+        "errors": 7,
+        "reference_length": 110,
+        "rate": 0.06363636363636363
+      }
+    },
+    {
+      "clip_index": 6,
+      "audio_id": "149437509380665175",
+      "data_path": "evaluation/data/raw/human/fleurs_de_dev_v1/149437509380665175.wav",
+      "audio_sha256": "6303885f518777651404d6c72e120fe1ebcc294480172dba52928f535e2b056f",
+      "speaker_id": null,
+      "length_bucket": "medium",
+      "gender": "MALE",
+      "official_split": "dev",
+      "profile": null,
+      "voice": null,
+      "role": null,
+      "categories": [],
+      "reference_status": "official_fleurs_metadata_not_manually_reviewed",
+      "requested_language": "auto",
+      "language_used": "de",
+      "audio_samples": 86400,
+      "audio_seconds": 5.4,
+      "inference_seconds": 1.797881125,
+      "real_time_factor": 0.33294094907407407,
+      "reference": "Argentinien ist bekannt dafür, dass sein Polo-Team und die Spieler zu den besten der Welt gehören.",
+      "hypothesis": "Argentinien ist bekannt dafür, dass ein Polo-Team und die Spieler zu den besten der Welt gehören.",
+      "word_error_rate": 0.058823529411764705,
+      "character_error_rate": 0.0125,
+      "semantic_word_error_rate": 0.058823529411764705,
+      "word_errors": {
+        "substitutions": 1,
+        "deletions": 0,
+        "insertions": 0,
+        "errors": 1,
+        "reference_length": 17,
+        "rate": 0.058823529411764705
+      },
+      "character_errors": {
+        "substitutions": 0,
+        "deletions": 1,
+        "insertions": 0,
+        "errors": 1,
+        "reference_length": 80,
+        "rate": 0.0125
+      }
+    },
+    {
+      "clip_index": 7,
+      "audio_id": "11568009216104084779",
+      "data_path": "evaluation/data/raw/human/fleurs_de_dev_v1/11568009216104084779.wav",
+      "audio_sha256": "6410514864409de7362bd2de92c932d5d87711c291bf0a34ef3f3c26d187e5dc",
+      "speaker_id": null,
+      "length_bucket": "medium",
+      "gender": "MALE",
+      "official_split": "dev",
+      "profile": null,
+      "voice": null,
+      "role": null,
+      "categories": [],
+      "reference_status": "official_fleurs_metadata_not_manually_reviewed",
+      "requested_language": "auto",
+      "language_used": "de",
+      "audio_samples": 168960,
+      "audio_seconds": 10.56,
+      "inference_seconds": 1.9139963340000001,
+      "real_time_factor": 0.1812496528409091,
+      "reference": "Forschung im Bereich KI umfasst die Herstellung von Maschinen zur Automatisierung von Aufgaben, die intelligentes Verhalten erfordern.",
+      "hypothesis": "Forschung im Bereich KI umfasst die Herstellung von Maschinen zur Automatisierung von Aufgaben, die Intelligentes Verhalten erfordern.",
+      "word_error_rate": 0.0,
+      "character_error_rate": 0.0,
+      "semantic_word_error_rate": 0.0,
+      "word_errors": {
+        "substitutions": 0,
+        "deletions": 0,
+        "insertions": 0,
+        "errors": 0,
+        "reference_length": 17,
+        "rate": 0.0
+      },
+      "character_errors": {
+        "substitutions": 0,
+        "deletions": 0,
+        "insertions": 0,
+        "errors": 0,
+        "reference_length": 116,
+        "rate": 0.0
+      }
+    },
+    {
+      "clip_index": 8,
+      "audio_id": "14565174356836630009",
+      "data_path": "evaluation/data/raw/human/fleurs_de_dev_v1/14565174356836630009.wav",
+      "audio_sha256": "c83eb2e8dd6fa8303d298555181ee9c0e614b6f887cb170273d45ead239294fa",
+      "speaker_id": null,
+      "length_bucket": "medium",
+      "gender": "MALE",
+      "official_split": "dev",
+      "profile": null,
+      "voice": null,
+      "role": null,
+      "categories": [],
+      "reference_status": "official_fleurs_metadata_not_manually_reviewed",
+      "requested_language": "auto",
+      "language_used": "de",
+      "audio_samples": 360000,
+      "audio_seconds": 22.5,
+      "inference_seconds": 1.9855415,
+      "real_time_factor": 0.08824628888888889,
+      "reference": "In vielen Fällen, kann die Teilnahme in einem Auslands-Überbrückungsjahr-Programm Ihre Chancen auf eine Hochschulausbildung in Ihrem Heimatland tatsächlich verbessern.",
+      "hypothesis": "In vielen Fällen kann die Teilnahme in einem Auslandsüberbrückungsjahrprogramm ihre Chancen auf eine Hochschulausbildung in ihrem Heimatland tatsächlich verbessern.",
+      "word_error_rate": 0.14285714285714285,
+      "character_error_rate": 0.0,
+      "semantic_word_error_rate": 0.14285714285714285,
+      "word_errors": {
+        "substitutions": 1,
+        "deletions": 2,
+        "insertions": 0,
+        "errors": 3,
+        "reference_length": 21,
+        "rate": 0.14285714285714285
+      },
+      "character_errors": {
+        "substitutions": 0,
+        "deletions": 0,
+        "insertions": 0,
+        "errors": 0,
+        "reference_length": 145,
+        "rate": 0.0
+      }
+    },
+    {
+      "clip_index": 9,
+      "audio_id": "16425197982854817946",
+      "data_path": "evaluation/data/raw/human/fleurs_de_dev_v1/16425197982854817946.wav",
+      "audio_sha256": "b346aa2056867c656850fa6a45b0e0590358db0795955f47dc1a030e6fb8e802",
+      "speaker_id": null,
+      "length_bucket": "long",
+      "gender": "MALE",
+      "official_split": "dev",
+      "profile": null,
+      "voice": null,
+      "role": null,
+      "categories": [],
+      "reference_status": "official_fleurs_metadata_not_manually_reviewed",
+      "requested_language": "auto",
+      "language_used": "de",
+      "audio_samples": 144000,
+      "audio_seconds": 9.0,
+      "inference_seconds": 2.280260792,
+      "real_time_factor": 0.2533623102222222,
+      "reference": "Die Vereinten Nationen hoffen zudem, einen Fonds einrichten zu können, der den von der globalen Erwärmung betroffenen Ländern helfen soll, mit den Auswirkungen fertig zu werden.",
+      "hypothesis": "Die Vereinten Nationen hoffen zudem einen Fonds einrichten zu können, der den von der globalen Erwärmung betroffenen Ländern helfen soll, mit den Auswirkungen fertig zu werden.",
+      "word_error_rate": 0.0,
+      "character_error_rate": 0.0,
+      "semantic_word_error_rate": 0.0,
+      "word_errors": {
+        "substitutions": 0,
+        "deletions": 0,
+        "insertions": 0,
+        "errors": 0,
+        "reference_length": 26,
+        "rate": 0.0
+      },
+      "character_errors": {
+        "substitutions": 0,
+        "deletions": 0,
+        "insertions": 0,
+        "errors": 0,
+        "reference_length": 148,
+        "rate": 0.0
+      }
+    },
+    {
+      "clip_index": 10,
+      "audio_id": "11447383195362139105",
+      "data_path": "evaluation/data/raw/human/fleurs_de_dev_v1/11447383195362139105.wav",
+      "audio_sha256": "d12de062a62f321b732612a8fa60fe8ba539044a224b92d1ede0fc227b5798ee",
+      "speaker_id": null,
+      "length_bucket": "long",
+      "gender": "MALE",
+      "official_split": "dev",
+      "profile": null,
+      "voice": null,
+      "role": null,
+      "categories": [],
+      "reference_status": "official_fleurs_metadata_not_manually_reviewed",
+      "requested_language": "auto",
+      "language_used": "de",
+      "audio_samples": 448320,
+      "audio_seconds": 28.02,
+      "inference_seconds": 2.1768227499999995,
+      "real_time_factor": 0.07768817808708064,
+      "reference": "Dieses neue Umfeld hat andere Ressourcen und andere Konkurrenten, so dass die neue Bevölkerung andere Merkmale oder Anpassungen benötigt, um ein starker Konkurrent zu sein, als das, was sie vorher gebraucht hat.",
+      "hypothesis": "Dieses neue Umfeld hat andere Ressourcen und andere Konkurrenten, sodass die neue Bevölkerung andere Merkmale und Anpassungen benötigt, um ein starker Konkurrent zu sein als das, was sie vorher gebraucht hat.",
+      "word_error_rate": 0.09375,
+      "character_error_rate": 0.022857142857142857,
+      "semantic_word_error_rate": 0.09375,
+      "word_errors": {
+        "substitutions": 2,
+        "deletions": 1,
+        "insertions": 0,
+        "errors": 3,
+        "reference_length": 32,
+        "rate": 0.09375
+      },
+      "character_errors": {
+        "substitutions": 1,
+        "deletions": 2,
+        "insertions": 1,
+        "errors": 4,
+        "reference_length": 175,
+        "rate": 0.022857142857142857
+      }
+    },
+    {
+      "clip_index": 11,
+      "audio_id": "15157582824062732431",
+      "data_path": "evaluation/data/raw/human/fleurs_de_dev_v1/15157582824062732431.wav",
+      "audio_sha256": "9f00c16eda0be554b0d36ea2beee7c3254ded46d1eba0cdff5583efbbaca3ff1",
+      "speaker_id": null,
+      "length_bucket": "long",
+      "gender": "MALE",
+      "official_split": "dev",
+      "profile": null,
+      "voice": null,
+      "role": null,
+      "categories": [],
+      "reference_status": "official_fleurs_metadata_not_manually_reviewed",
+      "requested_language": "auto",
+      "language_used": "de",
+      "audio_samples": 191040,
+      "audio_seconds": 11.94,
+      "inference_seconds": 2.306500833000001,
+      "real_time_factor": 0.19317427412060312,
+      "reference": "Als die Kämpfe nach dem Transport der Verwundeten ins Krankenhaus aufhörten, blieben etwa 40 der übrigen Insassen auf dem Hof ​​und weigerten sich, in ihre Zellen zurückzukehren.",
+      "hypothesis": "Als die Kämpfe nach dem Transport der Verwundeten ins Krankenhaus aufhörten, blieben etwa 40 der übrigen Insassen auf dem Hof und weigerten sich, in ihre Zellen zurückzukehren.",
+      "word_error_rate": 0.0,
+      "character_error_rate": 0.0,
+      "semantic_word_error_rate": 0.0,
+      "word_errors": {
+        "substitutions": 0,
+        "deletions": 0,
+        "insertions": 0,
+        "errors": 0,
+        "reference_length": 27,
+        "rate": 0.0
+      },
+      "character_errors": {
+        "substitutions": 0,
+        "deletions": 0,
+        "insertions": 0,
+        "errors": 0,
+        "reference_length": 147,
+        "rate": 0.0
+      }
+    },
+    {
+      "clip_index": 12,
+      "audio_id": "14164803304062297838",
+      "data_path": "evaluation/data/raw/human/fleurs_de_dev_v1/14164803304062297838.wav",
+      "audio_sha256": "3bc1ab5cba50a75d311e4e10e4b1a621759b81be59d8fbd794de8e701ee23b64",
+      "speaker_id": null,
+      "length_bucket": "long",
+      "gender": "MALE",
+      "official_split": "dev",
+      "profile": null,
+      "voice": null,
+      "role": null,
+      "categories": [],
+      "reference_status": "official_fleurs_metadata_not_manually_reviewed",
+      "requested_language": "auto",
+      "language_used": "de",
+      "audio_samples": 212160,
+      "audio_seconds": 13.26,
+      "inference_seconds": 2.267325166999999,
+      "real_time_factor": 0.1709898315987933,
+      "reference": "Bitte behandeln Sie diese Stätte mit der Würde, der Ehrfurcht und dem Respekt, die ihr gebühren. Machen Sie keine Witze über den Holocaust oder die Nazis.",
+      "hypothesis": "Bitte behandeln Sie diese Städte mit der Würde, der Erdurcht und dem Respekt, die Ihr Gebühren. Machen Sie keine Witze über den Holocaust oder die Nazis.",
+      "word_error_rate": 0.07692307692307693,
+      "character_error_rate": 0.024,
+      "semantic_word_error_rate": 0.07692307692307693,
+      "word_errors": {
+        "substitutions": 2,
+        "deletions": 0,
+        "insertions": 0,
+        "errors": 2,
+        "reference_length": 26,
+        "rate": 0.07692307692307693
+      },
+      "character_errors": {
+        "substitutions": 2,
+        "deletions": 1,
+        "insertions": 0,
+        "errors": 3,
+        "reference_length": 125,
+        "rate": 0.024
+      }
+    }
+  ]
+}

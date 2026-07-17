@@ -47,6 +47,34 @@ def test_timed_words_emit_only_stable_suffix():
     assert accepted.end == 10.6
 
 
+def test_timed_words_propagate_confirmation_policy_and_zero_confidence():
+    stabilizer = TimedWordStabilizer()
+    accepted = stabilizer.accept(
+        "ch1",
+        [Segment(" Stopp", 0.0, 0.4, 0.0, is_word=True, requires_confirmation=True)],
+        window_start_ts=10.0,
+        stable_until_ts=11.0,
+    )
+
+    assert accepted is not None
+    assert accepted.confidence == 0.0
+    assert accepted.requires_confirmation is True
+
+
+def test_timed_words_preserve_pre_normalization_raw_text():
+    stabilizer = TimedWordStabilizer()
+    accepted = stabilizer.accept(
+        "ch1",
+        [Segment(" siebenundsechzig", 0.0, 0.4, 0.9, is_word=True, raw_text=" 67")],
+        window_start_ts=10.0,
+        stable_until_ts=11.0,
+    )
+
+    assert accepted is not None
+    assert accepted.text == "siebenundsechzig"
+    assert accepted.raw_text == "67"
+
+
 def test_timed_words_suppress_repeated_overlap_word():
     stabilizer = TimedWordStabilizer()
 
@@ -66,6 +94,22 @@ def test_timed_words_suppress_repeated_overlap_word():
     assert first is not None
     assert first.text == "Signal."
     assert repeated is None
+
+
+def test_timed_words_preserve_genuine_immediate_repetition():
+    stabilizer = TimedWordStabilizer()
+    accepted = stabilizer.accept(
+        "ch1",
+        [
+            Segment(" Nein", 0.0, 0.25, 0.99, is_word=True),
+            Segment(", nein!", 0.28, 0.55, 0.99, is_word=True),
+        ],
+        window_start_ts=10.0,
+        stable_until_ts=11.0,
+    )
+
+    assert accepted is not None
+    assert accepted.text == "Nein, nein!"
 
 
 def test_timed_words_skip_words_that_start_before_committed_end():
@@ -94,3 +138,24 @@ def test_timed_words_skip_words_that_start_before_committed_end():
 
     assert accepted is not None
     assert accepted.text == "Wir"
+
+
+def test_timed_words_allow_same_word_later_in_new_utterance():
+    stabilizer = TimedWordStabilizer()
+
+    first = stabilizer.accept(
+        "ch1",
+        [Segment(" Copy", 0.0, 0.3, 0.99, is_word=True)],
+        window_start_ts=10.0,
+        stable_until_ts=11.0,
+    )
+    second = stabilizer.accept(
+        "ch1",
+        [Segment(" Copy", 0.0, 0.3, 0.99, is_word=True)],
+        window_start_ts=13.0,
+        stable_until_ts=14.0,
+    )
+
+    assert first is not None
+    assert second is not None
+    assert second.text == "Copy"

@@ -1,6 +1,5 @@
-const API_BASE = location.port === '5747'
-  ? `http://${location.hostname}:8080`
-  : location.origin
+const API_BASE = window.electronAPI?.getWebApiBase?.()
+  || (location.port === '5747' ? '' : location.origin)
 
 const TOKEN_KEY = 'transcom_auth_token'
 const USER_KEY = 'transcom_auth_user'
@@ -42,7 +41,7 @@ export async function login(email, password) {
   })
   if (!res.ok) throw new Error((await safeJson(res)).error || 'Login failed')
   const data = await res.json()
-  localStorage.setItem(TOKEN_KEY, data.token)
+  if (data.token) localStorage.setItem(TOKEN_KEY, data.token)
   localStorage.setItem(USER_KEY, JSON.stringify(data.user))
   return data.user
 }
@@ -51,6 +50,7 @@ export async function me() {
   const res = await authFetch('/api/me')
   const data = await safeJson(res)
   if (!res.ok) throw new AuthHttpError(data.error || 'Unauthorized', res.status)
+  if (data.token) localStorage.setItem(TOKEN_KEY, data.token)
   localStorage.setItem(USER_KEY, JSON.stringify(data.user))
   return data.user
 }

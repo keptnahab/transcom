@@ -1,0 +1,83 @@
+{
+  "schema_version": "2.0",
+  "dataset_version": "synthetic_de_v4",
+  "split": "holdout",
+  "language": "de-DE",
+  "pause_seconds": 0.65,
+  "trailing_guard_ms": 0,
+  "seal_after_generation": true,
+  "utterances": [
+    {
+      "id": "v4-holdout-001",
+      "speaker": "Tessa",
+      "role": "Sicherheit",
+      "voice": "Flo (Deutsch (Deutschland))",
+      "rate": 172,
+      "text": "Fahrt unverzüglich abbrechen!",
+      "categories": ["short", "safety", "umlaut"]
+    },
+    {
+      "id": "v4-holdout-002",
+      "speaker": "Cem",
+      "role": "Technik",
+      "voice": "Grandma (Deutsch (Deutschland))",
+      "rate": 188,
+      "text": "Einheit L fünf antwortet.",
+      "categories": ["short", "alphanumeric", "technical"]
+    },
+    {
+      "id": "v4-holdout-003",
+      "speaker": "Ingrid",
+      "role": "Energie",
+      "voice": "Rocko (Deutsch (Deutschland))",
+      "rate": 164,
+      "text": "Stromkreis sieben ist verriegelt.",
+      "categories": ["short", "safety", "number", "technical"]
+    },
+    {
+      "id": "v4-holdout-004",
+      "speaker": "Paul",
+      "role": "Logistik",
+      "voice": "Shelley (Deutsch (Deutschland))",
+      "rate": 194,
+      "text": "Tor C neun bleibt geschlossen.",
+      "categories": ["short", "safety", "alphanumeric"]
+    },
+    {
+      "id": "v4-holdout-005",
+      "speaker": "Tessa",
+      "role": "Sicherheit",
+      "voice": "Flo (Deutsch (Deutschland))",
+      "rate": 180,
+      "text": "Vor dem Anlauf prüfen wir den freien Fahrweg, beide Warnleuchten und die Handfreigabe an Station drei.",
+      "categories": ["long", "safety", "number", "technical", "umlaut"]
+    },
+    {
+      "id": "v4-holdout-006",
+      "speaker": "Cem",
+      "role": "Technik",
+      "voice": "Grandma (Deutsch (Deutschland))",
+      "rate": 168,
+      "text": "Sensorgruppe P vier meldet außerhalb des Toleranzfensters drei aufeinanderfolgende Fehler.",
+      "categories": ["medium", "alphanumeric", "number", "technical", "umlaut"]
+    },
+    {
+      "id": "v4-holdout-007",
+      "speaker": "Ingrid",
+      "role": "Rigging",
+      "voice": "Rocko (Deutsch (Deutschland))",
+      "rate": 182,
+      "text": "Bei einer Last von hundertachtzig Kilogramm darf der Hub erst starten, wenn Riegel und Schutzkontakt gleichzeitig bestätigt sind.",
+      "categories": ["long", "safety", "number", "technical"]
+    },
+    {
+      "id": "v4-holdout-008",
+      "speaker": "Paul",
+      "role": "Automation",
+      "voice": "Shelley (Deutsch (Deutschland))",
+      "rate": 176,
+      "text": "Für die Abschlusskontrolle protokollieren wir Ausgang B zwölf, Netzteil zwei und den mechanischen Sperrbolzen, bevor die Anlage in Bereitschaft geht.",
+      "categories": ["long", "alphanumeric", "number", "technical", "umlaut"]
+    }
+  ]
+}

@@ -16,6 +16,6 @@ export PYTHONPATH="$ROOT"
 export TRANSCOM_WEB_HOST="${TRANSCOM_WEB_HOST:-0.0.0.0}"
 export TRANSCOM_WS_HOST="${TRANSCOM_WS_HOST:-0.0.0.0}"
 export TRANSCOM_CHUNK_SECONDS="${TRANSCOM_CHUNK_SECONDS:-1.5}"
-export TRANSCOM_LANG="${TRANSCOM_LANG:-de}"
+export TRANSCOM_LANG="${TRANSCOM_LANG:-auto}"
 
 backend/.venv/bin/python backend/main.py

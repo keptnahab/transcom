@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "catalog_id": "transcom-safety-closed-commands-v1",
+  "mode": "closed_command",
+  "language": "de-DE",
+  "purpose": "Complete versioned allow-list for the production safety-command mode, frozen before ASR and before holdout generation.",
+  "commands": [
+    {
+      "command_id": "safety_motion_stop",
+      "intent_id": "motion_stop",
+      "allowed_phrases": [
+        "Alle Bewegungen stoppen!"
+      ]
+    },
+    {
+      "command_id": "safety_emergency_stop",
+      "intent_id": "motion_stop",
+      "allowed_phrases": [
+        "Not-Aus sofort auslösen!"
+      ]
+    },
+    {
+      "command_id": "safety_area_evacuate",
+      "intent_id": "area_evacuate",
+      "allowed_phrases": [
+        "Gefahrenbereich räumen!"
+      ]
+    },
+    {
+      "command_id": "safety_energy_isolate",
+      "intent_id": "energy_isolate",
+      "allowed_phrases": [
+        "Energiezufuhr trennen!"
+      ]
+    },
+    {
+      "command_id": "safety_brake_lock",
+      "intent_id": "brake_lock",
+      "allowed_phrases": [
+        "Haltebremse verriegeln!"
+      ]
+    },
+    {
+      "command_id": "safety_access_secure",
+      "intent_id": "access_secure",
+      "allowed_phrases": [
+        "Schutztor sicher schließen!"
+      ]
+    },
+    {
+      "command_id": "safety_load_hold",
+      "intent_id": "load_hold",
+      "allowed_phrases": [
+        "Last sicher halten!"
+      ]
+    },
+    {
+      "command_id": "safety_stage_lock",
+      "intent_id": "access_secure",
+      "allowed_phrases": [
+        "Bühne sofort sperren!"
+      ]
+    }
+  ],
+  "evaluation_policy": {
+    "primary_metric": "command_id_exact_accuracy",
+    "secondary_metrics": [
+      "normalized_phrase_exact_accuracy",
+      "word_error_rate",
+      "character_error_rate",
+      "latency_seconds"
+    ],
+    "safety_group_scored_separately": true,
+    "open_dictation_groups": [
+      "alphanumeric",
+      "medium",
+      "long"
+    ],
+    "selection_uses_asr_output": false
+  },
+  "split_policy": {
+    "same_across_dev_and_holdout": [
+      "command_id",
+      "intent_id",
+      "allowed_phrases"
+    ],
+    "required_dev_holdout_disjoint_fields": [
+      "utterance_id",
+      "speaker",
+      "voice",
+      "rate",
+      "audio_sha256"
+    ],
+    "holdout_unknown_before_candidate_freeze": [
+      "speaker",
+      "voice",
+      "rate",
+      "audio_sha256"
+    ],
+    "selection_uses_asr_output": false
+  },
+  "freeze_policy": {
+    "catalog_frozen_before_asr": true,
+    "catalog_frozen_before_holdout_generation": true,
+    "changes_require_new_catalog_id": true
+  }
+}

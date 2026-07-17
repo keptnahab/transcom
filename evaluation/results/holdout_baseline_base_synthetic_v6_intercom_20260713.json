@@ -1,0 +1,1950 @@
+{
+  "benchmark": "hash-bound-clip-suite",
+  "manifest": "/Users/macbookpro/Library/CloudStorage/Dropbox-Privat/00_AI/01_Codex/260704 TransCom/01 1st try on Claude/TransCom/evaluation/data/manifests/synthetic_v6_holdout_intercom_v1.json",
+  "manifest_sha256": "6656b1f2f8a7dcb838e353e45aa718d96a3bb8719817fef59e123bd8e8dc8be4",
+  "project_root": "/Users/macbookpro/Library/CloudStorage/Dropbox-Privat/00_AI/01_Codex/260704 TransCom/01 1st try on Claude/TransCom",
+  "dataset_id": "synthetic_de_v6-holdout-synthetic_de_v6-holdout-001-intercom-clips-v1",
+  "dataset_name": "Synthetic German evaluation data v2",
+  "manifest_language": "de-DE",
+  "language_mode": "de",
+  "languages_used": [
+    "de"
+  ],
+  "all_clip_hashes_verified": true,
+  "model": {
+    "asr_backend": "faster-whisper",
+    "model": "/Users/macbookpro/.cache/huggingface/hub/models--Systran--faster-whisper-base/snapshots/ebe41f70d5b6dfa9166e2c581c45c9c0cfc57b66",
+    "model_revision": null,
+    "resolved_model_path": "/Users/macbookpro/.cache/huggingface/hub/models--Systran--faster-whisper-base/snapshots/ebe41f70d5b6dfa9166e2c581c45c9c0cfc57b66",
+    "device": "cpu",
+    "compute_type": "int8",
+    "language_mode": "de",
+    "last_language": "de",
+    "fallback_reason": null,
+    "guard_fallback_count": 0,
+    "confirm_short_seconds": 3.0,
+    "edge_padding_seconds": 0.0,
+    "edge_padding_max_seconds": 3.0,
+    "domain_glossary_terms": [],
+    "guard_fallback_model": null
+  },
+  "recognition_config": {
+    "initial_prompt": "",
+    "hotwords": "",
+    "german_spoken_number_normalization": false,
+    "confirm_short_seconds": 3.0,
+    "edge_padding_seconds": 0.0,
+    "edge_padding_max_seconds": 3.0,
+    "domain_glossary_terms": [],
+    "beam_size": 1,
+    "no_speech_threshold": 0.6,
+    "language_switch_min_probability": 0.55,
+    "language_stickiness_ratio": 0.75,
+    "language_switch_margin": 0.0
+  },
+  "model_load_seconds": 0.09132129099999997,
+  "clip_count": 16,
+  "micro": {
+    "word_error_rate": 0.8556701030927835,
+    "character_error_rate": 0.24283559577677225,
+    "word_errors": {
+      "substitutions": 49,
+      "deletions": 6,
+      "insertions": 28,
+      "errors": 83,
+      "reference_length": 97,
+      "rate": 0.8556701030927835
+    },
+    "character_errors": {
+      "substitutions": 63,
+      "deletions": 33,
+      "insertions": 65,
+      "errors": 161,
+      "reference_length": 663,
+      "rate": 0.24283559577677225
+    },
+    "semantic_word_error_rate": 0.8350515463917526,
+    "semantic_word_errors": {
+      "substitutions": 47,
+      "deletions": 6,
+      "insertions": 28,
+      "errors": 81,
+      "reference_length": 97,
+      "rate": 0.8350515463917526
+    }
+  },
+  "macro": {
+    "word_error_rate": 1.172092490842491,
+    "character_error_rate": 0.4052765078923411
+  },
+  "total_audio_seconds": 50.75999999999999,
+  "total_inference_seconds": 9.438341079999999,
+  "real_time_factor": 0.1859405256107171,
+  "groups": {
+    "length_bucket": {
+      "long": {
+        "clip_count": 3,
+        "micro": {
+          "word_error_rate": 0.4444444444444444,
+          "character_error_rate": 0.10561056105610561,
+          "word_errors": {
+            "substitutions": 13,
+            "deletions": 3,
+            "insertions": 4,
+            "errors": 20,
+            "reference_length": 45,
+            "rate": 0.4444444444444444
+          },
+          "character_errors": {
+            "substitutions": 14,
+            "deletions": 12,
+            "insertions": 6,
+            "errors": 32,
+            "reference_length": 303,
+            "rate": 0.10561056105610561
+          },
+          "semantic_word_error_rate": 0.4444444444444444,
+          "semantic_word_errors": {
+            "substitutions": 13,
+            "deletions": 3,
+            "insertions": 4,
+            "errors": 20,
+            "reference_length": 45,
+            "rate": 0.4444444444444444
+          }
+        },
+        "macro": {
+          "word_error_rate": 0.4551282051282051,
+          "character_error_rate": 0.10740897943784193
+        },
+        "total_audio_seconds": 23.34,
+        "total_inference_seconds": 0.9372066239999981,
+        "real_time_factor": 0.04015452544987139
+      },
+      "medium": {
+        "clip_count": 3,
+        "micro": {
+          "word_error_rate": 0.631578947368421,
+          "character_error_rate": 0.11724137931034483,
+          "word_errors": {
+            "substitutions": 8,
+            "deletions": 2,
+            "insertions": 2,
+            "errors": 12,
+            "reference_length": 19,
+            "rate": 0.631578947368421
+          },
+          "character_errors": {
+            "substitutions": 10,
+            "deletions": 6,
+            "insertions": 1,
+            "errors": 17,
+            "reference_length": 145,
+            "rate": 0.11724137931034483
+          },
+          "semantic_word_error_rate": 0.5789473684210527,
+          "semantic_word_errors": {
+            "substitutions": 7,
+            "deletions": 2,
+            "insertions": 2,
+            "errors": 11,
+            "reference_length": 19,
+            "rate": 0.5789473684210527
+          }
+        },
+        "macro": {
+          "word_error_rate": 0.634920634920635,
+          "character_error_rate": 0.11808495464573905
+        },
+        "total_audio_seconds": 10.45,
+        "total_inference_seconds": 0.8560550840000012,
+        "real_time_factor": 0.08191914679425849
+      },
+      "short": {
+        "clip_count": 10,
+        "micro": {
+          "word_error_rate": 1.5454545454545454,
+          "character_error_rate": 0.5209302325581395,
+          "word_errors": {
+            "substitutions": 28,
+            "deletions": 1,
+            "insertions": 22,
+            "errors": 51,
+            "reference_length": 33,
+            "rate": 1.5454545454545454
+          },
+          "character_errors": {
+            "substitutions": 39,
+            "deletions": 15,
+            "insertions": 58,
+            "errors": 112,
+            "reference_length": 215,
+            "rate": 0.5209302325581395
+          },
+          "semantic_word_error_rate": 1.5151515151515151,
+          "semantic_word_errors": {
+            "substitutions": 27,
+            "deletions": 1,
+            "insertions": 22,
+            "errors": 50,
+            "reference_length": 33,
+            "rate": 1.5151515151515151
+          }
+        },
+        "macro": {
+          "word_error_rate": 1.5483333333333333,
+          "character_error_rate": 0.5807942324026716
+        },
+        "total_audio_seconds": 16.97,
+        "total_inference_seconds": 7.645079372,
+        "real_time_factor": 0.45050556110783735
+      }
+    },
+    "gender": {
+      "unknown": {
+        "clip_count": 16,
+        "micro": {
+          "word_error_rate": 0.8556701030927835,
+          "character_error_rate": 0.24283559577677225,
+          "word_errors": {
+            "substitutions": 49,
+            "deletions": 6,
+            "insertions": 28,
+            "errors": 83,
+            "reference_length": 97,
+            "rate": 0.8556701030927835
+          },
+          "character_errors": {
+            "substitutions": 63,
+            "deletions": 33,
+            "insertions": 65,
+            "errors": 161,
+            "reference_length": 663,
+            "rate": 0.24283559577677225
+          },
+          "semantic_word_error_rate": 0.8350515463917526,
+          "semantic_word_errors": {
+            "substitutions": 47,
+            "deletions": 6,
+            "insertions": 28,
+            "errors": 81,
+            "reference_length": 97,
+            "rate": 0.8350515463917526
+          }
+        },
+        "macro": {
+          "word_error_rate": 1.172092490842491,
+          "character_error_rate": 0.4052765078923411
+        },
+        "total_audio_seconds": 50.75999999999999,
+        "total_inference_seconds": 9.438341079999999,
+        "real_time_factor": 0.1859405256107171
+      }
+    },
+    "official_split": {
+      "holdout": {
+        "clip_count": 16,
+        "micro": {
+          "word_error_rate": 0.8556701030927835,
+          "character_error_rate": 0.24283559577677225,
+          "word_errors": {
+            "substitutions": 49,
+            "deletions": 6,
+            "insertions": 28,
+            "errors": 83,
+            "reference_length": 97,
+            "rate": 0.8556701030927835
+          },
+          "character_errors": {
+            "substitutions": 63,
+            "deletions": 33,
+            "insertions": 65,
+            "errors": 161,
+            "reference_length": 663,
+            "rate": 0.24283559577677225
+          },
+          "semantic_word_error_rate": 0.8350515463917526,
+          "semantic_word_errors": {
+            "substitutions": 47,
+            "deletions": 6,
+            "insertions": 28,
+            "errors": 81,
+            "reference_length": 97,
+            "rate": 0.8350515463917526
+          }
+        },
+        "macro": {
+          "word_error_rate": 1.172092490842491,
+          "character_error_rate": 0.4052765078923411
+        },
+        "total_audio_seconds": 50.75999999999999,
+        "total_inference_seconds": 9.438341079999999,
+        "real_time_factor": 0.1859405256107171
+      }
+    },
+    "profile": {
+      "unknown": {
+        "clip_count": 16,
+        "micro": {
+          "word_error_rate": 0.8556701030927835,
+          "character_error_rate": 0.24283559577677225,
+          "word_errors": {
+            "substitutions": 49,
+            "deletions": 6,
+            "insertions": 28,
+            "errors": 83,
+            "reference_length": 97,
+            "rate": 0.8556701030927835
+          },
+          "character_errors": {
+            "substitutions": 63,
+            "deletions": 33,
+            "insertions": 65,
+            "errors": 161,
+            "reference_length": 663,
+            "rate": 0.24283559577677225
+          },
+          "semantic_word_error_rate": 0.8350515463917526,
+          "semantic_word_errors": {
+            "substitutions": 47,
+            "deletions": 6,
+            "insertions": 28,
+            "errors": 81,
+            "reference_length": 97,
+            "rate": 0.8350515463917526
+          }
+        },
+        "macro": {
+          "word_error_rate": 1.172092490842491,
+          "character_error_rate": 0.4052765078923411
+        },
+        "total_audio_seconds": 50.75999999999999,
+        "total_inference_seconds": 9.438341079999999,
+        "real_time_factor": 0.1859405256107171
+      }
+    },
+    "voice": {
+      "Flo (Deutsch (Deutschland))": {
+        "clip_count": 4,
+        "micro": {
+          "word_error_rate": 1.3333333333333333,
+          "character_error_rate": 0.3177570093457944,
+          "word_errors": {
+            "substitutions": 10,
+            "deletions": 0,
+            "insertions": 10,
+            "errors": 20,
+            "reference_length": 15,
+            "rate": 1.3333333333333333
+          },
+          "character_errors": {
+            "substitutions": 16,
+            "deletions": 3,
+            "insertions": 15,
+            "errors": 34,
+            "reference_length": 107,
+            "rate": 0.3177570093457944
+          },
+          "semantic_word_error_rate": 1.3333333333333333,
+          "semantic_word_errors": {
+            "substitutions": 10,
+            "deletions": 0,
+            "insertions": 10,
+            "errors": 20,
+            "reference_length": 15,
+            "rate": 1.3333333333333333
+          }
+        },
+        "macro": {
+          "word_error_rate": 1.6428571428571428,
+          "character_error_rate": 0.40827154523963033
+        },
+        "total_audio_seconds": 8.32,
+        "total_inference_seconds": 2.392956583000001,
+        "real_time_factor": 0.28761497391826935
+      },
+      "Grandma (Deutsch (Deutschland))": {
+        "clip_count": 4,
+        "micro": {
+          "word_error_rate": 0.9130434782608695,
+          "character_error_rate": 0.19047619047619047,
+          "word_errors": {
+            "substitutions": 13,
+            "deletions": 2,
+            "insertions": 6,
+            "errors": 21,
+            "reference_length": 23,
+            "rate": 0.9130434782608695
+          },
+          "character_errors": {
+            "substitutions": 16,
+            "deletions": 8,
+            "insertions": 8,
+            "errors": 32,
+            "reference_length": 168,
+            "rate": 0.19047619047619047
+          },
+          "semantic_word_error_rate": 0.8695652173913043,
+          "semantic_word_errors": {
+            "substitutions": 12,
+            "deletions": 2,
+            "insertions": 6,
+            "errors": 20,
+            "reference_length": 23,
+            "rate": 0.8695652173913043
+          }
+        },
+        "macro": {
+          "word_error_rate": 1.1746794871794872,
+          "character_error_rate": 0.24421330176262557
+        },
+        "total_audio_seconds": 13.36,
+        "total_inference_seconds": 2.425552623999998,
+        "real_time_factor": 0.18155334011976035
+      },
+      "Rocko (Deutsch (Deutschland))": {
+        "clip_count": 4,
+        "micro": {
+          "word_error_rate": 0.6071428571428571,
+          "character_error_rate": 0.15706806282722513,
+          "word_errors": {
+            "substitutions": 13,
+            "deletions": 1,
+            "insertions": 3,
+            "errors": 17,
+            "reference_length": 28,
+            "rate": 0.6071428571428571
+          },
+          "character_errors": {
+            "substitutions": 13,
+            "deletions": 13,
+            "insertions": 4,
+            "errors": 30,
+            "reference_length": 191,
+            "rate": 0.15706806282722513
+          },
+          "semantic_word_error_rate": 0.5714285714285714,
+          "semantic_word_errors": {
+            "substitutions": 12,
+            "deletions": 1,
+            "insertions": 3,
+            "errors": 16,
+            "reference_length": 28,
+            "rate": 0.5714285714285714
+          }
+        },
+        "macro": {
+          "word_error_rate": 0.703125,
+          "character_error_rate": 0.20917397660818715
+        },
+        "total_audio_seconds": 14.2,
+        "total_inference_seconds": 1.2945309989999996,
+        "real_time_factor": 0.0911641548591549
+      },
+      "Shelley (Deutsch (Deutschland))": {
+        "clip_count": 4,
+        "micro": {
+          "word_error_rate": 0.8064516129032258,
+          "character_error_rate": 0.3299492385786802,
+          "word_errors": {
+            "substitutions": 13,
+            "deletions": 3,
+            "insertions": 9,
+            "errors": 25,
+            "reference_length": 31,
+            "rate": 0.8064516129032258
+          },
+          "character_errors": {
+            "substitutions": 18,
+            "deletions": 9,
+            "insertions": 38,
+            "errors": 65,
+            "reference_length": 197,
+            "rate": 0.3299492385786802
+          },
+          "semantic_word_error_rate": 0.8064516129032258,
+          "semantic_word_errors": {
+            "substitutions": 13,
+            "deletions": 3,
+            "insertions": 9,
+            "errors": 25,
+            "reference_length": 31,
+            "rate": 0.8064516129032258
+          }
+        },
+        "macro": {
+          "word_error_rate": 1.1677083333333333,
+          "character_error_rate": 0.7594472079589217
+        },
+        "total_audio_seconds": 14.879999999999999,
+        "total_inference_seconds": 3.3253008740000007,
+        "real_time_factor": 0.2234745211021506
+      }
+    },
+    "role": {
+      "Automation": {
+        "clip_count": 3,
+        "micro": {
+          "word_error_rate": 1.4615384615384615,
+          "character_error_rate": 0.6103896103896104,
+          "word_errors": {
+            "substitutions": 8,
+            "deletions": 2,
+            "insertions": 9,
+            "errors": 19,
+            "reference_length": 13,
+            "rate": 1.4615384615384615
+          },
+          "character_errors": {
+            "substitutions": 11,
+            "deletions": 1,
+            "insertions": 35,
+            "errors": 47,
+            "reference_length": 77,
+            "rate": 0.6103896103896104
+          },
+          "semantic_word_error_rate": 1.4615384615384615,
+          "semantic_word_errors": {
+            "substitutions": 8,
+            "deletions": 2,
+            "insertions": 9,
+            "errors": 19,
+            "reference_length": 13,
+            "rate": 1.4615384615384615
+          }
+        },
+        "macro": {
+          "word_error_rate": 1.4111111111111112,
+          "character_error_rate": 0.8862804878048781
+        },
+        "total_audio_seconds": 5.720000000000001,
+        "total_inference_seconds": 2.408886833000001,
+        "real_time_factor": 0.4211340617132868
+      },
+      "Bühne": {
+        "clip_count": 3,
+        "micro": {
+          "word_error_rate": 0.7142857142857143,
+          "character_error_rate": 0.15789473684210525,
+          "word_errors": {
+            "substitutions": 8,
+            "deletions": 0,
+            "insertions": 2,
+            "errors": 10,
+            "reference_length": 14,
+            "rate": 0.7142857142857143
+          },
+          "character_errors": {
+            "substitutions": 9,
+            "deletions": 5,
+            "insertions": 1,
+            "errors": 15,
+            "reference_length": 95,
+            "rate": 0.15789473684210525
+          },
+          "semantic_word_error_rate": 0.6428571428571429,
+          "semantic_word_errors": {
+            "substitutions": 7,
+            "deletions": 0,
+            "insertions": 2,
+            "errors": 9,
+            "reference_length": 14,
+            "rate": 0.6428571428571429
+          }
+        },
+        "macro": {
+          "word_error_rate": 0.7738095238095237,
+          "character_error_rate": 0.19110321658879406
+        },
+        "total_audio_seconds": 7.56,
+        "total_inference_seconds": 1.290188249999999,
+        "real_time_factor": 0.1706598214285713
+      },
+      "Energie": {
+        "clip_count": 2,
+        "micro": {
+          "word_error_rate": 0.75,
+          "character_error_rate": 0.15584415584415584,
+          "word_errors": {
+            "substitutions": 5,
+            "deletions": 0,
+            "insertions": 1,
+            "errors": 6,
+            "reference_length": 8,
+            "rate": 0.75
+          },
+          "character_errors": {
+            "substitutions": 6,
+            "deletions": 6,
+            "insertions": 0,
+            "errors": 12,
+            "reference_length": 77,
+            "rate": 0.15584415584415584
+          },
+          "semantic_word_error_rate": 0.625,
+          "semantic_word_errors": {
+            "substitutions": 4,
+            "deletions": 0,
+            "insertions": 1,
+            "errors": 5,
+            "reference_length": 8,
+            "rate": 0.625
+          }
+        },
+        "macro": {
+          "word_error_rate": 1.0,
+          "character_error_rate": 0.18640350877192982
+        },
+        "total_audio_seconds": 5.42,
+        "total_inference_seconds": 0.707641166000001,
+        "real_time_factor": 0.13056110073800758
+      },
+      "Inspizienz": {
+        "clip_count": 2,
+        "micro": {
+          "word_error_rate": 0.3,
+          "character_error_rate": 0.12121212121212122,
+          "word_errors": {
+            "substitutions": 4,
+            "deletions": 2,
+            "insertions": 0,
+            "errors": 6,
+            "reference_length": 20,
+            "rate": 0.3
+          },
+          "character_errors": {
+            "substitutions": 3,
+            "deletions": 12,
+            "insertions": 1,
+            "errors": 16,
+            "reference_length": 132,
+            "rate": 0.12121212121212122
+          },
+          "semantic_word_error_rate": 0.3,
+          "semantic_word_errors": {
+            "substitutions": 4,
+            "deletions": 2,
+            "insertions": 0,
+            "errors": 6,
+            "reference_length": 20,
+            "rate": 0.3
+          }
+        },
+        "macro": {
+          "word_error_rate": 0.46875,
+          "character_error_rate": 0.23391812865497075
+        },
+        "total_audio_seconds": 10.45,
+        "total_inference_seconds": 0.5408987080000003,
+        "real_time_factor": 0.05176064191387563
+      },
+      "Maschinerie": {
+        "clip_count": 1,
+        "micro": {
+          "word_error_rate": 2.5,
+          "character_error_rate": 0.4090909090909091,
+          "word_errors": {
+            "substitutions": 2,
+            "deletions": 0,
+            "insertions": 3,
+            "errors": 5,
+            "reference_length": 2,
+            "rate": 2.5
+          },
+          "character_errors": {
+            "substitutions": 4,
+            "deletions": 1,
+            "insertions": 4,
+            "errors": 9,
+            "reference_length": 22,
+            "rate": 0.4090909090909091
+          },
+          "semantic_word_error_rate": 2.5,
+          "semantic_word_errors": {
+            "substitutions": 2,
+            "deletions": 0,
+            "insertions": 3,
+            "errors": 5,
+            "reference_length": 2,
+            "rate": 2.5
+          }
+        },
+        "macro": {
+          "word_error_rate": 2.5,
+          "character_error_rate": 0.4090909090909091
+        },
+        "total_audio_seconds": 1.58,
+        "total_inference_seconds": 0.610461208,
+        "real_time_factor": 0.38636785316455696
+      },
+      "Rigging": {
+        "clip_count": 1,
+        "micro": {
+          "word_error_rate": 1.25,
+          "character_error_rate": 0.5,
+          "word_errors": {
+            "substitutions": 4,
+            "deletions": 0,
+            "insertions": 1,
+            "errors": 5,
+            "reference_length": 4,
+            "rate": 1.25
+          },
+          "character_errors": {
+            "substitutions": 9,
+            "deletions": 2,
+            "insertions": 2,
+            "errors": 13,
+            "reference_length": 26,
+            "rate": 0.5
+          },
+          "semantic_word_error_rate": 1.25,
+          "semantic_word_errors": {
+            "substitutions": 4,
+            "deletions": 0,
+            "insertions": 1,
+            "errors": 5,
+            "reference_length": 4,
+            "rate": 1.25
+          }
+        },
+        "macro": {
+          "word_error_rate": 1.25,
+          "character_error_rate": 0.5
+        },
+        "total_audio_seconds": 1.9,
+        "total_inference_seconds": 1.0764143329999998,
+        "real_time_factor": 0.5665338594736842
+      },
+      "Sicherheit": {
+        "clip_count": 2,
+        "micro": {
+          "word_error_rate": 0.9375,
+          "character_error_rate": 0.175,
+          "word_errors": {
+            "substitutions": 7,
+            "deletions": 2,
+            "insertions": 6,
+            "errors": 15,
+            "reference_length": 16,
+            "rate": 0.9375
+          },
+          "character_errors": {
+            "substitutions": 10,
+            "deletions": 4,
+            "insertions": 7,
+            "errors": 21,
+            "reference_length": 120,
+            "rate": 0.175
+          },
+          "semantic_word_error_rate": 0.9375,
+          "semantic_word_errors": {
+            "substitutions": 7,
+            "deletions": 2,
+            "insertions": 6,
+            "errors": 15,
+            "reference_length": 16,
+            "rate": 0.9375
+          }
+        },
+        "macro": {
+          "word_error_rate": 1.4743589743589745,
+          "character_error_rate": 0.24432497013142174
+        },
+        "total_audio_seconds": 9.43,
+        "total_inference_seconds": 1.386988332999999,
+        "real_time_factor": 0.14708253796394477
+      },
+      "Ton": {
+        "clip_count": 1,
+        "micro": {
+          "word_error_rate": 0.5625,
+          "character_error_rate": 0.125,
+          "word_errors": {
+            "substitutions": 7,
+            "deletions": 0,
+            "insertions": 2,
+            "errors": 9,
+            "reference_length": 16,
+            "rate": 0.5625
+          },
+          "character_errors": {
+            "substitutions": 6,
+            "deletions": 2,
+            "insertions": 4,
+            "errors": 12,
+            "reference_length": 96,
+            "rate": 0.125
+          },
+          "semantic_word_error_rate": 0.5625,
+          "semantic_word_errors": {
+            "substitutions": 7,
+            "deletions": 0,
+            "insertions": 2,
+            "errors": 9,
+            "reference_length": 16,
+            "rate": 0.5625
+          }
+        },
+        "macro": {
+          "word_error_rate": 0.5625,
+          "character_error_rate": 0.125
+        },
+        "total_audio_seconds": 7.09,
+        "total_inference_seconds": 0.32417904099999895,
+        "real_time_factor": 0.04572341904090253
+      },
+      "Video": {
+        "clip_count": 1,
+        "micro": {
+          "word_error_rate": 2.0,
+          "character_error_rate": 0.8888888888888888,
+          "word_errors": {
+            "substitutions": 4,
+            "deletions": 0,
+            "insertions": 4,
+            "errors": 8,
+            "reference_length": 4,
+            "rate": 2.0
+          },
+          "character_errors": {
+            "substitutions": 5,
+            "deletions": 0,
+            "insertions": 11,
+            "errors": 16,
+            "reference_length": 18,
+            "rate": 0.8888888888888888
+          },
+          "semantic_word_error_rate": 2.0,
+          "semantic_word_errors": {
+            "substitutions": 4,
+            "deletions": 0,
+            "insertions": 4,
+            "errors": 8,
+            "reference_length": 4,
+            "rate": 2.0
+          }
+        },
+        "macro": {
+          "word_error_rate": 2.0,
+          "character_error_rate": 0.8888888888888888
+        },
+        "total_audio_seconds": 1.61,
+        "total_inference_seconds": 1.0926832080000004,
+        "real_time_factor": 0.6786852223602486
+      }
+    },
+    "category": {
+      "alphanumeric": {
+        "clip_count": 6,
+        "micro": {
+          "word_error_rate": 1.0256410256410255,
+          "character_error_rate": 0.40384615384615385,
+          "word_errors": {
+            "substitutions": 23,
+            "deletions": 3,
+            "insertions": 14,
+            "errors": 40,
+            "reference_length": 39,
+            "rate": 1.0256410256410255
+          },
+          "character_errors": {
+            "substitutions": 24,
+            "deletions": 10,
+            "insertions": 50,
+            "errors": 84,
+            "reference_length": 208,
+            "rate": 0.40384615384615385
+          },
+          "semantic_word_error_rate": 1.0,
+          "semantic_word_errors": {
+            "substitutions": 22,
+            "deletions": 3,
+            "insertions": 14,
+            "errors": 39,
+            "reference_length": 39,
+            "rate": 1.0
+          }
+        },
+        "macro": {
+          "word_error_rate": 1.2159722222222222,
+          "character_error_rate": 0.6962347858127704
+        },
+        "total_audio_seconds": 16.62,
+        "total_inference_seconds": 4.098269082,
+        "real_time_factor": 0.2465865873646209
+      },
+      "long": {
+        "clip_count": 3,
+        "micro": {
+          "word_error_rate": 0.4444444444444444,
+          "character_error_rate": 0.10561056105610561,
+          "word_errors": {
+            "substitutions": 13,
+            "deletions": 3,
+            "insertions": 4,
+            "errors": 20,
+            "reference_length": 45,
+            "rate": 0.4444444444444444
+          },
+          "character_errors": {
+            "substitutions": 14,
+            "deletions": 12,
+            "insertions": 6,
+            "errors": 32,
+            "reference_length": 303,
+            "rate": 0.10561056105610561
+          },
+          "semantic_word_error_rate": 0.4444444444444444,
+          "semantic_word_errors": {
+            "substitutions": 13,
+            "deletions": 3,
+            "insertions": 4,
+            "errors": 20,
+            "reference_length": 45,
+            "rate": 0.4444444444444444
+          }
+        },
+        "macro": {
+          "word_error_rate": 0.4551282051282051,
+          "character_error_rate": 0.10740897943784193
+        },
+        "total_audio_seconds": 23.34,
+        "total_inference_seconds": 0.9372066239999981,
+        "real_time_factor": 0.04015452544987139
+      },
+      "medium": {
+        "clip_count": 3,
+        "micro": {
+          "word_error_rate": 0.631578947368421,
+          "character_error_rate": 0.11724137931034483,
+          "word_errors": {
+            "substitutions": 8,
+            "deletions": 2,
+            "insertions": 2,
+            "errors": 12,
+            "reference_length": 19,
+            "rate": 0.631578947368421
+          },
+          "character_errors": {
+            "substitutions": 10,
+            "deletions": 6,
+            "insertions": 1,
+            "errors": 17,
+            "reference_length": 145,
+            "rate": 0.11724137931034483
+          },
+          "semantic_word_error_rate": 0.5789473684210527,
+          "semantic_word_errors": {
+            "substitutions": 7,
+            "deletions": 2,
+            "insertions": 2,
+            "errors": 11,
+            "reference_length": 19,
+            "rate": 0.5789473684210527
+          }
+        },
+        "macro": {
+          "word_error_rate": 0.634920634920635,
+          "character_error_rate": 0.11808495464573905
+        },
+        "total_audio_seconds": 10.45,
+        "total_inference_seconds": 0.8560550840000012,
+        "real_time_factor": 0.08191914679425849
+      },
+      "number": {
+        "clip_count": 9,
+        "micro": {
+          "word_error_rate": 0.7352941176470589,
+          "character_error_rate": 0.24413145539906103,
+          "word_errors": {
+            "substitutions": 30,
+            "deletions": 4,
+            "insertions": 16,
+            "errors": 50,
+            "reference_length": 68,
+            "rate": 0.7352941176470589
+          },
+          "character_errors": {
+            "substitutions": 30,
+            "deletions": 23,
+            "insertions": 51,
+            "errors": 104,
+            "reference_length": 426,
+            "rate": 0.24413145539906103
+          },
+          "semantic_word_error_rate": 0.7058823529411765,
+          "semantic_word_errors": {
+            "substitutions": 28,
+            "deletions": 4,
+            "insertions": 16,
+            "errors": 48,
+            "reference_length": 68,
+            "rate": 0.7058823529411765
+          }
+        },
+        "macro": {
+          "word_error_rate": 0.9505291005291004,
+          "character_error_rate": 0.49602994264669525
+        },
+        "total_audio_seconds": 32.94,
+        "total_inference_seconds": 4.926014082,
+        "real_time_factor": 0.14954505409836066
+      },
+      "safety": {
+        "clip_count": 9,
+        "micro": {
+          "word_error_rate": 0.7647058823529411,
+          "character_error_rate": 0.17892156862745098,
+          "word_errors": {
+            "substitutions": 24,
+            "deletions": 3,
+            "insertions": 12,
+            "errors": 39,
+            "reference_length": 51,
+            "rate": 0.7647058823529411
+          },
+          "character_errors": {
+            "substitutions": 36,
+            "deletions": 22,
+            "insertions": 15,
+            "errors": 73,
+            "reference_length": 408,
+            "rate": 0.17892156862745098
+          },
+          "semantic_word_error_rate": 0.7450980392156863,
+          "semantic_word_errors": {
+            "substitutions": 23,
+            "deletions": 3,
+            "insertions": 12,
+            "errors": 38,
+            "reference_length": 51,
+            "rate": 0.7450980392156863
+          }
+        },
+        "macro": {
+          "word_error_rate": 1.209579772079772,
+          "character_error_rate": 0.2468787809357903
+        },
+        "total_audio_seconds": 30.51,
+        "total_inference_seconds": 5.088448038999999,
+        "real_time_factor": 0.16677968007210747
+      },
+      "short": {
+        "clip_count": 10,
+        "micro": {
+          "word_error_rate": 1.5454545454545454,
+          "character_error_rate": 0.5209302325581395,
+          "word_errors": {
+            "substitutions": 28,
+            "deletions": 1,
+            "insertions": 22,
+            "errors": 51,
+            "reference_length": 33,
+            "rate": 1.5454545454545454
+          },
+          "character_errors": {
+            "substitutions": 39,
+            "deletions": 15,
+            "insertions": 58,
+            "errors": 112,
+            "reference_length": 215,
+            "rate": 0.5209302325581395
+          },
+          "semantic_word_error_rate": 1.5151515151515151,
+          "semantic_word_errors": {
+            "substitutions": 27,
+            "deletions": 1,
+            "insertions": 22,
+            "errors": 50,
+            "reference_length": 33,
+            "rate": 1.5151515151515151
+          }
+        },
+        "macro": {
+          "word_error_rate": 1.5483333333333333,
+          "character_error_rate": 0.5807942324026716
+        },
+        "total_audio_seconds": 16.97,
+        "total_inference_seconds": 7.645079372,
+        "real_time_factor": 0.45050556110783735
+      },
+      "technical": {
+        "clip_count": 13,
+        "micro": {
+          "word_error_rate": 0.8045977011494253,
+          "character_error_rate": 0.23809523809523808,
+          "word_errors": {
+            "substitutions": 40,
+            "deletions": 6,
+            "insertions": 24,
+            "errors": 70,
+            "reference_length": 87,
+            "rate": 0.8045977011494253
+          },
+          "character_errors": {
+            "substitutions": 54,
+            "deletions": 28,
+            "insertions": 58,
+            "errors": 140,
+            "reference_length": 588,
+            "rate": 0.23809523809523808
+          },
+          "semantic_word_error_rate": 0.7931034482758621,
+          "semantic_word_errors": {
+            "substitutions": 39,
+            "deletions": 6,
+            "insertions": 24,
+            "errors": 69,
+            "reference_length": 87,
+            "rate": 0.7931034482758621
+          }
+        },
+        "macro": {
+          "word_error_rate": 1.12847280924204,
+          "character_error_rate": 0.4327577299322637
+        },
+        "total_audio_seconds": 44.879999999999995,
+        "total_inference_seconds": 7.319147956,
+        "real_time_factor": 0.16308261934046347
+      },
+      "umlaut": {
+        "clip_count": 7,
+        "micro": {
+          "word_error_rate": 0.6307692307692307,
+          "character_error_rate": 0.1662921348314607,
+          "word_errors": {
+            "substitutions": 27,
+            "deletions": 5,
+            "insertions": 9,
+            "errors": 41,
+            "reference_length": 65,
+            "rate": 0.6307692307692307
+          },
+          "character_errors": {
+            "substitutions": 35,
+            "deletions": 19,
+            "insertions": 20,
+            "errors": 74,
+            "reference_length": 445,
+            "rate": 0.1662921348314607
+          },
+          "semantic_word_error_rate": 0.6153846153846154,
+          "semantic_word_errors": {
+            "substitutions": 26,
+            "deletions": 5,
+            "insertions": 9,
+            "errors": 40,
+            "reference_length": 65,
+            "rate": 0.6153846153846154
+          }
+        },
+        "macro": {
+          "word_error_rate": 0.8498168498168498,
+          "character_error_rate": 0.28289490116584404
+        },
+        "total_audio_seconds": 33.67,
+        "total_inference_seconds": 3.7107352899999997,
+        "real_time_factor": 0.1102089483219483
+      }
+    }
+  },
+  "clip_results": [
+    {
+      "clip_index": 1,
+      "audio_id": "v6-holdout-001",
+      "data_path": "evaluation/generated/synthetic_v2/holdout/synthetic_de_v6-holdout-001/parts/intercom/v6-holdout-001.wav",
+      "audio_sha256": "dbd04d39e7fd386f236f06cde6446bc80ba9e75cd70560a465a081fd1507b540",
+      "speaker_id": "Saskia",
+      "length_bucket": "short",
+      "gender": null,
+      "official_split": "holdout",
+      "profile": null,
+      "voice": "Flo (Deutsch (Deutschland))",
+      "role": "Maschinerie",
+      "categories": [
+        "short",
+        "safety",
+        "technical"
+      ],
+      "reference_status": "synthetic_v2_spec_not_manually_reviewed",
+      "requested_language": "de",
+      "language_used": "de",
+      "audio_samples": 25280,
+      "audio_seconds": 1.58,
+      "inference_seconds": 0.610461208,
+      "real_time_factor": 0.38636785316455696,
+      "reference": "Maschinenfahrt anhalten!",
+      "hypothesis": "und Maschinen für den Faltens.",
+      "mean_asr_confidence": 0.300841627518336,
+      "minimum_asr_confidence": 0.10629183053970337,
+      "requires_confirmation": true,
+      "word_error_rate": 2.5,
+      "character_error_rate": 0.4090909090909091,
+      "semantic_word_error_rate": 2.5,
+      "word_errors": {
+        "substitutions": 2,
+        "deletions": 0,
+        "insertions": 3,
+        "errors": 5,
+        "reference_length": 2,
+        "rate": 2.5
+      },
+      "character_errors": {
+        "substitutions": 4,
+        "deletions": 1,
+        "insertions": 4,
+        "errors": 9,
+        "reference_length": 22,
+        "rate": 0.4090909090909091
+      }
+    },
+    {
+      "clip_index": 2,
+      "audio_id": "v6-holdout-002",
+      "data_path": "evaluation/generated/synthetic_v2/holdout/synthetic_de_v6-holdout-001/parts/intercom/v6-holdout-002.wav",
+      "audio_sha256": "96968ef754f76c9e192a9da88cbd3a3bf37e27303f33a9d84fa91684f0295bbb",
+      "speaker_id": "Nabil",
+      "length_bucket": "short",
+      "gender": null,
+      "official_split": "holdout",
+      "profile": null,
+      "voice": "Grandma (Deutsch (Deutschland))",
+      "role": "Sicherheit",
+      "categories": [
+        "short",
+        "safety"
+      ],
+      "reference_status": "synthetic_v2_spec_not_manually_reviewed",
+      "requested_language": "de",
+      "language_used": "de",
+      "audio_samples": 31200,
+      "audio_seconds": 1.95,
+      "inference_seconds": 1.0806288329999998,
+      "real_time_factor": 0.5541686323076922,
+      "reference": "Gefahrenzone sofort verlassen!",
+      "hypothesis": "Gefarben, so nirgend so fort, für Lassen.",
+      "mean_asr_confidence": 0.2807045170061645,
+      "minimum_asr_confidence": 0.1256352812051773,
+      "requires_confirmation": true,
+      "word_error_rate": 2.3333333333333335,
+      "character_error_rate": 0.37037037037037035,
+      "semantic_word_error_rate": 2.3333333333333335,
+      "word_errors": {
+        "substitutions": 3,
+        "deletions": 0,
+        "insertions": 4,
+        "errors": 7,
+        "reference_length": 3,
+        "rate": 2.3333333333333335
+      },
+      "character_errors": {
+        "substitutions": 3,
+        "deletions": 1,
+        "insertions": 6,
+        "errors": 10,
+        "reference_length": 27,
+        "rate": 0.37037037037037035
+      }
+    },
+    {
+      "clip_index": 3,
+      "audio_id": "v6-holdout-003",
+      "data_path": "evaluation/generated/synthetic_v2/holdout/synthetic_de_v6-holdout-001/parts/intercom/v6-holdout-003.wav",
+      "audio_sha256": "8e0765f94b2549b52754b4cfff52e6c8a94d441b928562c025e58e44f46dfa1a",
+      "speaker_id": "Verena",
+      "length_bucket": "short",
+      "gender": null,
+      "official_split": "holdout",
+      "profile": null,
+      "voice": "Rocko (Deutsch (Deutschland))",
+      "role": "Automation",
+      "categories": [
+        "short",
+        "safety",
+        "technical"
+      ],
+      "reference_status": "synthetic_v2_spec_not_manually_reviewed",
+      "requested_language": "de",
+      "language_used": "de",
+      "audio_samples": 24160,
+      "audio_seconds": 1.51,
+      "inference_seconds": 0.4666683749999998,
+      "real_time_factor": 0.3090519039735098,
+      "reference": "Bremskreis verriegeln!",
+      "hypothesis": "Bremskreis, das Regeln.",
+      "mean_asr_confidence": 0.45986418922742206,
+      "minimum_asr_confidence": 0.1410711407661438,
+      "requires_confirmation": true,
+      "word_error_rate": 1.0,
+      "character_error_rate": 0.2,
+      "semantic_word_error_rate": 1.0,
+      "word_errors": {
+        "substitutions": 1,
+        "deletions": 0,
+        "insertions": 1,
+        "errors": 2,
+        "reference_length": 2,
+        "rate": 1.0
+      },
+      "character_errors": {
+        "substitutions": 3,
+        "deletions": 1,
+        "insertions": 0,
+        "errors": 4,
+        "reference_length": 20,
+        "rate": 0.2
+      }
+    },
+    {
+      "clip_index": 4,
+      "audio_id": "v6-holdout-004",
+      "data_path": "evaluation/generated/synthetic_v2/holdout/synthetic_de_v6-holdout-001/parts/intercom/v6-holdout-004.wav",
+      "audio_sha256": "2c4f65912565e795e46c5d26e8df2b36fa78b5c1c1d4fbfe3de1bd1d46691dc7",
+      "speaker_id": "Wolf",
+      "length_bucket": "short",
+      "gender": null,
+      "official_split": "holdout",
+      "profile": null,
+      "voice": "Shelley (Deutsch (Deutschland))",
+      "role": "Rigging",
+      "categories": [
+        "short",
+        "safety",
+        "technical",
+        "umlaut"
+      ],
+      "reference_status": "synthetic_v2_spec_not_manually_reviewed",
+      "requested_language": "de",
+      "language_used": "de",
+      "audio_samples": 30400,
+      "audio_seconds": 1.9,
+      "inference_seconds": 1.0764143329999998,
+      "real_time_factor": 0.5665338594736842,
+      "reference": "Seilzug außer Betrieb setzen!",
+      "hypothesis": "Leile, such aus der Fehlblätzen.",
+      "mean_asr_confidence": 0.32927409425377846,
+      "minimum_asr_confidence": 0.1566777527332306,
+      "requires_confirmation": true,
+      "word_error_rate": 1.25,
+      "character_error_rate": 0.5,
+      "semantic_word_error_rate": 1.25,
+      "word_errors": {
+        "substitutions": 4,
+        "deletions": 0,
+        "insertions": 1,
+        "errors": 5,
+        "reference_length": 4,
+        "rate": 1.25
+      },
+      "character_errors": {
+        "substitutions": 9,
+        "deletions": 2,
+        "insertions": 2,
+        "errors": 13,
+        "reference_length": 26,
+        "rate": 0.5
+      }
+    },
+    {
+      "clip_index": 5,
+      "audio_id": "v6-holdout-005",
+      "data_path": "evaluation/generated/synthetic_v2/holdout/synthetic_de_v6-holdout-001/parts/intercom/v6-holdout-005.wav",
+      "audio_sha256": "345e5c2f75f91ab664ce033d91c7d5454045574889fe85c21ff522908727bdbd",
+      "speaker_id": "Saskia",
+      "length_bucket": "short",
+      "gender": null,
+      "official_split": "holdout",
+      "profile": null,
+      "voice": "Flo (Deutsch (Deutschland))",
+      "role": "Energie",
+      "categories": [
+        "short",
+        "safety",
+        "technical"
+      ],
+      "reference_status": "synthetic_v2_spec_not_manually_reviewed",
+      "requested_language": "de",
+      "language_used": "de",
+      "audio_samples": 24000,
+      "audio_seconds": 1.5,
+      "inference_seconds": 0.4381882080000006,
+      "real_time_factor": 0.2921254720000004,
+      "reference": "Energiezufuhr trennen!",
+      "hypothesis": "Energie zu fortfinden.",
+      "mean_asr_confidence": 0.40116487112310195,
+      "minimum_asr_confidence": 0.16838057339191437,
+      "requires_confirmation": true,
+      "word_error_rate": 1.5,
+      "character_error_rate": 0.25,
+      "semantic_word_error_rate": 1.5,
+      "word_errors": {
+        "substitutions": 2,
+        "deletions": 0,
+        "insertions": 1,
+        "errors": 3,
+        "reference_length": 2,
+        "rate": 1.5
+      },
+      "character_errors": {
+        "substitutions": 4,
+        "deletions": 1,
+        "insertions": 0,
+        "errors": 5,
+        "reference_length": 20,
+        "rate": 0.25
+      }
+    },
+    {
+      "clip_index": 6,
+      "audio_id": "v6-holdout-006",
+      "data_path": "evaluation/generated/synthetic_v2/holdout/synthetic_de_v6-holdout-001/parts/intercom/v6-holdout-006.wav",
+      "audio_sha256": "e5caa3351d8d8ee21f235579ad2147c95e43278961fab4a2065a9ce39ae51036",
+      "speaker_id": "Nabil",
+      "length_bucket": "short",
+      "gender": null,
+      "official_split": "holdout",
+      "profile": null,
+      "voice": "Grandma (Deutsch (Deutschland))",
+      "role": "Bühne",
+      "categories": [
+        "short",
+        "safety"
+      ],
+      "reference_status": "synthetic_v2_spec_not_manually_reviewed",
+      "requested_language": "de",
+      "language_used": "de",
+      "audio_samples": 30400,
+      "audio_seconds": 1.9,
+      "inference_seconds": 0.5336065410000002,
+      "real_time_factor": 0.2808455478947369,
+      "reference": "Arbeitsbereich umgehend sperren!",
+      "hypothesis": "Arbeitsbereicht umgehen, stellen.",
+      "mean_asr_confidence": 0.350493128101031,
+      "minimum_asr_confidence": 0.052109360694885254,
+      "requires_confirmation": true,
+      "word_error_rate": 1.0,
+      "character_error_rate": 0.1724137931034483,
+      "semantic_word_error_rate": 1.0,
+      "word_errors": {
+        "substitutions": 3,
+        "deletions": 0,
+        "insertions": 0,
+        "errors": 3,
+        "reference_length": 3,
+        "rate": 1.0
+      },
+      "character_errors": {
+        "substitutions": 3,
+        "deletions": 1,
+        "insertions": 1,
+        "errors": 5,
+        "reference_length": 29,
+        "rate": 0.1724137931034483
+      }
+    },
+    {
+      "clip_index": 7,
+      "audio_id": "v6-holdout-007",
+      "data_path": "evaluation/generated/synthetic_v2/holdout/synthetic_de_v6-holdout-001/parts/intercom/v6-holdout-007.wav",
+      "audio_sha256": "673c8a033552fde4cec77bdd1047d3dafaa8ecf557fb7678e6cf5f139a687391",
+      "speaker_id": "Verena",
+      "length_bucket": "short",
+      "gender": null,
+      "official_split": "holdout",
+      "profile": null,
+      "voice": "Rocko (Deutsch (Deutschland))",
+      "role": "Inspizienz",
+      "categories": [
+        "short",
+        "alphanumeric",
+        "number",
+        "technical"
+      ],
+      "reference_status": "synthetic_v2_spec_not_manually_reviewed",
+      "requested_language": "de",
+      "language_used": "de",
+      "audio_samples": 26880,
+      "audio_seconds": 1.68,
+      "inference_seconds": 0.23423062500000036,
+      "real_time_factor": 0.1394229910714288,
+      "reference": "Cue L sechs bestätigt.",
+      "hypothesis": "UN-SX bestätigt.",
+      "mean_asr_confidence": 0.43895083831416243,
+      "minimum_asr_confidence": 0.17694813013076782,
+      "requires_confirmation": true,
+      "word_error_rate": 0.75,
+      "character_error_rate": 0.3888888888888889,
+      "semantic_word_error_rate": 0.75,
+      "word_errors": {
+        "substitutions": 2,
+        "deletions": 1,
+        "insertions": 0,
+        "errors": 3,
+        "reference_length": 4,
+        "rate": 0.75
+      },
+      "character_errors": {
+        "substitutions": 2,
+        "deletions": 5,
+        "insertions": 0,
+        "errors": 7,
+        "reference_length": 18,
+        "rate": 0.3888888888888889
+      }
+    },
+    {
+      "clip_index": 8,
+      "audio_id": "v6-holdout-008",
+      "data_path": "evaluation/generated/synthetic_v2/holdout/synthetic_de_v6-holdout-001/parts/intercom/v6-holdout-008.wav",
+      "audio_sha256": "5bcf8ec0ca7a6fb13f1066c859df209697ac73919b273413c676bb8c2a392ddc",
+      "speaker_id": "Wolf",
+      "length_bucket": "short",
+      "gender": null,
+      "official_split": "holdout",
+      "profile": null,
+      "voice": "Shelley (Deutsch (Deutschland))",
+      "role": "Automation",
+      "categories": [
+        "short",
+        "alphanumeric",
+        "number",
+        "technical"
+      ],
+      "reference_status": "synthetic_v2_spec_not_manually_reviewed",
+      "requested_language": "de",
+      "language_used": "de",
+      "audio_samples": 20960,
+      "audio_seconds": 1.31,
+      "inference_seconds": 1.607240291,
+      "real_time_factor": 1.2269009854961832,
+      "reference": "Achse T neun in Ruhe.",
+      "hypothesis": "Ich schau, dass ich das hier noch nicht mehr in den Ruhen schau.",
+      "mean_asr_confidence": 0.190577016522487,
+      "minimum_asr_confidence": 0.01708194613456726,
+      "requires_confirmation": true,
+      "word_error_rate": 2.4,
+      "character_error_rate": 2.3125,
+      "semantic_word_error_rate": 2.4,
+      "word_errors": {
+        "substitutions": 4,
+        "deletions": 0,
+        "insertions": 8,
+        "errors": 12,
+        "reference_length": 5,
+        "rate": 2.4
+      },
+      "character_errors": {
+        "substitutions": 3,
+        "deletions": 0,
+        "insertions": 34,
+        "errors": 37,
+        "reference_length": 16,
+        "rate": 2.3125
+      }
+    },
+    {
+      "clip_index": 9,
+      "audio_id": "v6-holdout-009",
+      "data_path": "evaluation/generated/synthetic_v2/holdout/synthetic_de_v6-holdout-001/parts/intercom/v6-holdout-009.wav",
+      "audio_sha256": "9135b5509d2eb06fb7b3af95a3a0dbfaa52f45bb4945d42655e0004774cb0d6b",
+      "speaker_id": "Saskia",
+      "length_bucket": "short",
+      "gender": null,
+      "official_split": "holdout",
+      "profile": null,
+      "voice": "Flo (Deutsch (Deutschland))",
+      "role": "Video",
+      "categories": [
+        "short",
+        "alphanumeric",
+        "number",
+        "technical",
+        "umlaut"
+      ],
+      "reference_status": "synthetic_v2_spec_not_manually_reviewed",
+      "requested_language": "de",
+      "language_used": "de",
+      "audio_samples": 25760,
+      "audio_seconds": 1.61,
+      "inference_seconds": 1.0926832080000004,
+      "real_time_factor": 0.6786852223602486,
+      "reference": "Port W vier verfügbar.",
+      "hypothesis": "Ich bin ein Gott wie viel für Fügbar.",
+      "mean_asr_confidence": 0.16976690373849124,
+      "minimum_asr_confidence": 0.0131986690685153,
+      "requires_confirmation": true,
+      "word_error_rate": 2.0,
+      "character_error_rate": 0.8888888888888888,
+      "semantic_word_error_rate": 2.0,
+      "word_errors": {
+        "substitutions": 4,
+        "deletions": 0,
+        "insertions": 4,
+        "errors": 8,
+        "reference_length": 4,
+        "rate": 2.0
+      },
+      "character_errors": {
+        "substitutions": 5,
+        "deletions": 0,
+        "insertions": 11,
+        "errors": 16,
+        "reference_length": 18,
+        "rate": 0.8888888888888888
+      }
+    },
+    {
+      "clip_index": 10,
+      "audio_id": "v6-holdout-010",
+      "data_path": "evaluation/generated/synthetic_v2/holdout/synthetic_de_v6-holdout-001/parts/intercom/v6-holdout-010.wav",
+      "audio_sha256": "e78144a84af1c2940438dade92ed9e3ef3009ebadaddde472fda81adefe13259",
+      "speaker_id": "Nabil",
+      "length_bucket": "short",
+      "gender": null,
+      "official_split": "holdout",
+      "profile": null,
+      "voice": "Grandma (Deutsch (Deutschland))",
+      "role": "Bühne",
+      "categories": [
+        "short",
+        "alphanumeric",
+        "number"
+      ],
+      "reference_status": "synthetic_v2_spec_not_manually_reviewed",
+      "requested_language": "de",
+      "language_used": "de",
+      "audio_samples": 32480,
+      "audio_seconds": 2.03,
+      "inference_seconds": 0.5049577499999991,
+      "real_time_factor": 0.24874766009852176,
+      "reference": "Sektor Y zwei markiert.",
+      "hypothesis": "Zektor 0.2 Markiert",
+      "mean_asr_confidence": 0.28056606013948715,
+      "minimum_asr_confidence": 0.1305292888234059,
+      "requires_confirmation": true,
+      "word_error_rate": 0.75,
+      "character_error_rate": 0.3157894736842105,
+      "semantic_word_error_rate": 0.5,
+      "word_errors": {
+        "substitutions": 3,
+        "deletions": 0,
+        "insertions": 0,
+        "errors": 3,
+        "reference_length": 4,
+        "rate": 0.75
+      },
+      "character_errors": {
+        "substitutions": 3,
+        "deletions": 3,
+        "insertions": 0,
+        "errors": 6,
+        "reference_length": 19,
+        "rate": 0.3157894736842105
+      }
+    },
+    {
+      "clip_index": 11,
+      "audio_id": "v6-holdout-011",
+      "data_path": "evaluation/generated/synthetic_v2/holdout/synthetic_de_v6-holdout-001/parts/intercom/v6-holdout-011.wav",
+      "audio_sha256": "d99302373fb0670c0c8d699595861c27b5e681846a6939dfbe736868e679ba0e",
+      "speaker_id": "Verena",
+      "length_bucket": "medium",
+      "gender": null,
+      "official_split": "holdout",
+      "profile": null,
+      "voice": "Rocko (Deutsch (Deutschland))",
+      "role": "Energie",
+      "categories": [
+        "medium",
+        "safety",
+        "number",
+        "technical",
+        "umlaut"
+      ],
+      "reference_status": "synthetic_v2_spec_not_manually_reviewed",
+      "requested_language": "de",
+      "language_used": "de",
+      "audio_samples": 62720,
+      "audio_seconds": 3.92,
+      "inference_seconds": 0.26945295800000046,
+      "real_time_factor": 0.06873799948979603,
+      "reference": "Temperaturfühler fünf überschreitet die zulässige Warnschwelle.",
+      "hypothesis": "Temperaturführer 5 überschreit die Zulässige Warnschwelle.",
+      "mean_asr_confidence": 0.48604389056563374,
+      "minimum_asr_confidence": 0.07091505825519562,
+      "requires_confirmation": false,
+      "word_error_rate": 0.5,
+      "character_error_rate": 0.12280701754385964,
+      "semantic_word_error_rate": 0.3333333333333333,
+      "word_errors": {
+        "substitutions": 3,
+        "deletions": 0,
+        "insertions": 0,
+        "errors": 3,
+        "reference_length": 6,
+        "rate": 0.5
+      },
+      "character_errors": {
+        "substitutions": 2,
+        "deletions": 5,
+        "insertions": 0,
+        "errors": 7,
+        "reference_length": 57,
+        "rate": 0.12280701754385964
+      }
+    },
+    {
+      "clip_index": 12,
+      "audio_id": "v6-holdout-012",
+      "data_path": "evaluation/generated/synthetic_v2/holdout/synthetic_de_v6-holdout-001/parts/intercom/v6-holdout-012.wav",
+      "audio_sha256": "3bb63877c087db918eaa30536fdf72a701653fb23357d5b3a11f1be27833d5a7",
+      "speaker_id": "Wolf",
+      "length_bucket": "medium",
+      "gender": null,
+      "official_split": "holdout",
+      "profile": null,
+      "voice": "Shelley (Deutsch (Deutschland))",
+      "role": "Automation",
+      "categories": [
+        "medium",
+        "alphanumeric",
+        "number",
+        "technical",
+        "umlaut"
+      ],
+      "reference_status": "synthetic_v2_spec_not_manually_reviewed",
+      "requested_language": "de",
+      "language_used": "de",
+      "audio_samples": 46400,
+      "audio_seconds": 2.9,
+      "inference_seconds": 0.33497816700000094,
+      "real_time_factor": 0.11550971275862101,
+      "reference": "Steuerleitung Q zehn liefert keine Rückmeldung.",
+      "hypothesis": "Steuerleitung, Kuchen, Lieferdkeine Rückweldung",
+      "mean_asr_confidence": 0.43073681406676767,
+      "minimum_asr_confidence": 0.20498618483543396,
+      "requires_confirmation": true,
+      "word_error_rate": 0.8333333333333334,
+      "character_error_rate": 0.14634146341463414,
+      "semantic_word_error_rate": 0.8333333333333334,
+      "word_errors": {
+        "substitutions": 3,
+        "deletions": 2,
+        "insertions": 0,
+        "errors": 5,
+        "reference_length": 6,
+        "rate": 0.8333333333333334
+      },
+      "character_errors": {
+        "substitutions": 5,
+        "deletions": 0,
+        "insertions": 1,
+        "errors": 6,
+        "reference_length": 41,
+        "rate": 0.14634146341463414
+      }
+    },
+    {
+      "clip_index": 13,
+      "audio_id": "v6-holdout-013",
+      "data_path": "evaluation/generated/synthetic_v2/holdout/synthetic_de_v6-holdout-001/parts/intercom/v6-holdout-013.wav",
+      "audio_sha256": "c0d08e28a44e3d2a3ff87d74a98fd3869461c7f897928e67122325c4816956ee",
+      "speaker_id": "Saskia",
+      "length_bucket": "medium",
+      "gender": null,
+      "official_split": "holdout",
+      "profile": null,
+      "voice": "Flo (Deutsch (Deutschland))",
+      "role": "Bühne",
+      "categories": [
+        "medium",
+        "number",
+        "technical"
+      ],
+      "reference_status": "synthetic_v2_spec_not_manually_reviewed",
+      "requested_language": "de",
+      "language_used": "de",
+      "audio_samples": 58080,
+      "audio_seconds": 3.63,
+      "inference_seconds": 0.2516239589999998,
+      "real_time_factor": 0.06931789504132226,
+      "reference": "Vorhangmotor sieben bleibt vor der Endposition stehen.",
+      "hypothesis": "Vor ein Motor sieben bleibt vor der Entposition stehen.",
+      "mean_asr_confidence": 0.6543759405612946,
+      "minimum_asr_confidence": 0.24189631640911102,
+      "requires_confirmation": false,
+      "word_error_rate": 0.5714285714285714,
+      "character_error_rate": 0.0851063829787234,
+      "semantic_word_error_rate": 0.5714285714285714,
+      "word_errors": {
+        "substitutions": 2,
+        "deletions": 0,
+        "insertions": 2,
+        "errors": 4,
+        "reference_length": 7,
+        "rate": 0.5714285714285714
+      },
+      "character_errors": {
+        "substitutions": 3,
+        "deletions": 1,
+        "insertions": 0,
+        "errors": 4,
+        "reference_length": 47,
+        "rate": 0.0851063829787234
+      }
+    },
+    {
+      "clip_index": 14,
+      "audio_id": "v6-holdout-014",
+      "data_path": "evaluation/generated/synthetic_v2/holdout/synthetic_de_v6-holdout-001/parts/intercom/v6-holdout-014.wav",
+      "audio_sha256": "fec8189709427a0380c69467fc6efff65b7df085c61667490aa2a29f6e67a4c5",
+      "speaker_id": "Nabil",
+      "length_bucket": "long",
+      "gender": null,
+      "official_split": "holdout",
+      "profile": null,
+      "voice": "Grandma (Deutsch (Deutschland))",
+      "role": "Sicherheit",
+      "categories": [
+        "long",
+        "safety",
+        "technical",
+        "umlaut"
+      ],
+      "reference_status": "synthetic_v2_spec_not_manually_reviewed",
+      "requested_language": "de",
+      "language_used": "de",
+      "audio_samples": 119680,
+      "audio_seconds": 7.48,
+      "inference_seconds": 0.30635949999999923,
+      "real_time_factor": 0.04095715240641701,
+      "reference": "Nach dem Stillsetzen prüfen wir Lastweg, Schutzgitter, Bremsanzeige und die freie Rettungsroute vollständig.",
+      "hypothesis": "Nach dem Stil setzen Prüfen realistweg, Schutzgitter, Brems anseite und die Freirettungsrunde vollständig.",
+      "mean_asr_confidence": 0.5823556037667471,
+      "minimum_asr_confidence": 0.24365727603435516,
+      "requires_confirmation": false,
+      "word_error_rate": 0.6153846153846154,
+      "character_error_rate": 0.11827956989247312,
+      "semantic_word_error_rate": 0.6153846153846154,
+      "word_errors": {
+        "substitutions": 4,
+        "deletions": 2,
+        "insertions": 2,
+        "errors": 8,
+        "reference_length": 13,
+        "rate": 0.6153846153846154
+      },
+      "character_errors": {
+        "substitutions": 7,
+        "deletions": 3,
+        "insertions": 1,
+        "errors": 11,
+        "reference_length": 93,
+        "rate": 0.11827956989247312
+      }
+    },
+    {
+      "clip_index": 15,
+      "audio_id": "v6-holdout-015",
+      "data_path": "evaluation/generated/synthetic_v2/holdout/synthetic_de_v6-holdout-001/parts/intercom/v6-holdout-015.wav",
+      "audio_sha256": "5ddba36d5645dda6f19378c1cb9d4bcc3cacbe734f412ba8920da2895d6a7513",
+      "speaker_id": "Verena",
+      "length_bucket": "long",
+      "gender": null,
+      "official_split": "holdout",
+      "profile": null,
+      "voice": "Rocko (Deutsch (Deutschland))",
+      "role": "Ton",
+      "categories": [
+        "long",
+        "alphanumeric",
+        "number",
+        "technical",
+        "umlaut"
+      ],
+      "reference_status": "synthetic_v2_spec_not_manually_reviewed",
+      "requested_language": "de",
+      "language_used": "de",
+      "audio_samples": 113440,
+      "audio_seconds": 7.09,
+      "inference_seconds": 0.32417904099999895,
+      "real_time_factor": 0.04572341904090253,
+      "reference": "Rack C vier überwacht zwölf Eingänge und kennzeichnet einen fehlenden Takt sofort mit einer roten Statusmeldung.",
+      "hypothesis": "Ragt sehr viel über Wach zwölf ein, Gänge und Kennzeichnet einen fehlenden Tag, sofort mit einer roten Staltosmeldung.",
+      "mean_asr_confidence": 0.6980879765210879,
+      "minimum_asr_confidence": 0.1503312587738037,
+      "requires_confirmation": false,
+      "word_error_rate": 0.5625,
+      "character_error_rate": 0.125,
+      "semantic_word_error_rate": 0.5625,
+      "word_errors": {
+        "substitutions": 7,
+        "deletions": 0,
+        "insertions": 2,
+        "errors": 9,
+        "reference_length": 16,
+        "rate": 0.5625
+      },
+      "character_errors": {
+        "substitutions": 6,
+        "deletions": 2,
+        "insertions": 4,
+        "errors": 12,
+        "reference_length": 96,
+        "rate": 0.125
+      }
+    },
+    {
+      "clip_index": 16,
+      "audio_id": "v6-holdout-016",
+      "data_path": "evaluation/generated/synthetic_v2/holdout/synthetic_de_v6-holdout-001/parts/intercom/v6-holdout-016.wav",
+      "audio_sha256": "e9c78dd1b91acaabfe4ed4c017df1beb83c0433ceee4a5fddca35ca0952fb8d1",
+      "speaker_id": "Wolf",
+      "length_bucket": "long",
+      "gender": null,
+      "official_split": "holdout",
+      "profile": null,
+      "voice": "Shelley (Deutsch (Deutschland))",
+      "role": "Inspizienz",
+      "categories": [
+        "long",
+        "safety",
+        "number",
+        "technical",
+        "umlaut"
+      ],
+      "reference_status": "synthetic_v2_spec_not_manually_reviewed",
+      "requested_language": "de",
+      "language_used": "de",
+      "audio_samples": 140320,
+      "audio_seconds": 8.77,
+      "inference_seconds": 0.3066680829999999,
+      "real_time_factor": 0.03496785438996579,
+      "reference": "Bevor die Probe fortgesetzt wird, kontrollieren wir Seitengasse, Portalbrücke und alle drei Übergänge auf zurückgelassenes Material.",
+      "hypothesis": "Die Probe vorgesetzt wird, kontrollieren wir Seitengasen, Portalbrücke und alle drei Übergänge auf zurückgelassenes Material.",
+      "mean_asr_confidence": 0.7451038749681579,
+      "minimum_asr_confidence": 0.008873753249645233,
+      "requires_confirmation": false,
+      "word_error_rate": 0.1875,
+      "character_error_rate": 0.07894736842105263,
+      "semantic_word_error_rate": 0.1875,
+      "word_errors": {
+        "substitutions": 2,
+        "deletions": 1,
+        "insertions": 0,
+        "errors": 3,
+        "reference_length": 16,
+        "rate": 0.1875
+      },
+      "character_errors": {
+        "substitutions": 1,
+        "deletions": 7,
+        "insertions": 1,
+        "errors": 9,
+        "reference_length": 114,
+        "rate": 0.07894736842105263
+      }
+    }
+  ]
+}

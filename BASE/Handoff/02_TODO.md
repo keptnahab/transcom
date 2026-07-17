@@ -1,18 +1,23 @@
 # TODO
 
-|Status|Priority|Task|
-|---|---|---|
-|open|P0|Fix live transcript grouping so phrases are merged into coherent utterances instead of many tiny word fragments|
-|open|P0|Stabilize speaker matching and prevent arbitrary auto-speaker proliferation such as `Speaker 4/5/6` for the same person|
-|open|P0|Eliminate the remaining initial duplicate row at the beginning of a live transcript|
-|open|P0|Enforce German/English-only recognition behavior consistently in real runtime output|
-|open|P0|Re-run the live benchmark after transcript/speaker fixes and capture fresh latency and quality metrics|
-|open|P1|Investigate and fix the MLX / Metal crash during `scripts/benchmark_live_pipeline.py --warmup` on this machine|
-|open|P1|Add utterance-level update logic so the backend can update an in-progress segment instead of inserting a new row for every stabilized chunk|
-|open|P1|Tighten speaker matching windowing and confidence rules, especially for short accepted word windows|
-|open|P1|Decide whether auto-speaker creation should be delayed, smoothed, or disabled for low-confidence snippets|
-|open|P1|Validate real beta web flow end-to-end with login, websocket auth state, transcript stream, and user admin UI|
-|done|P1|Implement beta-user auth with email login and generated passwords|
-|done|P1|Allow admin to view, edit, and regenerate user passwords|
-|done|P1|Push current codebase to GitHub on `origin/main`|
-|done|P2|Document project history, decisions, setup, and status in `BASE`|
+| Status | Priority | Task |
+| --- | --- | --- |
+| open | P0 | Improve real ASR quality on the mixed demo/intercom feed; treat user-perceived quality as the main gate |
+| open | P0 | Reduce first usable transcript latency from about `3.54s` toward the intended live target |
+| open | P0 | Re-run real UI test against the updated backend to confirm duplicate first transcript row is gone |
+| open | P0 | Clarify or simplify the session/create/start/feed UX so testing is not confusing |
+| open | P1 | Revisit utterance commit logic so final rows are coherent and not over-fragmented |
+| open | P1 | Re-check speaker matching on final VAD segments only and verify it does not degrade ASR timing |
+| open | P1 | Validate the `mlx` runtime path again after the `faster-whisper` path is satisfactory |
+| open | P1 | Re-run browser-level end-to-end testing after the next ASR/stabilizer changes |
+| future | P2 | Design a Finder-backed transcript library: recent transcripts in a collapsible sidebar, synchronized audio playback, editing, reveal in Finder, export, and archive actions; see `10_FUTURE_TRANSCRIPT_LIBRARY.md` |
+| done | P1 | Add audible browser monitoring for demo/file mode when `Start Feed` is pressed |
+| done | P0 | Audit why the fixture benchmark improved while real UI output was still poor: UI/default launch paths used different ASR/language defaults |
+| done | P0 | Align default local ASR path with the verified `faster-whisper` benchmark path |
+| done | P0 | Stop beta launcher from forcing German-only transcription on the mixed German/English feed |
+| done | P0 | Add targeted UI replacement for updated transcript segment IDs so replacement broadcasts do not append duplicate rows |
+| done | P1 | Restore usable Audio File / Demo WAV controls in the UI |
+| done | P1 | Keep file-source mode stable during frontend state refreshes |
+| done | P1 | Add auth-disabled local test mode for faster UI iteration |
+| done | P1 | Improve the fixture benchmark over the older `0.4167` WER baseline |
+| done | P2 | Populate and synchronize the full `BASE` handoff folder |

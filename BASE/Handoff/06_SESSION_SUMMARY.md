@@ -1,18 +1,35 @@
 # Session Summary
 
-Completed:
-- Verified the real Git project path: `/Users/mkue/Documents/CODEX/INTERCOM TRANSCRIPT/01 1st try on Claude/TransCom`
-- Verified Git remote: `https://github.com/keptnahab/transcom.git`
-- Committed the full current codebase locally and pushed `main` to GitHub
-- Documented the project comprehensively in `BASE`
-- Re-ran automated verification:
-  - `backend/.venv/bin/python -m pytest` -> `43 passed, 1 warning`
-  - `npm run build:renderer` -> success
-- Re-ran benchmark command:
-  - `backend/.venv/bin/python scripts/benchmark_live_pipeline.py --warmup`
-  - result: crash in MLX / Metal runtime with `NSRangeException` from `libmlx.dylib`
+This session focused on making the project resumable and truthful.
 
-Next:
-- Continue from `BASE/Handoff/02_TODO.md` starting with transcript grouping and speaker stability
-- Treat benchmark runtime instability as a real blocker to trustworthy latency measurement on this machine
-- Update this file after every meaningful work session so it remains the fastest resume entry point
+Completed:
+- Re-established a clean `BASE` handoff set.
+- Confirmed the current local browser-test flow:
+  - Vite UI on `http://localhost:5747/`
+  - backend web API can run on `http://127.0.0.1:8081/`
+  - auth-disabled test mode is available
+- Fixed the frontend state issue that made audio-file mode jump back to live mode.
+- Added browser audio monitoring and visible native audio controls for file/demo mode.
+- Re-verified automated tests:
+  - `backend/.venv/bin/python -m pytest` -> `52 passed, 1 warning`
+- Verified renderer/package build:
+  - `npm run build` -> passed
+- Prepared the MacBook/Dropbox continuation handoff:
+  - `BASE/Handoff/09_MACBOOK.md`
+- Re-ran the `faster-whisper` benchmark:
+  - WER `0.2667`
+  - first emit `3.54s`
+  - avg infer `0.52s`
+  - no foreign languages in the benchmark output
+
+Still unresolved:
+- The user still reports very poor real recognition quality.
+- The user still reports slow live behavior.
+- The first duplicate transcript row has a targeted fix but still needs a fresh real UI run.
+- The UX around session state vs feed state remains confusing.
+
+Best next-chat starting point:
+- Read `BASE/Handoff/HANDOFF.md`
+- Then read `BASE/Handoff/09_MACBOOK.md`
+- Then continue from `BASE/Handoff/02_TODO.md`
+- First target should be real transcript quality and duplicate-line removal, not more UI surface area

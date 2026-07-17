@@ -1,0 +1,119 @@
+{
+  "schema_version": "2.0",
+  "dataset_version": "synthetic_de_v5",
+  "split": "holdout",
+  "language": "de-DE",
+  "pause_seconds": 0.65,
+  "trailing_guard_ms": 0,
+  "seal_after_generation": true,
+  "utterances": [
+    {
+      "id": "v5-holdout-001",
+      "speaker": "Greta",
+      "role": "Maschinerie",
+      "voice": "Flo (Deutsch (Deutschland))",
+      "rate": 170,
+      "text": "Notfahrt beenden!",
+      "categories": ["short", "safety", "technical"]
+    },
+    {
+      "id": "v5-holdout-002",
+      "speaker": "Ilyas",
+      "role": "Sicherheit",
+      "voice": "Grandma (Deutsch (Deutschland))",
+      "rate": 190,
+      "text": "Zündung sofort sperren!",
+      "categories": ["short", "safety", "technical", "umlaut"]
+    },
+    {
+      "id": "v5-holdout-003",
+      "speaker": "Maren",
+      "role": "Inspizienz",
+      "voice": "Rocko (Deutsch (Deutschland))",
+      "rate": 180,
+      "text": "Marke H neun gesetzt.",
+      "categories": ["short", "alphanumeric", "number"]
+    },
+    {
+      "id": "v5-holdout-004",
+      "speaker": "Theo",
+      "role": "Video",
+      "voice": "Shelley (Deutsch (Deutschland))",
+      "rate": 194,
+      "text": "Gruppe V drei wartet.",
+      "categories": ["short", "alphanumeric", "number", "technical"]
+    },
+    {
+      "id": "v5-holdout-005",
+      "speaker": "Greta",
+      "role": "Energie",
+      "voice": "Flo (Deutsch (Deutschland))",
+      "rate": 176,
+      "text": "Versorgung fünf bleibt sicher getrennt.",
+      "categories": ["medium", "safety", "number", "technical"]
+    },
+    {
+      "id": "v5-holdout-006",
+      "speaker": "Ilyas",
+      "role": "Sicherheit",
+      "voice": "Grandma (Deutsch (Deutschland))",
+      "rate": 166,
+      "text": "Warnkreis acht zeigt eine Störung.",
+      "categories": ["medium", "safety", "number", "technical", "umlaut"]
+    },
+    {
+      "id": "v5-holdout-007",
+      "speaker": "Maren",
+      "role": "Automation",
+      "voice": "Rocko (Deutsch (Deutschland))",
+      "rate": 186,
+      "text": "Panel X zwei meldet Betriebsbereitschaft.",
+      "categories": ["medium", "alphanumeric", "number", "technical"]
+    },
+    {
+      "id": "v5-holdout-008",
+      "speaker": "Theo",
+      "role": "Bühne",
+      "voice": "Shelley (Deutsch (Deutschland))",
+      "rate": 168,
+      "text": "Bevor der Prospekt abgesenkt wird, prüft die Maschinerie Kettenlauf, Bodenfreiheit und den geräumten Gefahrenbereich.",
+      "categories": ["long", "safety", "technical", "umlaut"]
+    },
+    {
+      "id": "v5-holdout-009",
+      "speaker": "Greta",
+      "role": "Ton",
+      "voice": "Flo (Deutsch (Deutschland))",
+      "rate": 182,
+      "text": "Der Verstärker auf Ausgang vier speist zwei Monitorwege und bleibt während der Verkabelung vollständig stummgeschaltet.",
+      "categories": ["long", "number", "technical", "umlaut"]
+    },
+    {
+      "id": "v5-holdout-010",
+      "speaker": "Ilyas",
+      "role": "Energie",
+      "voice": "Grandma (Deutsch (Deutschland))",
+      "rate": 172,
+      "text": "Messpunkt drei überschreitet den Grenzwert um sieben Volt.",
+      "categories": ["medium", "number", "technical", "umlaut"]
+    },
+    {
+      "id": "v5-holdout-011",
+      "speaker": "Maren",
+      "role": "Logistik",
+      "voice": "Rocko (Deutsch (Deutschland))",
+      "rate": 184,
+      "text": "Während des Umbaus beobachten wir Wagen J sechs, Schienenkontakt und beide Positionsgeber bis zum vollständigen Stillstand.",
+      "categories": ["long", "safety", "alphanumeric", "technical", "umlaut"]
+    },
+    {
+      "id": "v5-holdout-012",
+      "speaker": "Theo",
+      "role": "Automation",
+      "voice": "Shelley (Deutsch (Deutschland))",
+      "rate": 162,
+      "text": "Erst wenn Warnsignal, Schutztür und Rückmeldung übereinstimmen, darf die Anlage für den nächsten Ablauf freigegeben werden.",
+      "categories": ["long", "safety", "technical", "umlaut"]
+    }
+  ]
+}

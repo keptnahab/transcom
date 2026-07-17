@@ -1,0 +1,82 @@
+{
+  "schema_version": "2.0",
+  "dataset_version": "synthetic_de_v4",
+  "split": "dev",
+  "language": "de-DE",
+  "pause_seconds": 0.65,
+  "trailing_guard_ms": 0,
+  "utterances": [
+    {
+      "id": "v4-dev-001",
+      "speaker": "Maja",
+      "role": "Bühnenleitung",
+      "voice": "Anna",
+      "rate": 166,
+      "text": "Antrieb sofort stoppen!",
+      "categories": ["short", "safety", "technical"]
+    },
+    {
+      "id": "v4-dev-002",
+      "speaker": "Karim",
+      "role": "Kommunikation",
+      "voice": "Eddy (Deutsch (Deutschland))",
+      "rate": 184,
+      "text": "Kanal F sechs ist frei.",
+      "categories": ["short", "alphanumeric", "technical"]
+    },
+    {
+      "id": "v4-dev-003",
+      "speaker": "Ulrike",
+      "role": "Rigging",
+      "voice": "Reed (Deutsch (Deutschland))",
+      "rate": 174,
+      "text": "Lastgrenze bei zweihundert Kilogramm prüfen.",
+      "categories": ["medium", "safety", "number", "technical", "umlaut"]
+    },
+    {
+      "id": "v4-dev-004",
+      "speaker": "Jonas",
+      "role": "Video",
+      "voice": "Sandy (Deutsch (Deutschland))",
+      "rate": 192,
+      "text": "Matrix A drei bestätigt.",
+      "categories": ["short", "alphanumeric", "technical"]
+    },
+    {
+      "id": "v4-dev-005",
+      "speaker": "Maja",
+      "role": "Bühnenleitung",
+      "voice": "Anna",
+      "rate": 178,
+      "text": "Vor der nächsten Fahrt kontrollieren wir Endschalter, Bremskreis und den verriegelten Zugang auf Ebene vier.",
+      "categories": ["long", "safety", "number", "technical"]
+    },
+    {
+      "id": "v4-dev-006",
+      "speaker": "Karim",
+      "role": "Kommunikation",
+      "voice": "Eddy (Deutsch (Deutschland))",
+      "rate": 170,
+      "text": "Sprechstelle zwölf meldet eine Unterbrechung im Rückweg.",
+      "categories": ["medium", "number", "technical", "umlaut"]
+    },
+    {
+      "id": "v4-dev-007",
+      "speaker": "Ulrike",
+      "role": "Energie",
+      "voice": "Reed (Deutsch (Deutschland))",
+      "rate": 186,
+      "text": "Verteiler Q sieben bleibt ausgeschaltet, bis Spannung, Erdung und Schutzhaube gemeinsam geprüft sind.",
+      "categories": ["long", "safety", "alphanumeric", "technical", "umlaut"]
+    },
+    {
+      "id": "v4-dev-008",
+      "speaker": "Jonas",
+      "role": "Automation",
+      "voice": "Sandy (Deutsch (Deutschland))",
+      "rate": 162,
+      "text": "Nach dem Kontrolllauf vergleichen wir Position neun, Motortemperatur und Bremsstatus; erst danach wird die Bewegung freigegeben.",
+      "categories": ["long", "safety", "number", "technical"]
+    }
+  ]
+}

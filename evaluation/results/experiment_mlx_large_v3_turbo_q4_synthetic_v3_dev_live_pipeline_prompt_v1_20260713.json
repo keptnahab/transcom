@@ -1,0 +1,97 @@
+{
+  "audio": "/Users/macbookpro/Library/CloudStorage/Dropbox-Privat/00_AI/01_Codex/260704 TransCom/01 1st try on Claude/TransCom/evaluation/generated/synthetic_v2/dev/synthetic_de_v3-dev-001/audio/intercom.wav",
+  "audio_sha256": "019e273a586837f6d31a65db2a5fe1db2a68b32a6f9c1c3143efecb03e39fb87",
+  "reference_source": "/Users/macbookpro/Library/CloudStorage/Dropbox-Privat/00_AI/01_Codex/260704 TransCom/01 1st try on Claude/TransCom/evaluation/data/manifests/synthetic_v3_dev_intercom_stream_v1.json",
+  "reference_binding_verified": true,
+  "reference_word_count": 90,
+  "duration_seconds": 45.93,
+  "chunk_seconds": 1.25,
+  "configured_legacy_overlap_seconds": 3.75,
+  "capture_overlap_seconds": 0.0,
+  "language": "de",
+  "languages_used": [
+    "de"
+  ],
+  "model": {
+    "asr_backend": "mlx",
+    "model": "mlx-community/whisper-large-v3-turbo-q4",
+    "device": "apple-silicon",
+    "compute_type": "mlx-q4",
+    "language_mode": "de",
+    "last_language": "de",
+    "fallback_reason": null
+  },
+  "recognition_config": {
+    "initial_prompt": "Theaterprobe mit Regie, Bühne, Licht und Ton. Fachbegriffe: Inspizienz, Hubpodium, Not-Aus, AES67, Dante.",
+    "hotwords": "",
+    "beam_size": 1,
+    "no_speech_threshold": 0.6,
+    "language_switch_min_probability": 0.55,
+    "language_stickiness_ratio": 0.75,
+    "language_switch_margin": 0.0
+  },
+  "segmentation_config": {
+    "vad_min_speech_seconds": 0.5,
+    "vad_min_silence_seconds": 0.35,
+    "vad_max_segment_seconds": 2.5,
+    "vad_threshold": 0.25,
+    "vad_energy_threshold": 0.012,
+    "asr_min_rms": 0.012
+  },
+  "jobs": 12,
+  "stored_segments": 12,
+  "segments_with_text": 12,
+  "empty_segments": 0,
+  "duplicate_replacements": 0,
+  "word_error_rate": 0.14444444444444443,
+  "character_error_rate": 0.09808102345415778,
+  "char_similarity": 0.9019189765458422,
+  "word_errors": {
+    "substitutions": 8,
+    "deletions": 3,
+    "insertions": 2
+  },
+  "character_errors": {
+    "substitutions": 8,
+    "deletions": 38,
+    "insertions": 0
+  },
+  "speaker_counts": {
+    "Speaker 1": 3,
+    "Speaker 2": 6,
+    "Speaker 3": 3
+  },
+  "speaker_status": {
+    "engine": "sherpa-onnx",
+    "model": "/Users/macbookpro/Library/CloudStorage/Dropbox-Privat/00_AI/01_Codex/260704 TransCom/01 1st try on Claude/TransCom/models/3dspeaker_speech_eres2net_sv_en_voxceleb_16k.onnx",
+    "provider": "cpu",
+    "ready": true,
+    "auto_cluster": true,
+    "auto_speakers": 3,
+    "error": null
+  },
+  "first_emit_seconds": 1.23262275,
+  "first_emit_simulated_seconds": 1.66662275,
+  "avg_infer_seconds": 0.38123253125000006,
+  "p50_infer_seconds": 0.38101935399999975,
+  "p95_infer_seconds": 0.3958042500000003,
+  "max_infer_seconds": 0.40552075,
+  "total_infer_seconds": 4.574790375000001,
+  "inference_real_time_factor": 0.09960353527106469,
+  "simulated_pipeline_complete_seconds": 46.689385832999996,
+  "transcript": "Bühne frei? Die nächste Lichtmarke kommt in 12 Sekunden. Das Funk-Mikrofon von Eliko liegt bei Minus 8. Ich prüfe jetzt Empfänger 3 und den Rückkanal. Verstanden. Am 14. Oktober beginnen wir um 19.30 Uhr mit Szene 5, vorher bleibt der südliche Bühnenzug gesperrt. Clara, bestätige bitte den Not-Aus am Hubpodium. Aber löse ihn nicht aus. AES67 läuft stabil und der Dante Primer Link zeigt 0,4 Millisekunden Latenz. Ich fahre den Übergang langsam von 35 auf 72. Und halte anschließend die warme Farbtemperatur bis zum Schlussapplaus.",
+  "texts": [
+    "Bühne frei?",
+    "Die nächste Lichtmarke kommt in 12 Sekunden.",
+    "Das Funk-Mikrofon von Eliko liegt bei Minus 8.",
+    "Ich prüfe jetzt Empfänger 3 und den Rückkanal.",
+    "Verstanden.",
+    "Am 14. Oktober beginnen wir um 19.30 Uhr mit",
+    "Szene 5, vorher bleibt der südliche Bühnenzug gesperrt.",
+    "Clara, bestätige bitte den Not-Aus am Hubpodium.",
+    "Aber löse ihn nicht aus.",
+    "AES67 läuft stabil und der Dante Primer Link zeigt 0,4 Millisekunden Latenz.",
+    "Ich fahre den Übergang langsam von 35 auf 72.",
+    "Und halte anschließend die warme Farbtemperatur bis zum Schlussapplaus."
+  ]
+}

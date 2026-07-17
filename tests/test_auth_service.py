@@ -1,4 +1,5 @@
 from backend.auth.service import AuthService
+import backend.config as cfg
 
 
 def test_bootstrap_admin_and_login(tmp_path):
@@ -42,4 +43,16 @@ def test_admin_can_generate_replacement_password(tmp_path):
     assert updated["password"]
     assert updated["password"] != created["password"]
     assert auth.login("beta@example.com", updated["password"]) is not None
+    auth.close()
+
+
+def test_auth_disabled_bypasses_login(tmp_path, monkeypatch):
+    monkeypatch.setattr(cfg, "AUTH_DISABLED", True)
+    monkeypatch.setattr(cfg, "AUTH_DISABLED_EMAIL", "test@transcom.local")
+    auth = AuthService(tmp_path / "auth.db")
+    session = auth.login("", "")
+    assert session is not None
+    assert session["user"]["email"] == "test@transcom.local"
+    assert session["user"]["is_admin"] is True
+    assert auth.user_for_token(None)["email"] == "test@transcom.local"
     auth.close()

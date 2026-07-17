@@ -27,6 +27,20 @@ class TranscriptStore:
         text         TEXT NOT NULL,
         timestamp    REAL NOT NULL,
         confidence   REAL NOT NULL DEFAULT 1.0,
+        requires_confirmation INTEGER NOT NULL DEFAULT 0,
+        confirmation_acknowledged INTEGER NOT NULL DEFAULT 0,
+        confirmation_acknowledged_at REAL,
+        confirmation_acknowledged_by TEXT,
+        raw_text TEXT,
+        safety_confirmation_raw_text TEXT,
+        safety_confirmation_model TEXT,
+        safety_confirmation_used INTEGER NOT NULL DEFAULT 0,
+        safety_command_id TEXT,
+        safety_match_score REAL,
+        safety_match_margin REAL,
+        safety_rejection_reason TEXT,
+        safety_catalog_id TEXT,
+        safety_catalog_sha256 TEXT,
         speaker_id   TEXT,
         speaker_name TEXT,
         speaker_color TEXT,
@@ -36,6 +50,22 @@ class TranscriptStore:
     );
     CREATE INDEX IF NOT EXISTS idx_segments_ts ON segments (timestamp);
     CREATE INDEX IF NOT EXISTS idx_segments_ch ON segments (channel_id);
+    CREATE TABLE IF NOT EXISTS confirmation_events (
+        event_id TEXT PRIMARY KEY,
+        segment_id TEXT NOT NULL,
+        acknowledged_at REAL NOT NULL,
+        acknowledged_by TEXT NOT NULL,
+        text TEXT NOT NULL,
+        raw_text TEXT,
+        safety_confirmation_raw_text TEXT,
+        safety_confirmation_model TEXT,
+        safety_confirmation_used INTEGER NOT NULL DEFAULT 0,
+        safety_command_id TEXT,
+        safety_catalog_id TEXT,
+        safety_catalog_sha256 TEXT
+    );
+    CREATE INDEX IF NOT EXISTS idx_confirmation_events_segment
+        ON confirmation_events (segment_id, acknowledged_at);
     """
 
     def __init__(self, db_path: str = cfg.DB_PATH) -> None:
@@ -61,6 +91,17 @@ class TranscriptStore:
         text: str,
         timestamp: float,
         confidence: float = 1.0,
+        requires_confirmation: bool = False,
+        raw_text: str | None = None,
+        safety_confirmation_raw_text: str | None = None,
+        safety_confirmation_model: str | None = None,
+        safety_confirmation_used: bool = False,
+        safety_command_id: str | None = None,
+        safety_match_score: float | None = None,
+        safety_match_margin: float | None = None,
+        safety_rejection_reason: str | None = None,
+        safety_catalog_id: str | None = None,
+        safety_catalog_sha256: str | None = None,
         speaker_id: str | None = None,
         speaker_name: str | None = None,
         speaker_color: str | None = None,
@@ -74,6 +115,24 @@ class TranscriptStore:
             "text": text.strip(),
             "timestamp": timestamp,
             "confidence": confidence,
+            "requires_confirmation": bool(requires_confirmation),
+            "confirmation_acknowledged": False,
+            "confirmation_acknowledged_at": None,
+            "confirmation_acknowledged_by": None,
+            "raw_text": raw_text.strip() if raw_text and raw_text.strip() else None,
+            "safety_confirmation_raw_text": (
+                safety_confirmation_raw_text.strip()
+                if safety_confirmation_raw_text and safety_confirmation_raw_text.strip()
+                else None
+            ),
+            "safety_confirmation_model": safety_confirmation_model,
+            "safety_confirmation_used": bool(safety_confirmation_used),
+            "safety_command_id": safety_command_id,
+            "safety_match_score": safety_match_score,
+            "safety_match_margin": safety_match_margin,
+            "safety_rejection_reason": safety_rejection_reason,
+            "safety_catalog_id": safety_catalog_id,
+            "safety_catalog_sha256": safety_catalog_sha256,
             "speaker_id": speaker_id,
             "speaker_name": speaker_name,
             "speaker_color": speaker_color,
@@ -87,16 +146,43 @@ class TranscriptStore:
                 if len(seg["text"]) > len(duplicate["text"]):
                     self._replace_segment_text(duplicate, seg)
                     return dict(duplicate)
+                if seg["requires_confirmation"] and not duplicate["requires_confirmation"]:
+                    duplicate["requires_confirmation"] = True
+                    duplicate["confirmation_acknowledged"] = False
+                    duplicate["confirmation_acknowledged_at"] = None
+                    duplicate["confirmation_acknowledged_by"] = None
+                    self._db.execute(
+                        """UPDATE segments SET requires_confirmation = 1,
+                           confirmation_acknowledged = 0,
+                           confirmation_acknowledged_at = NULL,
+                           confirmation_acknowledged_by = NULL
+                           WHERE segment_id = ?""",
+                        (duplicate["segment_id"],),
+                    )
+                    self._db.commit()
+                    return dict(duplicate)
                 return {}
             self._segments.append(seg)
             self._db.execute(
                 """
                 INSERT INTO segments (
-                    segment_id, channel_id, text, timestamp, confidence,
+                    segment_id, channel_id, text, timestamp, confidence, requires_confirmation,
+                    confirmation_acknowledged, confirmation_acknowledged_at,
+                    confirmation_acknowledged_by, raw_text,
+                    safety_confirmation_raw_text, safety_confirmation_model,
+                    safety_confirmation_used, safety_command_id, safety_match_score,
+                    safety_match_margin, safety_rejection_reason,
+                    safety_catalog_id, safety_catalog_sha256,
                     speaker_id, speaker_name, speaker_color, speaker_confidence,
                     corrected_speaker_id, corrected_speaker_name
                 ) VALUES (
-                    :segment_id, :channel_id, :text, :timestamp, :confidence,
+                    :segment_id, :channel_id, :text, :timestamp, :confidence, :requires_confirmation,
+                    :confirmation_acknowledged, :confirmation_acknowledged_at,
+                    :confirmation_acknowledged_by, :raw_text,
+                    :safety_confirmation_raw_text, :safety_confirmation_model,
+                    :safety_confirmation_used, :safety_command_id, :safety_match_score,
+                    :safety_match_margin, :safety_rejection_reason,
+                    :safety_catalog_id, :safety_catalog_sha256,
                     :speaker_id, :speaker_name, :speaker_color, :speaker_confidence,
                     :corrected_speaker_id, :corrected_speaker_name
                 )
@@ -130,6 +216,7 @@ class TranscriptStore:
     def clear(self) -> None:
         with self._lock:
             self._segments.clear()
+            self._db.execute("DELETE FROM confirmation_events")
             self._db.execute("DELETE FROM segments")
             self._db.commit()
 
@@ -150,6 +237,80 @@ class TranscriptStore:
                     self._db.commit()
                     return dict(seg)
         raise KeyError(f"Segment not found: {segment_id}")
+
+    def acknowledge_confirmation(self, segment_id: str, acknowledged_by: str = "system") -> dict:
+        """Record an explicit operator acknowledgement for a flagged segment."""
+        with self._lock:
+            for seg in self._segments:
+                if seg["segment_id"] != segment_id:
+                    continue
+                if not seg["requires_confirmation"]:
+                    raise ValueError("Segment does not require confirmation")
+                actor = str(acknowledged_by or "").strip()
+                if not actor:
+                    raise ValueError("Confirmation requires an actor")
+                acknowledged_at = time.time()
+                seg["confirmation_acknowledged"] = True
+                seg["confirmation_acknowledged_at"] = acknowledged_at
+                seg["confirmation_acknowledged_by"] = actor
+                self._db.execute(
+                    """
+                    UPDATE segments
+                    SET confirmation_acknowledged = 1,
+                        confirmation_acknowledged_at = ?, confirmation_acknowledged_by = ?
+                    WHERE segment_id = ?
+                    """,
+                    (acknowledged_at, actor, segment_id),
+                )
+                self._db.execute(
+                    """
+                    INSERT INTO confirmation_events (
+                        event_id, segment_id, acknowledged_at, acknowledged_by,
+                        text, raw_text, safety_confirmation_raw_text,
+                        safety_confirmation_model, safety_confirmation_used,
+                        safety_command_id, safety_catalog_id, safety_catalog_sha256
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    """,
+                    (
+                        str(uuid.uuid4()), segment_id, acknowledged_at, actor,
+                        seg["text"], seg.get("raw_text"),
+                        seg.get("safety_confirmation_raw_text"),
+                        seg.get("safety_confirmation_model"),
+                        int(bool(seg.get("safety_confirmation_used"))),
+                        seg.get("safety_command_id"),
+                        seg.get("safety_catalog_id"), seg.get("safety_catalog_sha256"),
+                    ),
+                )
+                self._db.commit()
+                return dict(seg)
+        raise KeyError(f"Segment not found: {segment_id}")
+
+    def get_confirmation_events(self, segment_id: str | None = None) -> list[dict]:
+        with self._lock:
+            if segment_id is None:
+                cur = self._db.execute(
+                    """SELECT event_id, segment_id, acknowledged_at, acknowledged_by, text,
+                              raw_text, safety_confirmation_raw_text,
+                              safety_confirmation_model, safety_confirmation_used,
+                              safety_command_id, safety_catalog_id, safety_catalog_sha256
+                       FROM confirmation_events ORDER BY acknowledged_at"""
+                )
+            else:
+                cur = self._db.execute(
+                    """SELECT event_id, segment_id, acknowledged_at, acknowledged_by, text,
+                              raw_text, safety_confirmation_raw_text,
+                              safety_confirmation_model, safety_confirmation_used,
+                              safety_command_id, safety_catalog_id, safety_catalog_sha256
+                       FROM confirmation_events WHERE segment_id = ? ORDER BY acknowledged_at""",
+                    (segment_id,),
+                )
+            keys = (
+                "event_id", "segment_id", "acknowledged_at", "acknowledged_by", "text",
+                "raw_text", "safety_confirmation_raw_text", "safety_confirmation_model",
+                "safety_confirmation_used", "safety_command_id", "safety_catalog_id",
+                "safety_catalog_sha256",
+            )
+            return [dict(zip(keys, row)) for row in cur.fetchall()]
 
     def close(self) -> None:
         self._db.close()
@@ -175,7 +336,13 @@ class TranscriptStore:
     def _load_from_db(self) -> None:
         cur = self._db.execute(
             """
-            SELECT segment_id, channel_id, text, timestamp, confidence,
+            SELECT segment_id, channel_id, text, timestamp, confidence, requires_confirmation,
+                   confirmation_acknowledged, confirmation_acknowledged_at,
+                   confirmation_acknowledged_by, raw_text,
+                   safety_confirmation_raw_text, safety_confirmation_model,
+                   safety_confirmation_used, safety_command_id, safety_match_score,
+                   safety_match_margin, safety_rejection_reason,
+                   safety_catalog_id, safety_catalog_sha256,
                    speaker_id, speaker_name, speaker_color, speaker_confidence,
                    corrected_speaker_id, corrected_speaker_name
             FROM segments ORDER BY timestamp
@@ -188,12 +355,26 @@ class TranscriptStore:
                 "text": r[2],
                 "timestamp": r[3],
                 "confidence": r[4],
-                "speaker_id": r[5],
-                "speaker_name": r[6],
-                "speaker_color": r[7],
-                "speaker_confidence": r[8],
-                "corrected_speaker_id": r[9],
-                "corrected_speaker_name": r[10],
+                "requires_confirmation": bool(r[5]),
+                "confirmation_acknowledged": bool(r[6]),
+                "confirmation_acknowledged_at": r[7],
+                "confirmation_acknowledged_by": r[8],
+                "raw_text": r[9],
+                "safety_confirmation_raw_text": r[10],
+                "safety_confirmation_model": r[11],
+                "safety_confirmation_used": bool(r[12]),
+                "safety_command_id": r[13],
+                "safety_match_score": r[14],
+                "safety_match_margin": r[15],
+                "safety_rejection_reason": r[16],
+                "safety_catalog_id": r[17],
+                "safety_catalog_sha256": r[18],
+                "speaker_id": r[19],
+                "speaker_name": r[20],
+                "speaker_color": r[21],
+                "speaker_confidence": r[22],
+                "corrected_speaker_id": r[23],
+                "corrected_speaker_name": r[24],
             }
             for r in cur.fetchall()
         ]
@@ -202,6 +383,20 @@ class TranscriptStore:
         existing = {row[1] for row in self._db.execute("PRAGMA table_info(segments)").fetchall()}
         columns = {
             "speaker_id": "TEXT",
+            "requires_confirmation": "INTEGER NOT NULL DEFAULT 0",
+            "confirmation_acknowledged": "INTEGER NOT NULL DEFAULT 0",
+            "confirmation_acknowledged_at": "REAL",
+            "confirmation_acknowledged_by": "TEXT",
+            "raw_text": "TEXT",
+            "safety_confirmation_raw_text": "TEXT",
+            "safety_confirmation_model": "TEXT",
+            "safety_confirmation_used": "INTEGER NOT NULL DEFAULT 0",
+            "safety_command_id": "TEXT",
+            "safety_match_score": "REAL",
+            "safety_match_margin": "REAL",
+            "safety_rejection_reason": "TEXT",
+            "safety_catalog_id": "TEXT",
+            "safety_catalog_sha256": "TEXT",
             "speaker_name": "TEXT",
             "speaker_color": "TEXT",
             "speaker_confidence": "REAL NOT NULL DEFAULT 0.0",
@@ -211,8 +406,23 @@ class TranscriptStore:
         for name, definition in columns.items():
             if name not in existing:
                 self._db.execute(f"ALTER TABLE segments ADD COLUMN {name} {definition}")
+        event_existing = {
+            row[1] for row in self._db.execute("PRAGMA table_info(confirmation_events)").fetchall()
+        }
+        event_columns = {
+            "safety_confirmation_raw_text": "TEXT",
+            "safety_confirmation_model": "TEXT",
+            "safety_confirmation_used": "INTEGER NOT NULL DEFAULT 0",
+        }
+        for name, definition in event_columns.items():
+            if name not in event_existing:
+                self._db.execute(f"ALTER TABLE confirmation_events ADD COLUMN {name} {definition}")
 
     def _find_recent_duplicate(self, seg: dict) -> dict | None:
+        # Every safety-mode utterance is operationally significant, including
+        # an immediate repetition and an unresolved attempt.
+        if seg.get("safety_match_score") is not None:
+            return None
         text = self._normalize_text(seg["text"])
         if not text:
             return None
@@ -221,6 +431,8 @@ class TranscriptStore:
                 continue
             if abs(seg["timestamp"] - existing["timestamp"]) > _DEDUP_WINDOW_SECONDS:
                 break
+            if existing.get("safety_match_score") is not None:
+                continue
             other = self._normalize_text(existing["text"])
             if not other:
                 continue
@@ -231,25 +443,62 @@ class TranscriptStore:
         return None
 
     def _replace_segment_text(self, existing: dict, replacement: dict) -> None:
+        requires_confirmation = bool(
+            existing.get("requires_confirmation") or replacement.get("requires_confirmation")
+        )
         for key in (
             "text",
             "confidence",
+            "raw_text",
+            "safety_confirmation_raw_text",
+            "safety_confirmation_model",
+            "safety_confirmation_used",
+            "safety_command_id",
+            "safety_match_score",
+            "safety_match_margin",
+            "safety_rejection_reason",
+            "safety_catalog_id",
+            "safety_catalog_sha256",
             "speaker_id",
             "speaker_name",
             "speaker_color",
             "speaker_confidence",
         ):
             existing[key] = replacement[key]
+        existing["requires_confirmation"] = requires_confirmation
+        # A changed transcript must be acknowledged again, even if the shorter
+        # predecessor had already been reviewed.
+        existing["confirmation_acknowledged"] = False
+        existing["confirmation_acknowledged_at"] = None
+        existing["confirmation_acknowledged_by"] = None
         self._db.execute(
             """
             UPDATE segments
-            SET text = ?, confidence = ?, speaker_id = ?, speaker_name = ?,
+            SET text = ?, confidence = ?, requires_confirmation = ?, confirmation_acknowledged = 0,
+                confirmation_acknowledged_at = NULL, confirmation_acknowledged_by = NULL,
+                raw_text = ?, safety_confirmation_raw_text = ?,
+                safety_confirmation_model = ?, safety_confirmation_used = ?,
+                safety_command_id = ?, safety_match_score = ?,
+                safety_match_margin = ?, safety_rejection_reason = ?,
+                safety_catalog_id = ?, safety_catalog_sha256 = ?,
+                speaker_id = ?, speaker_name = ?,
                 speaker_color = ?, speaker_confidence = ?
             WHERE segment_id = ?
             """,
             (
                 existing["text"],
                 existing["confidence"],
+                int(existing["requires_confirmation"]),
+                existing["raw_text"],
+                existing["safety_confirmation_raw_text"],
+                existing["safety_confirmation_model"],
+                int(bool(existing["safety_confirmation_used"])),
+                existing["safety_command_id"],
+                existing["safety_match_score"],
+                existing["safety_match_margin"],
+                existing["safety_rejection_reason"],
+                existing["safety_catalog_id"],
+                existing["safety_catalog_sha256"],
                 existing["speaker_id"],
                 existing["speaker_name"],
                 existing["speaker_color"],

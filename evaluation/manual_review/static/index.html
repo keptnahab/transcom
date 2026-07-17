@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TransCom Referenzprüfung</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <aside class="review-sidebar" aria-label="TransCom Navigation">
+      <div class="brand"><span class="brand-mark">▥</span><strong>TransCom</strong></div>
+      <nav aria-label="Reviewbereich">
+        <div class="nav-section-label">REVIEWBEREICH</div>
+        <div class="nav-item active">⌁ <span>Manueller Audioabgleich</span></div>
+      </nav>
+      <div class="sidebar-note">Lokale Referenzprüfung<br><small>Entscheidungen werden append-only protokolliert.</small></div>
+    </aside>
+    <main class="shell">
+      <header class="hero">
+        <div>
+          <h1 id="profile-label">Manueller Audioabgleich</h1>
+          <p id="profile-meta" class="muted">Vergleichen Sie das Transkript mit der Audioaufnahme und bewerten Sie die Übereinstimmung.</p>
+        </div>
+        <div class="reviewer-box">
+          <label for="reviewer-id">Reviewerkennung</label>
+          <input id="reviewer-id" maxlength="64" autocomplete="off" placeholder="z. B. initials-01">
+        </div>
+      </header>
+
+      <section class="progress-panel" aria-label="Fortschritt">
+        <button id="previous-button" class="nav-button">← Vorheriger Clip</button>
+        <div class="progress-center"><span id="item-position" class="eyebrow"></span><div class="progress-dots" aria-hidden="true"></div></div>
+        <button id="next-button" class="nav-button">Nächster Clip →</button>
+        <div class="progress-track"><div id="progress-bar" class="progress-bar"></div></div>
+        <p id="progress-text">0 geprüft</p>
+        <div class="counts">
+          <span class="pill pass">PASS <b id="count-pass">0</b></span>
+          <span class="pill fail">FAIL <b id="count-fail">0</b></span>
+          <span class="pill pending">Offen <b id="count-pending">0</b></span>
+        </div>
+      </section>
+
+      <section class="review-card" aria-live="polite">
+        <div class="review-grid">
+          <div class="review-left">
+            <div class="audio-block">
+              <p class="card-title"><span class="card-icon">♬</span>Audio vollständig anhören</p>
+              <audio id="audio" controls preload="metadata"></audio>
+              <p id="listen-hint" class="hint">PASS/FAIL wird erst nach vollständiger Wiedergabe freigeschaltet.</p>
+              <button id="listened-button" class="listen-button" type="button" disabled>Ich habe dieses Audio vollständig angehört</button>
+            </div>
+            <div class="observation-block">
+              <p class="card-title"><span class="card-icon">▤</span>Beobachtung</p>
+              <textarea id="note" maxlength="4000" rows="5" placeholder="Notieren Sie Abweichungen, fehlende Wörter, falsche Begriffe oder Auffälligkeiten …"></textarea>
+              <div class="character-count">0 / 2000</div>
+            </div>
+          </div>
+          <div class="reference-block">
+            <p class="card-title"><span class="card-icon">▧</span>Referenztext</p>
+            <p id="reference-text" class="reference"></p>
+            <p id="binding" class="binding"></p>
+            <div class="reference-meta"><span>Sprache:<strong>Deutsch</strong></span><span>Clip:<strong id="clip-id"></strong></span><span>Status:<strong id="current-state">OFFEN</strong></span></div>
+          </div>
+        </div>
+        <p id="message" class="message" role="status"></p>
+      </section>
+
+      <div class="decision-row">
+        <button id="fail-button" class="button fail-button" disabled>⚑ &nbsp; Als FAIL protokollieren</button>
+        <button id="pass-button" class="button pass-button" disabled>✓ &nbsp; Als PASS protokollieren</button>
+      </div>
+      <nav class="navigation" aria-label="Clipnavigation">
+        <button id="next-open-button" class="nav-button primary">Nächsten offenen Clip</button>
+      </nav>
+
+      <footer>
+        Keine Entscheidung wird automatisch gesetzt. Jede neue Entscheidung wird append-only protokolliert
+        und ersetzt lediglich den aktuellen Status dieses Clips.
+      </footer>
+    </main>
+    <script src="/app.js" defer></script>
+  </body>
+</html>

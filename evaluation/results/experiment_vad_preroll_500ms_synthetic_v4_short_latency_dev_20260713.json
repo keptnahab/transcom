@@ -1,0 +1,220 @@
+{
+  "benchmark": "simulated-realtime-short-utterance-latency",
+  "manifest": "/Users/macbookpro/Library/CloudStorage/Dropbox-Privat/00_AI/01_Codex/260704 TransCom/01 1st try on Claude/TransCom/evaluation/data/manifests/synthetic_v4_short_latency_dev_v1.json",
+  "manifest_sha256": "6531edaed6192c0d5128b885a49cbeb440677152481033413960b96b884ddf23",
+  "fixture_id": "synthetic_v4_short_latency_dev_v1",
+  "source_manifest": "evaluation/generated/synthetic_v2/dev/synthetic_de_v4-dev-001/manifest.json",
+  "split": "dev",
+  "all_hashes_verified": true,
+  "model": {
+    "asr_backend": "mlx",
+    "model": "mlx-community/whisper-large-v3-turbo-q4",
+    "model_revision": "660c343bbf4e52ac257f0b7d952e5388e6f93bef",
+    "resolved_model_path": "/Users/macbookpro/.cache/huggingface/hub/models--mlx-community--whisper-large-v3-turbo-q4/snapshots/660c343bbf4e52ac257f0b7d952e5388e6f93bef",
+    "device": "apple-silicon",
+    "compute_type": "mlx-q4",
+    "language_mode": "de",
+    "last_language": "de",
+    "fallback_reason": null,
+    "guard_fallback_count": 0,
+    "guard_fallback_model": "Systran/faster-whisper-small"
+  },
+  "recognition_config": {
+    "initial_prompt": "Theaterprobe mit Regie, Bühne, Licht und Ton. Fachbegriffe: Inspizienz, Hubpodium, Not-Aus, AES67, Dante.",
+    "hotwords": "",
+    "beam_size": 1,
+    "no_speech_threshold": 0.6,
+    "language_switch_min_probability": 0.55,
+    "language_stickiness_ratio": 0.75,
+    "language_switch_margin": 0.0
+  },
+  "model_load_seconds": 1.208121792,
+  "language_mode": "de",
+  "simulation": {
+    "sample_rate": 16000,
+    "capture_block_size": 1024,
+    "chunk_seconds": 1.25,
+    "configured_overlap_seconds": 3.75,
+    "vad_min_silence_seconds": 0.35,
+    "feed_mode": "logical-real-time-by-sample-availability",
+    "worker_model": "single-serialized-worker"
+  },
+  "clips": 3,
+  "jobs": 3,
+  "successful_first_emits": 3,
+  "mean_end_to_emit_seconds": 1.2936019166666668,
+  "max_end_to_emit_seconds": 1.5105560830000004,
+  "total_speech_seconds": 4.91,
+  "total_inference_seconds": 1.101283542,
+  "real_time_factor": 0.22429400040733197,
+  "word_error_rate": 0.4166666666666667,
+  "character_error_rate": 0.1724137931034483,
+  "word_errors": {
+    "substitutions": 3,
+    "deletions": 2,
+    "insertions": 0,
+    "errors": 5,
+    "reference_length": 12,
+    "rate": 0.4166666666666667
+  },
+  "character_errors": {
+    "substitutions": 2,
+    "deletions": 8,
+    "insertions": 0,
+    "errors": 10,
+    "reference_length": 58,
+    "rate": 0.1724137931034483
+  },
+  "clip_results": [
+    {
+      "clip_id": "v4-dev-001",
+      "data_path": "evaluation/generated/synthetic_v2/dev/synthetic_de_v4-dev-001/parts/intercom/v4-dev-001.wav",
+      "audio_sha256": "f2513d01d5eaec27d33443f328723c6509727fff694e90aadb919fd6c65f07ff",
+      "reference": "Antrieb sofort stoppen!",
+      "hypothesis": "Antrieb sofort stoppen.",
+      "speech_end_seconds": 1.42,
+      "first_usable_emit_seconds": 2.9305560830000004,
+      "end_to_emit_seconds": 1.5105560830000004,
+      "jobs": 1,
+      "total_inference_seconds": 0.3674317920000001,
+      "real_time_factor": 0.2587547830985916,
+      "word_error_rate": 0.0,
+      "character_error_rate": 0.0,
+      "word_errors": {
+        "substitutions": 0,
+        "deletions": 0,
+        "insertions": 0,
+        "errors": 0,
+        "reference_length": 3,
+        "rate": 0.0
+      },
+      "character_errors": {
+        "substitutions": 0,
+        "deletions": 0,
+        "insertions": 0,
+        "errors": 0,
+        "reference_length": 20,
+        "rate": 0.0
+      },
+      "language_mode": "de",
+      "languages_used": [
+        "de"
+      ],
+      "job_results": [
+        {
+          "speech_id": "speech-0",
+          "vad_speech_start_seconds": 0.0,
+          "vad_speech_end_seconds": 1.666,
+          "audio_seconds": 1.666,
+          "available_at_seconds": 2.5631242910000003,
+          "vad_processing_seconds": 0.0031242910000002233,
+          "worker_start_seconds": 2.5631242910000003,
+          "inference_seconds": 0.3674317920000001,
+          "emit_at_seconds": 2.9305560830000004,
+          "hypothesis": "Antrieb sofort stoppen.",
+          "language_used": "de"
+        }
+      ]
+    },
+    {
+      "clip_id": "v4-dev-002",
+      "data_path": "evaluation/generated/synthetic_v2/dev/synthetic_de_v4-dev-001/parts/intercom/v4-dev-002.wav",
+      "audio_sha256": "59778924367fb855c34d0792b5f09fa31c1e8d26ed2fe18350d2749a845305fe",
+      "reference": "Kanal F sechs ist frei.",
+      "hypothesis": "Kanal F6 ist frei.",
+      "speech_end_seconds": 1.67,
+      "first_usable_emit_seconds": 2.92977175,
+      "end_to_emit_seconds": 1.25977175,
+      "jobs": 1,
+      "total_inference_seconds": 0.366552,
+      "real_time_factor": 0.21949221556886228,
+      "word_error_rate": 0.4,
+      "character_error_rate": 0.2777777777777778,
+      "word_errors": {
+        "substitutions": 1,
+        "deletions": 1,
+        "insertions": 0,
+        "errors": 2,
+        "reference_length": 5,
+        "rate": 0.4
+      },
+      "character_errors": {
+        "substitutions": 1,
+        "deletions": 4,
+        "insertions": 0,
+        "errors": 5,
+        "reference_length": 18,
+        "rate": 0.2777777777777778
+      },
+      "language_mode": "de",
+      "languages_used": [
+        "de"
+      ],
+      "job_results": [
+        {
+          "speech_id": "speech-0",
+          "vad_speech_start_seconds": 0.0,
+          "vad_speech_end_seconds": 1.89,
+          "audio_seconds": 1.89,
+          "available_at_seconds": 2.56321975,
+          "vad_processing_seconds": 0.0032197499999999657,
+          "worker_start_seconds": 2.56321975,
+          "inference_seconds": 0.366552,
+          "emit_at_seconds": 2.92977175,
+          "hypothesis": "Kanal F6 ist frei.",
+          "language_used": "de"
+        }
+      ]
+    },
+    {
+      "clip_id": "v4-dev-004",
+      "data_path": "evaluation/generated/synthetic_v2/dev/synthetic_de_v4-dev-001/parts/intercom/v4-dev-004.wav",
+      "audio_sha256": "566ce95002570722887aa244527f59be9fedaec48a4e106044538c459e2aa375",
+      "reference": "Matrix A drei bestätigt.",
+      "hypothesis": "Matrix A3 bestätig.",
+      "speech_end_seconds": 1.82,
+      "first_usable_emit_seconds": 2.930477917,
+      "end_to_emit_seconds": 1.110477917,
+      "jobs": 1,
+      "total_inference_seconds": 0.3672997499999999,
+      "real_time_factor": 0.2018130494505494,
+      "word_error_rate": 0.75,
+      "character_error_rate": 0.25,
+      "word_errors": {
+        "substitutions": 2,
+        "deletions": 1,
+        "insertions": 0,
+        "errors": 3,
+        "reference_length": 4,
+        "rate": 0.75
+      },
+      "character_errors": {
+        "substitutions": 1,
+        "deletions": 4,
+        "insertions": 0,
+        "errors": 5,
+        "reference_length": 20,
+        "rate": 0.25
+      },
+      "language_mode": "de",
+      "languages_used": [
+        "de"
+      ],
+      "job_results": [
+        {
+          "speech_id": "speech-0",
+          "vad_speech_start_seconds": 0.056,
+          "vad_speech_end_seconds": 2.05,
+          "audio_seconds": 1.994,
+          "available_at_seconds": 2.5631781670000002,
+          "vad_processing_seconds": 0.003178167000000176,
+          "worker_start_seconds": 2.5631781670000002,
+          "inference_seconds": 0.3672997499999999,
+          "emit_at_seconds": 2.930477917,
+          "hypothesis": "Matrix A3 bestätig.",
+          "language_used": "de"
+        }
+      ]
+    }
+  ]
+}

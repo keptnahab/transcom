@@ -1,11 +1,13 @@
 from __future__ import annotations
 import logging
+import math
 import queue
 import threading
 import time
 from typing import Callable
 import numpy as np
 import sounddevice as sd
+from scipy.signal import resample_poly
 
 from backend.audio.ring_buffer import RingBuffer
 import backend.config as cfg
@@ -38,11 +40,15 @@ class ChannelCapture:
         self._on_chunk = on_chunk
 
         chunk_frames = int(cfg.CHUNK_SECONDS * cfg.SAMPLE_RATE)
-        overlap_frames = int(cfg.OVERLAP_SECONDS * cfg.SAMPLE_RATE)
         # Buffer capacity = 30 seconds worth of audio
         capacity = cfg.SAMPLE_RATE * 30
 
-        self._ring = RingBuffer(capacity, chunk_frames, overlap_frames)
+        # Capture feeds the stateful VAD with contiguous, non-overlapping audio.
+        # Asking RingBuffer for overlap here used to delay each callback until
+        # overlap + chunk new samples were available, only to discard the
+        # overlap again in _emit_ready_chunks. Schedule on chunk-sized blocks
+        # directly so no samples are repeated and overlap adds no live latency.
+        self._ring = RingBuffer(capacity, chunk_frames, overlap_size=0)
         self._chunk_seconds = cfg.CHUNK_SECONDS
         self._sample_rate = cfg.SAMPLE_RATE
 
@@ -94,14 +100,18 @@ class ChannelCapture:
         import soundfile as sf
         data, sr = sf.read(path, dtype="float32", always_2d=False)
         if data.ndim == 2:
-            data = data[:, 0]  # mono
+            # Preserve information from both channels without allowing a
+            # same-polarity stereo pair to exceed the original peak.
+            data = np.mean(data, axis=1, dtype=np.float32)
         if sr != self._sample_rate:
-            # Simple nearest-neighbor resample
-            ratio = self._sample_rate / sr
-            n_out = int(len(data) * ratio)
-            indices = (np.arange(n_out) / ratio).astype(int)
-            indices = np.clip(indices, 0, len(data) - 1)
-            data = data[indices]
+            # Band-limited polyphase resampling avoids the imaging and aliasing
+            # introduced by the former nearest-neighbour file-mode path.
+            divisor = math.gcd(int(sr), int(self._sample_rate))
+            data = resample_poly(
+                np.asarray(data, dtype=np.float32),
+                self._sample_rate // divisor,
+                int(sr) // divisor,
+            ).astype(np.float32, copy=False)
 
         block = cfg.CAPTURE_BLOCK_SIZE
         for i in range(0, len(data), block):

@@ -1,6 +1,6 @@
 {
   "name": "transcom",
-  "version": "0.1.0",
+  "version": "0.2.0-beta.1",
   "description": "Local multi-channel audio transcription for live production",
   "main": "electron/main.js",
   "scripts": {
@@ -8,7 +8,11 @@
     "dev:renderer": "vite --config renderer/vite.config.js --port 5747",
     "dev:electron": "wait-on http://localhost:5747 && electron .",
     "build:renderer": "vite build --config renderer/vite.config.js",
-    "build": "npm run build:renderer && electron-builder",
+    "build:backend": "bash scripts/build_backend_runtime.sh",
+    "stage:models": "backend/.venv/bin/python scripts/stage_model_bundle.py",
+    "build:editions": "bash scripts/build_editions.sh",
+    "test:renderer": "node --test tests_js/*.test.mjs",
+    "build": "npm run build:renderer && npm run build:backend && npm run stage:models && electron-builder",
     "start": "electron ."
   },
   "devDependencies": {
@@ -31,14 +35,8 @@
     ],
     "extraResources": [
       {
-        "from": "backend",
-        "to": "backend",
-        "filter": [
-          "**/*",
-          "!**/__pycache__/**",
-          "!**/*.pyc",
-          "!.pytest_cache/**"
-        ]
+        "from": "release/runtime/backend-runtime",
+        "to": "backend-runtime"
       },
       {
         "from": "fixtures",
@@ -53,6 +51,18 @@
         "filter": [
           "**/*.onnx"
         ]
+      },
+      {
+        "from": "release/runtime/model-cache",
+        "to": "model-cache"
+      },
+      {
+        "from": "release/runtime/model-manifest.json",
+        "to": "model-manifest.json"
+      },
+      {
+        "from": "release/runtime/edition.json",
+        "to": "edition.json"
       }
     ],
     "mac": {

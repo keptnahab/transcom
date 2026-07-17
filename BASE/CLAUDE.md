@@ -1,8 +1,8 @@
 # CLAUDE.md
 
-# TransCom project rules
+# TransCom working rules
 
-Always start by reading:
+Always read first:
 1. `BASE/Handoff/HANDOFF.md`
 2. `BASE/Handoff/00_PROJECT_STATUS.md`
 3. `BASE/Handoff/02_TODO.md`
@@ -10,27 +10,35 @@ Always start by reading:
 5. `BASE/Handoff/07_KNOWN_ISSUES.md`
 
 Project intent:
-- `TransCom` is a local-first transcription tool for intercom / production audio.
-- Primary target is very good German and English live transcription with practical operator UX.
-- Speaker recognition must become reliable enough for real beta use.
-- Target latency remains about 1-2 seconds where feasible.
-- Beta access is intended over the network with lightweight user management.
+- `TransCom` is a local-first transcription tool for mixed intercom / production audio.
+- The practical target is strong German/English live transcription, low enough latency for operators, and usable speaker attribution.
+- No cloud transcription or GPT clean-up path is part of the intended first product.
+
+Current product truth:
+- The app is feature-rich enough to run end to end.
+- The core quality problem is not solved yet.
+- Real user feedback on 2026-07-01 is still negative on recognition quality, latency, and duplicate opening lines.
 
 Documentation rules:
-- Never keep important knowledge only in chat.
-- After meaningful work, update the relevant files in `BASE/Handoff/`.
-- Record facts, not hopes. If something is broken, document it as broken.
-- Keep decisions, risks, test status, and next steps synchronized.
+- Do not keep critical state only in chat.
+- Record facts, measurements, and observed failures.
+- If a feature works only partially, document both the win and the limit.
+- Keep `BASE/Handoff/02_TODO.md`, `06_SESSION_SUMMARY.md`, and `07_KNOWN_ISSUES.md` synchronized.
 
 Engineering rules:
-- Prefer improving existing code over duplicate implementations.
-- Before implementing: inspect -> reason -> implement -> test -> document.
-- Preserve local-first design unless the user explicitly changes direction.
-- No hardcoded secrets in code or docs.
-- Record temporary workarounds and why they exist.
+- Inspect before changing.
+- Prefer targeted fixes over broad rewrites.
+- Preserve the local/offline design unless the user explicitly changes the product direction.
+- Keep the benchmark and real UI behavior separate in your reasoning: fixture gains do not prove real usability.
+- When quality work is discussed, verify both with tests and with the fixture benchmark.
 
-Current repository facts:
+Important repo facts:
 - Local path: `/Users/mkue/Documents/CODEX/INTERCOM TRANSCRIPT/01 1st try on Claude/TransCom`
-- Git remote: `https://github.com/keptnahab/transcom.git`
+- Remote: `https://github.com/keptnahab/transcom.git`
 - Branch: `main`
-- First pushed commit: `8ea2dcd`
+
+Immediate priorities:
+1. Improve real ASR quality and responsiveness.
+2. Eliminate the duplicate first transcript row.
+3. Reduce session/feed UX confusion.
+4. Keep the handoff files trustworthy.

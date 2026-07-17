@@ -1,0 +1,540 @@
+{
+  "benchmark": "hash-bound-clip-suite",
+  "manifest": "/Users/macbookpro/Library/CloudStorage/Dropbox-Privat/00_AI/01_Codex/260704 TransCom/01 1st try on Claude/TransCom/evaluation/data/manifests/synthetic_v2_dev_intercom_v1.json",
+  "manifest_sha256": "3b43afdfee4168085e1b779c4c0c8ada5ff849b6931349e4535727eb01a9e9e6",
+  "project_root": "/Users/macbookpro/Library/CloudStorage/Dropbox-Privat/00_AI/01_Codex/260704 TransCom/01 1st try on Claude/TransCom",
+  "dataset_id": "synthetic_de_v2-dev-synthetic_de_v2-dev-001-intercom-clips-v1",
+  "dataset_name": "Synthetic German evaluation data v2",
+  "manifest_language": "de-DE",
+  "language_mode": "de",
+  "languages_used": [
+    "de"
+  ],
+  "all_clip_hashes_verified": true,
+  "model": {
+    "asr_backend": "faster-whisper",
+    "model": "Systran/faster-whisper-small",
+    "device": "cpu",
+    "compute_type": "int8",
+    "language_mode": "auto",
+    "last_language": "de",
+    "fallback_reason": null
+  },
+  "model_load_seconds": 2.0117977500000004,
+  "clip_count": 8,
+  "micro": {
+    "word_error_rate": 0.25555555555555554,
+    "character_error_rate": 0.13646055437100213,
+    "word_errors": {
+      "substitutions": 16,
+      "deletions": 4,
+      "insertions": 3,
+      "errors": 23,
+      "reference_length": 90,
+      "rate": 0.25555555555555554
+    },
+    "character_errors": {
+      "substitutions": 20,
+      "deletions": 37,
+      "insertions": 7,
+      "errors": 64,
+      "reference_length": 469,
+      "rate": 0.13646055437100213
+    }
+  },
+  "macro": {
+    "word_error_rate": 0.327181901775555,
+    "character_error_rate": 0.21496669840794225
+  },
+  "total_audio_seconds": 41.540000000000006,
+  "total_inference_seconds": 10.11821946,
+  "real_time_factor": 0.24357774337987478,
+  "groups": {
+    "length_bucket": {
+      "long": {
+        "clip_count": 3,
+        "micro": {
+          "word_error_rate": 0.18518518518518517,
+          "character_error_rate": 0.12056737588652482,
+          "word_errors": {
+            "substitutions": 7,
+            "deletions": 2,
+            "insertions": 1,
+            "errors": 10,
+            "reference_length": 54,
+            "rate": 0.18518518518518517
+          },
+          "character_errors": {
+            "substitutions": 10,
+            "deletions": 22,
+            "insertions": 2,
+            "errors": 34,
+            "reference_length": 282,
+            "rate": 0.12056737588652482
+          }
+        },
+        "macro": {
+          "word_error_rate": 0.19086113977754846,
+          "character_error_rate": 0.11963496102486636
+        },
+        "total_audio_seconds": 24.509999999999998,
+        "total_inference_seconds": 3.5959439590000013,
+        "real_time_factor": 0.14671333982048151
+      },
+      "medium": {
+        "clip_count": 3,
+        "micro": {
+          "word_error_rate": 0.36363636363636365,
+          "character_error_rate": 0.11904761904761904,
+          "word_errors": {
+            "substitutions": 9,
+            "deletions": 1,
+            "insertions": 2,
+            "errors": 12,
+            "reference_length": 33,
+            "rate": 0.36363636363636365
+          },
+          "character_errors": {
+            "substitutions": 10,
+            "deletions": 5,
+            "insertions": 5,
+            "errors": 20,
+            "reference_length": 168,
+            "rate": 0.11904761904761904
+          }
+        },
+        "macro": {
+          "word_error_rate": 0.34829059829059833,
+          "character_error_rate": 0.12027623472964633
+        },
+        "total_audio_seconds": 15.629999999999999,
+        "total_inference_seconds": 3.210982999999999,
+        "real_time_factor": 0.20543717210492637
+      },
+      "short": {
+        "clip_count": 2,
+        "micro": {
+          "word_error_rate": 0.3333333333333333,
+          "character_error_rate": 0.5263157894736842,
+          "word_errors": {
+            "substitutions": 0,
+            "deletions": 1,
+            "insertions": 0,
+            "errors": 1,
+            "reference_length": 3,
+            "rate": 0.3333333333333333
+          },
+          "character_errors": {
+            "substitutions": 0,
+            "deletions": 10,
+            "insertions": 0,
+            "errors": 10,
+            "reference_length": 19,
+            "rate": 0.5263157894736842
+          }
+        },
+        "macro": {
+          "word_error_rate": 0.5,
+          "character_error_rate": 0.5
+        },
+        "total_audio_seconds": 1.4,
+        "total_inference_seconds": 3.3112925010000005,
+        "real_time_factor": 2.3652089292857146
+      }
+    },
+    "gender": {
+      "unknown": {
+        "clip_count": 8,
+        "micro": {
+          "word_error_rate": 0.25555555555555554,
+          "character_error_rate": 0.13646055437100213,
+          "word_errors": {
+            "substitutions": 16,
+            "deletions": 4,
+            "insertions": 3,
+            "errors": 23,
+            "reference_length": 90,
+            "rate": 0.25555555555555554
+          },
+          "character_errors": {
+            "substitutions": 20,
+            "deletions": 37,
+            "insertions": 7,
+            "errors": 64,
+            "reference_length": 469,
+            "rate": 0.13646055437100213
+          }
+        },
+        "macro": {
+          "word_error_rate": 0.327181901775555,
+          "character_error_rate": 0.21496669840794225
+        },
+        "total_audio_seconds": 41.540000000000006,
+        "total_inference_seconds": 10.11821946,
+        "real_time_factor": 0.24357774337987478
+      }
+    },
+    "official_split": {
+      "dev": {
+        "clip_count": 8,
+        "micro": {
+          "word_error_rate": 0.25555555555555554,
+          "character_error_rate": 0.13646055437100213,
+          "word_errors": {
+            "substitutions": 16,
+            "deletions": 4,
+            "insertions": 3,
+            "errors": 23,
+            "reference_length": 90,
+            "rate": 0.25555555555555554
+          },
+          "character_errors": {
+            "substitutions": 20,
+            "deletions": 37,
+            "insertions": 7,
+            "errors": 64,
+            "reference_length": 469,
+            "rate": 0.13646055437100213
+          }
+        },
+        "macro": {
+          "word_error_rate": 0.327181901775555,
+          "character_error_rate": 0.21496669840794225
+        },
+        "total_audio_seconds": 41.540000000000006,
+        "total_inference_seconds": 10.11821946,
+        "real_time_factor": 0.24357774337987478
+      }
+    },
+    "profile": {
+      "unknown": {
+        "clip_count": 8,
+        "micro": {
+          "word_error_rate": 0.25555555555555554,
+          "character_error_rate": 0.13646055437100213,
+          "word_errors": {
+            "substitutions": 16,
+            "deletions": 4,
+            "insertions": 3,
+            "errors": 23,
+            "reference_length": 90,
+            "rate": 0.25555555555555554
+          },
+          "character_errors": {
+            "substitutions": 20,
+            "deletions": 37,
+            "insertions": 7,
+            "errors": 64,
+            "reference_length": 469,
+            "rate": 0.13646055437100213
+          }
+        },
+        "macro": {
+          "word_error_rate": 0.327181901775555,
+          "character_error_rate": 0.21496669840794225
+        },
+        "total_audio_seconds": 41.540000000000006,
+        "total_inference_seconds": 10.11821946,
+        "real_time_factor": 0.24357774337987478
+      }
+    }
+  },
+  "clip_results": [
+    {
+      "clip_index": 1,
+      "audio_id": "dev-001",
+      "data_path": "evaluation/generated/synthetic_v2/dev/synthetic_de_v2-dev-001/parts/intercom/dev-001.wav",
+      "audio_sha256": "6f851e925617e897900fb29221ffebffeafaf74e0dff2a7c222549c6c3cad0c0",
+      "speaker_id": "Lea",
+      "length_bucket": "short",
+      "gender": null,
+      "official_split": "dev",
+      "profile": null,
+      "requested_language": "de",
+      "language_used": "de",
+      "audio_samples": 10880,
+      "audio_seconds": 0.68,
+      "inference_seconds": 1.2667600839999995,
+      "real_time_factor": 1.8628824764705874,
+      "reference": "Bühne frei?",
+      "hypothesis": "Bühne frei!",
+      "word_error_rate": 0.0,
+      "character_error_rate": 0.0,
+      "word_errors": {
+        "substitutions": 0,
+        "deletions": 0,
+        "insertions": 0,
+        "errors": 0,
+        "reference_length": 2,
+        "rate": 0.0
+      },
+      "character_errors": {
+        "substitutions": 0,
+        "deletions": 0,
+        "insertions": 0,
+        "errors": 0,
+        "reference_length": 9,
+        "rate": 0.0
+      }
+    },
+    {
+      "clip_index": 2,
+      "audio_id": "dev-002",
+      "data_path": "evaluation/generated/synthetic_v2/dev/synthetic_de_v2-dev-001/parts/intercom/dev-002.wav",
+      "audio_sha256": "89e8eea7bfafd4a300755f783f1917d8fbae55761ec3a799555bd164be5f5baa",
+      "speaker_id": "Murat",
+      "length_bucket": "medium",
+      "gender": null,
+      "official_split": "dev",
+      "profile": null,
+      "requested_language": "de",
+      "language_used": "de",
+      "audio_samples": 58240,
+      "audio_seconds": 3.64,
+      "inference_seconds": 1.0440917499999998,
+      "real_time_factor": 0.2868383928571428,
+      "reference": "Achtung, die nächste Lichtmarke kommt in zwölf Sekunden.",
+      "hypothesis": "Achtung, die nächste Richtmarke kommt in 12 Sekunden.",
+      "word_error_rate": 0.25,
+      "character_error_rate": 0.1276595744680851,
+      "word_errors": {
+        "substitutions": 2,
+        "deletions": 0,
+        "insertions": 0,
+        "errors": 2,
+        "reference_length": 8,
+        "rate": 0.25
+      },
+      "character_errors": {
+        "substitutions": 3,
+        "deletions": 3,
+        "insertions": 0,
+        "errors": 6,
+        "reference_length": 47,
+        "rate": 0.1276595744680851
+      }
+    },
+    {
+      "clip_index": 3,
+      "audio_id": "dev-003",
+      "data_path": "evaluation/generated/synthetic_v2/dev/synthetic_de_v2-dev-001/parts/intercom/dev-003.wav",
+      "audio_sha256": "99dc485452ea9a317c5808153386b55c78ba00e5ec13788118b1739bbddda103",
+      "speaker_id": "Sophie",
+      "length_bucket": "long",
+      "gender": null,
+      "official_split": "dev",
+      "profile": null,
+      "requested_language": "de",
+      "language_used": "de",
+      "audio_samples": 119040,
+      "audio_seconds": 7.44,
+      "inference_seconds": 1.2514626250000003,
+      "real_time_factor": 0.1682073420698925,
+      "reference": "Das Funkmikrofon von Željko liegt bei minus achtzehn Dezibel; ich prüfe jetzt Empfänger drei und den Rückkanal.",
+      "hypothesis": "Das Funk-Mikrofon von ElriKolliG bei minus 18 Dezibel. Ich prüfe jetzt Empfehler 3 und den Rückkanal.",
+      "word_error_rate": 0.4117647058823529,
+      "character_error_rate": 0.22580645161290322,
+      "word_errors": {
+        "substitutions": 5,
+        "deletions": 1,
+        "insertions": 1,
+        "errors": 7,
+        "reference_length": 17,
+        "rate": 0.4117647058823529
+      },
+      "character_errors": {
+        "substitutions": 7,
+        "deletions": 12,
+        "insertions": 2,
+        "errors": 21,
+        "reference_length": 93,
+        "rate": 0.22580645161290322
+      }
+    },
+    {
+      "clip_index": 4,
+      "audio_id": "dev-004",
+      "data_path": "evaluation/generated/synthetic_v2/dev/synthetic_de_v2-dev-001/parts/intercom/dev-004.wav",
+      "audio_sha256": "94dbb8333e8b9ff072167349487b069f73a5d58efc7528e9b52bfeb1efcec8aa",
+      "speaker_id": "Ben",
+      "length_bucket": "short",
+      "gender": null,
+      "official_split": "dev",
+      "profile": null,
+      "requested_language": "de",
+      "language_used": "de",
+      "audio_samples": 11520,
+      "audio_seconds": 0.72,
+      "inference_seconds": 2.044532417000001,
+      "real_time_factor": 2.839628356944446,
+      "reference": "Verstanden.",
+      "hypothesis": "...",
+      "word_error_rate": 1.0,
+      "character_error_rate": 1.0,
+      "word_errors": {
+        "substitutions": 0,
+        "deletions": 1,
+        "insertions": 0,
+        "errors": 1,
+        "reference_length": 1,
+        "rate": 1.0
+      },
+      "character_errors": {
+        "substitutions": 0,
+        "deletions": 10,
+        "insertions": 0,
+        "errors": 10,
+        "reference_length": 10,
+        "rate": 1.0
+      }
+    },
+    {
+      "clip_index": 5,
+      "audio_id": "dev-005",
+      "data_path": "evaluation/generated/synthetic_v2/dev/synthetic_de_v2-dev-001/parts/intercom/dev-005.wav",
+      "audio_sha256": "01e45a20af4e1bff63e2c3458050117742ba15973504d8b2bf6f72710ccfeae6",
+      "speaker_id": "Lea",
+      "length_bucket": "long",
+      "gender": null,
+      "official_split": "dev",
+      "profile": null,
+      "requested_language": "de",
+      "language_used": "de",
+      "audio_samples": 120160,
+      "audio_seconds": 7.51,
+      "inference_seconds": 1.1828797089999998,
+      "real_time_factor": 0.15750728482023965,
+      "reference": "Am 14. Oktober beginnen wir um 19:30 Uhr mit Szene fünf; vorher bleibt der südliche Bühnenzug gesperrt.",
+      "hypothesis": "Am 14. Oktober beginnen wir um 19.30 Uhr mit Szene 5. Vorher bleibt der südliche Bühnenzug gesperrt.",
+      "word_error_rate": 0.05555555555555555,
+      "character_error_rate": 0.04819277108433735,
+      "word_errors": {
+        "substitutions": 1,
+        "deletions": 0,
+        "insertions": 0,
+        "errors": 1,
+        "reference_length": 18,
+        "rate": 0.05555555555555555
+      },
+      "character_errors": {
+        "substitutions": 1,
+        "deletions": 3,
+        "insertions": 0,
+        "errors": 4,
+        "reference_length": 83,
+        "rate": 0.04819277108433735
+      }
+    },
+    {
+      "clip_index": 6,
+      "audio_id": "dev-006",
+      "data_path": "evaluation/generated/synthetic_v2/dev/synthetic_de_v2-dev-001/parts/intercom/dev-006.wav",
+      "audio_sha256": "67eac6853b7f914807ab56786aff3955fa83e141c52b0fe6bc46b41a74e72f6a",
+      "speaker_id": "Murat",
+      "length_bucket": "medium",
+      "gender": null,
+      "official_split": "dev",
+      "profile": null,
+      "requested_language": "de",
+      "language_used": "de",
+      "audio_samples": 77600,
+      "audio_seconds": 4.85,
+      "inference_seconds": 1.0987198750000005,
+      "real_time_factor": 0.22654018041237126,
+      "reference": "Klara, bestätige bitte den Not-Aus am Hubpodium, aber löse ihn nicht aus.",
+      "hypothesis": "Die Klage bestätige bitte den Nothaus am Hupodium, aber röse ihn nicht aus.",
+      "word_error_rate": 0.46153846153846156,
+      "character_error_rate": 0.13793103448275862,
+      "word_errors": {
+        "substitutions": 4,
+        "deletions": 1,
+        "insertions": 1,
+        "errors": 6,
+        "reference_length": 13,
+        "rate": 0.46153846153846156
+      },
+      "character_errors": {
+        "substitutions": 3,
+        "deletions": 1,
+        "insertions": 4,
+        "errors": 8,
+        "reference_length": 58,
+        "rate": 0.13793103448275862
+      }
+    },
+    {
+      "clip_index": 7,
+      "audio_id": "dev-007",
+      "data_path": "evaluation/generated/synthetic_v2/dev/synthetic_de_v2-dev-001/parts/intercom/dev-007.wav",
+      "audio_sha256": "e25aa9fc0a75468d0103b7671321c73a57cb3b3bff7954c62a3b1f9ac954af44",
+      "speaker_id": "Sophie",
+      "length_bucket": "medium",
+      "gender": null,
+      "official_split": "dev",
+      "profile": null,
+      "requested_language": "de",
+      "language_used": "de",
+      "audio_samples": 114240,
+      "audio_seconds": 7.14,
+      "inference_seconds": 1.0681713749999986,
+      "real_time_factor": 0.14960383403361324,
+      "reference": "AES67 läuft stabil, und der Dante-Primärlink zeigt 0,4 Millisekunden Latenz.",
+      "hypothesis": "AES 67 läuft stabil und der Dante Primarily zeigt 0,4 Millisekunden Latence.",
+      "word_error_rate": 0.3333333333333333,
+      "character_error_rate": 0.09523809523809523,
+      "word_errors": {
+        "substitutions": 3,
+        "deletions": 0,
+        "insertions": 1,
+        "errors": 4,
+        "reference_length": 12,
+        "rate": 0.3333333333333333
+      },
+      "character_errors": {
+        "substitutions": 4,
+        "deletions": 1,
+        "insertions": 1,
+        "errors": 6,
+        "reference_length": 63,
+        "rate": 0.09523809523809523
+      }
+    },
+    {
+      "clip_index": 8,
+      "audio_id": "dev-008",
+      "data_path": "evaluation/generated/synthetic_v2/dev/synthetic_de_v2-dev-001/parts/intercom/dev-008.wav",
+      "audio_sha256": "b51e298d21ec20b990588bebc7422a931934177a0c21361f9ca74ef6be8acba6",
+      "speaker_id": "Ben",
+      "length_bucket": "long",
+      "gender": null,
+      "official_split": "dev",
+      "profile": null,
+      "requested_language": "de",
+      "language_used": "de",
+      "audio_samples": 152960,
+      "audio_seconds": 9.56,
+      "inference_seconds": 1.1616016250000012,
+      "real_time_factor": 0.12150644612970724,
+      "reference": "Ich fahre den Übergang langsam von 35 auf 72 Prozent und halte anschließend die warme Farbtemperatur bis zum Schlussapplaus.",
+      "hypothesis": "Ich fahre den Übergang langsam von 35 auf 72% und halte anschließend die warme Farbtemperatur bis zum Schlussauklaus.",
+      "word_error_rate": 0.10526315789473684,
+      "character_error_rate": 0.08490566037735849,
+      "word_errors": {
+        "substitutions": 1,
+        "deletions": 1,
+        "insertions": 0,
+        "errors": 2,
+        "reference_length": 19,
+        "rate": 0.10526315789473684
+      },
+      "character_errors": {
+        "substitutions": 2,
+        "deletions": 7,
+        "insertions": 0,
+        "errors": 9,
+        "reference_length": 106,
+        "rate": 0.08490566037735849
+      }
+    }
+  ]
+}

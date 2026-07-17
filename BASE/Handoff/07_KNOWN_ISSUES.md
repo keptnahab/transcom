@@ -1,25 +1,19 @@
 # Known Issues
 
-1. Live transcript grouping is still too granular.
-The current timed stabilizer can emit fragments that are stored as separate rows, producing many short lines instead of a coherent utterance.
+1. Real ASR quality is still below the user's bar.
+The fixture benchmark improved, and app defaults now match that benchmark path, but real UI output still needs to be judged by the user.
 
-2. Speaker recognition is not production-stable yet.
-Real-user tests showed cases where one real speaker became `Speaker 4`, `Speaker 5`, `Speaker 6`, or remained `Unknown`.
+2. First usable output is still slower than intended.
+The latest benchmark emitted first text at about `3.59s`, which is better than before but still not close to the user's desired live feel.
 
-3. Initial duplicate transcript rows can still appear.
-Store-level duplicate suppression helps, but has not fully eliminated the issue in real runs.
+3. The duplicate first transcript row needs re-verification.
+The UI now replaces an existing row when a backend replacement broadcast uses the same `segment_id`, which targets the observed duplicate-row path. It still needs a real UI run against the updated backend.
 
-4. Unsupported-language drift still occurs in practice.
-The product intent is German and English only, but live output has still shown other languages according to user testing.
+4. Session and feed controls are easy to misunderstand.
+The app distinguishes session creation/start from feed start/stop, but the UI does not explain that clearly enough for testing flow.
 
-5. Benchmarking on this machine is currently unreliable with the default MLX path.
-`backend/.venv/bin/python scripts/benchmark_live_pipeline.py --warmup` crashed on 2026-07-01 with a Metal / MLX exception:
-- `NSRangeException`
-- stack in `libmlx.dylib`
-- likely environment/runtime/device selection issue
+5. `mlx` is still not the most trustworthy benchmark path today.
+The app now defaults to `faster-whisper`; `mlx` remains available with `TRANSCOM_ASR_BACKEND=mlx` and should be revisited only after the faster-whisper path is satisfactory.
 
-6. Password visibility is a deliberate beta compromise.
-`backend/auth/service.py` stores `visible_password` so the admin UI can show and edit tester passwords. This is useful for beta ops but not suitable for hardened production security.
-
-7. Older existing users may have no recoverable visible password.
-If a user existed before `visible_password` was introduced, their plaintext password cannot be reconstructed. Admin must set or generate a new one.
+6. Password visibility remains a beta-only compromise.
+`backend/auth/service.py` stores `visible_password` for admin UX. That is acceptable for local/beta operations, not for hardened production security.

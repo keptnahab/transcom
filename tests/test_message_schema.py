@@ -45,11 +45,13 @@ def test_all_message_types_are_json_serializable():
         ("enrollment_result", {"quality": 0.9, "usable": True}),
         ("speaker_match", {"speaker_id": "sp1", "confidence": 0.8}),
         ("segment_correct_speaker", {"segment_id": "seg1", "speaker_id": "sp1"}),
+        ("segment_acknowledge_confirmation", {"segment_id": "seg1"}),
         ("share_start", {}),
         ("share_stop", {}),
         ("share_state", {"enabled": True, "url": "http://127.0.0.1:8787/?token=x"}),
         ("backend_status", {"active_channels": 0}),
         ("engine_status", {"state": "ready", "message": "Model ready"}),
+        ("edition_limit_reached", {"edition": "starter", "reason": "starter_time_limit", "limit_seconds": 60}),
         ("transcript_segment", {"segment_id": "x", "channel_id": "y", "text": "hi", "timestamp": 1.0, "confidence": 0.9}),
         ("error", {"message": "oops", "code": "E001"}),
     ]

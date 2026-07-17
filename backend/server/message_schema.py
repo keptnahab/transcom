@@ -82,6 +82,20 @@ class SegmentInfo(TypedDict):
     text: str
     timestamp: float   # Unix epoch seconds (absolute)
     confidence: float
+    requires_confirmation: bool
+    confirmation_acknowledged: bool
+    confirmation_acknowledged_at: float | None
+    confirmation_acknowledged_by: str | None
+    raw_text: str | None
+    safety_confirmation_raw_text: str | None
+    safety_confirmation_model: str | None
+    safety_confirmation_used: bool
+    safety_command_id: str | None
+    safety_match_score: float | None
+    safety_match_margin: float | None
+    safety_rejection_reason: str | None
+    safety_catalog_id: str | None
+    safety_catalog_sha256: str | None
 
 
 class InitStatePayload(TypedDict):

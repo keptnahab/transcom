@@ -16,10 +16,12 @@ logger = logging.getLogger(__name__)
 class TranscriptionResult:
     channel_id: str
     segments: list[Segment]
-    wall_clock_ts: float   # time.time() at chunk-slice moment
-    chunk_duration: float  # seconds of audio in the chunk
     source_audio: np.ndarray
-    context_prefix_seconds: float = 0.0
+    language: str
+    speech_start_ts: float
+    speech_end_ts: float
+    speech_id: str | None = None
+    is_final: bool = True
 
 
 ResultCallback = Callable[[TranscriptionResult], None]
@@ -54,17 +56,19 @@ class TranscriptionPool:
         self,
         channel_id: str,
         audio: np.ndarray,
-        wall_clock_ts: float,
-        context_prefix_seconds: float = 0.0,
+        speech_start_ts: float,
+        speech_end_ts: float,
+        speech_id: str | None = None,
+        is_final: bool = True,
     ) -> None:
-        chunk_duration = len(audio) / cfg.SAMPLE_RATE
         self._executor.submit(
             self._infer,
             channel_id,
             audio,
-            wall_clock_ts,
-            chunk_duration,
-            context_prefix_seconds,
+            speech_start_ts,
+            speech_end_ts,
+            speech_id,
+            is_final,
         )
 
     def shutdown(self) -> None:
@@ -78,16 +82,18 @@ class TranscriptionPool:
         self,
         channel_id: str,
         audio: np.ndarray,
-        wall_clock_ts: float,
-        chunk_duration: float,
-        context_prefix_seconds: float,
+        speech_start_ts: float,
+        speech_end_ts: float,
+        speech_id: str | None,
+        is_final: bool,
     ) -> None:
         try:
-            model_name = cfg.MLX_WHISPER_MODEL if cfg.WHISPER_BACKEND == "mlx" else cfg.WHISPER_MODEL
+            engine_status = self._engine.status()
             self._dispatch_status({
                 "state": "loading",
                 "channel_id": channel_id,
-                "message": f"Loading {cfg.WHISPER_BACKEND} model {model_name}",
+                "message": f"Loading {engine_status['asr_backend']} model {engine_status['model']}",
+                **engine_status,
             })
             segments = self._engine.transcribe(audio)
         except Exception as exc:
@@ -96,6 +102,7 @@ class TranscriptionPool:
                 "state": "error",
                 "channel_id": channel_id,
                 "message": str(exc),
+                **self._engine.status(),
             })
             return
 
@@ -103,6 +110,7 @@ class TranscriptionPool:
             "state": "ready",
             "channel_id": channel_id,
             "message": "Model ready",
+            **self._engine.status(),
         })
 
         if not segments:
@@ -111,10 +119,12 @@ class TranscriptionPool:
         result = TranscriptionResult(
             channel_id=channel_id,
             segments=segments,
-            wall_clock_ts=wall_clock_ts,
-            chunk_duration=chunk_duration,
             source_audio=audio,
-            context_prefix_seconds=context_prefix_seconds,
+            language=self._engine.last_language,
+            speech_start_ts=speech_start_ts,
+            speech_end_ts=speech_end_ts,
+            speech_id=speech_id,
+            is_final=is_final,
         )
         # Marshal back to the asyncio event loop safely
         asyncio.run_coroutine_threadsafe(self._dispatch(result), self._loop)

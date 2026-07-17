@@ -1,0 +1,26 @@
+{
+  "schema_version": "2.0",
+  "dataset_version": "synthetic_de_v6",
+  "split": "dev",
+  "language": "de-DE",
+  "pause_seconds": 0.65,
+  "trailing_guard_ms": 0,
+  "utterances": [
+    {"id": "v6-dev-001", "speaker": "Bianca", "role": "Maschinerie", "voice": "Anna", "rate": 164, "text": "Hauptantrieb stoppen!", "categories": ["short", "safety", "technical"]},
+    {"id": "v6-dev-002", "speaker": "Okan", "role": "Sicherheit", "voice": "Eddy (Deutsch (Deutschland))", "rate": 190, "text": "Schutzraum sofort räumen!", "categories": ["short", "safety", "umlaut"]},
+    {"id": "v6-dev-003", "speaker": "Petra", "role": "Automation", "voice": "Reed (Deutsch (Deutschland))", "rate": 178, "text": "Hubbewegung blockieren!", "categories": ["short", "safety", "technical"]},
+    {"id": "v6-dev-004", "speaker": "Ralf", "role": "Rigging", "voice": "Sandy (Deutsch (Deutschland))", "rate": 196, "text": "Lastaufnahme unterbrechen!", "categories": ["short", "safety", "technical"]},
+    {"id": "v6-dev-005", "speaker": "Bianca", "role": "Bühne", "voice": "Anna", "rate": 172, "text": "Zugang unverzüglich schließen!", "categories": ["short", "safety", "umlaut"]},
+    {"id": "v6-dev-006", "speaker": "Okan", "role": "Energie", "voice": "Eddy (Deutsch (Deutschland))", "rate": 186, "text": "Druckversorgung abschalten!", "categories": ["short", "safety", "technical"]},
+    {"id": "v6-dev-007", "speaker": "Petra", "role": "Inspizienz", "voice": "Reed (Deutsch (Deutschland))", "rate": 182, "text": "Cue K zwei bereit.", "categories": ["short", "alphanumeric", "number", "technical"]},
+    {"id": "v6-dev-008", "speaker": "Ralf", "role": "Automation", "voice": "Sandy (Deutsch (Deutschland))", "rate": 192, "text": "Position N acht erreicht.", "categories": ["short", "alphanumeric", "number", "technical"]},
+    {"id": "v6-dev-009", "speaker": "Bianca", "role": "Licht", "voice": "Anna", "rate": 176, "text": "Linie P fünf aktiv.", "categories": ["short", "alphanumeric", "number", "technical"]},
+    {"id": "v6-dev-010", "speaker": "Okan", "role": "Video", "voice": "Eddy (Deutsch (Deutschland))", "rate": 188, "text": "Modul Z drei verbunden.", "categories": ["short", "alphanumeric", "number", "technical"]},
+    {"id": "v6-dev-011", "speaker": "Petra", "role": "Maschinerie", "voice": "Reed (Deutsch (Deutschland))", "rate": 168, "text": "Endschalter vier meldet eine unsichere Zwischenlage.", "categories": ["medium", "safety", "number", "technical"]},
+    {"id": "v6-dev-012", "speaker": "Ralf", "role": "Kommunikation", "voice": "Sandy (Deutsch (Deutschland))", "rate": 184, "text": "Funkkanal dreizehn überträgt nur einseitig.", "categories": ["medium", "number", "technical", "umlaut"]},
+    {"id": "v6-dev-013", "speaker": "Bianca", "role": "Bühne", "voice": "Anna", "rate": 174, "text": "Bühnenwagen sechs steht außerhalb seiner Parkmarke.", "categories": ["medium", "number", "technical", "umlaut"]},
+    {"id": "v6-dev-014", "speaker": "Okan", "role": "Sicherheit", "voice": "Eddy (Deutsch (Deutschland))", "rate": 166, "text": "Vor jeder Fahrt kontrollieren wir Verriegelung, Warnleuchte, Bodenfreiheit und den geräumten Schutzkorridor.", "categories": ["long", "safety", "technical", "umlaut"]},
+    {"id": "v6-dev-015", "speaker": "Petra", "role": "Automation", "voice": "Reed (Deutsch (Deutschland))", "rate": 180, "text": "Steuerfeld A zwölf vergleicht drei Positionsgeber und meldet jede Abweichung größer als zwei Millimeter.", "categories": ["long", "alphanumeric", "number", "technical", "umlaut"]},
+    {"id": "v6-dev-016", "speaker": "Ralf", "role": "Inspizienz", "voice": "Sandy (Deutsch (Deutschland))", "rate": 162, "text": "Für den Umbau sichern wir den Hauptvorhang, räumen den Orchestergraben und bestätigen anschließend alle fünf Arbeitsbereiche einzeln.", "categories": ["long", "safety", "number", "technical", "umlaut"]}
+  ]
+}

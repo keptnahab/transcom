@@ -24,6 +24,12 @@ transcom_export.*
 dist/
 renderer/dist/
 release/
+build/
+
+# Independently versioned product site and reproducible evaluation data
+beta-website/
+evaluation/generated/
+evaluation/data/
 
 # Local logs
 *.log

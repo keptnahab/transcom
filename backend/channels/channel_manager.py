@@ -7,6 +7,8 @@ from backend.audio.capture import ChannelCapture, AudioChunkCallback
 
 logger = logging.getLogger(__name__)
 
+ChannelStopCallback = Callable[[str], None]
+
 
 class ChannelManager:
     """
@@ -16,8 +18,13 @@ class ChannelManager:
     submit audio to the TranscriptionPool.
     """
 
-    def __init__(self, on_chunk: AudioChunkCallback) -> None:
+    def __init__(
+        self,
+        on_chunk: AudioChunkCallback,
+        on_channel_stop: ChannelStopCallback | None = None,
+    ) -> None:
         self._on_chunk = on_chunk
+        self._on_channel_stop = on_channel_stop
         self._channels: dict[str, Channel] = {}
 
     # ------------------------------------------------------------------
@@ -123,4 +130,9 @@ class ChannelManager:
             ch._capture.stop()
             ch._capture = None
         ch.is_active = False
+        if self._on_channel_stop is not None:
+            try:
+                self._on_channel_stop(ch.id)
+            except Exception as exc:
+                logger.exception("Channel stop callback failed for %s: %s", ch.id, exc)
         logger.info("Capture stopped: %s", ch.id)

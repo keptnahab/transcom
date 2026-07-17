@@ -21,6 +21,8 @@ class TimedText:
     start: float
     end: float
     confidence: float
+    requires_confirmation: bool = False
+    raw_text: str | None = None
 
 
 class TranscriptStabilizer:
@@ -76,11 +78,11 @@ class TranscriptStabilizer:
 
 
 class TimedWordStabilizer:
-    def __init__(self, duplicate_horizon_seconds: float = 4.0, timestamp_epsilon: float = 0.08) -> None:
-        self._duplicate_horizon_seconds = duplicate_horizon_seconds
+    def __init__(self, timestamp_epsilon: float = 0.08, duplicate_window_seconds: float = 0.5) -> None:
         self._timestamp_epsilon = timestamp_epsilon
+        self._duplicate_window_seconds = duplicate_window_seconds
         self._last_end_by_channel: dict[str, float] = {}
-        self._recent_words_by_channel: dict[str, list[tuple[str, float]]] = {}
+        self._recent_words_by_channel: dict[str, list[tuple[str, float, float]]] = {}
 
     def accept(
         self,
@@ -88,10 +90,12 @@ class TimedWordStabilizer:
         words: Iterable,
         window_start_ts: float,
         stable_until_ts: float,
+        is_final: bool = True,
     ) -> TimedText | None:
         last_end = self._last_end_by_channel.get(channel_id, float("-inf"))
         recent = self._recent_words_by_channel.setdefault(channel_id, [])
-        accepted: list[tuple[str, str, float, float, float]] = []
+        prior_recent = list(recent)
+        accepted: list[tuple[str, str, float, float, float, bool, str]] = []
 
         for word in sorted(words, key=lambda item: float(getattr(item, "end", 0.0))):
             raw_text = str(getattr(word, "text", "") or "")
@@ -106,26 +110,37 @@ class TimedWordStabilizer:
                 continue
             if abs_end <= last_end + self._timestamp_epsilon:
                 continue
-            if self._is_recent_duplicate(normalized, abs_start, recent):
+            # Compare only with words from earlier ASR windows. Repetition
+            # within one utterance ("Nein, nein") is meaningful content.
+            if self._is_recent_duplicate(normalized, abs_start, abs_end, prior_recent):
                 continue
             confidence = float(getattr(word, "confidence", 0.0) or 0.0)
-            accepted.append((raw_text, normalized, abs_start, abs_end, confidence))
+            requires_confirmation = bool(getattr(word, "requires_confirmation", False))
+            model_raw_text = str(getattr(word, "raw_text", None) or raw_text)
+            accepted.append(
+                (
+                    raw_text, normalized, abs_start, abs_end, confidence,
+                    requires_confirmation, model_raw_text,
+                )
+            )
             last_end = max(last_end, abs_end)
-            recent.append((normalized, abs_end))
+            recent.append((normalized, abs_start, abs_end))
 
         if not accepted:
             return None
 
         recent[:] = recent[-16:]
-        self._last_end_by_channel[channel_id] = last_end
+        self._last_end_by_channel[channel_id] = last_end if is_final else self._last_end_by_channel.get(channel_id, float("-inf"))
         text = "".join(item[0] for item in accepted).strip()
-        confidence_values = [item[4] for item in accepted if item[4] > 0]
-        confidence = sum(confidence_values) / len(confidence_values) if confidence_values else 1.0
+        confidence_values = [item[4] for item in accepted]
+        confidence = sum(confidence_values) / len(confidence_values) if confidence_values else 0.0
         return TimedText(
             text=text,
             start=accepted[0][2],
             end=accepted[-1][3],
             confidence=confidence,
+            requires_confirmation=any(item[5] for item in accepted),
+            raw_text="".join(item[6] for item in accepted).strip(),
         )
 
     def reset(self, channel_id: str | None = None) -> None:
@@ -136,9 +151,21 @@ class TimedWordStabilizer:
         self._last_end_by_channel.pop(channel_id, None)
         self._recent_words_by_channel.pop(channel_id, None)
 
-    def _is_recent_duplicate(self, normalized: str, abs_start: float, recent: list[tuple[str, float]]) -> bool:
-        for recent_word, recent_end in reversed(recent[-6:]):
-            if recent_word == normalized and abs_start <= recent_end + self._duplicate_horizon_seconds:
+    def _is_recent_duplicate(
+        self,
+        normalized: str,
+        abs_start: float,
+        abs_end: float,
+        recent: list[tuple[str, float, float]],
+    ) -> bool:
+        for recent_word, recent_start, recent_end in reversed(recent[-8:]):
+            if recent_word != normalized:
+                continue
+            start_delta = abs(abs_start - recent_start)
+            end_delta = abs(abs_end - recent_end)
+            if start_delta <= self._timestamp_epsilon and end_delta <= self._timestamp_epsilon * 2:
+                return True
+            if abs_start <= recent_end + self._duplicate_window_seconds:
                 return True
         return False
 

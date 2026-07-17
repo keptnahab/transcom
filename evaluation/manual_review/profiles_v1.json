@@ -1,0 +1,117 @@
+{
+  "schema_version": "transcom-manual-reference-review-v1",
+  "profiles": [
+    {
+      "id": "safety_adversarial_clean_dev_v1",
+      "label": "Safety adversarial clean · Dev v1",
+      "group": "synthetic_clean",
+      "split": "dev",
+      "mode": "manual",
+      "manifest": "evaluation/data/manifests/safety_adversarial_dev_clean_v1.json",
+      "reviewed_output": "evaluation/data/reviewed_manifests/safety_adversarial_clean_dev_v1_reviewed_v1.json",
+      "review_log": "evaluation/manual_review/logs/safety_adversarial_clean_dev_v1.jsonl"
+    },
+    {
+      "id": "safety_adversarial_intercom_dev_v1",
+      "label": "Safety adversarial intercom · Dev v1",
+      "group": "synthetic_intercom",
+      "split": "dev",
+      "mode": "inherited",
+      "parent_profile": "safety_adversarial_clean_dev_v1",
+      "transformation_manifest": "evaluation/data/manifests/safety_adversarial_dev_intercom_v1.json",
+      "manifest": "evaluation/data/manifests/safety_adversarial_dev_intercom_v1.json",
+      "reviewed_output": "evaluation/data/reviewed_manifests/safety_adversarial_intercom_dev_v1_reviewed_v1.json",
+      "review_log": "evaluation/manual_review/logs/safety_adversarial_intercom_dev_v1.jsonl"
+    },
+    {
+      "id": "synthetic_clean_dev_v9",
+      "label": "Synthetic clean · Dev v9",
+      "group": "synthetic_clean",
+      "split": "dev",
+      "mode": "manual",
+      "manifest": "evaluation/data/manifests/synthetic_v9_dev_clean_v1.json",
+      "reviewed_output": "evaluation/data/reviewed_manifests/synthetic_clean_dev_v9_reviewed_v1.json",
+      "review_log": "evaluation/manual_review/logs/synthetic_clean_dev_v9.jsonl"
+    },
+    {
+      "id": "synthetic_clean_holdout_v9",
+      "label": "Synthetic clean · Holdout v9",
+      "group": "synthetic_clean",
+      "split": "holdout",
+      "mode": "manual",
+      "manifest": "evaluation/data/manifests/synthetic_v9_holdout_clean_v1.json",
+      "reviewed_output": "evaluation/data/reviewed_manifests/synthetic_clean_holdout_v9_reviewed_v1.json",
+      "review_log": "evaluation/manual_review/logs/synthetic_clean_holdout_v9.jsonl"
+    },
+    {
+      "id": "synthetic_intercom_dev_v9",
+      "label": "Synthetic intercom · Dev v9",
+      "group": "synthetic_intercom",
+      "split": "dev",
+      "mode": "inherited",
+      "parent_profile": "synthetic_clean_dev_v9",
+      "transformation_manifest": "evaluation/generated/synthetic_v2/dev/synthetic_de_v9-dev-001/manifest.json",
+      "manifest": "evaluation/data/manifests/synthetic_v9_dev_intercom_v1.json",
+      "reviewed_output": "evaluation/data/reviewed_manifests/synthetic_intercom_dev_v9_reviewed_v1.json",
+      "review_log": "evaluation/manual_review/logs/synthetic_intercom_dev_v9.jsonl"
+    },
+    {
+      "id": "synthetic_intercom_holdout_v9",
+      "label": "Synthetic intercom · Holdout v9",
+      "group": "synthetic_intercom",
+      "split": "holdout",
+      "mode": "inherited",
+      "parent_profile": "synthetic_clean_holdout_v9",
+      "transformation_manifest": "evaluation/generated/synthetic_v2/holdout/synthetic_de_v9-holdout-001/manifest.json",
+      "seal": "evaluation/generated/synthetic_v2/holdout/synthetic_de_v9-holdout-001/HOLDOUT_SEAL.json",
+      "manifest": "evaluation/data/manifests/synthetic_v9_holdout_intercom_v1.json",
+      "reviewed_output": "evaluation/data/reviewed_manifests/synthetic_intercom_holdout_v9_reviewed_v1.json",
+      "review_log": "evaluation/manual_review/logs/synthetic_intercom_holdout_v9.jsonl"
+    },
+    {
+      "id": "human_dev_v1",
+      "label": "Human FLEURS · Dev v1",
+      "group": "human",
+      "split": "dev",
+      "mode": "manual",
+      "manifest": "evaluation/data/manifests/fleurs_de_dev_v1.json",
+      "reviewed_output": "evaluation/data/reviewed_manifests/human_dev_v1_reviewed_v1.json",
+      "review_log": "evaluation/manual_review/logs/human_dev_v1.jsonl"
+    },
+    {
+      "id": "human_holdout_v2",
+      "label": "Human FLEURS · Holdout v2",
+      "group": "human",
+      "split": "holdout",
+      "mode": "manual",
+      "manifest": "evaluation/data/manifests/fleurs_de_test_holdout_v2.json",
+      "reviewed_output": "evaluation/data/reviewed_manifests/human_holdout_v2_reviewed_v1.json",
+      "review_log": "evaluation/manual_review/logs/human_holdout_v2.jsonl"
+    },
+    {
+      "id": "degraded_dev_v1",
+      "label": "Intentionally degraded · Dev v1",
+      "group": "degraded",
+      "split": "dev",
+      "mode": "inherited",
+      "parent_profile": "human_dev_v1",
+      "transformation_manifest": "evaluation/generated/degraded_v1/fleurs_de_dev_v1-degraded-v1-3d62a12152ef/manifest.json",
+      "manifest": "evaluation/generated/degraded_v1/fleurs_de_dev_v1-degraded-v1-3d62a12152ef/manifest.json",
+      "reviewed_output": "evaluation/data/reviewed_manifests/degraded_dev_v1_reviewed_v1.json",
+      "review_log": "evaluation/manual_review/logs/degraded_dev_v1.jsonl"
+    },
+    {
+      "id": "degraded_holdout_v2",
+      "label": "Intentionally degraded · Holdout v2",
+      "group": "degraded",
+      "split": "holdout",
+      "mode": "inherited",
+      "parent_profile": "human_holdout_v2",
+      "transformation_manifest": "evaluation/generated/degraded_v1/fleurs_de_test_holdout_v2-degraded-v1-3d62a12152ef/manifest.json",
+      "seal": "evaluation/generated/degraded_v1/fleurs_de_test_holdout_v2-degraded-v1-3d62a12152ef/HOLDOUT_SEAL.json",
+      "manifest": "evaluation/generated/degraded_v1/fleurs_de_test_holdout_v2-degraded-v1-3d62a12152ef/manifest.json",
+      "reviewed_output": "evaluation/data/reviewed_manifests/degraded_holdout_v2_reviewed_v1.json",
+      "review_log": "evaluation/manual_review/logs/degraded_holdout_v2.jsonl"
+    }
+  ]
+}

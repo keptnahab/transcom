@@ -1,0 +1,104 @@
+{
+  "audio": "/Users/macbookpro/Library/CloudStorage/Dropbox-Privat/00_AI/01_Codex/260704 TransCom/01 1st try on Claude/TransCom/evaluation/generated/synthetic_v2/dev/synthetic_de_v4-dev-001/audio/intercom.wav",
+  "audio_sha256": "37bf053172ecc8ffc37aa40d4ea0a93b75c4f9bcd10c7fc9d81074fbbe505364",
+  "reference_source": "/Users/macbookpro/Library/CloudStorage/Dropbox-Privat/00_AI/01_Codex/260704 TransCom/01 1st try on Claude/TransCom/evaluation/data/manifests/synthetic_v4_dev_intercom_stream_v1.json",
+  "reference_binding_verified": true,
+  "reference_word_count": 68,
+  "duration_seconds": 38.25,
+  "chunk_seconds": 1.25,
+  "configured_legacy_overlap_seconds": 3.75,
+  "capture_overlap_seconds": 0.0,
+  "language": "de",
+  "languages_used": [
+    "de"
+  ],
+  "model": {
+    "asr_backend": "mlx",
+    "model": "mlx-community/whisper-large-v3-turbo-q4",
+    "model_revision": "660c343bbf4e52ac257f0b7d952e5388e6f93bef",
+    "resolved_model_path": "/Users/macbookpro/.cache/huggingface/hub/models--mlx-community--whisper-large-v3-turbo-q4/snapshots/660c343bbf4e52ac257f0b7d952e5388e6f93bef",
+    "device": "apple-silicon",
+    "compute_type": "mlx-q4",
+    "language_mode": "de",
+    "last_language": "de",
+    "fallback_reason": null,
+    "guard_fallback_count": 0,
+    "guard_fallback_model": "Systran/faster-whisper-small"
+  },
+  "recognition_config": {
+    "initial_prompt": "Theaterprobe mit Regie, Bühne, Licht und Ton. Fachbegriffe: Inspizienz, Hubpodium, Not-Aus, AES67, Dante.",
+    "hotwords": "",
+    "beam_size": 1,
+    "no_speech_threshold": 0.6,
+    "language_switch_min_probability": 0.55,
+    "language_stickiness_ratio": 0.75,
+    "language_switch_margin": 0.0
+  },
+  "segmentation_config": {
+    "vad_min_speech_seconds": 0.5,
+    "vad_min_silence_seconds": 0.35,
+    "vad_max_segment_seconds": 5.0,
+    "vad_threshold": 0.25,
+    "vad_energy_threshold": 0.012,
+    "asr_min_rms": 0.012
+  },
+  "jobs": 9,
+  "stored_segments": 9,
+  "segments_with_text": 9,
+  "empty_segments": 0,
+  "duplicate_replacements": 0,
+  "word_error_rate": 0.19117647058823528,
+  "character_error_rate": 0.11981566820276497,
+  "semantic_word_error_rate": 0.14705882352941177,
+  "char_similarity": 0.880184331797235,
+  "word_errors": {
+    "substitutions": 9,
+    "deletions": 4,
+    "insertions": 0
+  },
+  "character_errors": {
+    "substitutions": 10,
+    "deletions": 42,
+    "insertions": 0
+  },
+  "semantic_word_errors": {
+    "substitutions": 6,
+    "deletions": 4,
+    "insertions": 0
+  },
+  "speaker_counts": {
+    "Speaker 1": 2,
+    "Speaker 2": 4,
+    "Speaker 3": 3
+  },
+  "speaker_status": {
+    "engine": "sherpa-onnx",
+    "model": "/Users/macbookpro/Library/CloudStorage/Dropbox-Privat/00_AI/01_Codex/260704 TransCom/01 1st try on Claude/TransCom/models/3dspeaker_speech_eres2net_sv_en_voxceleb_16k.onnx",
+    "provider": "cpu",
+    "ready": true,
+    "auto_cluster": true,
+    "auto_speakers": 3,
+    "error": null
+  },
+  "first_emit_seconds": 2.0320393329999997,
+  "first_emit_simulated_seconds": 2.866039333,
+  "avg_infer_seconds": 0.3790926248888889,
+  "p50_infer_seconds": 0.3739770830000002,
+  "p95_infer_seconds": 0.40135266599999975,
+  "max_infer_seconds": 0.40135266599999975,
+  "total_infer_seconds": 3.4118336240000002,
+  "inference_real_time_factor": 0.08919826467973857,
+  "simulated_pipeline_complete_seconds": 40.372907833,
+  "transcript": "Antrieb sofort stoppen. Kanal F6 ist frei. Lastgrenze bei 200 Kilogramm prüfen. Matrix-A3 bestätig. Vor der nächsten Fahrt kontrollieren wir Endschalter, Bremskreis und den verriegelten Zugang auf Ebene 4. Sprechstelle 12 meldet eine Unterbrechung im Rückweg. Verteiler Q7 bleibt ausgeschaltet, bis Spannung, Erdung und Schutzhaube gemeinsam geprüft sind. Nach dem Kontrollauf vergleichen wir Position 9, Motortemperatur und Erst danach wird die Bewegung freigegeben.",
+  "texts": [
+    "Antrieb sofort stoppen.",
+    "Kanal F6 ist frei.",
+    "Lastgrenze bei 200 Kilogramm prüfen.",
+    "Matrix-A3 bestätig.",
+    "Vor der nächsten Fahrt kontrollieren wir Endschalter, Bremskreis und den verriegelten Zugang auf Ebene 4.",
+    "Sprechstelle 12 meldet eine Unterbrechung im Rückweg.",
+    "Verteiler Q7 bleibt ausgeschaltet, bis Spannung, Erdung und Schutzhaube gemeinsam geprüft sind.",
+    "Nach dem Kontrollauf vergleichen wir Position 9, Motortemperatur und",
+    "Erst danach wird die Bewegung freigegeben."
+  ]
+}

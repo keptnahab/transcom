@@ -1,0 +1,34 @@
+{
+  "schema_version": "2.0",
+  "dataset_version": "synthetic_de_v8",
+  "split": "holdout",
+  "language": "de-DE",
+  "pause_seconds": 0.65,
+  "trailing_guard_ms": 0,
+  "seal_after_generation": true,
+  "safety_catalog": {
+    "catalog_id": "transcom-safety-closed-commands-v1",
+    "path": "evaluation/synthesis_v2/catalogs/safety_commands_closed_v1.json",
+    "sha256": "70afb86af75eac3bd1a639c0367f6c0121f544c5671ef1422171b10686220190"
+  },
+  "utterances": [
+    {"id":"v8-holdout-001","speaker":"Franka","role":"Maschinerie","voice":"Flo (Deutsch (Deutschland))","rate":161,"command_id":"safety_motion_stop","intent":"motion_stop","text":"Alle Bewegungen stoppen!","categories":["short","safety","closed_command","technical"]},
+    {"id":"v8-holdout-002","speaker":"Hakan","role":"Sicherheit","voice":"Grandma (Deutsch (Deutschland))","rate":165,"command_id":"safety_emergency_stop","intent":"motion_stop","text":"Not-Aus sofort auslösen!","categories":["short","safety","closed_command","technical","umlaut"]},
+    {"id":"v8-holdout-003","speaker":"Jette","role":"Sicherheit","voice":"Rocko (Deutsch (Deutschland))","rate":169,"command_id":"safety_area_evacuate","intent":"area_evacuate","text":"Gefahrenbereich räumen!","categories":["short","safety","closed_command","technical","umlaut"]},
+    {"id":"v8-holdout-004","speaker":"Keno","role":"Energie","voice":"Shelley (Deutsch (Deutschland))","rate":173,"command_id":"safety_energy_isolate","intent":"energy_isolate","text":"Energiezufuhr trennen!","categories":["short","safety","closed_command","technical"]},
+    {"id":"v8-holdout-005","speaker":"Franka","role":"Rigging","voice":"Flo (Deutsch (Deutschland))","rate":177,"command_id":"safety_brake_lock","intent":"brake_lock","text":"Haltebremse verriegeln!","categories":["short","safety","closed_command","technical"]},
+    {"id":"v8-holdout-006","speaker":"Hakan","role":"Bühne","voice":"Grandma (Deutsch (Deutschland))","rate":181,"command_id":"safety_access_secure","intent":"access_secure","text":"Schutztor sicher schließen!","categories":["short","safety","closed_command","technical","umlaut"]},
+    {"id":"v8-holdout-007","speaker":"Jette","role":"Rigging","voice":"Rocko (Deutsch (Deutschland))","rate":185,"command_id":"safety_load_hold","intent":"load_hold","text":"Last sicher halten!","categories":["short","safety","closed_command","technical"]},
+    {"id":"v8-holdout-008","speaker":"Keno","role":"Inspizienz","voice":"Shelley (Deutsch (Deutschland))","rate":189,"command_id":"safety_stage_lock","intent":"access_secure","text":"Bühne sofort sperren!","categories":["short","safety","closed_command","technical","umlaut"]},
+    {"id":"v8-holdout-009","speaker":"Franka","role":"Inspizienz","voice":"Flo (Deutsch (Deutschland))","rate":193,"text":"Code Z sieben bestätigt.","categories":["short","alphanumeric","open_dictation","number","technical","umlaut"]},
+    {"id":"v8-holdout-010","speaker":"Hakan","role":"Automation","voice":"Grandma (Deutsch (Deutschland))","rate":161,"text":"Position N zwei gesperrt.","categories":["short","alphanumeric","open_dictation","number","technical"]},
+    {"id":"v8-holdout-011","speaker":"Jette","role":"Netzwerk","voice":"Rocko (Deutsch (Deutschland))","rate":165,"text":"Linie Q sechs bereit.","categories":["short","alphanumeric","open_dictation","number","technical"]},
+    {"id":"v8-holdout-012","speaker":"Keno","role":"Bühne","voice":"Shelley (Deutsch (Deutschland))","rate":169,"text":"Sektor X vier geräumt.","categories":["short","alphanumeric","open_dictation","number","technical","umlaut"]},
+    {"id":"v8-holdout-013","speaker":"Franka","role":"Energie","voice":"Flo (Deutsch (Deutschland))","rate":173,"text":"Versorgungskreis fünf meldet stabile Ausgangsspannung.","categories":["medium","open_dictation","number","technical"]},
+    {"id":"v8-holdout-014","speaker":"Hakan","role":"Video","voice":"Grandma (Deutsch (Deutschland))","rate":177,"text":"Steuerpfad R neun wartet auf die Quittierung.","categories":["medium","alphanumeric","open_dictation","number","technical"]},
+    {"id":"v8-holdout-015","speaker":"Jette","role":"Maschinerie","voice":"Rocko (Deutsch (Deutschland))","rate":181,"text":"Drehbühne drei erreicht die markierte Parkposition.","categories":["medium","open_dictation","number","technical","umlaut"]},
+    {"id":"v8-holdout-016","speaker":"Keno","role":"Sicherheit","voice":"Shelley (Deutsch (Deutschland))","rate":185,"text":"Vor dem Umbau kontrolliert die Mannschaft alle Sperrzonen und bestätigt den stillgesetzten Antrieb.","categories":["long","open_dictation","technical"]},
+    {"id":"v8-holdout-017","speaker":"Franka","role":"Inspizienz","voice":"Flo (Deutsch (Deutschland))","rate":189,"text":"Die Aufnahmeleitung bestätigt Cue L vierzehn erst nach der Rückmeldung aus sämtlichen Gewerken.","categories":["long","alphanumeric","open_dictation","number","technical","umlaut"]},
+    {"id":"v8-holdout-018","speaker":"Hakan","role":"Wartung","voice":"Grandma (Deutsch (Deutschland))","rate":193,"text":"Nach der Inspektion protokollieren wir Lastprobe, Endschaltertest und die abschließende Betriebsfreigabe.","categories":["long","open_dictation","technical","umlaut"]}
+  ]
+}

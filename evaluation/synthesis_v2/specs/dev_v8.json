@@ -1,0 +1,33 @@
+{
+  "schema_version": "2.0",
+  "dataset_version": "synthetic_de_v8",
+  "split": "dev",
+  "language": "de-DE",
+  "pause_seconds": 0.65,
+  "trailing_guard_ms": 0,
+  "safety_catalog": {
+    "catalog_id": "transcom-safety-closed-commands-v1",
+    "path": "evaluation/synthesis_v2/catalogs/safety_commands_closed_v1.json",
+    "sha256": "70afb86af75eac3bd1a639c0367f6c0121f544c5671ef1422171b10686220190"
+  },
+  "utterances": [
+    {"id":"v8-dev-001","speaker":"Alina","role":"Maschinerie","voice":"Anna","rate":160,"command_id":"safety_motion_stop","intent":"motion_stop","text":"Alle Bewegungen stoppen!","categories":["short","safety","closed_command","technical"]},
+    {"id":"v8-dev-002","speaker":"Boris","role":"Sicherheit","voice":"Eddy (Deutsch (Deutschland))","rate":164,"command_id":"safety_emergency_stop","intent":"motion_stop","text":"Not-Aus sofort auslösen!","categories":["short","safety","closed_command","technical","umlaut"]},
+    {"id":"v8-dev-003","speaker":"Cem","role":"Sicherheit","voice":"Reed (Deutsch (Deutschland))","rate":168,"command_id":"safety_area_evacuate","intent":"area_evacuate","text":"Gefahrenbereich räumen!","categories":["short","safety","closed_command","technical","umlaut"]},
+    {"id":"v8-dev-004","speaker":"Dora","role":"Energie","voice":"Sandy (Deutsch (Deutschland))","rate":172,"command_id":"safety_energy_isolate","intent":"energy_isolate","text":"Energiezufuhr trennen!","categories":["short","safety","closed_command","technical"]},
+    {"id":"v8-dev-005","speaker":"Alina","role":"Rigging","voice":"Anna","rate":176,"command_id":"safety_brake_lock","intent":"brake_lock","text":"Haltebremse verriegeln!","categories":["short","safety","closed_command","technical"]},
+    {"id":"v8-dev-006","speaker":"Boris","role":"Bühne","voice":"Eddy (Deutsch (Deutschland))","rate":180,"command_id":"safety_access_secure","intent":"access_secure","text":"Schutztor sicher schließen!","categories":["short","safety","closed_command","technical","umlaut"]},
+    {"id":"v8-dev-007","speaker":"Cem","role":"Rigging","voice":"Reed (Deutsch (Deutschland))","rate":184,"command_id":"safety_load_hold","intent":"load_hold","text":"Last sicher halten!","categories":["short","safety","closed_command","technical"]},
+    {"id":"v8-dev-008","speaker":"Dora","role":"Inspizienz","voice":"Sandy (Deutsch (Deutschland))","rate":188,"command_id":"safety_stage_lock","intent":"access_secure","text":"Bühne sofort sperren!","categories":["short","safety","closed_command","technical","umlaut"]},
+    {"id":"v8-dev-009","speaker":"Alina","role":"Inspizienz","voice":"Anna","rate":192,"text":"Code M fünf bestätigt.","categories":["short","alphanumeric","open_dictation","number","technical","umlaut"]},
+    {"id":"v8-dev-010","speaker":"Boris","role":"Automation","voice":"Eddy (Deutsch (Deutschland))","rate":160,"text":"Position K acht gesperrt.","categories":["short","alphanumeric","open_dictation","number","technical"]},
+    {"id":"v8-dev-011","speaker":"Cem","role":"Netzwerk","voice":"Reed (Deutsch (Deutschland))","rate":164,"text":"Linie P drei bereit.","categories":["short","alphanumeric","open_dictation","number","technical"]},
+    {"id":"v8-dev-012","speaker":"Dora","role":"Bühne","voice":"Sandy (Deutsch (Deutschland))","rate":168,"text":"Sektor V neun geräumt.","categories":["short","alphanumeric","open_dictation","number","technical","umlaut"]},
+    {"id":"v8-dev-013","speaker":"Alina","role":"Energie","voice":"Anna","rate":172,"text":"Antriebskreis zwölf meldet normale Betriebstemperatur.","categories":["medium","open_dictation","number","technical"]},
+    {"id":"v8-dev-014","speaker":"Boris","role":"Video","voice":"Eddy (Deutsch (Deutschland))","rate":176,"text":"Signalweg C vier wartet auf die Freigabe.","categories":["medium","alphanumeric","open_dictation","number","technical"]},
+    {"id":"v8-dev-015","speaker":"Cem","role":"Maschinerie","voice":"Reed (Deutsch (Deutschland))","rate":180,"text":"Podium zwei erreicht die untere Endlage.","categories":["medium","open_dictation","number","technical"]},
+    {"id":"v8-dev-016","speaker":"Dora","role":"Sicherheit","voice":"Sandy (Deutsch (Deutschland))","rate":184,"text":"Vor der nächsten Fahrt vergleicht das Team die Positionsanzeigen und bestätigt den freien Korridor.","categories":["long","open_dictation","technical","umlaut"]},
+    {"id":"v8-dev-017","speaker":"Alina","role":"Inspizienz","voice":"Anna","rate":188,"text":"Die Inspizienz meldet Cue G dreizehn erst nach Rückgabe von Licht, Ton und Maschinerie.","categories":["long","alphanumeric","open_dictation","number","technical","umlaut"]},
+    {"id":"v8-dev-018","speaker":"Boris","role":"Wartung","voice":"Eddy (Deutsch (Deutschland))","rate":192,"text":"Nach der Wartung dokumentieren wir Bremsprobe, Sensortest und die erneute Funktionsfreigabe.","categories":["long","open_dictation","technical"]}
+  ]
+}

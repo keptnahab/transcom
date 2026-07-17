@@ -1,0 +1,22 @@
+{
+  "schema_version":"2.0","dataset_version":"synthetic_de_v7","split":"dev","language":"de-DE","pause_seconds":0.65,"trailing_guard_ms":0,
+  "safety_catalog":{"catalog_id":"transcom-safety-command-intents-v1","path":"evaluation/synthesis_v2/catalogs/safety_commands_v1.json","sha256":"9217165522fabb2b8559d7164b96a480085f6c5db3dc5c020dd0c10af3c5cfb8"},
+  "utterances":[
+    {"id":"v7-dev-001","speaker":"Carina","role":"Maschinerie","voice":"Anna","rate":160,"intent":"motion_stop","text":"Fahrwerk sofort stillsetzen!","categories":["short","safety","technical"]},
+    {"id":"v7-dev-002","speaker":"Deniz","role":"Sicherheit","voice":"Eddy (Deutsch (Deutschland))","rate":164,"intent":"area_evacuate","text":"Gefahrenfeld vollständig räumen!","categories":["short","safety","umlaut"]},
+    {"id":"v7-dev-003","speaker":"Eva","role":"Energie","voice":"Reed (Deutsch (Deutschland))","rate":168,"intent":"energy_isolate","text":"Hydraulikzufuhr jetzt trennen!","categories":["short","safety","technical"]},
+    {"id":"v7-dev-004","speaker":"Georg","role":"Rigging","voice":"Sandy (Deutsch (Deutschland))","rate":172,"intent":"brake_lock","text":"Haltebremse sicher verriegeln!","categories":["short","safety","technical"]},
+    {"id":"v7-dev-005","speaker":"Carina","role":"Bühne","voice":"Anna","rate":176,"intent":"access_secure","text":"Schutztor unverzüglich schließen!","categories":["short","safety","umlaut"]},
+    {"id":"v7-dev-006","speaker":"Deniz","role":"Rigging","voice":"Eddy (Deutsch (Deutschland))","rate":180,"intent":"load_hold","text":"Schwebende Last nicht weiterfahren!","categories":["short","safety","technical"]},
+    {"id":"v7-dev-007","speaker":"Eva","role":"Inspizienz","voice":"Reed (Deutsch (Deutschland))","rate":184,"intent":"cue_status","text":"Cue R vier freigegeben.","categories":["short","alphanumeric","number","technical"]},
+    {"id":"v7-dev-008","speaker":"Georg","role":"Automation","voice":"Sandy (Deutsch (Deutschland))","rate":188,"intent":"component_status","text":"Achse B sieben wartet.","categories":["short","alphanumeric","number","technical"]},
+    {"id":"v7-dev-009","speaker":"Carina","role":"Netzwerk","voice":"Anna","rate":160,"intent":"component_status","text":"Knoten F zwei online.","categories":["short","alphanumeric","number","technical"]},
+    {"id":"v7-dev-010","speaker":"Deniz","role":"Bühne","voice":"Eddy (Deutsch (Deutschland))","rate":164,"intent":"component_status","text":"Markierung U neun erreicht.","categories":["short","alphanumeric","number","technical"]},
+    {"id":"v7-dev-011","speaker":"Eva","role":"Energie","voice":"Reed (Deutsch (Deutschland))","rate":168,"intent":"signal_fault","text":"Messkreis sechs meldet Unterspannung.","categories":["medium","number","technical"]},
+    {"id":"v7-dev-012","speaker":"Georg","role":"Video","voice":"Sandy (Deutsch (Deutschland))","rate":172,"intent":"signal_fault","text":"Datenpfad J acht verliert die Synchronität.","categories":["medium","alphanumeric","number","technical","umlaut"]},
+    {"id":"v7-dev-013","speaker":"Carina","role":"Maschinerie","voice":"Anna","rate":176,"intent":"signal_fault","text":"Drehzahlwächter drei zeigt einen unzulässigen Sprung.","categories":["medium","number","technical","umlaut"]},
+    {"id":"v7-dev-014","speaker":"Deniz","role":"Sicherheit","voice":"Eddy (Deutsch (Deutschland))","rate":180,"intent":"safety_check","text":"Vor dem Start prüfen wir Schutzabstand, Verriegelungsanzeige, Bremsdruck und den vollständig freien Bewegungsraum.","categories":["long","safety","technical","umlaut"]},
+    {"id":"v7-dev-015","speaker":"Eva","role":"Automation","voice":"Reed (Deutsch (Deutschland))","rate":184,"intent":"safety_check","text":"Kontrollpunkt D elf vergleicht vier Sensorwerte und verhindert die Freigabe bei einer Abweichung über drei Millimeter.","categories":["long","alphanumeric","number","technical","umlaut"]},
+    {"id":"v7-dev-016","speaker":"Georg","role":"Inspizienz","voice":"Sandy (Deutsch (Deutschland))","rate":188,"intent":"safety_check","text":"Nach dem Szenenumbau bestätigen wir Portal, Seitenbühne und alle sechs Zugänge, bevor die nächste Bewegung angekündigt wird.","categories":["long","safety","number","technical","umlaut"]}
+  ]
+}

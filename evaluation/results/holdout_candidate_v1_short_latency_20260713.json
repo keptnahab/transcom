@@ -1,0 +1,168 @@
+{
+  "benchmark": "simulated-realtime-short-utterance-latency",
+  "manifest": "/Users/macbookpro/Library/CloudStorage/Dropbox-Privat/00_AI/01_Codex/260704 TransCom/01 1st try on Claude/TransCom/evaluation/data/manifests/synthetic_v3_short_latency_holdout_v1.json",
+  "manifest_sha256": "06eea8fcf9e6422a465e0b8b5e1a7e37ddb674d0626a2093816a39c2668bbea5",
+  "fixture_id": "synthetic_v3_short_latency_holdout_v1",
+  "source_manifest": "evaluation/generated/synthetic_v2/holdout/synthetic_de_v3-holdout-001/manifest.json",
+  "split": "holdout",
+  "all_hashes_verified": true,
+  "model": {
+    "asr_backend": "mlx",
+    "model": "mlx-community/whisper-large-v3-turbo-q4",
+    "model_revision": "660c343bbf4e52ac257f0b7d952e5388e6f93bef",
+    "resolved_model_path": "/Users/macbookpro/.cache/huggingface/hub/models--mlx-community--whisper-large-v3-turbo-q4/snapshots/660c343bbf4e52ac257f0b7d952e5388e6f93bef",
+    "device": "apple-silicon",
+    "compute_type": "mlx-q4",
+    "language_mode": "de",
+    "last_language": "de",
+    "fallback_reason": null
+  },
+  "recognition_config": {
+    "initial_prompt": "Theaterprobe mit Regie, Bühne, Licht und Ton. Fachbegriffe: Inspizienz, Hubpodium, Not-Aus, AES67, Dante.",
+    "hotwords": "",
+    "beam_size": 1,
+    "no_speech_threshold": 0.6,
+    "language_switch_min_probability": 0.55,
+    "language_stickiness_ratio": 0.75,
+    "language_switch_margin": 0.0
+  },
+  "model_load_seconds": 1.2638852919999999,
+  "language_mode": "de",
+  "simulation": {
+    "sample_rate": 16000,
+    "capture_block_size": 1024,
+    "chunk_seconds": 1.25,
+    "configured_overlap_seconds": 3.75,
+    "vad_min_silence_seconds": 0.35,
+    "feed_mode": "logical-real-time-by-sample-availability",
+    "worker_model": "single-serialized-worker"
+  },
+  "clips": 2,
+  "jobs": 2,
+  "successful_first_emits": 2,
+  "mean_end_to_emit_seconds": 3.2324497710000006,
+  "max_end_to_emit_seconds": 4.169373,
+  "total_speech_seconds": 3.4,
+  "total_inference_seconds": 3.5224733750000006,
+  "real_time_factor": 1.0360215808823532,
+  "word_error_rate": 1.2857142857142858,
+  "character_error_rate": 0.7307692307692307,
+  "word_errors": {
+    "substitutions": 5,
+    "deletions": 0,
+    "insertions": 4,
+    "errors": 9,
+    "reference_length": 7,
+    "rate": 1.2857142857142858
+  },
+  "character_errors": {
+    "substitutions": 9,
+    "deletions": 5,
+    "insertions": 5,
+    "errors": 19,
+    "reference_length": 26,
+    "rate": 0.7307692307692307
+  },
+  "clip_results": [
+    {
+      "clip_id": "holdout-001",
+      "data_path": "evaluation/generated/synthetic_v2/holdout/synthetic_de_v3-holdout-001/parts/intercom/holdout-001.wav",
+      "audio_sha256": "206888d8c34018fa393b697c326d51bf01b5297aa31caeeba7117bf8e2731a11",
+      "reference": "Stopp, Gefahr!",
+      "hypothesis": "Du F 대 대 대 대",
+      "speech_end_seconds": 1.12,
+      "first_usable_emit_seconds": 5.289373,
+      "end_to_emit_seconds": 4.169373,
+      "jobs": 1,
+      "total_inference_seconds": 2.726365083,
+      "real_time_factor": 2.434254538392857,
+      "word_error_rate": 3.0,
+      "character_error_rate": 1.0,
+      "word_errors": {
+        "substitutions": 2,
+        "deletions": 0,
+        "insertions": 4,
+        "errors": 6,
+        "reference_length": 2,
+        "rate": 3.0
+      },
+      "character_errors": {
+        "substitutions": 5,
+        "deletions": 5,
+        "insertions": 1,
+        "errors": 11,
+        "reference_length": 11,
+        "rate": 1.0
+      },
+      "language_mode": "de",
+      "languages_used": [
+        "de"
+      ],
+      "job_results": [
+        {
+          "speech_id": "speech-0",
+          "vad_speech_start_seconds": 0.278,
+          "vad_speech_end_seconds": 1.41,
+          "audio_seconds": 1.132,
+          "available_at_seconds": 2.563007917,
+          "vad_processing_seconds": 0.0030079170000001376,
+          "worker_start_seconds": 2.563007917,
+          "inference_seconds": 2.726365083,
+          "emit_at_seconds": 5.289373,
+          "hypothesis": "Du F 대 대 대 대",
+          "language_used": "de"
+        }
+      ]
+    },
+    {
+      "clip_id": "holdout-004",
+      "data_path": "evaluation/generated/synthetic_v2/holdout/synthetic_de_v3-holdout-001/parts/intercom/holdout-004.wav",
+      "audio_sha256": "2adec6fdb68a8159ed7745e7a11bc3c048287b8880f653ec53f660796a60d488",
+      "reference": "Cue 47 B ist bereit.",
+      "hypothesis": "KUH7 und 40D ist bereit.",
+      "speech_end_seconds": 2.28,
+      "first_usable_emit_seconds": 4.575526542,
+      "end_to_emit_seconds": 2.2955265420000006,
+      "jobs": 1,
+      "total_inference_seconds": 0.7961082920000004,
+      "real_time_factor": 0.34917030350877215,
+      "word_error_rate": 0.6,
+      "character_error_rate": 0.5333333333333333,
+      "word_errors": {
+        "substitutions": 3,
+        "deletions": 0,
+        "insertions": 0,
+        "errors": 3,
+        "reference_length": 5,
+        "rate": 0.6
+      },
+      "character_errors": {
+        "substitutions": 4,
+        "deletions": 0,
+        "insertions": 4,
+        "errors": 8,
+        "reference_length": 15,
+        "rate": 0.5333333333333333
+      },
+      "language_mode": "de",
+      "languages_used": [
+        "de"
+      ],
+      "job_results": [
+        {
+          "speech_id": "speech-0",
+          "vad_speech_start_seconds": 0.0,
+          "vad_speech_end_seconds": 2.594,
+          "audio_seconds": 2.594,
+          "available_at_seconds": 3.77941825,
+          "vad_processing_seconds": 0.003418250000000178,
+          "worker_start_seconds": 3.77941825,
+          "inference_seconds": 0.7961082920000004,
+          "emit_at_seconds": 4.575526542,
+          "hypothesis": "KUH7 und 40D ist bereit.",
+          "language_used": "de"
+        }
+      ]
+    }
+  ]
+}

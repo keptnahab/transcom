@@ -1,28 +1,35 @@
 # Context
 
 Product context:
-- TransCom is meant for live intercom / production communication where operators need near-live transcript visibility from a mixed audio feed.
-- The product is intentionally local-first and offline-oriented. Audio should stay on the machine. LAN sharing is acceptable; cloud dependence is not the default direction.
-- The user has repeatedly emphasized that speaker recognition quality, low latency, and practical usability matter more than superficial feature completeness.
+- TransCom is for live intercom / production communication where operators need fast, readable transcript output from one mixed audio feed.
+- The product is intentionally local-first and offline-first.
+- LAN sharing is acceptable; cloud dependence is not the default direction.
 
-User expectations established so far:
-- German and English only. Other languages should not appear as recognition or translation output.
-- Speaker recognition should actually work, not just expose placeholder UI.
-- Latency should be around 1-2 seconds when realistically possible.
-- Duplicate initial transcript rows are not acceptable.
-- Beta testers should be able to access the app over the network.
-- Admin must be able to see and edit user passwords from the UI.
+User expectations that are now explicit:
+- German and English only. Other-language drift is a product bug.
+- The transcript must feel live, not delayed and lumpy.
+- The first line must not duplicate.
+- Audio-file mode should be straightforward to use for testing.
+- The user expects file mode controls to appear when `Audio File` is selected.
+- The user expects to understand whether a session must be created, started, and why.
 
-Current project location:
-- Workspace root: `/Users/mkue/Documents/CODEX/INTERCOM TRANSCRIPT`
-- Actual git project: `/Users/mkue/Documents/CODEX/INTERCOM TRANSCRIPT/01 1st try on Claude/TransCom`
-- Related sherpa source/reference folder outside repo: `/Users/mkue/Documents/CODEX/INTERCOM TRANSCRIPT/02 sherpa onnx`
+Current user pain from real testing on 2026-07-01:
+- File/demo selection is now visible, but the user cannot hear the test audio.
+- Recognition quality is still judged very poor.
+- Recognition is still too slow.
+- The duplicate first row still exists.
+- The UI separation between session state and feed state is confusing.
 
-Operating assumptions:
-- Main development environment is macOS.
-- Apple Silicon is an important target, therefore `mlx-whisper` is the default ASR backend on arm64 macOS.
-- Beta operation may use the lightweight web server instead of only Electron.
+Development constraints:
+- No OpenAI/GPT transcript refinement in this phase.
+- No cloud ASR fallback in this phase.
+- Fix the local pipeline before trying larger product changes.
 
-Important product tension:
-- The app already includes auth and network beta access, but the core live-quality experience is still not where the user wants it.
-- Documentation must reflect both truths: meaningful progress exists, and the central recognition problem is not solved yet.
+Operational context:
+- Main development machine is macOS on Apple Silicon.
+- The runtime default ASR backend on this machine is the pinned MLX hybrid:
+  Turbo through 3.0 seconds and Full above 3.0 seconds.
+- Pinned faster-whisper Small supplies guarded fallback and, only when Safety
+  Mode is explicitly enabled, an independent confirmation pass.
+- Safety Mode is off by default.
+- For current quality checks, the `faster-whisper` benchmark is the more reliable measurement path.

@@ -1,0 +1,82 @@
+{
+  "schema_version": "2.0",
+  "dataset_version": "synthetic_de_v2",
+  "split": "holdout",
+  "language": "de-DE",
+  "pause_seconds": 0.41,
+  "seal_after_generation": true,
+  "utterances": [
+    {
+      "id": "holdout-001",
+      "speaker": "Nora",
+      "role": "Bühne",
+      "voice": "Flo (Deutsch (Deutschland))",
+      "rate": 168,
+      "text": "Stopp, Gefahr!",
+      "categories": ["short", "safety", "umlaut"]
+    },
+    {
+      "id": "holdout-002",
+      "speaker": "Yusuf",
+      "role": "Video",
+      "voice": "Grandma (Deutsch (Deutschland))",
+      "rate": 186,
+      "text": "Der Timecode springt bei 01:02:43:12 um zwei Frames zurück.",
+      "categories": ["medium", "timecode", "number", "technical"]
+    },
+    {
+      "id": "holdout-003",
+      "speaker": "Élodie",
+      "role": "Inspizienz",
+      "voice": "Rocko (Deutsch (Deutschland))",
+      "rate": 174,
+      "text": "Herr Weiß, öffnen Sie bitte die Außentür für Núñez, sobald der Lastenaufzug Ebene minus zwei erreicht hat.",
+      "categories": ["long", "proper_name", "number", "umlaut", "eszett", "diacritic"]
+    },
+    {
+      "id": "holdout-004",
+      "speaker": "David",
+      "role": "Automation",
+      "voice": "Shelley (Deutsch (Deutschland))",
+      "rate": 192,
+      "text": "Cue 47 B ist bereit.",
+      "categories": ["short", "alphanumeric", "technical"]
+    },
+    {
+      "id": "holdout-005",
+      "speaker": "Nora",
+      "role": "Bühne",
+      "voice": "Flo (Deutsch (Deutschland))",
+      "rate": 180,
+      "text": "Die Requisite wiegt 23,5 Kilogramm; wir tragen sie zu dritt über die schmale Treppe und sichern danach das Geländer.",
+      "categories": ["long", "decimal", "number", "safety", "umlaut"]
+    },
+    {
+      "id": "holdout-006",
+      "speaker": "Yusuf",
+      "role": "Video",
+      "voice": "Grandma (Deutsch (Deutschland))",
+      "rate": 164,
+      "text": "SDI zwei bleibt schwarz, obwohl der 4K-Konverter ein gültiges 50-Hertz-Signal meldet.",
+      "categories": ["medium", "abbreviation", "alphanumeric", "number", "technical"]
+    },
+    {
+      "id": "holdout-007",
+      "speaker": "Élodie",
+      "role": "Inspizienz",
+      "voice": "Rocko (Deutsch (Deutschland))",
+      "rate": 188,
+      "text": "Für den Wiederbeginn zählen wir rückwärts: drei, zwei, eins, los.",
+      "categories": ["medium", "countdown", "number", "umlaut"]
+    },
+    {
+      "id": "holdout-008",
+      "speaker": "David",
+      "role": "Automation",
+      "voice": "Shelley (Deutsch (Deutschland))",
+      "rate": 170,
+      "text": "Nach dem Neustart des Steuerrechners synchronisieren sich OSC, MIDI und die redundante Netzwerkbrücke innerhalb von ungefähr neunzig Sekunden.",
+      "categories": ["long", "abbreviation", "number", "technical", "umlaut"]
+    }
+  ]
+}

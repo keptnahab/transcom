@@ -1,0 +1,157 @@
+{
+  "benchmark": "simulated-realtime-short-utterance-latency",
+  "manifest": "/Users/macbookpro/Library/CloudStorage/Dropbox-Privat/00_AI/01_Codex/260704 TransCom/01 1st try on Claude/TransCom/evaluation/data/manifests/synthetic_v2_short_latency_dev_v1.json",
+  "manifest_sha256": "d772615fc1090410943dafa6901cf426a1e28dcdf494003f20c40d0b560ca02f",
+  "fixture_id": "synthetic_v2_short_latency_dev_v1",
+  "source_manifest": "evaluation/generated/synthetic_v2/dev/synthetic_de_v2-dev-001/manifest.json",
+  "split": "dev",
+  "all_hashes_verified": true,
+  "model": {
+    "asr_backend": "faster-whisper",
+    "model": "Systran/faster-whisper-small",
+    "device": "cpu",
+    "compute_type": "int8",
+    "language_mode": "auto",
+    "last_language": "de",
+    "fallback_reason": null
+  },
+  "model_load_seconds": 0.43824787499999995,
+  "language_mode": "de",
+  "simulation": {
+    "sample_rate": 16000,
+    "capture_block_size": 1024,
+    "chunk_seconds": 1.5,
+    "configured_overlap_seconds": 0.75,
+    "vad_min_silence_seconds": 0.35,
+    "feed_mode": "logical-real-time-by-sample-availability",
+    "worker_model": "single-serialized-worker"
+  },
+  "clips": 2,
+  "jobs": 2,
+  "successful_first_emits": 1,
+  "mean_end_to_emit_seconds": 1.803469208,
+  "max_end_to_emit_seconds": 1.803469208,
+  "total_speech_seconds": 1.4,
+  "total_inference_seconds": 1.7495271250000002,
+  "real_time_factor": 1.2496622321428574,
+  "word_error_rate": 0.3333333333333333,
+  "character_error_rate": 0.5263157894736842,
+  "word_errors": {
+    "substitutions": 0,
+    "deletions": 1,
+    "insertions": 0,
+    "errors": 1,
+    "reference_length": 3,
+    "rate": 0.3333333333333333
+  },
+  "character_errors": {
+    "substitutions": 0,
+    "deletions": 10,
+    "insertions": 0,
+    "errors": 10,
+    "reference_length": 19,
+    "rate": 0.5263157894736842
+  },
+  "clip_results": [
+    {
+      "clip_id": "dev-001",
+      "data_path": "evaluation/generated/synthetic_v2/dev/synthetic_de_v2-dev-001/parts/intercom/dev-001.wav",
+      "audio_sha256": "6f851e925617e897900fb29221ffebffeafaf74e0dff2a7c222549c6c3cad0c0",
+      "reference": "Bühne frei?",
+      "hypothesis": "Bühne frei!",
+      "speech_end_seconds": 0.68,
+      "first_usable_emit_seconds": 2.4834692080000003,
+      "end_to_emit_seconds": 1.803469208,
+      "jobs": 1,
+      "total_inference_seconds": 0.9429007500000002,
+      "real_time_factor": 1.3866187500000002,
+      "word_error_rate": 0.0,
+      "character_error_rate": 0.0,
+      "word_errors": {
+        "substitutions": 0,
+        "deletions": 0,
+        "insertions": 0,
+        "errors": 0,
+        "reference_length": 2,
+        "rate": 0.0
+      },
+      "character_errors": {
+        "substitutions": 0,
+        "deletions": 0,
+        "insertions": 0,
+        "errors": 0,
+        "reference_length": 9,
+        "rate": 0.0
+      },
+      "language_mode": "de",
+      "languages_used": [
+        "de"
+      ],
+      "job_results": [
+        {
+          "speech_id": "speech-0",
+          "vad_speech_start_seconds": 0.076,
+          "vad_speech_end_seconds": 0.93,
+          "audio_seconds": 0.854,
+          "available_at_seconds": 1.540568458,
+          "vad_processing_seconds": 0.004568458000000053,
+          "worker_start_seconds": 1.540568458,
+          "inference_seconds": 0.9429007500000002,
+          "emit_at_seconds": 2.4834692080000003,
+          "hypothesis": "Bühne frei!",
+          "language_used": "de"
+        }
+      ]
+    },
+    {
+      "clip_id": "dev-004",
+      "data_path": "evaluation/generated/synthetic_v2/dev/synthetic_de_v2-dev-001/parts/intercom/dev-004.wav",
+      "audio_sha256": "94dbb8333e8b9ff072167349487b069f73a5d58efc7528e9b52bfeb1efcec8aa",
+      "reference": "Verstanden.",
+      "hypothesis": "",
+      "speech_end_seconds": 0.72,
+      "first_usable_emit_seconds": null,
+      "end_to_emit_seconds": null,
+      "jobs": 1,
+      "total_inference_seconds": 0.806626375,
+      "real_time_factor": 1.1203144097222222,
+      "word_error_rate": 1.0,
+      "character_error_rate": 1.0,
+      "word_errors": {
+        "substitutions": 0,
+        "deletions": 1,
+        "insertions": 0,
+        "errors": 1,
+        "reference_length": 1,
+        "rate": 1.0
+      },
+      "character_errors": {
+        "substitutions": 0,
+        "deletions": 10,
+        "insertions": 0,
+        "errors": 10,
+        "reference_length": 10,
+        "rate": 1.0
+      },
+      "language_mode": "de",
+      "languages_used": [
+        "de"
+      ],
+      "job_results": [
+        {
+          "speech_id": "speech-0",
+          "vad_speech_start_seconds": 0.076,
+          "vad_speech_end_seconds": 0.898,
+          "audio_seconds": 0.822,
+          "available_at_seconds": 1.539915041,
+          "vad_processing_seconds": 0.0039150409999999525,
+          "worker_start_seconds": 1.539915041,
+          "inference_seconds": 0.806626375,
+          "emit_at_seconds": 2.346541416,
+          "hypothesis": "",
+          "language_used": "de"
+        }
+      ]
+    }
+  ]
+}

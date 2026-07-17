@@ -7,7 +7,11 @@
  *   ws.send('add_channel', { name: 'Mic 1', device_index: 0, color: '#3498db' })
  */
 
-const WS_URL = `${location.protocol === 'https:' ? 'wss' : 'ws'}://${location.hostname || '127.0.0.1'}:8765`
+// Keep the WebSocket endpoint configurable in development so the manual
+// review server can continue using its own local port.
+const WS_PORT = import.meta.env.VITE_TRANSCOM_WS_PORT || '8765'
+const WS_URL = window.electronAPI?.getWebSocketBase?.()
+  || `${location.protocol === 'https:' ? 'wss' : 'ws'}://${location.hostname || '127.0.0.1'}:${WS_PORT}`
 const BACKOFF = [500, 1000, 2000, 4000, 8000]
 
 class WSClient {

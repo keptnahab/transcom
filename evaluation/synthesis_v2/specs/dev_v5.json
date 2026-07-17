@@ -1,0 +1,118 @@
+{
+  "schema_version": "2.0",
+  "dataset_version": "synthetic_de_v5",
+  "split": "dev",
+  "language": "de-DE",
+  "pause_seconds": 0.65,
+  "trailing_guard_ms": 0,
+  "utterances": [
+    {
+      "id": "v5-dev-001",
+      "speaker": "Alina",
+      "role": "Maschinerie",
+      "voice": "Anna",
+      "rate": 164,
+      "text": "Motor aus!",
+      "categories": ["short", "safety", "technical"]
+    },
+    {
+      "id": "v5-dev-002",
+      "speaker": "Farid",
+      "role": "Bühne",
+      "voice": "Eddy (Deutsch (Deutschland))",
+      "rate": 188,
+      "text": "Bremse jetzt schließen!",
+      "categories": ["short", "safety", "technical"]
+    },
+    {
+      "id": "v5-dev-003",
+      "speaker": "Helene",
+      "role": "Inspizienz",
+      "voice": "Reed (Deutsch (Deutschland))",
+      "rate": 178,
+      "text": "Cue D sieben steht.",
+      "categories": ["short", "alphanumeric", "technical"]
+    },
+    {
+      "id": "v5-dev-004",
+      "speaker": "Lukas",
+      "role": "Licht",
+      "voice": "Sandy (Deutsch (Deutschland))",
+      "rate": 196,
+      "text": "Kreis M vier bestätigt.",
+      "categories": ["short", "alphanumeric", "technical"]
+    },
+    {
+      "id": "v5-dev-005",
+      "speaker": "Alina",
+      "role": "Ton",
+      "voice": "Anna",
+      "rate": 176,
+      "text": "Kanal sechzehn führt kein Signal.",
+      "categories": ["medium", "number", "technical", "umlaut"]
+    },
+    {
+      "id": "v5-dev-006",
+      "speaker": "Farid",
+      "role": "Sicherheit",
+      "voice": "Eddy (Deutsch (Deutschland))",
+      "rate": 170,
+      "text": "Sperrzone zwei bleibt unbetretbar.",
+      "categories": ["medium", "safety", "number"]
+    },
+    {
+      "id": "v5-dev-007",
+      "speaker": "Helene",
+      "role": "Kommunikation",
+      "voice": "Reed (Deutsch (Deutschland))",
+      "rate": 184,
+      "text": "Funkweg R elf sendet fehlerfrei.",
+      "categories": ["medium", "alphanumeric", "number", "technical"]
+    },
+    {
+      "id": "v5-dev-008",
+      "speaker": "Lukas",
+      "role": "Bühne",
+      "voice": "Sandy (Deutsch (Deutschland))",
+      "rate": 168,
+      "text": "Vor dem Verfahren kontrolliert die Bühnencrew Seilführung, Endlage und den gesicherten Fluchtweg.",
+      "categories": ["long", "safety", "technical", "umlaut"]
+    },
+    {
+      "id": "v5-dev-009",
+      "speaker": "Alina",
+      "role": "Licht",
+      "voice": "Anna",
+      "rate": 180,
+      "text": "Der Dimmer an Adresse einhundertzwölf versorgt drei Arbeitsleuchten und bleibt bis zur Freigabe auf null Prozent.",
+      "categories": ["long", "number", "technical", "umlaut"]
+    },
+    {
+      "id": "v5-dev-010",
+      "speaker": "Farid",
+      "role": "Ton",
+      "voice": "Eddy (Deutsch (Deutschland))",
+      "rate": 174,
+      "text": "Pegel neun liegt sechs Dezibel unter dem Sollwert.",
+      "categories": ["medium", "number", "technical"]
+    },
+    {
+      "id": "v5-dev-011",
+      "speaker": "Helene",
+      "role": "Inspizienz",
+      "voice": "Reed (Deutsch (Deutschland))",
+      "rate": 186,
+      "text": "Für den Szenenwechsel werden Podest zwei, Vorhanglinie G fünf und die seitliche Warnlampe gemeinsam überwacht.",
+      "categories": ["long", "safety", "alphanumeric", "number", "technical", "umlaut"]
+    },
+    {
+      "id": "v5-dev-012",
+      "speaker": "Lukas",
+      "role": "Automation",
+      "voice": "Sandy (Deutsch (Deutschland))",
+      "rate": 160,
+      "text": "Nach dem Funktionstest protokollieren wir Bremsprobe, Türkontakt und Restlast, bevor Personal den Bereich wieder betritt.",
+      "categories": ["long", "safety", "technical", "umlaut"]
+    }
+  ]
+}

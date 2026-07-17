@@ -32,15 +32,12 @@ echo "==> Installing Python dependencies..."
 "$VENV/bin/pip" install --upgrade pip -q
 "$VENV/bin/pip" install -r "$ROOT/backend/requirements.txt"
 
-# Pre-download Whisper model (base by default)
-MODEL="${TRANSCOM_MODEL:-base}"
-echo "==> Pre-downloading Whisper model: $MODEL"
-"$VENV/bin/python" -c "
-from faster_whisper import WhisperModel
-print(f'  Downloading {\"$MODEL\"} model (one-time)...')
-WhisperModel('$MODEL', device='cpu', compute_type='int8')
-print('  Done.')
-"
+# Pre-download all immutable hybrid-runtime snapshots. Runtime is deliberately offline.
+echo "==> Pre-downloading all three pinned ASR model snapshots"
+"$VENV/bin/python" "$ROOT/scripts/download_models.py"
+
+echo "==> Verifying pinned ASR snapshots with network access disabled"
+HF_HUB_OFFLINE=1 "$VENV/bin/python" "$ROOT/scripts/download_models.py" --verify-only
 
 # Install Node deps
 echo "==> Installing Node dependencies..."

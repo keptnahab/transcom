@@ -2,6 +2,7 @@ from __future__ import annotations
 import asyncio
 import json
 import logging
+import time
 from typing import TYPE_CHECKING, Awaitable, Callable
 from urllib.parse import parse_qs, urlparse
 
@@ -10,6 +11,7 @@ from websockets.server import WebSocketServerProtocol
 
 from backend.server.message_schema import make
 import backend.config as cfg
+from backend.transcription.engine import WhisperEngine
 
 if TYPE_CHECKING:
     from backend.channels.channel_manager import ChannelManager
@@ -42,6 +44,8 @@ class WSServer:
         enrollment_fn: Callable[[str, float], Awaitable[dict]] | None = None,
         auth_service: AuthService | None = None,
         transcript_reset_fn: Callable[[], None] | None = None,
+        edition: str | None = None,
+        session_limit_seconds: float | None = None,
     ) -> None:
         self._channel_manager = channel_manager
         self._store = transcript_store
@@ -53,6 +57,15 @@ class WSServer:
         self._enrollment_fn = enrollment_fn
         self._auth_service = auth_service
         self._transcript_reset_fn = transcript_reset_fn
+        self._edition = cfg.normalize_edition(edition if edition is not None else cfg.EDITION)
+        self._session_limit_seconds = float(
+            cfg.STARTER_SESSION_LIMIT_SECONDS
+            if session_limit_seconds is None
+            else float(session_limit_seconds)
+        )
+        self._edition_timer_task: asyncio.Task | None = None
+        self._starter_budget_started_at: float | None = None
+        self._edition_limit_was_reached = False
         self._clients: set[WebSocketServerProtocol] = set()
 
     # ------------------------------------------------------------------
@@ -140,6 +153,8 @@ class WSServer:
             "clear_transcript": self._handle_clear,
             "get_status": self._handle_get_status,
             "session_create": self._handle_session_create,
+            "session_list": self._handle_session_list,
+            "session_open": self._handle_session_open,
             "session_start": self._handle_session_start,
             "session_stop": self._handle_session_stop,
             "speaker_create": self._handle_speaker_create,
@@ -147,6 +162,7 @@ class WSServer:
             "speaker_delete": self._handle_speaker_delete,
             "enrollment_start": self._handle_enrollment_start,
             "segment_correct_speaker": self._handle_segment_correct_speaker,
+            "segment_acknowledge_confirmation": self._handle_segment_acknowledge_confirmation,
             "share_start": self._handle_share_start,
             "share_stop": self._handle_share_stop,
         }
@@ -175,6 +191,7 @@ class WSServer:
             "channels": channels,
             "segments": segments,
             "session": self._session_manager.to_dict(),
+            "sessions": self._session_manager.list_sessions(),
             "speakers": self._speaker_service.list_speakers(),
             "share": self._share_server.state(),
             "audio_source": self.audio_source_payload(),
@@ -215,7 +232,7 @@ class WSServer:
             color=payload.get("color", "#3498db"),
             label=payload.get("label"),
         )
-        if payload.get("start"):
+        if payload.get("start") and await self._capture_allowed(ws, req_id):
             ch = self._channel_manager.start_channel(ch.id)
         await self.broadcast(make("channel_added", {"channel": ch.to_dict()}))
 
@@ -234,6 +251,8 @@ class WSServer:
         await self.broadcast(make("channel_removed", {"id": payload["id"]}))
 
     async def _handle_start_capture(self, ws, payload, req_id):
+        if not await self._capture_allowed(ws, req_id):
+            return
         ch = self._channel_manager.start_channel(payload["id"])
         await self.broadcast(make("channel_updated", {"channel": ch.to_dict()}))
 
@@ -251,6 +270,13 @@ class WSServer:
         await self._send(ws, make("search_results", {"segments": results, "query": payload.get("query", "")}, req_id))
 
     async def _handle_export(self, ws, payload, req_id):
+        if self._edition != "full":
+            await self._send(ws, make("error", {
+                "message": "Export ist in der Starter-Edition nicht verfügbar.",
+                "code": "EDITION_EXPORT_LOCKED",
+                **self.edition_payload(),
+            }, req_id))
+            return
         fmt = payload.get("format", "txt")
         path = payload.get("path", f"transcom_export.{fmt}")
         from backend.transcript.exporter import export
@@ -266,6 +292,8 @@ class WSServer:
         await self._send(ws, make("backend_status", self.status_payload(), req_id))
 
     async def _handle_session_create(self, ws, payload, req_id):
+        self._reset_edition_budget()
+        self._channel_manager.stop_all()
         info = self._session_manager.create(
             root_dir=payload.get("root_dir"),
             name=payload.get("name"),
@@ -273,7 +301,35 @@ class WSServer:
         self._store.reopen(info.db_path)
         self._reset_transcript_state()
         await self.broadcast(make("session_state", {"session": self._session_manager.to_dict()}))
+        await self.broadcast(make("channels_updated", {
+            "channels": [ch.to_dict() for ch in self._channel_manager.list_channels()],
+        }))
         await self.broadcast(make("transcript_cleared", {}))
+        await self._broadcast_session_list()
+
+    async def _handle_session_list(self, ws, payload, req_id):
+        await self._send(ws, make("session_list", {
+            "sessions": self._session_manager.list_sessions(),
+        }, req_id))
+
+    async def _handle_session_open(self, ws, payload, req_id):
+        self._reset_edition_budget()
+        self._channel_manager.stop_all()
+        info = self._session_manager.open(payload.get("id", ""))
+        self._store.reopen(info.db_path)
+        self._reset_transcript_state()
+        segments = self._store.get_all()
+        await self.broadcast(make("channels_updated", {
+            "channels": [ch.to_dict() for ch in self._channel_manager.list_channels()],
+        }))
+        await self.broadcast(make("session_state", {"session": self._session_manager.to_dict()}))
+        await self.broadcast(make("transcript_loaded", {"segments": segments}))
+        await self._broadcast_session_list()
+
+    async def _broadcast_session_list(self):
+        await self.broadcast(make("session_list", {
+            "sessions": self._session_manager.list_sessions(),
+        }))
 
     def _reset_transcript_state(self) -> None:
         if self._transcript_reset_fn is not None:
@@ -281,15 +337,20 @@ class WSServer:
 
     async def _handle_session_start(self, ws, payload, req_id):
         info = self._session_manager.start()
+        self._starter_budget_started_at = info.started_at
+        self._edition_limit_was_reached = False
         await self.broadcast(make("session_state", {"session": self._session_manager.to_dict()}))
         await self._send(ws, make("session_started", {"session": info.__dict__}, req_id))
+        self._schedule_edition_limit()
 
     async def _handle_session_stop(self, ws, payload, req_id):
+        self._cancel_edition_timer()
         self._channel_manager.stop_all()
         info = self._session_manager.stop()
         await self.broadcast(make("channels_updated", {"channels": [ch.to_dict() for ch in self._channel_manager.list_channels()]}))
         await self.broadcast(make("session_state", {"session": self._session_manager.to_dict()}))
         await self._send(ws, make("session_stopped", {"session": info.__dict__}, req_id))
+        await self._broadcast_session_list()
 
     async def _handle_speaker_create(self, ws, payload, req_id):
         speaker = self._speaker_service.create_speaker(
@@ -333,6 +394,16 @@ class WSServer:
         segment = self._store.correct_speaker(payload["segment_id"], speaker_id, speaker_name)
         await self.broadcast(make("segment_updated", {"segment": segment}, req_id))
 
+    async def _handle_segment_acknowledge_confirmation(self, ws, payload, req_id):
+        user = None
+        if self._auth_service is not None:
+            user = self._auth_service.user_for_token(self._token_from_ws(ws))
+        actor = str((user or {}).get("email") or "local-operator")
+        segment = self._store.acknowledge_confirmation(
+            payload["segment_id"], acknowledged_by=actor
+        )
+        await self.broadcast(make("segment_updated", {"segment": segment}, req_id))
+
     async def _handle_share_start(self, ws, payload, req_id):
         state = self._share_server.start()
         await self.broadcast(make("share_state", state, req_id))
@@ -340,6 +411,106 @@ class WSServer:
     async def _handle_share_stop(self, ws, payload, req_id):
         state = self._share_server.stop()
         await self.broadcast(make("share_state", state, req_id))
+
+    def edition_payload(self) -> dict:
+        return {
+            "edition": self._edition,
+            "export_allowed": self._edition == "full",
+            "session_limit_seconds": (
+                self._display_session_limit() if self._edition == "starter" else None
+            ),
+        }
+
+    def _display_session_limit(self) -> int | float:
+        limit = self._session_limit_seconds
+        return int(limit) if limit.is_integer() else limit
+
+    async def _capture_allowed(self, ws, req_id) -> bool:
+        if self._edition == "full":
+            return True
+        if self._edition_limit_was_reached:
+            await self._send_edition_limit_error(ws, req_id)
+            return False
+
+        started_at = self._edition_budget_start()
+        if time.time() - started_at >= self._session_limit_seconds:
+            await self._apply_edition_limit()
+            await self._send_edition_limit_error(ws, req_id)
+            return False
+        self._schedule_edition_limit()
+        return True
+
+    def _edition_budget_start(self) -> float:
+        current = self._session_manager.current
+        if current is not None and current.started_at is not None:
+            self._starter_budget_started_at = current.started_at
+        if self._starter_budget_started_at is None:
+            self._starter_budget_started_at = time.time()
+        return self._starter_budget_started_at
+
+    def _schedule_edition_limit(self) -> None:
+        if self._edition != "starter" or self._edition_limit_was_reached:
+            return
+        self._cancel_edition_timer()
+        remaining = max(
+            0.0,
+            self._session_limit_seconds - (time.time() - self._edition_budget_start()),
+        )
+        self._edition_timer_task = asyncio.create_task(self._expire_edition_after(remaining))
+
+    async def _expire_edition_after(self, delay: float) -> None:
+        try:
+            await asyncio.sleep(delay)
+            await self._apply_edition_limit()
+        except asyncio.CancelledError:
+            return
+
+    async def _apply_edition_limit(self) -> None:
+        if self._edition != "starter" or self._edition_limit_was_reached:
+            return
+        self._edition_limit_was_reached = True
+        self._cancel_edition_timer(except_current=True)
+        self._channel_manager.stop_all()
+        current = self._session_manager.current
+        if current is not None and current.status == "live":
+            self._session_manager.stop()
+
+        display_limit = self._display_session_limit()
+        payload = {
+            "edition": "starter",
+            "reason": "starter_time_limit",
+            "limit_seconds": display_limit,
+            "message": f"Starter-Limit erreicht: Die Transkription wurde nach {display_limit} Sekunden gestoppt.",
+        }
+        await self.broadcast(make("edition_limit_reached", payload))
+        await self.broadcast(make("channels_updated", {
+            "channels": [ch.to_dict() for ch in self._channel_manager.list_channels()],
+        }))
+        await self.broadcast(make("session_state", {
+            "session": self._session_manager.to_dict(),
+            "reason": payload["reason"],
+        }))
+
+    async def _send_edition_limit_error(self, ws, req_id) -> None:
+        await self._send(ws, make("error", {
+            "message": "Starter-Limit erreicht. Bitte eine neue Transkription anlegen oder Full verwenden.",
+            "code": "EDITION_SESSION_LIMIT_REACHED",
+            "edition": "starter",
+            "reason": "starter_time_limit",
+            "limit_seconds": self._display_session_limit(),
+        }, req_id))
+
+    def _cancel_edition_timer(self, except_current: bool = False) -> None:
+        task = self._edition_timer_task
+        if task is not None and not task.done():
+            if not except_current or task is not asyncio.current_task():
+                task.cancel()
+        self._edition_timer_task = None
+
+    def _reset_edition_budget(self) -> None:
+        self._cancel_edition_timer()
+        self._starter_budget_started_at = None
+        self._edition_limit_was_reached = False
 
     def status_payload(self) -> dict:
         active = [ch.to_dict() for ch in self._channel_manager.list_channels() if ch.is_active]
@@ -349,27 +520,38 @@ class WSServer:
             "error": None,
         }
         speaker_status = self._speaker_service.status()
-        mlx_backend = cfg.WHISPER_BACKEND == "mlx"
+        engine_status = WhisperEngine.get().status()
         return {
+            **self.edition_payload(),
             "active_channels": len(active),
             "segments": len(self._store.get_all()),
             "active_channel_ids": [ch["id"] for ch in active],
             "audio_source": self.audio_source_payload(),
-            "backend": cfg.WHISPER_BACKEND,
-            "model": cfg.MLX_WHISPER_MODEL if mlx_backend else cfg.WHISPER_MODEL,
-            "device": "apple-silicon" if mlx_backend else cfg.WHISPER_DEVICE,
-            "compute_type": "mlx-q4" if mlx_backend else cfg.WHISPER_COMPUTE_TYPE,
+            "backend": engine_status["asr_backend"],
+            "asr_backend": engine_status["asr_backend"],
+            "model": engine_status["model"],
+            "device": engine_status["device"],
+            "compute_type": engine_status["compute_type"],
             "language": cfg.WHISPER_LANGUAGE,
+            "language_mode": engine_status["language_mode"],
+            "last_language": engine_status["last_language"],
             "allowed_languages": sorted(cfg.WHISPER_ALLOWED_LANGUAGES),
             "chunk_seconds": cfg.CHUNK_SECONDS,
             "overlap_seconds": cfg.OVERLAP_SECONDS,
             "stable_tail_seconds": cfg.TRANSCRIPT_STABLE_TAIL_SECONDS,
+            "confirm_short_seconds": cfg.ASR_CONFIRM_SHORT_SECONDS,
+            "edge_padding_seconds": cfg.ASR_EDGE_PADDING_SECONDS,
+            "edge_padding_max_seconds": cfg.ASR_EDGE_PADDING_MAX_SECONDS,
+            "fallback_reason": engine_status["fallback_reason"] or vad_status.get("fallback_reason"),
             "vad": vad_status,
+            "vad_engine": vad_status.get("engine"),
             "speaker_model": speaker_status,
         }
 
     def audio_source_payload(self) -> dict:
-        demo_path = cfg.PROJECT_ROOT / "fixtures" / "audio" / "intercom_test_feed.wav"
+        demo_path = cfg.DEMO_AUDIO_PATH
+        if not demo_path.is_file():
+            demo_path = cfg.PROJECT_ROOT / "fixtures" / "audio" / "intercom_test_feed.wav"
         if cfg.AUDIO_SOURCE and cfg.AUDIO_SOURCE.startswith("file://"):
             return {
                 "mode": "file",

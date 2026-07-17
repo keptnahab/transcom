@@ -7,7 +7,7 @@ import socket
 import threading
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
-from urllib.parse import unquote, urlparse
+from urllib.parse import parse_qs, unquote, urlparse
 
 import backend.config as cfg
 from backend.auth import AuthService
@@ -37,7 +37,10 @@ class WebAppServer:
                     if user is None:
                         self._send_json({"error": "Unauthorized"}, status=401)
                         return
-                    self._send_json({"user": {"email": user["email"], "is_admin": user["is_admin"]}})
+                    payload = {"user": {"email": user["email"], "is_admin": user["is_admin"]}}
+                    if auth.auth_disabled:
+                        payload.update(auth.disabled_session())
+                    self._send_json(payload)
                     return
                 if parsed.path == "/api/users":
                     user = auth.user_for_token(self._bearer_token())
@@ -48,6 +51,15 @@ class WebAppServer:
                         self._send_json({"error": "Forbidden"}, status=403)
                         return
                     self._send_json({"users": auth.list_users()})
+                    return
+                if parsed.path == "/api/audio-file":
+                    user = auth.user_for_token(self._bearer_token() or self._query_token(parsed))
+                    if user is None:
+                        self._send_json({"error": "Unauthorized"}, status=401)
+                        return
+                    params = parse_qs(parsed.query)
+                    path = params.get("path", [""])[0]
+                    self._send_audio_file(path)
                     return
                 self._send_static(parsed.path)
 
@@ -140,6 +152,42 @@ class WebAppServer:
                 self.end_headers()
                 self.wfile.write(data)
 
+            def _send_audio_file(self, path: str) -> None:
+                target = Path(unquote(path)).expanduser().resolve()
+                if not target.is_file():
+                    self._send_json({"error": "Audio file not found"}, status=404)
+                    return
+                content_type = mimetypes.guess_type(str(target))[0] or "audio/wav"
+                file_size = target.stat().st_size
+                start = 0
+                end = file_size - 1
+                status = 200
+                range_header = self.headers.get("Range", "")
+                if range_header.startswith("bytes="):
+                    try:
+                        raw_start, raw_end = range_header.removeprefix("bytes=").split("-", 1)
+                        start = int(raw_start) if raw_start else 0
+                        end = int(raw_end) if raw_end else file_size - 1
+                        start = max(0, min(start, file_size - 1))
+                        end = max(start, min(end, file_size - 1))
+                        status = 206
+                    except ValueError:
+                        start = 0
+                        end = file_size - 1
+                length = end - start + 1
+                with target.open("rb") as f:
+                    f.seek(start)
+                    data = f.read(length)
+                self.send_response(status)
+                self.send_header("Content-Type", content_type)
+                self.send_header("Content-Length", str(length))
+                self.send_header("Cache-Control", "no-store")
+                self.send_header("Accept-Ranges", "bytes")
+                if status == 206:
+                    self.send_header("Content-Range", f"bytes {start}-{end}/{file_size}")
+                self.end_headers()
+                self.wfile.write(data)
+
             def _read_json(self) -> dict:
                 length = int(self.headers.get("Content-Length", "0") or "0")
                 if length <= 0:
@@ -154,6 +202,9 @@ class WebAppServer:
                 if header.lower().startswith("bearer "):
                     return header[7:].strip()
                 return None
+
+            def _query_token(self, parsed) -> str | None:
+                return parse_qs(parsed.query).get("token", [None])[0]
 
             def _send_json(self, payload: dict, status: int = 200) -> None:
                 data = json.dumps(payload).encode("utf-8")

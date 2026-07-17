@@ -1,0 +1,68 @@
+{
+  "audio": "/Users/macbookpro/Library/CloudStorage/Dropbox-Privat/00_AI/01_Codex/260704 TransCom/01 1st try on Claude/TransCom/evaluation/generated/synthetic_v2/dev/synthetic_de_v2-dev-001/audio/intercom.wav",
+  "audio_sha256": "2c2c14b832920ffe5a9be201a2b036b8d6e0a1f2d84eb65572463069715f5346",
+  "reference_source": "/Users/macbookpro/Library/CloudStorage/Dropbox-Privat/00_AI/01_Codex/260704 TransCom/01 1st try on Claude/TransCom/evaluation/data/manifests/synthetic_v2_dev_intercom_stream_v1.json",
+  "reference_binding_verified": true,
+  "reference_word_count": 90,
+  "duration_seconds": 44.06,
+  "chunk_seconds": 1.5,
+  "configured_legacy_overlap_seconds": 0.75,
+  "capture_overlap_seconds": 0.0,
+  "language": "de",
+  "languages_used": [
+    "de"
+  ],
+  "jobs": 9,
+  "stored_segments": 9,
+  "segments_with_text": 9,
+  "empty_segments": 0,
+  "duplicate_replacements": 0,
+  "word_error_rate": 0.2111111111111111,
+  "character_error_rate": 0.11513859275053305,
+  "char_similarity": 0.8848614072494669,
+  "word_errors": {
+    "substitutions": 13,
+    "deletions": 3,
+    "insertions": 3
+  },
+  "character_errors": {
+    "substitutions": 14,
+    "deletions": 34,
+    "insertions": 6
+  },
+  "speaker_counts": {
+    "Speaker 1": 5,
+    "Speaker 2": 2,
+    "Speaker 3": 2
+  },
+  "speaker_status": {
+    "engine": "sherpa-onnx",
+    "model": "/Users/macbookpro/Library/CloudStorage/Dropbox-Privat/00_AI/01_Codex/260704 TransCom/01 1st try on Claude/TransCom/models/3dspeaker_speech_eres2net_sv_en_voxceleb_16k.onnx",
+    "provider": "cpu",
+    "ready": true,
+    "auto_cluster": true,
+    "auto_speakers": 3,
+    "error": null
+  },
+  "first_emit_seconds": 7.173516375,
+  "first_emit_simulated_seconds": 8.441516374999999,
+  "avg_infer_seconds": 1.1994760417777781,
+  "p50_infer_seconds": 1.0432573750000005,
+  "p95_infer_seconds": 2.441516375,
+  "max_infer_seconds": 2.441516375,
+  "total_infer_seconds": 10.795284376000003,
+  "inference_real_time_factor": 0.24501326318656383,
+  "simulated_pipeline_complete_seconds": 46.077579875,
+  "transcript": "Döne frei. Achtung, die nächste Richtmarke kommt in zwölf Sekunden. Das Funkmikrofon von Eric O'Leag bei Minus 8. In die Ziebel, ich prüfe jetzt Empfänger 3 und den Rückkanal. Am 14. Oktober beginnen wir um 19.30 Uhr Szene 5, vorher bleibt der südliche Bühnenzug gesperrt. Klager, Bestätige, Bitte den Notaus am Hubpodium. Aber röse ihn nicht aus. AES67 läuft stabil und der Dante Primärlink zeigt 0,4 Millisekunden Latence. Ich fahre den Übergang langsam von 35 auf 72. 80 und halte anschließend die warme Farbtemperatur bis zum Schlussapplaus.",
+  "texts": [
+    "Döne frei. Achtung, die nächste Richtmarke kommt in zwölf Sekunden.",
+    "Das Funkmikrofon von Eric O'Leag bei Minus 8.",
+    "In die Ziebel, ich prüfe jetzt Empfänger 3 und den Rückkanal.",
+    "Am 14. Oktober beginnen wir um 19.30 Uhr",
+    "Szene 5, vorher bleibt der südliche Bühnenzug gesperrt.",
+    "Klager, Bestätige, Bitte den Notaus am Hubpodium.",
+    "Aber röse ihn nicht aus. AES67 läuft stabil und der Dante Primärlink zeigt 0,4 Millisekunden Latence.",
+    "Ich fahre den Übergang langsam von 35 auf 72.",
+    "80 und halte anschließend die warme Farbtemperatur bis zum Schlussapplaus."
+  ]
+}

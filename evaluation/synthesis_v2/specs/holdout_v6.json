@@ -1,0 +1,27 @@
+{
+  "schema_version": "2.0",
+  "dataset_version": "synthetic_de_v6",
+  "split": "holdout",
+  "language": "de-DE",
+  "pause_seconds": 0.65,
+  "trailing_guard_ms": 0,
+  "seal_after_generation": true,
+  "utterances": [
+    {"id": "v6-holdout-001", "speaker": "Saskia", "role": "Maschinerie", "voice": "Flo (Deutsch (Deutschland))", "rate": 170, "text": "Maschinenfahrt anhalten!", "categories": ["short", "safety", "technical"]},
+    {"id": "v6-holdout-002", "speaker": "Nabil", "role": "Sicherheit", "voice": "Grandma (Deutsch (Deutschland))", "rate": 192, "text": "Gefahrenzone sofort verlassen!", "categories": ["short", "safety"]},
+    {"id": "v6-holdout-003", "speaker": "Verena", "role": "Automation", "voice": "Rocko (Deutsch (Deutschland))", "rate": 180, "text": "Bremskreis verriegeln!", "categories": ["short", "safety", "technical"]},
+    {"id": "v6-holdout-004", "speaker": "Wolf", "role": "Rigging", "voice": "Shelley (Deutsch (Deutschland))", "rate": 194, "text": "Seilzug außer Betrieb setzen!", "categories": ["short", "safety", "technical", "umlaut"]},
+    {"id": "v6-holdout-005", "speaker": "Saskia", "role": "Energie", "voice": "Flo (Deutsch (Deutschland))", "rate": 174, "text": "Energiezufuhr trennen!", "categories": ["short", "safety", "technical"]},
+    {"id": "v6-holdout-006", "speaker": "Nabil", "role": "Bühne", "voice": "Grandma (Deutsch (Deutschland))", "rate": 188, "text": "Arbeitsbereich umgehend sperren!", "categories": ["short", "safety"]},
+    {"id": "v6-holdout-007", "speaker": "Verena", "role": "Inspizienz", "voice": "Rocko (Deutsch (Deutschland))", "rate": 184, "text": "Cue L sechs bestätigt.", "categories": ["short", "alphanumeric", "number", "technical"]},
+    {"id": "v6-holdout-008", "speaker": "Wolf", "role": "Automation", "voice": "Shelley (Deutsch (Deutschland))", "rate": 196, "text": "Achse T neun in Ruhe.", "categories": ["short", "alphanumeric", "number", "technical"]},
+    {"id": "v6-holdout-009", "speaker": "Saskia", "role": "Video", "voice": "Flo (Deutsch (Deutschland))", "rate": 178, "text": "Port W vier verfügbar.", "categories": ["short", "alphanumeric", "number", "technical", "umlaut"]},
+    {"id": "v6-holdout-010", "speaker": "Nabil", "role": "Bühne", "voice": "Grandma (Deutsch (Deutschland))", "rate": 190, "text": "Sektor Y zwei markiert.", "categories": ["short", "alphanumeric", "number"]},
+    {"id": "v6-holdout-011", "speaker": "Verena", "role": "Energie", "voice": "Rocko (Deutsch (Deutschland))", "rate": 168, "text": "Temperaturfühler fünf überschreitet die zulässige Warnschwelle.", "categories": ["medium", "safety", "number", "technical", "umlaut"]},
+    {"id": "v6-holdout-012", "speaker": "Wolf", "role": "Automation", "voice": "Shelley (Deutsch (Deutschland))", "rate": 186, "text": "Steuerleitung Q zehn liefert keine Rückmeldung.", "categories": ["medium", "alphanumeric", "number", "technical", "umlaut"]},
+    {"id": "v6-holdout-013", "speaker": "Saskia", "role": "Bühne", "voice": "Flo (Deutsch (Deutschland))", "rate": 176, "text": "Vorhangmotor sieben bleibt vor der Endposition stehen.", "categories": ["medium", "number", "technical"]},
+    {"id": "v6-holdout-014", "speaker": "Nabil", "role": "Sicherheit", "voice": "Grandma (Deutsch (Deutschland))", "rate": 164, "text": "Nach dem Stillsetzen prüfen wir Lastweg, Schutzgitter, Bremsanzeige und die freie Rettungsroute vollständig.", "categories": ["long", "safety", "technical", "umlaut"]},
+    {"id": "v6-holdout-015", "speaker": "Verena", "role": "Ton", "voice": "Rocko (Deutsch (Deutschland))", "rate": 182, "text": "Rack C vier überwacht zwölf Eingänge und kennzeichnet einen fehlenden Takt sofort mit einer roten Statusmeldung.", "categories": ["long", "alphanumeric", "number", "technical", "umlaut"]},
+    {"id": "v6-holdout-016", "speaker": "Wolf", "role": "Inspizienz", "voice": "Shelley (Deutsch (Deutschland))", "rate": 166, "text": "Bevor die Probe fortgesetzt wird, kontrollieren wir Seitengasse, Portalbrücke und alle drei Übergänge auf zurückgelassenes Material.", "categories": ["long", "safety", "number", "technical", "umlaut"]}
+  ]
+}

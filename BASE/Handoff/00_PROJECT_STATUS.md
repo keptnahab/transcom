@@ -1,22 +1,56 @@
 # Project Status
 
 Goal:
-- Deliver a very good local-first TransCom beta for intercom / production audio with strong German and English transcription, practical low-latency live output, useful speaker recognition, operator correction workflow, and network-accessible beta login for testers.
+- Deliver a local-first TransCom beta that can transcribe mixed intercom audio in German and English with practical live latency, coherent utterance grouping, and useful speaker assignment.
 
-Progress:
-- Core app exists and runs.
-- Renderer build is working.
-- Backend tests currently pass.
-- Authentication and beta-user management are implemented, including admin bootstrap, user creation, login, delete, and visible/editable passwords.
-- Session, transcript storage, LAN viewer, audio source selection, speaker check-in UI, and live transcription pipeline are present.
-- Sherpa-based VAD / speaker embedding integration path exists, with fallback logic when models are missing or unavailable.
-- Real quality issues remain in speaker assignment, segmentation granularity, duplicate suppression, and language discipline.
+Current phase:
+- Stabilization and quality improvement.
+- The product is beyond prototype stage, but not ready for confident beta use on recognition quality.
+- As of 2026-07-04, the work is being moved to Dropbox for about six weeks of MacBook-only continuation.
 
-Milestone:
-- Milestone reached: first pushed beta codebase on GitHub (`8ea2dcd` on `main`).
-- Current phase: stabilization and quality improvement, not greenfield development.
+Current MacBook path after move:
+- `/Users/mkue/Dropbox (Privat)/00_AI/01_Codex/260704 TransCom/01 1st try on Claude/TransCom`
 
-Verified on 2026-07-01:
-- `backend/.venv/bin/python -m pytest` -> `43 passed, 1 warning`
-- `npm run build:renderer` -> success
-- `backend/.venv/bin/python scripts/benchmark_live_pipeline.py --warmup` -> failed with MLX / Metal crash (`NSRangeException` in `libmlx.dylib`), so benchmark status is currently red on this machine/runtime
+Implemented:
+- Electron/Vite frontend and Python backend
+- session creation and local storage
+- live input and audio-file feed modes
+- sherpa-based VAD path with fallback
+- local speaker service and check-in UI
+- transcript persistence and export
+- LAN read-only viewer
+- beta web auth and admin user management
+- auth-bypass local test mode
+
+Verified on 2026-07-04:
+- `backend/.venv/bin/python -m pytest` -> `52 passed, 1 warning`
+- `npm run build` -> passed
+
+Latest benchmark reference from 2026-07-01:
+- `backend/.venv/bin/python scripts/benchmark_live_pipeline.py --warmup`
+  - WER: `0.2667`
+  - first emit: `3.59s`
+  - avg infer: `0.56s`
+  - languages used: `de`, `en`
+
+What is working well enough:
+- The app starts and can be tested locally in browser mode.
+- Demo WAV selection is present in the UI again.
+- The backend honors file-source mode correctly.
+- Auth-disabled testing unblocks UI work.
+- The fixture benchmark is materially better than the old `0.4167` baseline.
+- Default Apple-Silicon launch uses the pinned MLX hybrid: Turbo for original
+  audio `<= 3.0 s`, Full above 3.0 s, with pinned faster-whisper Small available
+  for guarded fallback and explicitly enabled Safety confirmation.
+- Updated transcript rows are replaced in the UI instead of appended when the backend reuses a segment ID.
+- File/demo mode has browser audio monitoring and visible native audio controls.
+
+What is not good enough:
+- Real transcript quality is still described by the user as "katastrophal schlecht".
+- Real latency still feels too slow.
+- The duplicate opening line needs a fresh UI run against the updated backend to confirm the targeted fix.
+- Session lifecycle and feed lifecycle are still hard to understand from the UI.
+
+Release reality:
+- The current bottleneck is not missing features.
+- The current bottleneck is transcript quality and operator confidence.

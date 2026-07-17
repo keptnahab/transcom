@@ -18,6 +18,9 @@ body{margin:0;background:#0f1018;color:#e9ecf4;font:14px -apple-system,BlinkMacS
 header{position:sticky;top:0;background:#171a24;border-bottom:1px solid #2b3040;padding:12px 14px;display:flex;justify-content:space-between;gap:12px}
 main{padding:10px 0}.row{display:grid;grid-template-columns:72px 112px 1fr;gap:10px;padding:8px 14px;border-left:4px solid transparent}
 .ts,.speaker{color:#8d96ad;font-variant-numeric:tabular-nums}.text{line-height:1.45}.empty{padding:32px 14px;color:#8d96ad}
+.confirm{display:inline-block;margin-right:7px;border:1px solid #f9c74f;border-radius:3px;color:#f9c74f;font-size:9px;padding:1px 4px}.confirmed{border-color:#70c1b3;color:#70c1b3}
+.command{display:inline-block;margin-right:7px;border:1px solid #2f9e9b;border-radius:3px;color:#37b6a8;font-size:9px;padding:1px 4px}
+.raw{display:block;margin-top:2px;color:#8d96ad;font:10px ui-monospace,SFMono-Regular,Menlo,monospace}
 @media(max-width:620px){.row{grid-template-columns:56px 1fr}.speaker{grid-column:2}.text{grid-column:2}}
 </style></head><body>
 <header><strong>TransCom Live</strong><span id="status">Connecting</span></header><main id="rows"><div class="empty">Waiting for transcript...</div></main>
@@ -25,7 +28,7 @@ main{padding:10px 0}.row{display:grid;grid-template-columns:72px 112px 1fr;gap:1
 const token = new URLSearchParams(location.search).get('token');
 const rows = document.getElementById('rows');
 const status = document.getElementById('status');
-function esc(s){return String(s||'').replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))}
+function esc(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function ts(v){return new Date(v*1000).toTimeString().slice(0,8)}
 async function poll(){
   try {
@@ -34,7 +37,7 @@ async function poll(){
     const data = await r.json();
     status.textContent = data.live ? 'Live' : 'Paused';
     rows.innerHTML = data.segments.length ? data.segments.map(s =>
-      `<div class="row" style="border-left-color:${esc(s.speaker_color || '#5865f2')}"><span class="ts">${ts(s.timestamp)}</span><span class="speaker">${esc(s.speaker_name || 'Unknown')}</span><span class="text">${esc(s.text)}</span></div>`
+      `<div class="row" style="border-left-color:${esc(s.speaker_color || '#5865f2')}"><span class="ts">${ts(s.timestamp)}</span><span class="speaker">${esc(s.speaker_name || 'Unknown')}</span><span class="text"${s.raw_text && s.raw_text !== s.text ? ` title="Roh erkannt: ${esc(s.raw_text)}"` : ''}>${s.requires_confirmation ? `<span class="confirm ${s.confirmation_acknowledged ? 'confirmed' : ''}">${s.confirmation_acknowledged ? 'BESTÄTIGT' : 'PRÜFEN'}</span>` : ''}${s.safety_command_id ? '<span class="command">BEFEHL</span>' : ''}${esc(s.text)}${s.raw_text && s.raw_text !== s.text ? `<small class="raw">Roh erkannt: ${esc(s.raw_text)}</small>` : ''}${s.safety_confirmation_used ? `<small class="raw">Zweitprüfung (${esc(s.safety_confirmation_model || 'unbekannt')}): ${esc(s.safety_confirmation_raw_text || '')}</small>` : ''}</span></div>`
     ).join('') : '<div class="empty">Waiting for transcript...</div>';
   } catch(e) { status.textContent = 'Disconnected'; }
 }

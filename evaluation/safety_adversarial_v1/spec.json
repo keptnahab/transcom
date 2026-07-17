@@ -1,0 +1,105 @@
+{
+  "schema_version": "transcom-safety-adversarial-source-v1",
+  "dataset_id": "safety_adversarial_de_dev_v1",
+  "split": "dev",
+  "language": "de-DE",
+  "reference_status": "synthetic_source_pending_manual_audio_review",
+  "utterances": [
+    {
+      "id": "safety-adv-dev-001",
+      "speaker": "Ada",
+      "role": "Rigging",
+      "voice": "Anna",
+      "rate": 150,
+      "text": "Last sicher fallen.",
+      "canonical_command_id": "safety_load_hold",
+      "canonical_text": "Last sicher halten!",
+      "observed_action": "fallen",
+      "canonical_action": "halten"
+    },
+    {
+      "id": "safety-adv-dev-002",
+      "speaker": "Ben",
+      "role": "Sicherheit",
+      "voice": "Eddy (Deutsch (Deutschland))",
+      "rate": 158,
+      "text": "Not-Aus sofort auslassen.",
+      "canonical_command_id": "safety_emergency_stop",
+      "canonical_text": "Not-Aus sofort auslösen!",
+      "observed_action": "auslassen",
+      "canonical_action": "auslösen"
+    },
+    {
+      "id": "safety-adv-dev-003",
+      "speaker": "Cem",
+      "role": "Inspizienz",
+      "voice": "Reed (Deutsch (Deutschland))",
+      "rate": 166,
+      "text": "Bühne sofort sterben.",
+      "canonical_command_id": "safety_stage_lock",
+      "canonical_text": "Bühne sofort sperren!",
+      "observed_action": "sterben",
+      "canonical_action": "sperren"
+    },
+    {
+      "id": "safety-adv-dev-004",
+      "speaker": "Dora",
+      "role": "Maschinerie",
+      "voice": "Sandy (Deutsch (Deutschland))",
+      "rate": 174,
+      "text": "Haltebremse lösen.",
+      "canonical_command_id": "safety_brake_lock",
+      "canonical_text": "Haltebremse verriegeln!",
+      "observed_action": "lösen",
+      "canonical_action": "verriegeln"
+    },
+    {
+      "id": "safety-adv-dev-005",
+      "speaker": "Emil",
+      "role": "Energie",
+      "voice": "Flo (Deutsch (Deutschland))",
+      "rate": 182,
+      "text": "Energiezufuhr verbinden.",
+      "canonical_command_id": "safety_energy_isolate",
+      "canonical_text": "Energiezufuhr trennen!",
+      "observed_action": "verbinden",
+      "canonical_action": "trennen"
+    },
+    {
+      "id": "safety-adv-dev-006",
+      "speaker": "Fina",
+      "role": "Sicherheit",
+      "voice": "Grandma (Deutsch (Deutschland))",
+      "rate": 190,
+      "text": "Gefahrenbereich betreten.",
+      "canonical_command_id": "safety_area_evacuate",
+      "canonical_text": "Gefahrenbereich räumen!",
+      "observed_action": "betreten",
+      "canonical_action": "räumen"
+    },
+    {
+      "id": "safety-adv-dev-007",
+      "speaker": "Gero",
+      "role": "Bühne",
+      "voice": "Grandpa (Deutsch (Deutschland))",
+      "rate": 198,
+      "text": "Bühne sofort freigeben.",
+      "canonical_command_id": "safety_stage_lock",
+      "canonical_text": "Bühne sofort sperren!",
+      "observed_action": "freigeben",
+      "canonical_action": "sperren"
+    },
+    {
+      "id": "safety-adv-dev-008",
+      "speaker": "Hana",
+      "role": "Maschinerie",
+      "voice": "Shelley (Deutsch (Deutschland))",
+      "rate": 206,
+      "text": "Alle Bewegungen starten.",
+      "canonical_command_id": "safety_motion_stop",
+      "canonical_text": "Alle Bewegungen stoppen!",
+      "observed_action": "starten",
+      "canonical_action": "stoppen"
+    }
+  ]
+}

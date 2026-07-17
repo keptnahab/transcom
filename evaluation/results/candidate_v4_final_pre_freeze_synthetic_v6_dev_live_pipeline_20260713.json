@@ -1,0 +1,123 @@
+{
+  "audio": "/Users/macbookpro/Library/CloudStorage/Dropbox-Privat/00_AI/01_Codex/260704 TransCom/01 1st try on Claude/TransCom/evaluation/generated/synthetic_v2/dev/synthetic_de_v6-dev-001/audio/intercom.wav",
+  "audio_sha256": "b14d923711c00feb6a7a9e7449d887de78250305d8c487352c836e866b24871a",
+  "reference_source": "/Users/macbookpro/Library/CloudStorage/Dropbox-Privat/00_AI/01_Codex/260704 TransCom/01 1st try on Claude/TransCom/evaluation/data/manifests/synthetic_v6_dev_intercom_stream_v1.json",
+  "reference_binding_verified": true,
+  "reference_word_count": 90,
+  "duration_seconds": 57.4,
+  "chunk_seconds": 1.25,
+  "configured_legacy_overlap_seconds": 3.75,
+  "capture_overlap_seconds": 0.0,
+  "language": "de",
+  "languages_used": [
+    "de"
+  ],
+  "model": {
+    "asr_backend": "mlx",
+    "model": "mlx-community/whisper-large-v3-turbo-q4",
+    "model_revision": "660c343bbf4e52ac257f0b7d952e5388e6f93bef",
+    "resolved_model_path": "/Users/macbookpro/.cache/huggingface/hub/models--mlx-community--whisper-large-v3-turbo-q4/snapshots/660c343bbf4e52ac257f0b7d952e5388e6f93bef",
+    "device": "apple-silicon",
+    "compute_type": "mlx-q4",
+    "language_mode": "de",
+    "last_language": "de",
+    "fallback_reason": null,
+    "guard_fallback_count": 0,
+    "confirm_short_seconds": 3.0,
+    "edge_padding_seconds": 0.35,
+    "edge_padding_max_seconds": 3.0,
+    "domain_glossary_terms": [
+      "Lastaufnahme",
+      "unterbrechen"
+    ],
+    "guard_fallback_model": "Systran/faster-whisper-small"
+  },
+  "recognition_config": {
+    "initial_prompt": "Deutschsprachige Theaterprobe mit kurzen Sicherheitskommandos und technischen Cues. Es geht um Motor, Bremse, Kreis, Kanal, Einheit, Buchstaben und Zahlen sowie um Inspizienz, Hubpodium, Not-Aus, AES67 und Dante.",
+    "hotwords": "",
+    "german_spoken_number_normalization": true,
+    "confirm_short_seconds": 3.0,
+    "beam_size": 1,
+    "no_speech_threshold": 0.6,
+    "language_switch_min_probability": 0.55,
+    "language_stickiness_ratio": 0.75,
+    "language_switch_margin": 0.0
+  },
+  "segmentation_config": {
+    "vad_min_speech_seconds": 0.5,
+    "vad_min_silence_seconds": 0.35,
+    "vad_max_segment_seconds": 5.0,
+    "vad_threshold": 0.25,
+    "vad_energy_threshold": 0.012,
+    "vad_pre_roll_seconds": 0.5,
+    "vad_post_roll_seconds": 0.0,
+    "asr_min_rms": 0.012
+  },
+  "jobs": 17,
+  "stored_segments": 17,
+  "segments_with_text": 17,
+  "empty_segments": 0,
+  "duplicate_replacements": 0,
+  "word_error_rate": 0.13333333333333333,
+  "character_error_rate": 0.03912363067292645,
+  "semantic_word_error_rate": 0.13333333333333333,
+  "char_similarity": 0.9608763693270735,
+  "word_errors": {
+    "substitutions": 10,
+    "deletions": 0,
+    "insertions": 2
+  },
+  "character_errors": {
+    "substitutions": 10,
+    "deletions": 9,
+    "insertions": 6
+  },
+  "semantic_word_errors": {
+    "substitutions": 10,
+    "deletions": 0,
+    "insertions": 2
+  },
+  "speaker_counts": {
+    "Speaker 1": 4,
+    "Speaker 2": 9,
+    "Speaker 3": 4
+  },
+  "speaker_status": {
+    "engine": "sherpa-onnx",
+    "model": "/Users/macbookpro/Library/CloudStorage/Dropbox-Privat/00_AI/01_Codex/260704 TransCom/01 1st try on Claude/TransCom/models/3dspeaker_speech_eres2net_sv_en_voxceleb_16k.onnx",
+    "provider": "cpu",
+    "ready": true,
+    "auto_cluster": true,
+    "auto_speakers": 3,
+    "error": null
+  },
+  "first_emit_seconds": 1.8730383750000004,
+  "first_emit_simulated_seconds": 2.8670383750000004,
+  "avg_infer_seconds": 0.37606943388235287,
+  "p50_infer_seconds": 0.3698023749999999,
+  "p95_infer_seconds": 0.40273333399999967,
+  "max_infer_seconds": 0.415376457999999,
+  "total_infer_seconds": 6.393180375999998,
+  "inference_real_time_factor": 0.11137944905923343,
+  "simulated_pipeline_complete_seconds": 59.215376457999994,
+  "transcript": "Hauptantrieb stoppen. Schutzraum sofort kommen. Hubbewegung blockieren. Lastaufnahme unterbrechen. Zugang unverzüglich schließen. Druckversorgung abschalten. Kuhle K zwei der Rite. Positionen nach der Reich. Linie P fünf aktiv. Motor Z drei verbunden. Endschalter vier meldet eine unsichere Zwischenlage. Funkkanal dreizehn überträgt nur einseitig. Bühnenwagen sechs steht außerhalb seiner Parkmarke. Vor jeder Fahrt kontrollieren wir Verriegelung, Warnleuchte, Bodenfreiheit und den geräumten Schutz. Korreidor Steuerfeld A zwölf vergleicht drei Positionsgeber und meldet jede Abweichung größer als zwei mm. Für den Umbau sichern wir den Hauptvorhang, räumen den Orchestergraben und bestätigen anschließend alle fünf Arbeitsbereiche einzeln.",
+  "texts": [
+    "Hauptantrieb stoppen.",
+    "Schutzraum sofort kommen.",
+    "Hubbewegung blockieren.",
+    "Lastaufnahme unterbrechen.",
+    "Zugang unverzüglich schließen.",
+    "Druckversorgung abschalten.",
+    "Kuhle K zwei der Rite.",
+    "Positionen nach der Reich.",
+    "Linie P fünf aktiv.",
+    "Motor Z drei verbunden.",
+    "Endschalter vier meldet eine unsichere Zwischenlage.",
+    "Funkkanal dreizehn überträgt nur einseitig.",
+    "Bühnenwagen sechs steht außerhalb seiner Parkmarke.",
+    "Vor jeder Fahrt kontrollieren wir Verriegelung, Warnleuchte, Bodenfreiheit und den geräumten Schutz.",
+    "Korreidor",
+    "Steuerfeld A zwölf vergleicht drei Positionsgeber und meldet jede Abweichung größer als zwei mm.",
+    "Für den Umbau sichern wir den Hauptvorhang, räumen den Orchestergraben und bestätigen anschließend alle fünf Arbeitsbereiche einzeln."
+  ]
+}

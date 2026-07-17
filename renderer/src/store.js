@@ -14,7 +14,9 @@ class Store {
       segments: [],         // SegmentInfo[]  (all, chronological)
       devices: [],          // AudioDevice[]
       audioSource: { mode: 'live', path: null, demo_path: null },
+      audioSourceMode: 'live',
       session: null,
+      sessions: [],
       speakers: [],
       share: { enabled: false, url: null, token: null },
       authUser: null,

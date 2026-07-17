@@ -1,13 +1,16 @@
 # Decisions
-|Date|Decision|Reason|
-|---|---|---|
-|2026-07-01|Keep TransCom local-first and offline-oriented by default|The product is about sensitive live intercom audio; local operation is a core expectation|
-|2026-07-01|Use a Python backend plus Electron/Vite frontend|This split fits audio/ML work on the backend and keeps the operator UI flexible|
-|2026-07-01|Support a lightweight beta web app in parallel to Electron|The user wants external beta testers to access the app over the network without full packaging first|
-|2026-07-01|Default to `mlx-whisper` on macOS arm64, otherwise `faster-whisper`|Apple Silicon should have a faster local path, while keeping a more portable fallback|
-|2026-07-01|Prepare sherpa-onnx integration for VAD and speaker embedding|Speaker recognition must be real local inference, not only heuristic placeholders|
-|2026-07-01|Keep a fallback speaker path when sherpa models are missing|Development and UI workflows must remain runnable before model assets are fully in place|
-|2026-07-01|Allow only German and English as intended supported languages|This was explicitly requested; other-language output is considered a product bug|
-|2026-07-01|Store visible beta-user passwords in the auth DB for admin editing|The user explicitly needs to see and edit passwords for testers; this is acceptable for beta but not hardened production|
-|2026-07-01|Do not invalidate all sessions when an admin changes a password|This avoids locking out the current admin during user management operations|
-|2026-07-01|Use `BASE/Handoff/*` as mandatory persistent working memory|The user wants future context windows to continue immediately without reconstruction|
+
+| Date | Decision | Reason |
+| --- | --- | --- |
+| 2026-07-01 | Keep TransCom local-first and offline-first | Intercom audio is sensitive and the user explicitly wants the core pipeline local |
+| 2026-07-01 | Do not use GPT/OpenAI transcript cleanup in this implementation wave | The user asked for local pipeline fixes first |
+| 2026-07-01 | Keep German and English as the only intended recognition languages | The user treats other-language drift as a bug |
+| 2026-07-01 | Use sherpa-onnx VAD with fallback instead of raw chunk submission | Non-speech windows were a known quality problem |
+| 2026-07-01 | Historical: change `TRANSCOM_MODEL` to `Systran/faster-whisper-base` (superseded by the pinned Small decision below) | The older naked `base` default was not acceptable |
+| 2026-07-01 | Keep `TRANSCOM_LANG=auto` with `TRANSCOM_ALLOWED_LANGS=de,en` | Auto detection is useful, but must stay inside supported languages |
+| 2026-07-01 | Keep Apple Silicon runtime default backend as `mlx`, but use `faster-whisper` as the current benchmark reference path | The runtime and the most reliable quality measurement path are not identical right now |
+| 2026-07-01 | Add `TRANSCOM_AUTH_DISABLED=1` test mode | UI testing should not be blocked by login while iterating locally |
+| 2026-07-01 | Persist only final transcript rows in this wave; no new preview event contract yet | The user asked for pipeline correctness before UI contract expansion |
+| 2026-07-01 | Keep session controls and feed controls separate for now, but document the confusion as a real issue | The behavior is implemented, but the UX still needs work |
+| 2026-07-13 | Supersede the earlier single-model/base defaults with three immutable snapshots: MLX Turbo `<= 3.0 s`, MLX Full `> 3.0 s`, and faster-whisper Small for guarded fallback/Safety confirmation | Duration routing improves short commands without weakening longer transcription, while exact revisions and offline-only runtime resolution make deployment reproducible |
+| 2026-07-13 | Keep Safety Mode disabled by default and require `TRANSCOM_SAFETY_COMMAND_MODE=1` | Safety interpretation must be an explicit operator deployment choice and still never executes machine actions |

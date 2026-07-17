@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "catalog_id": "transcom-safety-command-intents-v1",
+  "language": "de-DE",
+  "purpose": "Versioned allow-list of production safety intents; it intentionally contains no split phrase, audio, voice, or rate realization.",
+  "allowed_intents": [
+    {"id": "motion_stop", "meaning": "Stop or inhibit powered movement."},
+    {"id": "area_evacuate", "meaning": "Clear people from a hazardous work area."},
+    {"id": "energy_isolate", "meaning": "Disconnect or isolate an energy source."},
+    {"id": "brake_lock", "meaning": "Apply or lock a mechanical brake."},
+    {"id": "access_secure", "meaning": "Close, lock, or block unsafe access."},
+    {"id": "load_hold", "meaning": "Hold or suspend a load-related operation."},
+    {"id": "cue_status", "meaning": "Report an alphanumeric production cue state."},
+    {"id": "component_status", "meaning": "Report an alphanumeric component or position state."},
+    {"id": "signal_fault", "meaning": "Report a numeric or technical signal fault."},
+    {"id": "safety_check", "meaning": "Describe a medium or long pre-operation safety control."}
+  ],
+  "split_policy": {
+    "known_before_evaluation": ["catalog_id", "allowed_intent_ids", "category_coverage"],
+    "holdout_unknown_before_candidate_freeze": ["phrase", "audio", "speaker", "voice", "rate", "artifact_hash"],
+    "required_dev_holdout_disjoint_fields": ["utterance_id", "phrase", "speaker", "voice", "rate", "audio_sha256"],
+    "selection_uses_asr_output": false
+  }
+}

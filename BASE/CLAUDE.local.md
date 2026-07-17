@@ -1,37 +1,41 @@
-# CODING local configuration
+# Local Development Notes
 
 Project:
 - TransCom
-- Local-first live transcription and speaker workflow app for intercom / production audio
+- Local-first live transcription for intercom / production audio
 
-Build:
-- `npm run build:renderer`
-- `npm run build`
+Setup:
+- Repo root: `/Users/mkue/Documents/CODEX/INTERCOM TRANSCRIPT/01 1st try on Claude/TransCom`
+- Install dependencies: `./scripts/setup.sh`
 
-Run:
-- Renderer dev only: `npm run dev:renderer`
+Useful run commands:
+- Renderer only: `npm run dev:renderer`
+- Backend only:
+  `PYTHONUNBUFFERED=1 PYTHONPATH="$PWD" backend/.venv/bin/python backend/main.py`
+- Local web testing with auth disabled:
+  `TRANSCOM_WEB_PORT=8081 TRANSCOM_AUTH_DISABLED=1 backend/.venv/bin/python backend/main.py`
 - Electron dev: `npm run dev`
-- Backend only: `PYTHONUNBUFFERED=1 PYTHONPATH="$PWD" backend/.venv/bin/python backend/main.py`
-- Beta web app helper: `./scripts/beta_server.sh`
 
-Test:
+Typical local web setup:
+- Vite UI: `http://localhost:5747/`
+- Backend web API in local test mode: `http://127.0.0.1:8081/`
+- Vite proxies `/api` to the backend web port
+- `TRANSCOM_AUTH_DISABLED=1` auto-allows a fake admin user for UI testing
+
+Tests:
 - `backend/.venv/bin/python -m pytest`
-- `backend/.venv/bin/python scripts/benchmark_live_pipeline.py --warmup`
+- `TRANSCOM_ASR_BACKEND=faster-whisper backend/.venv/bin/python scripts/benchmark_live_pipeline.py --warmup`
 
-Tech Stack:
-- Electron
-- Vite
-- Vanilla JS renderer
-- Python backend
-- WebSocket transport
-- SQLite
-- `faster-whisper`
-- `mlx-whisper` on Apple Silicon by default
-- `sherpa-onnx` for VAD / speaker embedding when models are present
-- `sounddevice`, `soundfile`, `numpy`
+Latest verified results on 2026-07-01:
+- `pytest`: `51 passed, 1 warning`
+- Benchmark, `faster-whisper` path:
+  - WER `0.2667`
+  - `languages_used = ["de", "en"]`
+  - `first_emit_seconds = 3.54`
+  - `avg_infer_seconds = 0.52`
 
-Special Rules:
-- Supported languages are intended to be German and English only.
-- Audio should remain local; cloud APIs are not part of the intended product.
-- Keep beta-user auth simple but functional.
-- Document real runtime URLs, credentials strategy, and operational caveats in `BASE/Handoff/`.
+Current caveats:
+- Apple Silicon runtime still defaults to `mlx`, but the more trustworthy quality benchmark today is the `faster-whisper` path.
+- Demo WAV/file mode is selectable in the UI again.
+- File mode currently does not provide audible playback monitoring.
+- The session controls and feed controls are separate, which has confused real users.
