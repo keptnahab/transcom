@@ -460,30 +460,30 @@ def build() -> Path:
     c.setSubject("Deutsches Benutzerhandbuch für die TransCom macOS Beta")
     cover(c)
 
-    p = Page(c, 2, "Starter oder Full?")
-    p.callout("Zwei eindeutig getrennte Builds", "Die Edition ist Bestandteil des ausgelieferten App-Builds und wird in der Oberfläche angezeigt. Fehlende oder ungültige Editionen fallen sicher auf Starter zurück.", "teal")
+    p = Page(c, 2, "Beta oder Full?")
+    p.callout("Zwei eindeutig getrennte Builds", "Die Edition ist Bestandteil des ausgelieferten App-Builds und wird in der Oberfläche angezeigt. Fehlende oder ungültige Editionen fallen sicher auf Beta zurück.", "teal")
     p.table([
         ["Edition", "Neue Transkription", "Gespeicherte Transkripte", "Export"],
-        ["Starter", "Je Session exakt maximal 60 Sekunden", "Ansehen, durchsuchen, Sprecher korrigieren und verwalten", "Gesperrt"],
+        ["Beta", "Je Session exakt maximal 60 Sekunden", "Ansehen, durchsuchen, Sprecher korrigieren und verwalten", "Gesperrt"],
         ["Full - einmalig 199 €", "Keine 60-Sekunden-Grenze", "Ansehen, durchsuchen, Sprecher korrigieren und verwalten", "TXT und CSV"],
     ], widths=[35*mm, 45*mm, 65*mm, CONTENT_W-145*mm])
-    p.callout("Was nach 60 Sekunden passiert", "Starter stoppt serverseitig automatisch sowohl den Audiofeed als auch die laufende Session. Das bisherige Transkript bleibt gespeichert. Dieselbe Session kann nicht einfach weiterlaufen; du kannst eine <b>neue Session</b> anlegen und erhältst dort erneut maximal 60 Sekunden.", "warn")
+    p.callout("Was nach 60 Sekunden passiert", "Beta stoppt serverseitig automatisch sowohl den Audiofeed als auch die laufende Session. Das bisherige Transkript bleibt gespeichert. Dieselbe Session kann nicht einfach weiterlaufen; du kannst eine <b>neue Session</b> anlegen und erhältst dort erneut maximal 60 Sekunden.", "warn")
     p.h2("Auslieferung in dieser Beta")
-    p.bullet("Starter und Full werden als getrennte, eindeutig benannte App-ZIPs gebaut.")
+    p.bullet("Beta und Full werden als getrennte, eindeutig benannte App-ZIPs gebaut.")
     p.bullet("Es gibt derzeit keinen Checkout, keine Lizenzaktivierung und keinen In-App-Kauf.")
     p.bullet("TransCom Full wird nach persönlicher Abstimmung ausgeliefert. Der angegebene Preis beträgt einmalig 199 €.")
     p.h2("Start in vier Schritten")
     p.flow(["Edition prüfen", "Demo starten", "Ergebnis prüfen", "Neue Session / Export"])
     p.step(1, "App öffnen", "Beim ersten Start bis zu 60 Sekunden für Backend und Modellinitialisierung einplanen.")
-    p.step(2, "Edition lesen", "Unter der Audioquelle steht <b>TransCom Starter</b> oder <b>TransCom Full</b> mit den jeweiligen Grenzen.")
-    p.step(3, "Demo testen", "<b>Demo</b> wählen und <b>Transkription starten</b>. Starter endet automatisch nach exakt 60 Sekunden.")
-    p.step(4, "Weiterarbeiten", "In Starter eine neue Session für den nächsten 60-Sekunden-Test anlegen; in Full bei Bedarf TXT oder CSV exportieren.")
+    p.step(2, "Edition lesen", "Unter der Audioquelle steht <b>TransCom Beta</b> oder <b>TransCom Full</b> mit den jeweiligen Grenzen.")
+    p.step(3, "Demo testen", "<b>Demo</b> wählen und <b>Transkription starten</b>. Beta endet automatisch nach exakt 60 Sekunden.")
+    p.step(4, "Weiterarbeiten", "In Beta eine neue Session für den nächsten 60-Sekunden-Test anlegen; in Full bei Bedarf TXT oder CSV exportieren.")
     p.callout("Sicherheitsgrenze", "TransCom darf in dieser Beta keine sicherheitskritische Kommunikation, Freigabe oder Maschinensteuerung ersetzen. Jede relevante Aussage muss über den Original-Audiokanal bestätigt werden.", "danger")
     p.finish()
 
     p = Page(c, 3, "Installation auf Apple Silicon")
     p.h2("Geliefertes Beta-Paket")
-    p.step(1, "Richtiges ZIP entpacken", "<b>TransCom-Starter-0.2.0-beta.1-arm64-mac.zip</b> oder <b>TransCom-Full-0.2.0-beta.1-arm64-mac.zip</b> im Finder doppelklicken.")
+    p.step(1, "Richtiges ZIP entpacken", "<b>TransCom-Beta-0.2.0-beta.1-arm64-mac.zip</b> oder <b>TransCom-Full-0.2.0-beta.1-arm64-mac.zip</b> im Finder doppelklicken.")
     p.step(2, "App ablegen", "<b>TransCom.app</b> nach <b>Programme</b> oder in einen lokalen Testordner kopieren. Nicht direkt aus dem ZIP starten.")
     p.step(3, "Erstmals öffnen", "Rechtsklick auf <b>TransCom.app</b> und <b>Öffnen</b> wählen. Die Warnung des nicht signierten Beta-Builds bewusst bestätigen.")
     p.step(4, "Berechtigungen", "Wenn macOS fragt, Mikrofonzugriff erlauben. Für den LAN-Viewer kann zusätzlich der Zugriff auf das lokale Netzwerk nötig sein.")
@@ -494,7 +494,7 @@ def build() -> Path:
     p.para("Den Terminal-Befehl nur für genau diese geprüfte App verwenden. Er entfernt die Quarantäne-Markierung; er signiert oder verifiziert die App nicht.", S_SMALL)
     p.h2("Login")
     p.para("Der lokale Desktop-Build startet standardmäßig im Auth-Bypass und verlangt kein Login. Erscheint eine Login-Maske, verwendest du die authentifizierte Web-Beta und brauchst die separat bereitgestellten Zugangsdaten.")
-    p.para("Starter und Full benötigen keine Aktivierung. Die Edition wird durch das jeweils ausgelieferte, getrennt benannte App-Paket festgelegt.", S_SMALL)
+    p.para("Beta und Full benötigen keine Aktivierung. Die Edition wird durch das jeweils ausgelieferte, getrennt benannte App-Paket festgelegt.", S_SMALL)
     p.finish()
 
     p = Page(c, 4, "Erster Start und Oberfläche")
@@ -513,7 +513,7 @@ def build() -> Path:
     p.step(2, "Speicherort prüfen", "Ohne Auswahl speichert der Desktop-Build dauerhaft unter <b>Library/Application Support/TransCom/data/sessions</b>. Unter <b>Speicherort</b> kann optional ein anderer beschreibbarer Ordnerpfad eingetragen werden.")
     p.step(3, "Quelle wählen", "<b>Demo</b> für den ersten Test, <b>Datei</b> für eigene Aufnahmen, <b>Live</b> für ein Eingabegerät.")
     p.step(4, "Starten", "Der große Button legt bei Bedarf die Session an, startet sie und startet den Audiofeed in einem Ablauf.")
-    p.callout("Edition sichtbar prüfen", "Unter dem Start-/Stop-Bereich steht <b>TransCom Starter</b> oder <b>TransCom Full</b>. Wenn die Anzeige nicht zum Dateinamen des ausgelieferten ZIPs passt, den Test stoppen und den Support informieren.", "warn")
+    p.callout("Edition sichtbar prüfen", "Unter dem Start-/Stop-Bereich steht <b>TransCom Beta</b> oder <b>TransCom Full</b>. Wenn die Anzeige nicht zum Dateinamen des ausgelieferten ZIPs passt, den Test stoppen und den Support informieren.", "warn")
     p.finish()
 
     p = Page(c, 5, "Audio-Datei-Demo")
@@ -523,9 +523,9 @@ def build() -> Path:
     p.step(2, "Demo auswählen", "Im Dreifachschalter <b>Demo - Testaufnahme</b> wählen. Die Dateizusammenfassung muss <b>TransCom-Testaufnahme</b> zeigen.")
     p.step(3, "Transkription starten", "Den großen Button drücken. Wiedergabe und Verarbeitung starten gemeinsam.")
     p.step(4, "Geduld beim ersten Text", "Je nach Modellinitialisierung und Segmentgrenze können mehrere Sekunden vergehen. Der letzte Referenzwert für die erste Ausgabe lag bei ca. 3,59 Sekunden, reale Systeme können langsamer sein.")
-    p.step(5, "Limit oder Stop", "Starter stoppt Feed und Session nach exakt 60 Sekunden automatisch. Full läuft bis <b>Transkription beenden</b>; nur dort ist anschließend TXT/CSV-Export verfügbar.")
+    p.step(5, "Limit oder Stop", "Beta stoppt Feed und Session nach exakt 60 Sekunden automatisch. Full läuft bis <b>Transkription beenden</b>; nur dort ist anschließend TXT/CSV-Export verfügbar.")
     p.h2("Eigene Aufnahme")
-    p.para("Unter <b>Datei - Eigene Aufnahme</b> öffnet die Desktop-App einen Dateidialog. Unterstützte Filter: WAV/WAVE, AIFF/AIF, MP3 und M4A. Dateien laufen in Echtzeit. Starter verarbeitet pro neuer Session maximal die ersten 60 Sekunden; Full läuft ohne diese Zeitgrenze.")
+    p.para("Unter <b>Datei - Eigene Aufnahme</b> öffnet die Desktop-App einen Dateidialog. Unterstützte Filter: WAV/WAVE, AIFF/AIF, MP3 und M4A. Dateien laufen in Echtzeit. Beta verarbeitet pro neuer Session maximal die ersten 60 Sekunden; Full läuft ohne diese Zeitgrenze.")
     p.two_cards("Was du hören solltest", "Im Datei-/Demo-Modus wird Audio über die lokale Wiedergabe überwacht. Prüfe macOS-Ausgabe, Lautstärke und Stummschaltung.", "Was du sehen solltest", "Status <b>Transkription läuft</b>, zunehmende Laufzeit und nach Segmentabschluss neue Zeilen in der Mitte.")
     p.callout("Kein Ton ist nicht gleich kein Feed", "Wenn das Monitoring stumm ist, kann die Backend-Verarbeitung dennoch laufen. Beurteile deshalb getrennt: hörbare Wiedergabe, aktiver Feed und erscheinende Transkriptzeilen.", "info")
     p.finish()
@@ -539,13 +539,13 @@ def build() -> Path:
         ["bereit", "Session/Feed läuft nicht", "Quelle kontrollieren und starten"],
         ["läuft", "Sessionstatus ist live", "Nicht Namen oder Speicherort wechseln"],
         ["Transkription läuft", "Mindestens ein Audiokanal ist aktiv", "Pegel/Audio und neue Zeilen beobachten"],
-        ["Starter-Limit erreicht", "60 Sekunden dieser Session sind verbraucht; Feed und Session wurden serverseitig gestoppt", "Neue Session anlegen, nicht dieselbe neu starten"],
+        ["Beta-Limit erreicht", "60 Sekunden dieser Session sind verbraucht; Feed und Session wurden serverseitig gestoppt", "Neue Session anlegen, nicht dieselbe neu starten"],
         ["Audio-Engine wird verbunden", "WebSocket/Backend noch nicht bereit", "Warten; nach 8 Sekunden Fehlermeldung prüfen"],
         ["Audio-Engine nicht erreichbar", "Backend oder Portverbindung fehlgeschlagen", "App neu starten, Modelle/Ports prüfen"],
     ], widths=[38*mm, 62*mm, CONTENT_W-100*mm])
     p.h2("Gespeicherte Sessions")
     p.para("Rechts unter <b>Gespeicherte Transkripte</b> kannst du in beiden Editionen Sessions ansehen, durchsuchen, Sprecherzuordnungen korrigieren, im Finder zeigen, auswählen oder in den Papierkorb bewegen. Freie Textbearbeitung ist weiterhin nicht vorgesehen.")
-    p.callout("Löschen ist eine echte Dateisystemaktion", "Die App verschiebt bestätigte TransCom-Sessionordner in den macOS-Papierkorb. Full kann vorher TXT/CSV exportieren; Starter bewahrt das Ergebnis nur als lokale Session auf.", "warn")
+    p.callout("Löschen ist eine echte Dateisystemaktion", "Die App verschiebt bestätigte TransCom-Sessionordner in den macOS-Papierkorb. Full kann vorher TXT/CSV exportieren; Beta bewahrt das Ergebnis nur als lokale Session auf.", "warn")
     p.h2("Session-Inhalt")
     p.code("<session-ordner>/\n  session.json\n  transcript.db\n  exports/\n  profiles/")
     p.para("Die Datenbank ist die Arbeitskopie. TXT/CSV-Exporte sind transportable Ausgaben, aber kein vollständiges Backup aller Session-Metadaten.", S_SMALL)
@@ -608,7 +608,7 @@ def build() -> Path:
 
     p = Page(c, 10, "Editionen, Export und Archivierung")
     p.table([
-        ["Funktion", "Starter", "Full"],
+        ["Funktion", "Beta", "Full"],
         ["Gespeicherte Sessions", "Ansehen, durchsuchen, Sprecher korrigieren, verwalten", "Ansehen, durchsuchen, Sprecher korrigieren, verwalten"],
         ["Neue Transkription", "Exakt max. 60 s je neuer Session", "Ohne 60-s-Grenze"],
         ["Export", "In UI und Backend gesperrt", "TXT und CSV"],
@@ -623,7 +623,7 @@ def build() -> Path:
         ["TXT", "Schnelles Lesen und Teilen", "Zeit, Channel-Kürzel, Text; Safety-Markierungen und Rohtext falls vorhanden"],
         ["CSV", "Auswertung und Vergleich", "Zeit, Channel, Text, Confidence sowie ausführliche Safety-/Auditfelder"],
     ], widths=[25*mm, 52*mm, CONTENT_W-77*mm])
-    p.callout("Starter-Export ist bewusst gesperrt", "Der Button zeigt <b>Exportieren · Full</b> und ist deaktiviert. Auch direkte Exportanfragen weist das Backend zurück. Für Export wird der getrennte Full-Build benötigt; es gibt keinen In-App-Kauf oder Aktivierungsdialog.", "info")
+    p.callout("Beta-Export ist bewusst gesperrt", "Der Button zeigt <b>Exportieren · Full</b> und ist deaktiviert. Auch direkte Exportanfragen weist das Backend zurück. Für Export wird der getrennte Full-Build benötigt; es gibt keinen In-App-Kauf oder Aktivierungsdialog.", "info")
     p.callout("Was der Export nicht ist", "TXT und CSV sind keine vollständige Session-Sicherung. Bewahre für eine reproduzierbare Untersuchung zusätzlich <b>session.json</b> und <b>transcript.db</b> auf.", "warn")
     p.h2("Empfohlene Ablagestruktur")
     p.code("TransCom Tests/\n  2026-07-14_Demo/\n    export.txt\n    export.csv\n    session.json\n    transcript.db\n    feedback.txt")
@@ -702,8 +702,8 @@ def build() -> Path:
         ["Erste Doppelzeile", "Gezielter UI-Fix vorhanden, Real-UI-Bestätigung offen", "Jedes Auftreten dokumentieren"],
         ["Session/Feed-UX", "Interne Zustände sind gebündelt und leicht missverständlich", "Statusleiste und großen Start/Stop-Button beachten"],
         ["Speaker-Zuordnung", "Lokal implementiert, real noch unzureichend validiert", "Manuell korrigieren; nie als Identität nutzen"],
-        ["Starter-Grenze", "Feed und Session stoppen nach exakt 60 s serverseitig", "Für weitere Aufnahme eine neue Session anlegen"],
-        ["Editionsauslieferung", "Getrennte Starter-/Full-Builds; keine Aktivierung", "Dateiname und Anzeige vor Test abgleichen"],
+        ["Beta-Grenze", "Feed und Session stoppen nach exakt 60 s serverseitig", "Für weitere Aufnahme eine neue Session anlegen"],
+        ["Editionsauslieferung", "Getrennte Beta-/Full-Builds; keine Aktivierung", "Dateiname und Anzeige vor Test abgleichen"],
         ["Auth-Bypass", "Desktop-Beta startet ohne Login", "Nur vertrauenswürdiges Testnetz; keine fremde Umgebung"],
         ["Signierung", "Beta-Build ist nicht signiert/notarisiert", "Herkunft und Prüfsumme kontrollieren"],
     ], widths=[34*mm, 72*mm, CONTENT_W-106*mm], font_size=6.9)
@@ -745,23 +745,23 @@ def build() -> Path:
         ["Sprecher falsch", "Stimmprobe sauber und repräsentativ?", "Neu einsprechen; Zeile manuell korrigieren; als Beta-Risiko melden"],
         ["LAN-Link nicht erreichbar", "Gleiches LAN, Port 8787, VPN/Firewall", "VPN aus; lokale Netzwerkfreigabe prüfen; Link vollständig neu kopieren"],
         ["LAN meldet 403", "Token fehlt oder Freigabe wurde neu gestartet", "Aktuellen vollständigen Link aus der App verwenden"],
-        ["Starter stoppt bei 60 s", "Anzeige Starter?", "Erwartetes Produktverhalten: Feed und Session sind beendet; neue Session anlegen"],
-        ["Starter startet nicht erneut", "60-s-Budget derselben Session verbraucht?", "Eine neue Session anlegen; dadurch entsteht ein neues 60-s-Budget"],
-        ["Export gesperrt", "Anzeige Starter bzw. Button Exportieren · Full?", "Erwartet in Starter; Export ist nur im getrennten Full-Build verfügbar"],
+        ["Beta stoppt bei 60 s", "Anzeige Beta?", "Erwartetes Produktverhalten: Feed und Session sind beendet; neue Session anlegen"],
+        ["Beta startet nicht erneut", "60-s-Budget derselben Session verbraucht?", "Eine neue Session anlegen; dadurch entsteht ein neues 60-s-Budget"],
+        ["Export gesperrt", "Anzeige Beta bzw. Button Exportieren · Full?", "Erwartet in Beta; Export ist nur im getrennten Full-Build verfügbar"],
         ["Full-Exportdatei leer", "Richtige Session geöffnet? Segmente sichtbar?", "Session öffnen, Inhalt prüfen und erneut exportieren"],
     ], widths=[37*mm, 61*mm, CONTENT_W-98*mm], font_size=6.7)
-    p.callout("Minimaler Reproduktionstest", "Neue Session - Demo starten - Ergebnis beobachten. Starter muss bei 60 s Feed und Session stoppen; danach neue Session anlegen. Full manuell stoppen und TXT exportieren. Erst danach Live-Routing untersuchen.", "info")
+    p.callout("Minimaler Reproduktionstest", "Neue Session - Demo starten - Ergebnis beobachten. Beta muss bei 60 s Feed und Session stoppen; danach neue Session anlegen. Full manuell stoppen und TXT exportieren. Erst danach Live-Routing untersuchen.", "info")
     p.finish()
 
     p = Page(c, 17, "Beta-Testcheckliste")
     p.h2("1. Installation")
-    for item in ["Paket/Prüfsumme kontrolliert", "Starter-/Full-Dateiname und Anzeige stimmen überein", "App entpackt und geöffnet", "Audio-Engine wird bereit"]:
+    for item in ["Paket/Prüfsumme kontrolliert", "Beta-/Full-Dateiname und Anzeige stimmen überein", "App entpackt und geöffnet", "Audio-Engine wird bereit"]:
         p.checklist(item)
     p.h2("2. Demo und Datei")
     for item in ["Demo auswählbar", "Audio hörbar", "Erste Zeile nach ____ Sekunden", "Transkription beendet sauber", "Eigene Datei getestet: Format ______"]:
         p.checklist(item)
     p.h2("3. Livebetrieb")
-    for item in ["Eingang erkannt: ____________________", "Start/Stop verständlich", "Starter: Stopp bei exakt 60 s / Full: 5 Minuten", "Überlappende Sprecher ausprobiert"]:
+    for item in ["Eingang erkannt: ____________________", "Start/Stop verständlich", "Beta: Stopp bei exakt 60 s / Full: 5 Minuten", "Überlappende Sprecher ausprobiert"]:
         p.checklist(item)
     p.h2("4. Ergebnis")
     p.table([
@@ -775,7 +775,7 @@ def build() -> Path:
         ["Bedienbarkeit", "□", "□", "□", "□", "□"],
     ], widths=[60*mm] + [(CONTENT_W-60*mm)/5]*5)
     p.h2("5. Weitergabe")
-    for item in ["Starter: Export sichtbar gesperrt", "Starter: neue Session nach 60 s möglich", "Full: TXT und CSV exportiert", "LAN-Viewer geöffnet und anschließend gestoppt"]:
+    for item in ["Beta: Export sichtbar gesperrt", "Beta: neue Session nach 60 s möglich", "Full: TXT und CSV exportiert", "LAN-Viewer geöffnet und anschließend gestoppt"]:
         p.checklist(item)
     p.finish()
 
@@ -829,8 +829,8 @@ def build() -> Path:
 
     p = Page(c, 20, "Kurzreferenz")
     p.h2("Die fünf wichtigsten Regeln")
-    p.step(1, "Edition prüfen", "ZIP-Dateiname und Anzeige <b>Starter</b> oder <b>Full</b> müssen zusammenpassen.")
-    p.step(2, "Starter neu anlegen", "Nach dem automatischen Stopp bei exakt 60 Sekunden eine neue Session für den nächsten Abschnitt erstellen.")
+    p.step(1, "Edition prüfen", "ZIP-Dateiname und Anzeige <b>Beta</b> oder <b>Full</b> müssen zusammenpassen.")
+    p.step(2, "Beta neu anlegen", "Nach dem automatischen Stopp bei exakt 60 Sekunden eine neue Session für den nächsten Abschnitt erstellen.")
     p.step(3, "Audio bleibt maßgeblich", "Zahlen, Namen, Richtungen und Sicherheitskommunikation nie nur aus dem Transkript übernehmen.")
     p.step(4, "Nur vertrauenswürdiges LAN", "Desktop-Auth-Bypass und unverschlüsselten LAN-Viewer nicht in fremden Netzen einsetzen.")
     p.step(5, "Beispiele statt Bauchgefühl", "Zeitstempel, Quelle, erwartet/erkannt und Latenz dokumentieren.")
@@ -845,7 +845,7 @@ def build() -> Path:
         ["LAN-Viewer", "Optionen - Live-Ansicht teilen - Link erzeugen"],
         ["Alte Session", "Rechts: Gespeicherte Transkripte - Öffnen"],
     ], widths=[45*mm, CONTENT_W-45*mm])
-    p.callout("Beta-Ziel erreicht, wenn ...", "Installation und Demo reproduzierbar laufen, Starter exakt bei 60 Sekunden stoppt und eine neue Session erlaubt, Full ohne diese Grenze arbeitet, Full-Exporte entstehen und Qualitätsgrenzen konkret dokumentiert sind.", "good")
+    p.callout("Beta-Ziel erreicht, wenn ...", "Installation und Demo reproduzierbar laufen, Beta exakt bei 60 Sekunden stoppt und eine neue Session erlaubt, Full ohne diese Grenze arbeitet, Full-Exporte entstehen und Qualitätsgrenzen konkret dokumentiert sind.", "good")
     p.para("Dokumentstatus: Inhaltlich gegen Quellcode, Setup und Handoff vom 14.07.2026 geprüft. Das Handbuch beschreibt den tatsächlichen Beta-Stand einschließlich offener Release-Risiken.", S_SMALL)
     p.finish()
 

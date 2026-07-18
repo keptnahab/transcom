@@ -1,0 +1,47 @@
+:root{
+  --navy-950:#0d2a42;
+  --navy-900:#153b59;
+  --navy-700:#2b5f86;
+  --cream:#f8f6f1;
+  --paper:#fffefa;
+  --line:#ded8cf;
+  --ink:#1c2f43;
+  --muted:#68798a;
+  --orange:#e76522;
+  --orange-dark:#c94e12;
+  --green:#4e7d69;
+  font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  color:var(--ink);
+  background:var(--cream);
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;overscroll-behavior-y:none}
+body{background:radial-gradient(circle at 90% 10%,#2b5f8618,transparent 30%),var(--cream)}
+a{color:inherit}
+.shell{width:min(1120px,calc(100% - 40px));margin:0 auto;padding:34px 0 28px}
+.shell.narrow{width:min(780px,calc(100% - 40px))}
+.brand{display:inline-flex;align-items:center;gap:11px;color:var(--navy-950);font:700 22px Georgia,"Times New Roman",serif;text-decoration:none}
+.brand-mark{background:var(--orange);border-radius:50%;display:flex;align-items:center;justify-content:center;gap:2px;width:27px;height:25px;padding:5px}
+.brand-mark i{display:block;width:2px;border-radius:2px;background:#fff}
+.brand-mark i:nth-child(1){height:5px}.brand-mark i:nth-child(2){height:12px}.brand-mark i:nth-child(3){height:8px}.brand-mark i:nth-child(4){height:4px}
+.panel{display:grid;grid-template-columns:1.05fr .95fr;gap:70px;align-items:center;min-height:calc(100vh - 155px);padding:60px 0}
+.copy h1,.result-card h1,.legal-card h1{margin:18px 0 24px;color:var(--navy-950);font:600 clamp(48px,6vw,78px)/.98 Georgia,"Times New Roman",serif;letter-spacing:-.045em}
+.lead{color:#52687a;font-size:17px;line-height:1.7}
+.eyebrow,.kicker{color:var(--navy-700);letter-spacing:.15em;text-transform:uppercase;font-size:10px;font-weight:800}
+.eyebrow{display:flex;align-items:center;gap:9px}.eyebrow span{width:8px;height:8px;border-radius:50%;background:var(--orange);box-shadow:0 0 0 5px #e765221f}
+.facts{display:grid;gap:13px;margin:32px 0 0;padding:0;list-style:none;color:#5a6f80;font-size:13px}.facts b{display:inline-block;width:22px;color:var(--green)}
+.form-card,.result-card,.legal-card{background:var(--paper);border:1px solid var(--line);box-shadow:0 24px 70px #0d2a4220;padding:42px}
+.form-card h2{margin:12px 0 16px;color:var(--navy-950);font:600 34px/1.1 Georgia,"Times New Roman",serif}.form-card>p{color:var(--muted);line-height:1.65}
+form{display:grid;gap:13px;margin-top:28px}label{font-size:12px;font-weight:750;color:var(--navy-900)}
+input[type=email]{width:100%;height:52px;border:1px solid #cfc8be;border-radius:5px;background:#fff;padding:0 15px;color:var(--ink);font:inherit;outline:none}
+input[type=email]:focus{border-color:var(--navy-700);box-shadow:0 0 0 4px #2b5f8617}
+.check{display:grid;grid-template-columns:20px 1fr;gap:10px;align-items:start;margin:4px 0 8px;color:#607383;font-size:10px;line-height:1.55;font-weight:500}.check input{margin:2px 0 0}.check a{text-underline-offset:2px}
+.button{min-height:52px;border:0;border-radius:5px;background:var(--orange);color:#fff;padding:0 22px;display:inline-flex;align-items:center;justify-content:center;gap:18px;font:760 13px/1 Inter,ui-sans-serif,sans-serif;text-decoration:none;cursor:pointer;box-shadow:0 10px 25px #c94e1233}.button:hover{background:var(--orange-dark)}
+.button.secondary{background:var(--navy-900);margin-top:18px}
+.fineprint{color:#7d8b95!important;text-align:center;font-size:9px!important;line-height:1.55!important;margin:15px 0 0!important}
+.notice{background:#fff2e9;border-left:3px solid var(--orange);padding:10px 12px;color:#8c3d17!important;font-size:11px}.error{color:#a83b27}
+.trap{position:absolute!important;left:-10000px!important;width:1px!important;height:1px!important;overflow:hidden!important}
+.result-card,.legal-card{margin:70px 0}.result-card dl{margin:30px 0 0;border-top:1px solid var(--line)}.result-card dl div{display:grid;grid-template-columns:110px 1fr;gap:20px;border-bottom:1px solid var(--line);padding:14px 0;font-size:11px}.result-card dt{color:var(--muted)}.result-card dd{margin:0;min-width:0}.result-card code{font-size:9px;word-break:break-all}
+.legal-card h1{font-size:58px}.legal-card h2{margin:32px 0 7px;color:var(--navy-950);font:600 21px Georgia,"Times New Roman",serif}.legal-card p{color:#5e7180;font-size:13px;line-height:1.75}.legal-card a{text-underline-offset:3px}
+footer{display:flex;justify-content:flex-end;gap:20px;color:var(--muted);font-size:9px}footer a{text-decoration:none}
+@media(max-width:800px){.panel{grid-template-columns:1fr;gap:35px;padding:70px 0}.copy h1{font-size:55px}.form-card,.result-card,.legal-card{padding:30px 23px}.result-card,.legal-card{margin:50px 0}.legal-card h1{font-size:44px}}

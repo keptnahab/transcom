@@ -88,7 +88,7 @@ function shortModelName(model) {
 
 async function doExport(fmt) {
   if (!editionState(store.get('status')).exportAllowed) {
-    window.alert('Export ist in TransCom Starter gesperrt. TransCom Full enthält TXT- und CSV-Export.')
+    window.alert('Export ist in TransCom Beta gesperrt. TransCom Full enthält TXT- und CSV-Export.')
     return
   }
   let path = `transcom_export.${fmt}`

@@ -12,9 +12,9 @@ npm run stage:models
 for EDITION in starter full; do
   "$ROOT/backend/.venv/bin/python" "$ROOT/scripts/write_edition_manifest.py" "$EDITION"
   if [ "$EDITION" = "starter" ]; then
-    PRODUCT_NAME="TransCom Starter"
-    APP_ID="com.transcom.starter"
-    LABEL="Starter"
+    PRODUCT_NAME="TransCom Beta"
+    APP_ID="com.transcom.beta"
+    LABEL="Beta"
   else
     PRODUCT_NAME="TransCom Full"
     APP_ID="com.transcom.full"
@@ -27,4 +27,4 @@ for EDITION in starter full; do
     --config.artifactName="TransCom-$LABEL-$VERSION-\${arch}-mac.\${ext}"
 done
 
-echo "Starter/Full builds: $ROOT/dist/starter and $ROOT/dist/full"
+echo "Beta/Full builds: $ROOT/dist/starter and $ROOT/dist/full"

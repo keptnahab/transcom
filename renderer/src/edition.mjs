@@ -2,7 +2,7 @@ export function editionState(status = {}) {
   const edition = status?.edition === 'full' ? 'full' : 'starter'
   return {
     edition,
-    label: edition === 'full' ? 'Full' : 'Starter',
+    label: edition === 'full' ? 'Full' : 'Beta',
     exportAllowed: edition === 'full' && status?.export_allowed !== false,
     sessionLimitSeconds: edition === 'full' ? null : Number(status?.session_limit_seconds || 60),
   }
@@ -10,5 +10,6 @@ export function editionState(status = {}) {
 
 export function editionLimitMessage(payload = {}) {
   const limit = Number(payload?.limit_seconds || 60)
-  return payload?.message || `Starter-Limit erreicht: Die Transkription wurde nach ${limit} Sekunden beendet.`
+  const message = payload?.message || `Beta-Limit erreicht: Die Transkription wurde nach ${limit} Sekunden beendet.`
+  return message.replaceAll('Starter', 'Beta')
 }

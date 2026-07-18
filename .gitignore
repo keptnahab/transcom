@@ -25,6 +25,7 @@ dist/
 renderer/dist/
 release/
 build/
+output/website/*-R2-*.zip
 
 # Independently versioned product site and reproducible evaluation data
 beta-website/

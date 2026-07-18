@@ -16,7 +16,7 @@ function releaseEdition() {
     const manifest = JSON.parse(fs.readFileSync(path.join(process.resourcesPath, 'edition.json'), 'utf8'))
     return manifest.edition === 'full' ? 'full' : 'starter'
   } catch (error) {
-    console.error('Edition manifest missing or invalid; using Starter:', error.message)
+    console.error('Edition manifest missing or invalid; using Beta:', error.message)
     return 'starter'
   }
 }
@@ -78,7 +78,7 @@ function startBackend() {
         HF_HUB_OFFLINE: app.isPackaged ? '1' : (process.env.HF_HUB_OFFLINE || ''),
         TRANSFORMERS_OFFLINE: app.isPackaged ? '1' : (process.env.TRANSFORMERS_OFFLINE || ''),
         // Packaged builds never trust a caller-provided edition override. The
-        // separately produced Starter/Full artifact carries this manifest.
+        // separately produced Beta/Full artifact carries this manifest.
         TRANSCOM_EDITION: releaseEdition(),
       },
       stdio: ['ignore', 'pipe', 'pipe'],

@@ -1,16 +1,18 @@
-# TransCom Starter und Full
+# TransCom Beta und Full
 
 ## Produktgrenzen
 
-| Funktion | Starter | Full |
+| Funktion | Beta | Full |
 | --- | --- | --- |
 | Gespeicherte Transkripte ansehen, bearbeiten und verwalten | ja | ja |
 | Neue Live-/Datei-Transkription | maximal exakt 60 Sekunden | unbegrenzt |
 | TXT-/CSV-Export | serverseitig gesperrt | erlaubt |
-| Preis | Beta-/Einstiegsedition | einmalig 295 EUR |
+| Preis | kostenlos in der Beta-Phase | einmalig 199 EUR |
 
-Starter ist der sichere Default. Fehlt ein Editionsmerkmal oder ist es
-unlesbar, startet Backend und Oberfläche als Starter.
+Beta ist der öffentliche Name der kostenlosen Edition. Technisch bleibt ihr
+Manifestwert aus Kompatibilitätsgründen `starter`. Fehlt ein Editionsmerkmal
+oder ist es unlesbar, starten Backend und Oberfläche sicher in dieser
+eingeschränkten Beta-Edition.
 
 ## Technische Entscheidung fuer den ersten Verkauf
 
@@ -31,15 +33,15 @@ eine signierte Offline-Lizenz ersetzt werden:
    Fulfillment, oeffentlicher Schluessel in der App,
 2. Lizenzinhalt mit Lizenz-ID, Edition, Kunde und optionalem Ablaufdatum,
 3. kanonische Serialisierung und Signaturpruefung vor Backendstart,
-4. Starter-Fallback bei fehlender oder ungueltiger Signatur,
+4. Beta-Fallback bei fehlender oder ungueltiger Signatur,
 5. Widerruf/Mehrgeraeteregel erst definieren, bevor ein Checkout automatisiert
    wird.
 
 ## Manueller Fulfillment-Ablauf
 
-1. Zahlung von einmalig 295 EUR ausserhalb der App bestaetigen.
+1. Zahlung von einmalig 199 EUR ausserhalb der App bestaetigen.
 2. Ausschliesslich das Full-Artefakt mit seinem veroeffentlichten SHA-256 an
-   den Kunden geben; Starter und Full nicht unter demselben Dateinamen ablegen.
+   den Kunden geben; Beta und Full nicht unter demselben Dateinamen ablegen.
 3. Kunde verifiziert SHA-256 vor dem Oeffnen.
 4. Kaufbeleg, Buildversion, Artefakt-Hash und Empfaenger intern protokollieren.
 5. Keine Zusage von Developer-ID-Signatur oder Apple-Notarisierung machen,
