@@ -11,5 +11,5 @@ return [
     'r2_object_key' => 'releases/0.2.0-beta.1/TransCom-Beta-0.2.0-beta.1-arm64-mac.zip',
     'download_ttl' => 21600,
     'download_size' => '2,0 GB',
-    'sha256' => '8cd33adefae44975ff5a1225d7ac2413376c811e70085dd145c1ac83fa412493',
+    'sha256' => '93d14431bdfd0e999dfabf12bc3b5a5c179d159213d035d33ef686293b093386',
 ];
