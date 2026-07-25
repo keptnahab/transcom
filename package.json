@@ -11,7 +11,8 @@
     "build:backend": "bash scripts/build_backend_runtime.sh",
     "stage:models": "backend/.venv/bin/python scripts/stage_model_bundle.py",
     "build:editions": "bash scripts/build_editions.sh",
-    "upload:beta": "bash scripts/upload_release_to_r2.sh",
+    "upload:beta": "bash scripts/upload_release_to_r2.sh beta",
+    "upload:full": "bash scripts/upload_release_to_r2.sh full",
     "test:renderer": "node --test tests_js/*.test.mjs",
     "build": "npm run build:renderer && npm run build:backend && npm run stage:models && electron-builder",
     "start": "electron ."

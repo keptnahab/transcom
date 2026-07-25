@@ -39,14 +39,83 @@ function beta_escape(string $value): string
     return htmlspecialchars($value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
 }
 
-function beta_r2_presigned_download_url(?int $ttl = null): string
+function beta_normalize_email(string $email): string
+{
+    return strtolower(trim($email));
+}
+
+function beta_is_full_access_email(string $email): bool
+{
+    $config = beta_config();
+    $file = (string) ($config['full_access_file'] ?? '');
+    if ($file === '' || !is_file($file) || !is_readable($file)) {
+        return false;
+    }
+
+    $needle = beta_normalize_email($email);
+    if ($needle === '' || !filter_var($needle, FILTER_VALIDATE_EMAIL)) {
+        return false;
+    }
+
+    $lines = file($file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    if ($lines === false) {
+        throw new RuntimeException('Full-Freigabeliste konnte nicht gelesen werden.');
+    }
+
+    foreach ($lines as $line) {
+        $candidate = trim((string) $line);
+        if ($candidate === '' || substr($candidate, 0, 1) === '#') {
+            continue;
+        }
+        if (hash_equals($needle, beta_normalize_email($candidate))) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+function beta_download_offer_for_email(string $email): array
+{
+    $config = beta_config();
+    $offer = [
+        'edition' => 'beta',
+        'label' => 'Beta',
+        'version' => (string) ($config['version'] ?? ''),
+        'object_key' => (string) ($config['r2_object_key'] ?? ''),
+        'download_size' => (string) ($config['download_size'] ?? ''),
+        'sha256' => (string) ($config['sha256'] ?? ''),
+    ];
+
+    $full = $config['full_download'] ?? null;
+    if (!beta_is_full_access_email($email) || !is_array($full)) {
+        return $offer;
+    }
+
+    $objectKey = ltrim(trim((string) ($full['r2_object_key'] ?? '')), '/');
+    $sha256 = strtolower(trim((string) ($full['sha256'] ?? '')));
+    if ($objectKey === '' || !preg_match('/\\A[a-f0-9]{64}\\z/', $sha256)) {
+        throw new RuntimeException('Full-Download-Konfiguration ist unvollständig.');
+    }
+
+    return [
+        'edition' => 'full',
+        'label' => 'Full',
+        'version' => (string) ($full['version'] ?? $offer['version']),
+        'object_key' => $objectKey,
+        'download_size' => (string) ($full['download_size'] ?? $offer['download_size']),
+        'sha256' => $sha256,
+    ];
+}
+
+function beta_r2_presigned_download_url(string $objectKey, ?int $ttl = null): string
 {
     $config = beta_config();
     $accountId = strtolower(trim((string) ($config['r2_account_id'] ?? '')));
     $accessKeyId = trim((string) ($config['r2_access_key_id'] ?? ''));
     $secretAccessKey = (string) ($config['r2_secret_access_key'] ?? '');
     $bucket = trim((string) ($config['r2_bucket'] ?? ''));
-    $objectKey = ltrim((string) ($config['r2_object_key'] ?? ''), '/');
+    $objectKey = ltrim($objectKey, '/');
 
     if (!preg_match('/\A[a-f0-9]{32}\z/', $accountId)
         || $accessKeyId === ''
@@ -146,7 +215,7 @@ function beta_rate_limit(string $email): bool
     $now = time();
     $remote = (string) ($_SERVER['REMOTE_ADDR'] ?? 'unknown');
     $ipHash = hash_hmac('sha256', $remote, $secret);
-    $emailHash = hash_hmac('sha256', strtolower($email), $secret);
+    $emailHash = hash_hmac('sha256', beta_normalize_email($email), $secret);
     $checks = [
         [beta_storage_dir('rate-ip/' . $ipHash), 60],
         [beta_storage_dir('rate-email/' . $emailHash), 600],
@@ -194,7 +263,7 @@ function beta_create_request(string $email): string
     $tokenHash = hash('sha256', $token);
     $config = beta_config();
     $payload = [
-        'email' => $email,
+        'email' => beta_normalize_email($email),
         'created_at' => time(),
         'expires_at' => time() + 86400,
         'version' => (string) $config['version'],
@@ -213,13 +282,13 @@ function beta_send_confirmation(string $email, string $token): bool
 {
     $config = beta_config();
     $confirmUrl = TRANSCOM_ROOT_URL . '/beta/confirm.php?token=' . rawurlencode($token);
-    $subject = 'TransCom Beta-Download bestätigen';
+    $subject = 'TransCom-Download bestätigen';
     $message = "Hallo,\n\n"
-        . "bitte bestätige deine E-Mail-Adresse, um den aktuellen TransCom-Beta-Download zu erhalten:\n\n"
+        . "bitte bestätige deine E-Mail-Adresse, um deinen aktuellen TransCom-Download zu erhalten:\n\n"
         . $confirmUrl . "\n\n"
-        . "Der Link ist 24 Stunden gültig. Die Adresse wird nur für den Beta-Download verwendet, nicht für Werbung oder Newsletter.\n\n"
+        . "Der Link ist 24 Stunden gültig. Die Adresse wird nur für den Download verwendet, nicht für Werbung oder Newsletter.\n\n"
         . "Falls du den Download nicht angefordert hast, ignoriere diese Nachricht.\n\n"
-        . "TransCom Beta\n"
+        . "TransCom\n"
         . "https://amazinglighting.design/transcom/\n";
     $headers = implode("\r\n", [
         'MIME-Version: 1.0',
@@ -259,19 +328,20 @@ function beta_confirm_request(string $token): ?array
         return null;
     }
 
-    $email = (string) ($payload['email'] ?? '');
+    $email = beta_normalize_email((string) ($payload['email'] ?? ''));
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         @unlink($file);
         return null;
     }
 
+    $offer = beta_download_offer_for_email($email);
     $csv = beta_storage_dir('confirmed.csv');
     $handle = fopen($csv, 'ab');
     if ($handle === false) {
         throw new RuntimeException('Bestätigung konnte nicht gespeichert werden.');
     }
     if (flock($handle, LOCK_EX)) {
-        fputcsv($handle, [gmdate('c'), $email, (string) ($payload['version'] ?? ''), 'beta-download'], ',', '"', '\\');
+        fputcsv($handle, [gmdate('c'), $email, (string) $offer['version'], (string) $offer['edition'] . '-download'], ',', '"', '\\');
         fflush($handle);
         flock($handle, LOCK_UN);
     }
@@ -279,5 +349,6 @@ function beta_confirm_request(string $token): ?array
     chmod($csv, 0600);
     @unlink($file);
 
+    $payload['edition'] = $offer['edition'];
     return $payload;
 }

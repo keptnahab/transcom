@@ -12,4 +12,13 @@ return [
     'download_ttl' => 21600,
     'download_size' => '2,0 GB',
     'sha256' => '93d14431bdfd0e999dfabf12bc3b5a5c179d159213d035d33ef686293b093386',
+    // Eine E-Mail pro Zeile, nur im nicht öffentlichen transcom-private-Ordner.
+    'full_access_file' => __DIR__ . '/full-access-emails.txt',
+    // Diese Werte erst nach dem Upload des signierten Full-Builds einsetzen.
+    'full_download' => [
+        'version' => '0.2.0-beta.1',
+        'r2_object_key' => '__FULL_R2_OBJECT_KEY__',
+        'download_size' => '__FULL_DOWNLOAD_SIZE__',
+        'sha256' => '__FULL_SHA256__',
+    ],
 ];

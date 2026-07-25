@@ -1,0 +1,6 @@
+# Eine E-Mail-Adresse pro Zeile. Groß-/Kleinschreibung spielt keine Rolle.
+# Zeilen, die mit # beginnen, sind Kommentare.
+# Diese Datei liegt ausschließlich im geschützten Ordner transcom-private.
+#
+# Beispiel:
+# vorname.nachname@example.com

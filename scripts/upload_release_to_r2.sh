@@ -3,8 +3,19 @@ set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 VERSION="$(node -p "require('$ROOT/package.json').version")"
-DEFAULT_FILE="$ROOT/dist/starter/TransCom-Beta-$VERSION-arm64-mac.zip"
-SOURCE_FILE="${1:-$DEFAULT_FILE}"
+REQUESTED_RELEASE="${1:-beta}"
+case "$REQUESTED_RELEASE" in
+  beta)
+    DEFAULT_FILE="$ROOT/dist/starter/TransCom-Beta-$VERSION-arm64-mac.zip"
+    ;;
+  full)
+    DEFAULT_FILE="$ROOT/dist/full/TransCom-Full-$VERSION-arm64-mac.zip"
+    ;;
+  *)
+    DEFAULT_FILE="$REQUESTED_RELEASE"
+    ;;
+esac
+SOURCE_FILE="$DEFAULT_FILE"
 ACCOUNT_ID="9f1287d71ea12b31e411a2dbe14ce956"
 BUCKET="transcom"
 REMOTE="transcom_r2"
@@ -23,9 +34,11 @@ if ! command -v rclone >/dev/null 2>&1; then
 fi
 
 FILE_NAME="$(basename "$SOURCE_FILE")"
-FILE_VERSION="$(printf '%s' "$FILE_NAME" | sed -E 's/^TransCom-Beta-(.*)-arm64-mac\.zip$/\1/')"
-if [[ "$FILE_VERSION" == "$FILE_NAME" ]]; then
-  echo "Unerwarteter Beta-Dateiname: $FILE_NAME" >&2
+if [[ "$FILE_NAME" =~ ^TransCom-(Beta|Full)-(.*)-arm64-mac\.zip$ ]]; then
+  RELEASE_LABEL="${BASH_REMATCH[1]}"
+  FILE_VERSION="${BASH_REMATCH[2]}"
+else
+  echo "Unerwarteter Release-Dateiname: $FILE_NAME" >&2
   exit 1
 fi
 
@@ -41,7 +54,7 @@ RCLONE_CONFIG_TRANSCOM_R2_SECRET_ACCESS_KEY="$(security find-generic-password -a
 OBJECT_KEY="releases/$FILE_VERSION/$FILE_NAME"
 DESTINATION="$REMOTE:$BUCKET/$OBJECT_KEY"
 
-echo "Lade $FILE_NAME nach R2 hoch ..."
+echo "Lade TransCom $RELEASE_LABEL ($FILE_NAME) nach R2 hoch ..."
 rclone copyto "$SOURCE_FILE" "$DESTINATION" \
   --s3-no-check-bucket \
   --s3-upload-cutoff 100Mi \
